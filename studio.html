@@ -90,6 +90,8 @@
   .rfloor{height:clamp(70px,18vh,180px);position:relative;background-size:cover;background-position:center;box-shadow:inset 0 3px 6px rgba(0,0,0,.14)}
   .rcol{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid rgba(0,0,0,.10)}
   .rcol:last-child{border-right:0}
+  .rband{position:relative;cursor:pointer}.rcols{cursor:pointer}
+  .rtsel{outline:2px solid var(--gold);outline-offset:-2px;z-index:2}
   .rceil{height:clamp(80px,24vh,200px);background:#f5f2ea}
   .rwall{flex:1;position:relative;background:#ece6da}
   .rskirt{height:clamp(64px,20vh,200px);background:#fbf9f3;box-shadow:inset 0 2px 0 rgba(0,0,0,.06)}
@@ -163,7 +165,7 @@
 
 <div class="wrap">
   <div class="side paint" id="sidePaint">
-    <div class="colhint">Paint · tap to add · compare colours</div>
+    <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">⟳ change</button></div>
   </div>
@@ -231,7 +233,7 @@ function rail(sideEl, railEl, kind, items, paint){
 var sel={paint:null,board:null};
 /* ---- room: multi-colour paint side + ceiling/walls/skirting zones ---- */
 var paints=[], zones={ceiling:false,walls:true,skirting:false,floor:false};
-var wallMode='paint', floorType='hard', floor=null;
+var wallMode='paint', floorType='hard', floor=null, paintTarget='wall', ceilCol=FB[0], skirtCol=FB[0];
 var FLOORS={hard:[],soft:[]};   // Crucial Trading — Hard (sisal/coir/weaves) + Soft (wool), loaded from manifest
 fetch('/showcase/floors/floors.json').then(function(r){return r.json();}).then(function(m){
   ['hard','soft'].forEach(function(t){FLOORS[t]=(m[t]||[]).map(function(f){f.url='/showcase/'+(f.dir||('floors/'+t))+'/'+f.file;f.type=t;return f;});});
@@ -241,22 +243,22 @@ function wallCss(c){return wallMode==='wallpaper'?'background-color:'+c+';backgr
 function renderRoom(){
   var f=el('fillPaint');
   var cols=paints.map(function(p){
-    return '<div class="rcol">'
-      +'<div class="rceil'+(zones.ceiling?'':' rzoff')+'" '+(zones.ceiling?'style="background:'+p[1]+'"':'')+'></div>'
-      +'<div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'></div>'
-      +'<div class="rskirt'+(zones.skirting?'':' rzoff')+'" '+(zones.skirting?'style="background:'+p[1]+'"':'')+'></div>'
-      +'</div>';
+    return '<div class="rcol"><div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'></div></div>';
   }).join('');
+  var ceil=zones.ceiling?'<div class="rceil rband'+(paintTarget==='ceiling'?' rtsel':'')+'" data-surf="ceiling" data-tag data-brand="Farrow &amp; Ball" data-name="'+ceilCol[0]+'" style="background:'+ceilCol[1]+'"></div>':'';
+  var skirt=zones.skirting?'<div class="rskirt rband'+(paintTarget==='skirting'?' rtsel':'')+'" data-surf="skirting" data-tag data-brand="Farrow &amp; Ball" data-name="'+skirtCol[0]+'" style="background:'+skirtCol[1]+'"></div>':'';
   var fl=(zones.floor&&floor)?'<div class="rfloor" data-tag data-brand="'+(floor.type==='hard'?'Egger':'Crucial Trading')+'" data-name="'+floor.name+'" style="background-image:url(\''+floor.url+'\')"></div>':'';
-  f.innerHTML='<div class="room"><div class="rcols">'+cols+'</div>'+fl+'</div>'
+  f.innerHTML='<div class="room">'+ceil+'<div class="rcols'+(paintTarget==='wall'?' rtsel':'')+'" data-surf="wall">'+cols+'</div>'+skirt+fl+'</div>'
     +'<div class="roomtools"><button class="rt add" id="paddcol">＋ colour</button><button class="rt" id="pclear">⟳ reset</button></div>';
-  el('paddcol').onclick=function(){el('sidePaint').classList.remove('chosen');toast('Tap another colour to compare');};
-  el('pclear').onclick=function(){paints=[];sel.paint=null;el('sidePaint').classList.remove('chosen');updateBar();el('suggest').classList.remove('show','on');};
+  [].forEach.call(f.querySelectorAll('[data-surf]'),function(s){s.addEventListener('click',function(){setTarget(s.getAttribute('data-surf'));});});
+  el('paddcol').onclick=function(){el('sidePaint').classList.remove('chosen');toast(paintTarget==='wall'?'Tap another colour to compare':'Pick a colour for the '+paintTarget);};
+  el('pclear').onclick=function(){paints=[];sel.paint=null;paintTarget='wall';el('sidePaint').classList.remove('chosen');updateBar();el('suggest').classList.remove('show','on');};
 }
+function setTarget(t){paintTarget=t;el('sidePaint').classList.remove('chosen');var h=el('colhint');if(h)h.textContent=(t==='wall'?'Wall · tap to add · compare colours':'Painting the '+t+' · tap a colour');}
 function addPaint(it){
-  if(paints.length>=6){toast('Up to 6 colours');return;}
-  if(!paints.some(function(p){return p[0]===it[0];})) paints.push(it);
-  sel.paint=paints[0];
+  if(paintTarget==='ceiling'){ceilCol=it;}
+  else if(paintTarget==='skirting'){skirtCol=it;}
+  else{ if(paints.length>=6){toast('Up to 6 colours');return;} if(!paints.some(function(p){return p[0]===it[0];})) paints.push(it); sel.paint=paints[0]; }
   el('sidePaint').classList.add('chosen');
   renderRoom();updateBar();
 }
@@ -274,6 +276,7 @@ function syncSub(){menu.classList.toggle('showfloor',zones.floor);}
 function bindZone(id,key){el(id).onchange=function(){zones[key]=el(id).checked;
   if(key==='floor'){el('floorbar').classList.toggle('on',zones.floor);document.body.classList.toggle('hasfloor',zones.floor);
     if(zones.floor&&!floor&&FLOORS[floorType][0])floor=FLOORS[floorType][0];renderFloorRail();}
+  if(key==='ceiling'||key==='skirting'){ if(el(id).checked){setTarget(key);} else if(paintTarget===key){paintTarget='wall';} }
   syncSub();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
 bindZone('zc','ceiling');bindZone('zs','skirting');bindZone('zf','floor');
 /* Walls: Paint | Wallpaper — the tick switches, never blank */
