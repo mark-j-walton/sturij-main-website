@@ -78,6 +78,9 @@
   .opts-menu label{display:flex;align-items:center;gap:10px;padding:9px 11px;font-size:11px;letter-spacing:.03em;color:var(--ink);cursor:pointer;border-radius:8px}
   .opts-menu label:hover{background:var(--paper-warm)}
   .opts-menu label .px{margin-left:auto;opacity:.5;font-size:9.5px}
+  .orow{display:flex;align-items:center;gap:10px;padding:8px 11px}
+  .orow .ol{font-size:11px;color:var(--ink);min-width:44px}
+  .orow .fseg{flex:1}
   .opts-menu input{accent-color:var(--bronze);width:15px;height:15px;flex:none}
   /* ===== room (paint side split) ===== */
   #fillPaint{position:absolute;inset:0;padding:0;display:none}
@@ -103,6 +106,21 @@
   .fchips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;max-height:196px;overflow-y:auto;padding-right:2px}
   .fchip{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background-size:cover;cursor:pointer}
   .fchip.on{outline:2px solid var(--bronze);outline-offset:1px}
+  #floorpick .fchips{display:none}   /* floor now chosen from the bottom rail */
+  /* ===== floor coverings: horizontal rail along the bottom ===== */
+  .floorbar{position:fixed;left:0;right:0;bottom:0;z-index:23;height:84px;display:none;background:var(--navy);box-shadow:0 -3px 16px rgba(0,0,0,.34)}
+  .floorbar.on{display:block}
+  body.hasfloor .bar{bottom:104px}body.hasfloor .pad{bottom:100px}body.hasfloor .roomtools{bottom:92px}
+  .fhint{position:absolute;top:5px;left:0;right:0;text-align:center;font:600 9px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.55);pointer-events:none;z-index:2}
+  .frail{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none}
+  .frail.grabbing{cursor:grabbing}
+  .ftrack{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
+  .ftile{width:122px;flex:none;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.28);position:relative}
+  .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(0,0,0,.42);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .fexp{position:absolute;inset:0;display:none;background-size:cover;background-position:center;align-items:center;justify-content:space-between;padding:0 18px}
+  .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
+  .fexp .fn{font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.48);padding:10px 14px;border-radius:8px}
+  .fexp .fchg{font:600 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 14px;cursor:pointer}
   /* ===== peel-off post-it tag ===== */
   .pad{position:fixed;left:16px;bottom:18px;z-index:28;width:126px;height:92px;cursor:grab;font-family:var(--f-mono)}
   .pad .sheet{position:absolute;inset:0;background:#efe3c4;border-radius:3px;box-shadow:0 5px 14px rgba(0,0,0,.22)}
@@ -134,15 +152,12 @@
 <div class="opts" id="opts">
   <button class="otab" id="otab">◧ Room options <span class="cv">▾</span></button>
   <div class="opts-menu">
+    <div class="orow"><span class="ol">Walls</span><div class="fseg" id="wallseg"><button data-w="paint" class="on">Paint</button><button data-w="wallpaper">Wallpaper</button></div></div>
     <label><input type="checkbox" id="zc"> Ceiling <span class="px">200px</span></label>
-    <label><input type="checkbox" id="zw" checked> Walls</label>
-    <div class="wallpick" id="wallpick"><div class="fseg"><button data-w="paint" class="on">Paint</button><button data-w="wallpaper">Wallpaper</button></div></div>
     <label><input type="checkbox" id="zs"> Skirting <span class="px">200px</span></label>
-    <label><input type="checkbox" id="zf"> Flooring</label>
-    <div class="floorpick" id="floorpick">
-      <div class="fseg"><button data-t="hard" class="on">Hard</button><button data-t="soft">Soft</button></div>
-      <div class="fchips" id="fchips"></div>
-    </div>
+    <label><input type="checkbox" id="zf"> Floor</label>
+    <div class="floorpick" id="floorpick"><div class="fseg" id="floorseg"><button data-t="hard" class="on">Hard</button><button data-t="soft">Carpet</button></div></div>
+    <label><input type="checkbox" id="zt" checked> Post-it tags</label>
   </div>
 </div>
 
@@ -157,6 +172,12 @@
     <div class="rail" id="railBoard"><div class="track"></div></div>
     <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">⟳ change</button></div>
   </div>
+</div>
+
+<div class="floorbar" id="floorbar">
+  <div class="fhint">Floor · drag · tap to lay</div>
+  <div class="frail" id="frail"><div class="ftrack"></div></div>
+  <div class="fexp" id="fexp"><span class="fn"></span><button class="fchg" id="fchg">⟳ change</button></div>
 </div>
 
 <div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
@@ -185,7 +206,8 @@ function rail(sideEl, railEl, kind, items, paint){
   function strip(it,i){
     var bg = paint ? 'background:'+it[1] : "background-image:url('/showcase/finishes/"+it.s+".webp')";
     var nm = paint ? it[0] : it.n;
-    return '<div class="strip" data-i="'+i+'" style="'+bg+'"><span class="lab"><span class="nm">'+nm+'</span><span class="add">＋ Add swatch</span></span></div>';
+    var brand = paint ? 'Farrow &amp; Ball' : 'Egger';
+    return '<div class="strip" data-i="'+i+'" data-tag data-brand="'+brand+'" data-name="'+nm+'" style="'+bg+'"><span class="lab"><span class="nm">'+nm+'</span><span class="add">＋ Add swatch</span></span></div>';
   }
   track.innerHTML=items.map(function(it,i){return strip(it,i);}).concat(items.map(function(it,i){return strip(it,i);})).join('');
   var H=items.length*SH, y=0, dragging=false, lastY=0, vy=0, moved=0, raf=null;
@@ -213,7 +235,7 @@ var wallMode='paint', floorType='hard', floor=null;
 var FLOORS={hard:[],soft:[]};   // Crucial Trading — Hard (sisal/coir/weaves) + Soft (wool), loaded from manifest
 fetch('/showcase/floors/floors.json').then(function(r){return r.json();}).then(function(m){
   ['hard','soft'].forEach(function(t){FLOORS[t]=(m[t]||[]).map(function(f){f.url='/showcase/'+(f.dir||('floors/'+t))+'/'+f.file;f.type=t;return f;});});
-  renderChips();
+  renderFloorRail();
 }).catch(function(){});
 function wallCss(c){return wallMode==='wallpaper'?'background-color:'+c+';background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 11px,rgba(0,0,0,.06) 11px 22px),radial-gradient(rgba(255,255,255,.12) 1.4px,transparent 1.6px);background-size:auto,24px 24px':'background:'+c;}
 function renderRoom(){
@@ -221,11 +243,11 @@ function renderRoom(){
   var cols=paints.map(function(p){
     return '<div class="rcol">'
       +'<div class="rceil'+(zones.ceiling?'':' rzoff')+'" '+(zones.ceiling?'style="background:'+p[1]+'"':'')+'></div>'
-      +'<div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'><span class="rnm">'+p[0]+(zones.walls&&wallMode==='wallpaper'?' · paper':'')+'</span></div>'
+      +'<div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'></div>'
       +'<div class="rskirt'+(zones.skirting?'':' rzoff')+'" '+(zones.skirting?'style="background:'+p[1]+'"':'')+'></div>'
       +'</div>';
   }).join('');
-  var fl=(zones.floor&&floor)?'<div class="rfloor" data-tag data-brand="'+(floor.type==='hard'?'Egger':'Crucial Trading')+'" data-name="'+floor.name+'" style="background-image:url(\''+floor.url+'\')"><span class="rnm">Floor · '+floor.name+'</span></div>':'';
+  var fl=(zones.floor&&floor)?'<div class="rfloor" data-tag data-brand="'+(floor.type==='hard'?'Egger':'Crucial Trading')+'" data-name="'+floor.name+'" style="background-image:url(\''+floor.url+'\')"></div>':'';
   f.innerHTML='<div class="room"><div class="rcols">'+cols+'</div>'+fl+'</div>'
     +'<div class="roomtools"><button class="rt add" id="paddcol">＋ colour</button><button class="rt" id="pclear">⟳ reset</button></div>';
   el('paddcol').onclick=function(){el('sidePaint').classList.remove('chosen');toast('Tap another colour to compare');};
@@ -245,16 +267,35 @@ function fillSide(kind,it){
   var fb=el('fillBoard');fb.setAttribute('data-tag','');fb.setAttribute('data-brand','Egger');fb.setAttribute('data-name',it.n);
   updateBar();
 }
-/* ---- Options tab: zones + wall mode + flooring ---- */
-var menu=document.querySelector('.opts-menu');
+/* ---- Options: walls switch + zones + floor bottom rail ---- */
+var menu=document.querySelector('.opts-menu'), fmoved=0;
 el('otab').onclick=function(){el('opts').classList.toggle('open');};
-function syncSub(){menu.classList.toggle('showwall',zones.walls);menu.classList.toggle('showfloor',zones.floor);}
-function bindZone(id,key){el(id).onchange=function(){zones[key]=el(id).checked;if(key==='floor'&&zones.floor&&!floor&&FLOORS[floorType][0]){floor=FLOORS[floorType][0];renderChips();}syncSub();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
-bindZone('zc','ceiling');bindZone('zw','walls');bindZone('zs','skirting');bindZone('zf','floor');
-[].forEach.call(el('wallpick').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('wallpick').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');wallMode=b.getAttribute('data-w');if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
-function renderChips(){var box=el('fchips');if(!box)return;box.innerHTML='';FLOORS[floorType].forEach(function(flr){var c=document.createElement('div');c.className='fchip'+(floor&&floor.file===flr.file?' on':'');c.style.backgroundImage="url('"+flr.url+"')";c.title=flr.name;c.onclick=function(){floor=flr;renderChips();if(el('sidePaint').classList.contains('chosen'))renderRoom();};box.appendChild(c);});}
-[].forEach.call(el('floorpick').querySelectorAll('.fseg button'),function(b){b.onclick=function(){[].forEach.call(el('floorpick').querySelectorAll('.fseg button'),function(x){x.classList.remove('on');});b.classList.add('on');floorType=b.getAttribute('data-t');floor=FLOORS[floorType][0]||null;renderChips();if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
-renderChips();syncSub();
+function syncSub(){menu.classList.toggle('showfloor',zones.floor);}
+function bindZone(id,key){el(id).onchange=function(){zones[key]=el(id).checked;
+  if(key==='floor'){el('floorbar').classList.toggle('on',zones.floor);document.body.classList.toggle('hasfloor',zones.floor);
+    if(zones.floor&&!floor&&FLOORS[floorType][0])floor=FLOORS[floorType][0];renderFloorRail();}
+  syncSub();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
+bindZone('zc','ceiling');bindZone('zs','skirting');bindZone('zf','floor');
+/* Walls: Paint | Wallpaper — the tick switches, never blank */
+[].forEach.call(el('wallseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('wallseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');wallMode=b.getAttribute('data-w');if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
+/* Floor: Hard | Carpet — tick moves */
+[].forEach.call(el('floorseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('floorseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');floorType=b.getAttribute('data-t');floor=FLOORS[floorType][0]||null;el('floorbar').classList.remove('filled');renderFloorRail();if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
+/* floor coverings tiled along the bottom; tap lays it across the full floor */
+function renderFloorRail(){var track=el('frail')&&el('frail').querySelector('.ftrack');if(!track)return;track.innerHTML='';FLOORS[floorType].forEach(function(fl){var t=document.createElement('div');t.className='ftile';t.style.backgroundImage="url('"+fl.url+"')";t.setAttribute('data-tag','');t.setAttribute('data-brand',floorType==='hard'?'Egger':'Crucial Trading');t.setAttribute('data-name',fl.name);t.innerHTML='<span class="fl">'+fl.name+'</span>';t.addEventListener('click',function(){if(fmoved>6)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});track.appendChild(t);});}
+el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
+(function(){var rail=el('frail'),track=rail.querySelector('.ftrack'),x=0,down=false,lx=0,vx=0,raf=null;
+  function ap(){track.style.transform='translateX('+x+'px)';}
+  function clamp(){var min=Math.min(0,rail.clientWidth-track.scrollWidth);if(x>0)x=0;if(x<min)x=min;}
+  rail.addEventListener('wheel',function(e){e.preventDefault();x-=(e.deltaY+e.deltaX);clamp();ap();},{passive:false});
+  rail.addEventListener('pointerdown',function(e){down=true;lx=e.clientX;fmoved=0;vx=0;if(raf)cancelAnimationFrame(raf);rail.setPointerCapture(e.pointerId);rail.classList.add('grabbing');});
+  rail.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-lx;lx=e.clientX;vx=dx;fmoved+=Math.abs(dx);x+=dx;clamp();ap();});
+  function mom(){vx*=0.92;if(Math.abs(vx)<0.4)return;x+=vx;clamp();ap();raf=requestAnimationFrame(mom);}
+  rail.addEventListener('pointerup',function(){if(!down)return;down=false;rail.classList.remove('grabbing');mom();});
+  rail.addEventListener('pointercancel',function(){down=false;rail.classList.remove('grabbing');});
+})();
+/* Post-it tags on/off */
+el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
+syncSub();
 [].forEach.call(document.querySelectorAll('.change'),function(b){b.onclick=function(){var k=b.getAttribute('data-k');(k==='paint'?el('sidePaint'):el('sideBoard')).classList.remove('chosen');sel[k]=null;if(k==='paint')paints=[];updateBar();el('suggest').classList.remove('show','on');};});
 function bothChosen(){return sel.paint&&sel.board;}
 function updateBar(){ el('bar').classList.toggle('on',!!bothChosen()); if(bothChosen()) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
@@ -325,7 +366,7 @@ function pairPNG(cb){
   };img.onerror=function(){cb(cv);};img.src='/showcase/finishes/'+sel.board.s+'.webp';
 }
 function pairName(){return slug(sel.paint[0]+'__'+sel.board.n);}
-el('cam').onclick=function(){pairPNG(function(cv){var a=document.createElement('a');a.href=cv.toDataURL('image/png');a.download=pairName()+'.png';a.click();toast('Photo saved');});};
+el('cam').onclick=function(){pairPNG(function(cv){items.push({name:'Room — '+(sel.paint?sel.paint[0]:'')+' + '+(sel.board?sel.board.n:''),file:pairName()+'.png',sub:'room photo',swatchCss:'background:'+(sel.paint?sel.paint[1]:'#ccc'),png:cv.toDataURL('image/png')});renderTray();toast('Photo added to zip');});};
 el('addpair').onclick=function(){pairPNG(function(cv){items.push({name:sel.paint[0]+' + '+sel.board.n,file:pairName()+'.png',sub:'pairing',swatchCss:'background:'+sel.paint[1],png:cv.toDataURL('image/png')});renderTray();toast('Added pairing');});};
 
 function showSuggest(){if(!bothChosen())return;var row=el('srow');row.innerHTML='';
@@ -365,7 +406,7 @@ el('bzip').onclick=function(){
   function noteHTML(brand,name,meta){return '<div class="wm"></div><span class="tape"></span><div class="brand">'+brand+'</div><div class="nm">'+name+'</div><div class="meta">'+(meta||'Sturij')+'</div><div class="curl"></div>';}
   function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
   pad.addEventListener('pointerdown',function(e){
-    e.preventDefault();
+    e.preventDefault(); try{pad.setPointerCapture(e.pointerId);}catch(_){}
     var note=document.createElement('div'); note.className='note drag';
     note.innerHTML=noteHTML('Sturij','Drop on a finish…','peel &amp; place');
     document.body.appendChild(note);
