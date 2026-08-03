@@ -61,6 +61,15 @@
   .tray img{height:52px;border-radius:6px;border:1px solid var(--line)}
   .tray .zip{font-family:var(--f-sans);font-weight:600;font-size:13px;color:var(--navy);background:var(--gold);border:0;border-radius:10px;padding:10px 16px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.2)}
   @media(max-width:560px){.dock .nm{display:none}.strip{height:56px}}
+  .suggest{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:16px clamp(12px,3vw,26px) 20px;background:linear-gradient(to top,rgba(16,26,34,.55),transparent);display:none;opacity:0;transition:opacity .8s ease}
+  .suggest.on{display:block}.suggest.show{opacity:1}
+  .suggest .sx{position:absolute;top:6px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(250,248,242,.5);background:rgba(16,26,34,.5);color:#fff;font-size:13px;cursor:pointer}
+  .suggest .sh{font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 12px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .srow{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px}
+  .scard{flex:none;width:150px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
+  .scard:hover{transform:translateY(-3px)}
+  .scard .si{height:96px;background-size:cover;background-position:center}
+  .scard .sn{padding:9px 11px;font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.03em;color:var(--ink)}
 </style>
 </head>
 <body>
@@ -88,6 +97,7 @@
   <div class="half rp" id="rp"><div class="cap" id="rpc"></div></div>
 </div>
 <div class="handles" id="handles"><button class="hbtn" id="hprev">‹</button><div class="hview" id="hview"></div><button class="hbtn" id="hnext">›</button><div class="hname" id="hname"></div></div>
+<div class="suggest" id="suggest"><button class="sx" id="sx">✕</button><div class="sh">Egger suggests · complementary decors</div><div class="srow" id="srow"></div></div>
 <div class="stbar" id="stbar" style="display:none">
   <button id="bhandles">Handles</button>
   <button class="p" id="bsnap">Snapshot</button>
@@ -149,9 +159,9 @@ el('combine').onclick=function(){
   el('lpc').textContent='Paint · '+FB[selPaint][0];
   el('rp').style.backgroundImage="url('/showcase/finishes/"+BOARDS[selBoard].s+".webp')";
   el('rpc').textContent='Board · '+BOARDS[selBoard].n;
-  el('stage').classList.add('on');el('stbar').style.display='flex';
+  el('stage').classList.add('on');el('stbar').style.display='flex';setTimeout(showSuggest,700);
 };
-el('bclose').onclick=function(){el('stage').classList.remove('on');el('stbar').style.display='none';el('handles').classList.remove('on');handleOn=false;};
+el('bclose').onclick=function(){el('stage').classList.remove('on');el('stbar').style.display='none';el('handles').classList.remove('on');handleOn=false;hideSuggest();};
 
 /* ---------- snapshot to PNG ---------- */
 var shots=[];
@@ -200,6 +210,17 @@ el('bzip').onclick=function(){
   var files=shots.map(function(s){return {name:s.name,data:dataURLtoU8(s.url)};});
   var blob=new Blob([zip(files)],{type:'application/zip'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sturij-pairings.zip';a.click();
 };
+
+/* Egger suggested complementary decors (placeholder set — wire the CDN feed when available) */
+function showSuggest(){var row=el('srow');row.innerHTML='';
+  var picks=BOARDS.filter(function(b){return b.s!==BOARDS[selBoard].s;}).sort(function(){return Math.random()-.5;}).slice(0,6);
+  picks.forEach(function(b){var c=document.createElement('div');c.className='scard';
+    c.innerHTML='<div class="si" style="background-image:url(\'/showcase/finishes/'+b.s+'.webp\')"></div><div class="sn">'+b.n+'</div>';
+    c.onclick=function(){selBoard=BOARDS.indexOf(b);el('rp').style.backgroundImage="url('/showcase/finishes/"+b.s+".webp')";el('rpc').textContent='Board \u00b7 '+b.n;refreshDock();showSuggest();};
+    row.appendChild(c);});
+  var sg=el('suggest');sg.classList.add('on');requestAnimationFrame(function(){sg.classList.add('show');});}
+function hideSuggest(){var sg=el('suggest');sg.classList.remove('show');setTimeout(function(){sg.classList.remove('on');},600);}
+el('sx').onclick=hideSuggest;
 </script>
 </body>
 </html>
