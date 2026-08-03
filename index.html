@@ -101,8 +101,13 @@
   .form textarea{min-height:96px;resize:vertical}
   .form button{width:100%;margin-top:4px;background:var(--accent);color:#FAF7F0;font-family:var(--serif);font-weight:600;font-size:1rem;border:0;border-radius:999px;padding:13px;cursor:pointer}
   .note{font-size:.82rem;color:var(--ink-faint);margin:12px 0 0;text-align:center}
-  footer{border-top:1px solid var(--rule);padding:40px 0 60px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
-  footer .g{color:var(--gold)}
+  footer{border-top:1px solid var(--rule);padding:40px 0 60px}
+  footer .legal{max-width:62em;color:var(--ink-soft);font-size:.92rem;line-height:1.65;margin:0 0 26px}
+  footer .legal p{margin:0 0 10px}
+  footer .legal strong{color:var(--ink)}
+  footer .legal .commit{color:var(--ink-faint);font-size:.84rem}
+  footer .meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);border-top:1px solid var(--rule);padding-top:22px}
+  footer .meta .g{color:var(--gold)}
   ::selection{background:color-mix(in srgb,var(--accent) 22%,transparent)}
 
   /* ---- admin ---- */
@@ -200,7 +205,13 @@
 
 </div>
 
-<div class="wrap"><footer><span data-edit="footer.left">Sturij · fitted furniture · made in Britain</span><span class="g" data-edit="footer.right">Measured · made · fitted</span></footer></div>
+<div class="wrap"><footer>
+  <div class="legal">
+    <p data-edit="footer.legal" data-html><strong>Sturij</strong> is a trading name of Storage Innovation Limited, registered in England &amp; Wales under company number 12903072.</p>
+    <p class="commit" data-edit="footer.commit">Storage Innovation Limited is committed to providing a quality service and working in an open and accountable way that builds trust and respect. One of the ways in which we can continue to improve our service is by listening and responding to the views of our clients and stakeholders, and in particular by responding positively to complaints, and by putting mistakes right.</p>
+  </div>
+  <div class="meta"><span data-edit="footer.left">Sturij · fitted furniture · made in Britain</span><span class="g" data-edit="footer.right">Measured · made · fitted</span></div>
+</footer></div>
 </main>
 
 <div class="adminbar"><span class="status" id="astatus">admin</span><button class="save" onclick="save()">Save & publish</button><button class="exit" onclick="exitAdmin()">Done</button></div>
