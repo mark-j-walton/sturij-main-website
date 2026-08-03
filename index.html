@@ -209,6 +209,7 @@
         <div class="field"><label>Email</label><input name="email" type="email" required></div>
         <div class="field"><label>Phone</label><input name="phone" inputmode="tel"></div>
         <div class="field"><label>The room</label><textarea name="message" placeholder="Kitchen, wardrobe, rough size, timescale…"></textarea></div>
+        <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
         <button type="submit">Send enquiry</button>
         <p class="note" id="enqnote">Goes to the Sturij team.</p>
       </form>
@@ -243,6 +244,7 @@
 
 <script>
 const SITE_FN="https://oqduxjquzbvetkcllymd.supabase.co/functions/v1/site";
+const ENQ_FN="https://oqduxjquzbvetkcllymd.supabase.co/functions/v1/enquiry";
 let PASS=null, imgTarget=null;
 
 /* theme */
@@ -332,7 +334,14 @@ async function save(){
   }catch(err){status('⚠ '+err.message)}
 }
 function status(t){document.getElementById('astatus').textContent=t}
-function enq(e){e.preventDefault();document.getElementById('enqnote').textContent='Thanks — we’ll be in touch. (Form wiring to HubSpot pending.)';e.target.querySelector('button').textContent='Sent ✓';return false}
+async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('button'),note=document.getElementById('enqnote');
+  const body={name:f.name.value,email:f.email.value,phone:f.phone.value,message:f.message.value,website:f.website.value};
+  btn.disabled=true;btn.textContent='Sending…';
+  try{const r=await fetch(ENQ_FN,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});const j=await r.json();
+    if(!r.ok||!j.ok)throw new Error(j.error||'failed');
+    note.textContent='Thanks — your enquiry is in. We’ll be in touch shortly.';btn.textContent='Sent ✓';f.reset();
+  }catch(_){note.innerHTML='Sorry, that didn’t send. Please call <a href="tel:+441937326011">01937 326011</a> or email <a href="mailto:contact@sturij.com">contact@sturij.com</a>.';btn.disabled=false;btn.textContent='Send enquiry';}
+  return false}
 </script>
 </body>
 </html>
