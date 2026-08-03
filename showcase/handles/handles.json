@@ -1,0 +1,3236 @@
+[
+{
+"name": "Ark Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-ark-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Ark Pull Handle",
+"type": "pull",
+"file": "hendel-ark-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Aspen Pull Handle",
+"type": "pull",
+"file": "hendel-aspen-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Aspen T-Bar Knob",
+"type": "knob",
+"file": "hendel-aspen-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Austin Pull Handle",
+"type": "pull",
+"file": "hendel-austin-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Bailgate Pull Handle",
+"type": "pull",
+"file": "hendel-bailgate-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Bailgate T-Bar Knob",
+"type": "knob",
+"file": "hendel-bailgate-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Barrington Cup Handle",
+"type": "cup",
+"file": "hendel-barrington-cup-handle-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Barrington Eclipse Ribbed Pull Handle",
+"type": "pull",
+"file": "hendel-barrington-eclipse-ribbed-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Barrington Eclipse Smooth Pull Handle",
+"type": "pull",
+"file": "hendel-barrington-eclipse-smooth-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Barrington Knob",
+"type": "knob",
+"file": "hendel-barrington-knob-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Barrington Pull Handle",
+"type": "pull",
+"file": "hendel-barrington-pull-handle-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Battersea Pull Handle",
+"type": "pull",
+"file": "hendel-battersea-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Battersea T-Bar Knob",
+"type": "knob",
+"file": "hendel-battersea-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Belgravia Knob",
+"type": "knob",
+"file": "hendel-belgravia-knob-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Belgravia Knob",
+"type": "knob",
+"file": "hendel-belgravia-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Belgravia Pull Handle",
+"type": "pull",
+"file": "hendel-belgravia-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Belgravia T-Bar Knob",
+"type": "knob",
+"file": "hendel-belgravia-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Brokk Pull Handle",
+"type": "pull",
+"file": "hendel-brokk-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Brokk T-Bar Knob",
+"type": "knob",
+"file": "hendel-brokk-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Callcott Cup Handle",
+"type": "cup",
+"file": "hendel-callcott-cup-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Callcott Knob",
+"type": "knob",
+"file": "hendel-callcott-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Conic Knob",
+"type": "knob",
+"file": "hendel-conic-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Conic Pull Handle",
+"type": "pull",
+"file": "hendel-conic-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Conic T-Bar Knob",
+"type": "knob",
+"file": "hendel-conic-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Dixton Bar Handle",
+"type": "bar",
+"file": "hendel-dixton-bar-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Dixton T-Bar Knob",
+"type": "knob",
+"file": "hendel-dixton-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Felix Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-felix-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Felix Pull Handle",
+"type": "pull",
+"file": "hendel-felix-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Fitzrovia Knob",
+"type": "knob",
+"file": "hendel-fitzrovia-knob-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Fitzrovia Pull Handle",
+"type": "pull",
+"file": "hendel-fitzrovia-pull-handle-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Fitzrovia T-Bar Knob",
+"type": "knob",
+"file": "hendel-fitzrovia-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Fleur Cup Handle",
+"type": "cup",
+"file": "hendel-fleur-cup-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Fleur Knob",
+"type": "knob",
+"file": "hendel-fleur-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Geddes Pull Handle",
+"type": "pull",
+"file": "hendel-geddes-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Greenwich Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-greenwich-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Greenwich Cup Handle",
+"type": "cup",
+"file": "hendel-greenwich-cup-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Greenwich Knob",
+"type": "knob",
+"file": "hendel-greenwich-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Greenwich Oval Knob",
+"type": "knob",
+"file": "hendel-greenwich-oval-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Greenwich Pull Handle",
+"type": "pull",
+"file": "hendel-greenwich-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hampton Cup Handle",
+"type": "cup",
+"file": "hendel-hampton-cup-handle-1.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hampton D Handle",
+"type": "pull",
+"file": "hendel-hampton-d-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hampton Knob",
+"type": "knob",
+"file": "hendel-hampton-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hempstock Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-hempstock-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hempstock Pull Handle",
+"type": "pull",
+"file": "hendel-hempstock-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hempstock T-Bar Knob",
+"type": "knob",
+"file": "hendel-hempstock-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hoxa Knob",
+"type": "knob",
+"file": "hendel-hoxa-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hoxa Pull Handle",
+"type": "pull",
+"file": "hendel-hoxa-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hoxa T-Bar Knob",
+"type": "knob",
+"file": "hendel-hoxa-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hudson Pull Handle",
+"type": "pull",
+"file": "hendel-hudson-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Hudson T-Bar Knob",
+"type": "knob",
+"file": "hendel-hudson-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Huxley Knob",
+"type": "knob",
+"file": "hendel-huxley-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Huxley Pull Handle",
+"type": "pull",
+"file": "hendel-huxley-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Huxley T-Bar Knob",
+"type": "knob",
+"file": "hendel-huxley-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Kellas Bar Handle",
+"type": "bar",
+"file": "hendel-kellas-bar-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Kellas T-Bar Knob",
+"type": "knob",
+"file": "hendel-kellas-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Liberty D Handle",
+"type": "pull",
+"file": "hendel-liberty-d-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Liberty Knob",
+"type": "knob",
+"file": "hendel-liberty-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Liberty T-Bar Knob",
+"type": "knob",
+"file": "hendel-liberty-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Lindum Pull Handle",
+"type": "pull",
+"file": "hendel-lindum-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Lindum T-Bar Knob",
+"type": "knob",
+"file": "hendel-lindum-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Newbridge Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-newbridge-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Newbridge Drop Handle",
+"type": "pull",
+"file": "hendel-newbridge-drop-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Newbridge Pull Handle",
+"type": "pull",
+"file": "hendel-newbridge-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Newport Knob",
+"type": "knob",
+"file": "hendel-newport-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Newport Pull Handle",
+"type": "pull",
+"file": "hendel-newport-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Okus Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-okus-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Okus Pull Handle",
+"type": "pull",
+"file": "hendel-okus-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Otto Cup Handle",
+"type": "cup",
+"file": "hendel-otto-cup-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Otto D Handle",
+"type": "pull",
+"file": "hendel-otto-d-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Otto Knob",
+"type": "knob",
+"file": "hendel-otto-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Pembrey Bar Handle",
+"type": "bar",
+"file": "hendel-pembrey-bar-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Pembrey T-Bar Knob",
+"type": "knob",
+"file": "hendel-pembrey-t-bar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Quinn Pull Handle",
+"type": "pull",
+"file": "hendel-quinn-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Scroll",
+"type": "pull",
+"file": "hendel-scroll.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trafalgar Bow Handle",
+"type": "bow",
+"file": "hendel-trafalgar-bow-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trafalgar Cup Handle",
+"type": "cup",
+"file": "hendel-trafalgar-cup-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trafalgar Knob",
+"type": "knob",
+"file": "hendel-trafalgar-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trew Appliance Pull Handle",
+"type": "pull",
+"file": "hendel-trew-appliance-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trew Knob",
+"type": "knob",
+"file": "hendel-trew-knob.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Trew Pull Handle",
+"type": "pull",
+"file": "hendel-trew-pull-handle.webp",
+"brand": "Hendel & Hendel"
+},
+{
+"name": "Bar Handle, Aluminium, Fixing Centres 160-1178 mm, Graf 2",
+"type": "bar",
+"file": "hafele-bar-handle-aluminium-fixing-centres-160-1178-mm-graf-2-00925552.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Aluminium, Fixing Centres 192 mm, Graf Big",
+"type": "bar",
+"file": "hafele-bar-handle-aluminium-fixing-centres-192-mm-graf-big-01527906.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Aluminum, Fixing Centre 128-320 mm, Alstone",
+"type": "bar",
+"file": "hafele-bar-handle-aluminum-fixing-centre-128-320-mm-alstone-01987476.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Aluminum, Fixing Centres 160-320 mm, Ashbourne",
+"type": "bar",
+"file": "hafele-bar-handle-aluminum-fixing-centres-160-320-mm-ashbourne-01987462.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Cast Iron, Fixing Centres 160 mm, Staffora",
+"type": "bar",
+"file": "hafele-bar-handle-cast-iron-fixing-centres-160-mm-staffora-01644687.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Fixing Centres 160-192 mm, Aluminium, Tiberius",
+"type": "bar",
+"file": "hafele-bar-handle-fixing-centres-160-192-mm-aluminium-tiberius-00853846.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Grade 304 Stainless Steel, Fixing Centres 128-775 mm",
+"type": "bar",
+"file": "hafele-bar-handle-grade-304-stainless-steel-fixing-centres-128-775-mm-00853827.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Stainless Steel, Fixing Centres 160-192 mm, Lydiate",
+"type": "bar",
+"file": "hafele-bar-handle-stainless-steel-fixing-centres-160-192-mm-lydiate-00853851.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Stainless Steel/Zinc Alloy, \u00d8 14 mm, Fixing Centres 160 mm, Laurel",
+"type": "bar",
+"file": "hafele-bar-handle-stainless-steel-zinc-alloy-14-mm-fixing-centres-160-mm-laur-00853826.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, \u00d8 12 mm, Fixing Centres 128-160 mm, Bartram",
+"type": "bar",
+"file": "hafele-bar-handle-steel-12-mm-fixing-centres-128-160-mm-bartram-00852598.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, \u00d8 12 mm, Fixing Centres 128-160 mm, Bartram",
+"type": "bar",
+"file": "hafele-bar-handle-steel-12-mm-fixing-centres-128-160-mm-bartram-00852944.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, \u00d8 12 mm, Fixing Centres 128-860 mm, Barnabus",
+"type": "bar",
+"file": "hafele-bar-handle-steel-12-mm-fixing-centres-128-860-mm-barnabus-00853853.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, \u00d8 12 mm, Fixing Centres 96-456 mm, Barkston",
+"type": "bar",
+"file": "hafele-bar-handle-steel-12-mm-fixing-centres-96-456-mm-barkston-01298009.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel Bar With Zinc Alloy Feet, Fixing Centres 128-384 mm, Pimlico",
+"type": "bar",
+"file": "hafele-bar-handle-steel-bar-with-zinc-alloy-feet-fixing-centres-128-384-mm-pi-00852952.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, Fixing Centres 128-160 mm, Puma",
+"type": "bar",
+"file": "hafele-bar-handle-steel-fixing-centres-128-160-mm-puma-00852995.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, Fixing Centres 96-758 mm",
+"type": "bar",
+"file": "hafele-bar-handle-steel-fixing-centres-96-758-mm-00853692.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, Fixing Centres 96-907 mm, Barrington",
+"type": "bar",
+"file": "hafele-bar-handle-steel-fixing-centres-96-907-mm-barrington-00853824.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Steel, Fixing Centres 96 mm, Alice",
+"type": "bar",
+"file": "hafele-bar-handle-steel-fixing-centres-96-mm-alice-00853855.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, with Base, Stainless Steel, Orlana",
+"type": "bar",
+"file": "hafele-bar-handle-with-base-stainless-steel-orlana-00853019.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Wood, Fixing Centres 160 mm, Tilaa",
+"type": "bar",
+"file": "hafele-bar-handle-wood-fixing-centres-160-mm-tilaa-01343160.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Zinc Alloy Ends with Stainless Steel Tube, Fixing Centres 192 mm, Keyhole, Gigi",
+"type": "bar",
+"file": "hafele-bar-handle-zinc-alloy-ends-with-stainless-steel-tube-fixing-centres-19-00854065.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Zinc Alloy Feet, Fixing Centres 128-224 mm, Domino",
+"type": "bar",
+"file": "hafele-bar-handle-zinc-alloy-feet-fixing-centres-128-224-mm-domino-00853848.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Zinc Alloy, Fixing Centres 192 mm, Floid",
+"type": "bar",
+"file": "hafele-bar-handle-zinc-alloy-fixing-centres-192-mm-floid-01527899.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Zinc Alloy, Length 177 mm, Fixing Centres 96 mm, Silas",
+"type": "bar",
+"file": "hafele-bar-handle-zinc-alloy-length-177-mm-fixing-centres-96-mm-silas-00852494.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bar Handle, Zinc Alloy/Stainless Steel, Keyhole, Fixing Centres 128-632 mm, Chelsea",
+"type": "bar",
+"file": "hafele-bar-handle-zinc-alloy-stainless-steel-keyhole-fixing-centres-128-632-m-00853850.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Belt Knob, Zinc Alloy",
+"type": "knob",
+"file": "hafele-belt-knob-zinc-alloy-01907378.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Boss Bar Handle, Angled, Stainless Steel Bar with Zinc Alloy Feet, Fixing Centres 160 mm, Nugent",
+"type": "bar",
+"file": "hafele-boss-bar-handle-angled-stainless-steel-bar-with-zinc-alloy-feet-fixing-00853871.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Boss Bar Handle, Zinc Alloy/Steel, \u00d8 14 mm, Fixing Centres 128-1157 mm, Boston",
+"type": "bar",
+"file": "hafele-boss-bar-handle-zinc-alloy-steel-14-mm-fixing-centres-128-1157-mm-bost-00853874.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Boss Bar Handle, Zinc Alloy/Steel, \u00d8 14 mm, Fixing Centres 128-909 mm, Beulah",
+"type": "bar",
+"file": "hafele-boss-bar-handle-zinc-alloy-steel-14-mm-fixing-centres-128-909-mm-beula-00853872.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Aluminium, Fixing Centres 128-160 mm, Florence",
+"type": "bow",
+"file": "hafele-bow-handle-aluminium-fixing-centres-128-160-mm-florence-00853917.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Aluminium, Fixing Centres 160 mm, Tavistock",
+"type": "bow",
+"file": "hafele-bow-handle-aluminium-fixing-centres-160-mm-tavistock-00853919.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Cast Iron, Fixing Centres 128 mm, Smooth",
+"type": "bow",
+"file": "hafele-bow-handle-cast-iron-fixing-centres-128-mm-smooth-01318466.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Lightweight, Zinc Alloy, Fixing Centres 128 mm",
+"type": "bow",
+"file": "hafele-bow-handle-lightweight-zinc-alloy-fixing-centres-128-mm-01298098.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Stainless Steel, Fixing Centres 160-320 mm, Metropolis",
+"type": "bow",
+"file": "hafele-bow-handle-stainless-steel-fixing-centres-160-320-mm-metropolis-00852752.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Steel, Fixing Centre 224 mm, Clifton",
+"type": "bow",
+"file": "hafele-bow-handle-steel-fixing-centre-224-mm-clifton-00853930.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Steel, Fixing Centres 256 mm",
+"type": "bow",
+"file": "hafele-bow-handle-steel-fixing-centres-256-mm-00853694.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Steel, Fixing Centres 96-288 mm",
+"type": "bow",
+"file": "hafele-bow-handle-steel-fixing-centres-96-288-mm-00853903.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Steel, Fixing Centres 96-288 mm, Clifton",
+"type": "bow",
+"file": "hafele-bow-handle-steel-fixing-centres-96-288-mm-clifton-01298025.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, with Backplate, Zinc Alloy, Fixing Centres 128-160 mm, Augusta",
+"type": "bow",
+"file": "hafele-bow-handle-with-backplate-zinc-alloy-fixing-centres-128-160-mm-augusta-00852657.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Wood, Fixing Centres 160 mm, Sway",
+"type": "bow",
+"file": "hafele-bow-handle-wood-fixing-centres-160-mm-sway-00852353.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128-160 mm, Lewis",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-160-mm-lewis-00853910.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128-224 mm, Arco",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-224-mm-arco-00853924.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128-256 mm, Melbury",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-256-mm-melbury-00853929.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Antrobus",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-antrobus-00853895.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Bradley",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-bradley-00853484.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Elmer",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-elmer-00853881.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Jackson",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-jackson-00853905.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Octavia",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-octavia-00853739.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Odessa",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-odessa-00853907.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 128 mm, Quigley",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-128-mm-quigley-00853916.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 160/192 mm, Henley",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-160-192-mm-henley-00853912.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 160 mm, Chiswick",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-160-mm-chiswick-00853913.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 160 mm, Kayla",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-160-mm-kayla-00853911.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 160 mm, Odessa",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-160-mm-odessa-00853906.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 160 mm, Tara",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-160-mm-tara-00853898.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 64-288 mm, Cordelia",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-64-288-mm-cordelia-00853909.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 64-288 mm, Hudson",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-64-288-mm-hudson-00853886.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96-128 mm, Dimple",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-128-mm-dimple-00853330.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96-192 mm, Manila",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-192-mm-manila-00853896.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96-224 mm, Sabine",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-224-mm-sabine-00853875.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96 mm, Emily",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-mm-emily-00853894.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96 mm, Fabian",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-mm-fabian-00853877.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Fixing Centres 96 mm, Norfolk",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-fixing-centres-96-mm-norfolk-00853880.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Bow Handle, Zinc Alloy, Length 164 mm, Fixing Centres 128 mm, Remus",
+"type": "bow",
+"file": "hafele-bow-handle-zinc-alloy-length-164-mm-fixing-centres-128-mm-remus-00853327.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Connectors, for External Corners, for Profiles, Gola System C Plus",
+"type": "profile",
+"file": "hafele-connectors-for-external-corners-for-profiles-gola-system-c-plus-00854795.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Connectors, for Internal Corners, for Profiles, Gola System C Plus",
+"type": "profile",
+"file": "hafele-connectors-for-internal-corners-for-profiles-gola-system-c-plus-00854799.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Connectors, for Profiles, Gola System B/C",
+"type": "profile",
+"file": "hafele-connectors-for-profiles-gola-system-b-c-00854796.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Handle, Brass, Fixing Centre 76-192 mm, Albury",
+"type": "cup",
+"file": "hafele-cup-handle-brass-fixing-centre-76-192-mm-albury-01929366.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Handle, Zinc Alloy, Fixing Centre 64 mm, Tocco",
+"type": "cup",
+"file": "hafele-cup-handle-zinc-alloy-fixing-centre-64-mm-tocco-01638753.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Handle, Zinc Alloy, Fixing Centres 160 mm, Palladium",
+"type": "cup",
+"file": "hafele-cup-handle-zinc-alloy-fixing-centres-160-mm-palladium-01926421.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Handle, Zinc Alloy, Fixing Centres 64 mm, Sutton",
+"type": "cup",
+"file": "hafele-cup-handle-zinc-alloy-fixing-centres-64-mm-sutton-01976217.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centre 64-192 mm, Parina",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centre-64-192-mm-parina-01318461.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centre 64 mm, Bevera",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centre-64-mm-bevera-01644791.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centres 64 mm, Jude",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centres-64-mm-jude-01297960.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centres 96-202 mm, Queslett",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centres-96-202-mm-queslett-00853993.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centres 96 mm, Delia",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centres-96-mm-delia-01297959.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Fixing Centres 96 mm, Restoration",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-fixing-centres-96-mm-restoration-00854000.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Brass, Mulberry",
+"type": "cup",
+"file": "hafele-cup-pull-handle-brass-mulberry-00853983.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Cast Iron, Fixing Centres 64 mm, Smooth",
+"type": "cup",
+"file": "hafele-cup-pull-handle-cast-iron-fixing-centres-64-mm-smooth-01318490.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Fixing Centres 64 mm, Bevera",
+"type": "cup",
+"file": "hafele-cup-pull-handle-fixing-centres-64-mm-bevera-01644689.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Wood, Fixing Centres 32-160 mm, Wilton",
+"type": "cup",
+"file": "hafele-cup-pull-handle-wood-fixing-centres-32-160-mm-wilton-00853989.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 64-128 mm, Odessa",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-64-128-mm-odessa-00853998.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 64 mm, Knightsbridge",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-64-mm-knightsbridge-00854014.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 64 mm, Land",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-64-mm-land-01527902.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 76 mm, Ariel",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-76-mm-ariel-00853992.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 76 mm, Crawford",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-76-mm-crawford-00853988.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 76 mm, Henrietta",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-76-mm-henrietta-00853991.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Augusta",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-96-mm-augusta-00852363.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Kane",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-96-mm-kane-00854139.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Cup Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Mayberry",
+"type": "cup",
+"file": "hafele-cup-pull-handle-zinc-alloy-fixing-centres-96-mm-mayberry-00853522.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Handle, Aluminum Feet, Fixing Centres 160-320 mm, Duo Mini",
+"type": "pull",
+"file": "hafele-d-handle-aluminum-feet-fixing-centres-160-320-mm-duo-mini-01973900.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Handle, Aluminum, Fixing Centres 128 mm",
+"type": "pull",
+"file": "hafele-d-handle-aluminum-fixing-centres-128-mm-01976222.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Handle, Fixing Centres 192 mm, Lymington",
+"type": "pull",
+"file": "hafele-d-handle-fixing-centres-192-mm-lymington-01343158.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Handle, Zinc Alloy, Fixing Centres 160 mm, Firm",
+"type": "pull",
+"file": "hafele-d-handle-zinc-alloy-fixing-centres-160-mm-firm-01527903.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 128-160 mm, Albert",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-128-160-mm-albert-00854054.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 128-320 mm, Pembridge",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-128-320-mm-pembridge-00854066.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 160-320 mm, Bragi",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-160-320-mm-bragi-01709590.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 160-320 mm, Salzano",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-160-320-mm-salzano-01709591.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 160-992 mm, Rille",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-160-992-mm-rille-01705740.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 160 mm, Keswick",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-160-mm-keswick-02089709.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 160 mm, Leopold",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-160-mm-leopold-00854043.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Aluminium, Fixing Centres 96 mm, Henrietta",
+"type": "pull",
+"file": "hafele-d-pull-handle-aluminium-fixing-centres-96-mm-henrietta-00854068.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Anodised Aluminium, Fixing Centres 96 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-anodised-aluminium-fixing-centres-96-mm-00853697.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Grade 304 Stainless Steel, Fixing Centres 128-448 mm, Hargrave",
+"type": "pull",
+"file": "hafele-d-pull-handle-grade-304-stainless-steel-fixing-centres-128-448-mm-harg-00852753.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Oak, Fixing Centres 96 mm, Adda",
+"type": "pull",
+"file": "hafele-d-pull-handle-oak-fixing-centres-96-mm-adda-00854084.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Stainless Steel, \u00d8 10 mm, Fixing Centres 64-352 mm, Mandalay",
+"type": "pull",
+"file": "hafele-d-pull-handle-stainless-steel-10-mm-fixing-centres-64-352-mm-mandalay-00852365.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, \u00d8 10 mm, Fixing Centres 96-128 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-10-mm-fixing-centres-96-128-mm-01237679.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, \u00d8 10 mm, Fixing Centres 96-128 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-10-mm-fixing-centres-96-128-mm-01318428.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, \u00d8 10 mm, Fixing Centres 96 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-10-mm-fixing-centres-96-mm-00853235.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, \u00d8 8 mm, Fixing Centres 90-256 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-8-mm-fixing-centres-90-256-mm-02050252.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, \u00d8 8 mm, Fixing Centres 96-448 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-8-mm-fixing-centres-96-448-mm-00854034.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, Fixing Centres 160-320 mm, Pencil",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-fixing-centres-160-320-mm-pencil-01709589.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, Fixing Centres 192 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-fixing-centres-192-mm-01318435.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, Fixing Centres 96-256 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-fixing-centres-96-256-mm-00853199.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Steel, Fixing Centres 96 mm",
+"type": "pull",
+"file": "hafele-d-pull-handle-steel-fixing-centres-96-mm-00852949.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Walnut, Fixing Centres 160 mm, Contact",
+"type": "pull",
+"file": "hafele-d-pull-handle-walnut-fixing-centres-160-mm-contact-00854083.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle with Backplate, Aluminium, Fixing Centres 192-1178 mm, Arpa",
+"type": "pull",
+"file": "hafele-d-pull-handle-with-backplate-aluminium-fixing-centres-192-1178-mm-arpa-01673855.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, \u00d8 10 mm, Fixing Centres 160 mm, Tocco",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-10-mm-fixing-centres-160-mm-tocco-01638752.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Emerson",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-emerson-00854023.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, H\u00e4fele Design, Theodore",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-h-fele-design-theodore-00853402.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Logan",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-logan-00854027.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Morgan",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-morgan-00854024.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Shapes",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-shapes-00853305.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Twist",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-128-mm-twist-02079705.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160-192 mm, Deel",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-192-mm-deel-00854058.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160-224 mm, Factory",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-224-mm-factory-00854067.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160-320 mm, Lines",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-320-mm-lines-01705600.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Alberti",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-alberti-01298106.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Arno",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-arno-01655561.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Bolsena",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-bolsena-00852821.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Brera",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-brera-00854047.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Devon",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-devon-00854022.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Glitter",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-glitter-00854049.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Harrington",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-harrington-00854061.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Larissa",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-larissa-00854026.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Twister",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-160-mm-twister-00854071.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 64-320 mm, Curly",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-64-320-mm-curly-01318426.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 96-128 mm, Crystal",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-96-128-mm-crystal-00854030.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 96-320 mm, Lincoln",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-96-320-mm-lincoln-00853066.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Knightsbridge",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-96-mm-knightsbridge-00854069.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Logan",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-fixing-centres-96-mm-logan-00854028.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, H\u00e4fele Design, Verona",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-h-fele-design-verona-00853234.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Length 200-330 mm, Bronte",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-length-200-330-mm-bronte-00853622.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Malvan",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-malvan-00854052.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "D Pull Handle, Zinc Alloy, Montrose",
+"type": "pull",
+"file": "hafele-d-pull-handle-zinc-alloy-montrose-00852968.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Double Ringed Pull Handle, Iron, Fixing Centres 160-320 mm, Barchester",
+"type": "pull",
+"file": "hafele-double-ringed-pull-handle-iron-fixing-centres-160-320-mm-barchester-01911145.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Double Ringed T Knob, Iron, \u00d818 mm, Barchester",
+"type": "knob",
+"file": "hafele-double-ringed-t-knob-iron-18-mm-barchester-01911600.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Handle, Zinc Alloy, 30 mm, Caxton",
+"type": "pull",
+"file": "hafele-drop-handle-zinc-alloy-30-mm-caxton-00854089.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Handle, Zinc Alloy, Fixing Centres 160 mm, Twister",
+"type": "pull",
+"file": "hafele-drop-handle-zinc-alloy-fixing-centres-160-mm-twister-00854087.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Handle, Zinc Alloy, Fixing Centres 64 mm, Caxton",
+"type": "pull",
+"file": "hafele-drop-handle-zinc-alloy-fixing-centres-64-mm-caxton-00854088.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Handle, Zinc Alloy, Fixing Centres 96 mm, Risle",
+"type": "pull",
+"file": "hafele-drop-handle-zinc-alloy-fixing-centres-96-mm-risle-00854098.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Pendant Handle, Zinc Alloy, Argenton",
+"type": "pull",
+"file": "hafele-drop-pendant-handle-zinc-alloy-argenton-00854100.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Drop Ring Handle, Zinc Alloy, Fixing Centres 38 mm",
+"type": "pull",
+"file": "hafele-drop-ring-handle-zinc-alloy-fixing-centres-38-mm-00854104.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Edge Pull Handle, Solid Brass, 38 x 3 mm, Length 50-200 mm",
+"type": "profile",
+"file": "hafele-edge-pull-handle-solid-brass-38-x-3-mm-length-50-200-mm-00854308.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Edge Pull Handle, Solid Brass, 68 x 4 mm, Length 50-200 mm",
+"type": "profile",
+"file": "hafele-edge-pull-handle-solid-brass-68-x-4-mm-length-50-200-mm-00854309.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Finger Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Templeton",
+"type": "pull",
+"file": "hafele-finger-pull-handle-zinc-alloy-fixing-centres-160-mm-templeton-01298100.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Furniture Knob, H\u00e4fele Design Cona",
+"type": "knob",
+"file": "hafele-furniture-knob-h-fele-design-cona-01981167.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Glass Door Pull, for Glass Thickness 4-5 mm, Zinc Alloy",
+"type": "pull",
+"file": "hafele-glass-door-pull-for-glass-thickness-4-5-mm-zinc-alloy-00854225.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A1",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a1-01708744.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A2",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a2-01708738.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A3",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a3-01708739.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A3 LED",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a3-01893771.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A6",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a6-01708740.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Handle Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 A7",
+"type": "profile",
+"file": "hafele-handle-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-a7-01708741.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Brass, \u00d8 44 mm, Epte",
+"type": "inset",
+"file": "hafele-inset-handle-brass-44-mm-epte-00852689.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Brass, 90 x 40 mm, Maine",
+"type": "inset",
+"file": "hafele-inset-handle-brass-90-x-40-mm-maine-01298137.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Brass or Steel, Width 75-99 mm",
+"type": "inset",
+"file": "hafele-inset-handle-brass-or-steel-width-75-99-mm-00854542.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Unfinished Wood, 94 mm, Montone",
+"type": "inset",
+"file": "hafele-inset-handle-unfinished-wood-94-mm-montone-01298146.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Wood, Length 210 mm, Halkin",
+"type": "inset",
+"file": "hafele-inset-handle-wood-length-210-mm-halkin-00854571.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, 160 mm, Cubic",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-160-mm-cubic-00925561.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, 240 mm, Pellipar",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-240-mm-pellipar-01298142.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, \u00d8 40 - 60 mm, Tap",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-40-60-mm-tap-01318475.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, \u00d8 5 mm Lugs, Fixing Centres 128 mm, Hide",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-5-mm-lugs-fixing-centres-128-mm-hide-01298134.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, \u00d8 50 mm, Indre",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-50-mm-indre-01298141.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Fixing Centres 128 mm, Fold",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-fixing-centres-128-mm-fold-01974710.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Fixing Centres 96 mm, Avebury",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-fixing-centres-96-mm-avebury-00854460.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Fixing Centres 96 mm, Rhin",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-fixing-centres-96-mm-rhin-00854440.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, for Glue Fixing, Square, Saul",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-for-glue-fixing-square-saul-00854492.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Length 109 mm, Height 56 mm, Vienne",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-length-109-mm-height-56-mm-vienne-00854446.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Length 110 mm, Height 56 mm, Blavett",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-length-110-mm-height-56-mm-blavett-00854447.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Inset Handle, Zinc Alloy, Length 173 mm, Cavendish",
+"type": "inset",
+"file": "hafele-inset-handle-zinc-alloy-length-173-mm-cavendish-00854435.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 10 mm, Graf 2",
+"type": "knob",
+"file": "hafele-knob-aluminium-10-mm-graf-2-00925566.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 12 x 55 mm, Salzano",
+"type": "knob",
+"file": "hafele-knob-aluminium-12-x-55-mm-salzano-01709595.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 14 mm, Egg Timer",
+"type": "knob",
+"file": "hafele-knob-aluminium-14-mm-egg-timer-00855165.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 17 mm, Graf",
+"type": "knob",
+"file": "hafele-knob-aluminium-17-mm-graf-00854881.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 18 x 30 mm, Bragi",
+"type": "knob",
+"file": "hafele-knob-aluminium-18-x-30-mm-bragi-01709594.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 20 mm, Orson",
+"type": "knob",
+"file": "hafele-knob-aluminium-20-mm-orson-00855142.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, 36.5 x 36.5 mm, Issey",
+"type": "knob",
+"file": "hafele-knob-aluminium-36-5-x-36-5-mm-issey-00855078.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, \u00d8 38-50 mm, Graf Big",
+"type": "knob",
+"file": "hafele-knob-aluminium-38-50-mm-graf-big-01527905.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, 55 mm, Brooklyn",
+"type": "knob",
+"file": "hafele-knob-aluminium-55-mm-brooklyn-02043548.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, 60 mm, Casey",
+"type": "knob",
+"file": "hafele-knob-aluminium-60-mm-casey-02043550.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, 60 mm, Hinoki",
+"type": "knob",
+"file": "hafele-knob-aluminium-60-mm-hinoki-02043565.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Aluminium, Point",
+"type": "knob",
+"file": "hafele-knob-aluminium-point-01973894.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 16-25 mm, Cyrus",
+"type": "knob",
+"file": "hafele-knob-brass-16-25-mm-cyrus-00855276.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 20-30 mm, Kendrick",
+"type": "knob",
+"file": "hafele-knob-brass-20-30-mm-kendrick-00855275.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 30-35 mm, Delia",
+"type": "knob",
+"file": "hafele-knob-brass-30-35-mm-delia-01298164.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 30 mm, Clayton",
+"type": "knob",
+"file": "hafele-knob-brass-30-mm-clayton-00855301.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 30 mm, Jude",
+"type": "knob",
+"file": "hafele-knob-brass-30-mm-jude-01298163.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 30 mm, Langham",
+"type": "knob",
+"file": "hafele-knob-brass-30-mm-langham-01909211.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32-38 mm, Parina",
+"type": "knob",
+"file": "hafele-knob-brass-32-38-mm-parina-01318519.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass \u00d8 32 mm, Albury",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-albury-01929365.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32 mm, Bevera",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-bevera-01644779.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32 mm, Chloeu",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-chloeu-00854868.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32 mm, Corrine",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-corrine-00855302.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32 mm, Salso",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-salso-01644847.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 32 mm, Tordino",
+"type": "knob",
+"file": "hafele-knob-brass-32-mm-tordino-01644837.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 38 mm, Mulberry",
+"type": "knob",
+"file": "hafele-knob-brass-38-mm-mulberry-01892040.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 40 mm, Carton",
+"type": "knob",
+"file": "hafele-knob-brass-40-mm-carton-00855004.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 40 mm, Nile",
+"type": "knob",
+"file": "hafele-knob-brass-40-mm-nile-01935950.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, \u00d8 40 mm, Thaxted",
+"type": "knob",
+"file": "hafele-knob-brass-40-mm-thaxted-01935933.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass, Luca",
+"type": "knob",
+"file": "hafele-knob-brass-luca-01318438.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Brass or Cast Iron, 37 x 37 mm, Burbridge",
+"type": "knob",
+"file": "hafele-knob-brass-or-cast-iron-37-x-37-mm-burbridge-00854867.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, 32 mm x 32 mm, Conwy",
+"type": "knob",
+"file": "hafele-knob-cast-iron-32-mm-x-32-mm-conwy-00855548.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, \u00d8 34 mm, Esaro",
+"type": "knob",
+"file": "hafele-knob-cast-iron-34-mm-esaro-02025327.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, 34 x 34 mm, Varaita",
+"type": "knob",
+"file": "hafele-knob-cast-iron-34-x-34-mm-varaita-01644686.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, \u00d8 35 mm, Buxton",
+"type": "knob",
+"file": "hafele-knob-cast-iron-35-mm-buxton-00855544.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, \u00d8 35 mm, Smooth",
+"type": "knob",
+"file": "hafele-knob-cast-iron-35-mm-smooth-01318520.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Cast Iron, \u00d8 38 mm, Bevera",
+"type": "knob",
+"file": "hafele-knob-cast-iron-38-mm-bevera-01644688.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Ceramic, \u00d8 38 mm, Iris",
+"type": "knob",
+"file": "hafele-knob-ceramic-38-mm-iris-00855578.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Ceramic, \u00d8 38 mm, Victoria",
+"type": "knob",
+"file": "hafele-knob-ceramic-38-mm-victoria-00855581.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Ceramic, \u00d8 50 mm, Victoria",
+"type": "knob",
+"file": "hafele-knob-ceramic-50-mm-victoria-00855580.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Glass with Brass Base, \u00d8 30-35 mm, Harley",
+"type": "knob",
+"file": "hafele-knob-glass-with-brass-base-30-35-mm-harley-00855429.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Grade 304 Stainless Steel, 25 x 25 mm, Metropolis",
+"type": "knob",
+"file": "hafele-knob-grade-304-stainless-steel-25-x-25-mm-metropolis-00855115.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, H\u00e4fele Design, \u00d8 27 mm, Ashton",
+"type": "knob",
+"file": "hafele-knob-h-fele-design-27-mm-ashton-01638757.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, H\u00e4fele Design, Onega",
+"type": "knob",
+"file": "hafele-knob-h-fele-design-onega-01981157.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, H\u00e4fele Design, Zinc Alloy, \u00d8 46 mm, Pebble",
+"type": "knob",
+"file": "hafele-knob-h-fele-design-zinc-alloy-46-mm-pebble-01496464.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Iron, \u00d8 38-49 mm, Barchester",
+"type": "knob",
+"file": "hafele-knob-iron-38-49-mm-barchester-01911599.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Iron and Ceramic, \u00d8 36 mm, Edstone",
+"type": "knob",
+"file": "hafele-knob-iron-and-ceramic-36-mm-edstone-00855564.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Mild Steel, \u00d8 38 mm, Harlington",
+"type": "knob",
+"file": "hafele-knob-mild-steel-38-mm-harlington-01911141.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Oak, \u00d8 44 mm, Cross Grain",
+"type": "knob",
+"file": "hafele-knob-oak-44-mm-cross-grain-00855361.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Oak, Smoked Finish, Shaker",
+"type": "knob",
+"file": "hafele-knob-oak-smoked-finish-shaker-00854901.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Oak/Walnut, \u00d8 56 mm, Yoyo",
+"type": "knob",
+"file": "hafele-knob-oak-walnut-56-mm-yoyo-00854902.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Porcelain, \u00d8 37 mm, Calvin",
+"type": "knob",
+"file": "hafele-knob-porcelain-37-mm-calvin-00854874.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Solid Wood, \u00d8 32 mm, Ringwood",
+"type": "knob",
+"file": "hafele-knob-solid-wood-32-mm-ringwood-01343161.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Stainless Steel, \u00d8 32-60 mm, Metropolis",
+"type": "knob",
+"file": "hafele-knob-stainless-steel-32-60-mm-metropolis-00855187.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Stainless Steel, \u00d8 32 mm, Metropolis",
+"type": "knob",
+"file": "hafele-knob-stainless-steel-32-mm-metropolis-00855114.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Steel, \u00d8 24 mm, Binx",
+"type": "knob",
+"file": "hafele-knob-steel-24-mm-binx-00855590.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Steel, \u00d830 mm, Longham",
+"type": "knob",
+"file": "hafele-knob-steel-30-mm-longham-02055987.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Tapered, Stainless Steel, \u00d8 32 mm, Metropolis",
+"type": "knob",
+"file": "hafele-knob-tapered-stainless-steel-32-mm-metropolis-00855188.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Tumbled OceanIX, \u00d8 42 mm, Plato",
+"type": "knob",
+"file": "hafele-knob-tumbled-oceanix-42-mm-plato-01928407.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob with Backplate, Aluminium, \u00d8 22 mm, Arpa",
+"type": "knob",
+"file": "hafele-knob-with-backplate-aluminium-22-mm-arpa-01705608.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, with Backplate, Brass, \u00d8 33 mm, Ambrose",
+"type": "knob",
+"file": "hafele-knob-with-backplate-brass-33-mm-ambrose-01932896.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, with Backplate, Zinc Alloy, \u00d8 30 mm, Odessa",
+"type": "knob",
+"file": "hafele-knob-with-backplate-zinc-alloy-30-mm-odessa-00854955.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, with Backplate, Zinc Alloy, 30 x 30 mm, Augusta",
+"type": "knob",
+"file": "hafele-knob-with-backplate-zinc-alloy-30-x-30-mm-augusta-01318505.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Wood, 17.5 mm, Luv Wood",
+"type": "knob",
+"file": "hafele-knob-wood-17-5-mm-luv-wood-02043613.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Wood, \u00d8 48 mm, Circum",
+"type": "knob",
+"file": "hafele-knob-wood-48-mm-circum-02060304.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Wood, Unfinished, \u00d8 39 mm",
+"type": "knob",
+"file": "hafele-knob-wood-unfinished-39-mm-00855366.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Wood, Unfinished/Lacquered, \u00d8 42-67 mm, Cadogan",
+"type": "knob",
+"file": "hafele-knob-wood-unfinished-lacquered-42-67-mm-cadogan-00855379.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc alloy",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-01318515.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 12-20 mm, Leo",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-12-20-mm-leo-00855245.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 21, Scallop",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-21-scallop-01960628.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 25 mm, Oval",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-25-mm-oval-00855068.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 28-33 mm, Dimple",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-28-33-mm-dimple-00854893.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 29.5 mm, Cassius",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-29-5-mm-cassius-00855284.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Albano",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-albano-00854886.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Angus",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-angus-00854979.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Coco",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-coco-00855201.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Kane",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-kane-00855625.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Knightsbridge",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-knightsbridge-01938926.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 30 mm, Twister",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-mm-twister-00854982.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 30 x 30 mm, Lyle",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-30-x-30-mm-lyle-00855131.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 31.5 mm, Duke",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-31-5-mm-duke-01892048.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 32 mm, Eden",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-32-mm-eden-00855185.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 32 mm, Floyd",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-32-mm-floyd-00855202.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 32 mm, Mayberry",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-32-mm-mayberry-00854866.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 32 mm, Oriel",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-32-mm-oriel-00855127.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 32 mm, Palladium",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-32-mm-palladium-01926412.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 33 mm, Ariel",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-33-mm-ariel-00855352.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 34.5 mm, Amelia",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-34-5-mm-amelia-00855228.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 35 mm, Aspen",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-35-mm-aspen-00854888.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 35 mm, Crawford",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-35-mm-crawford-00855613.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 35 mm, Floid",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-35-mm-floid-01527900.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 35 mm, Oberon",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-35-mm-oberon-00855631.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 35 mm, Sorrento",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-35-mm-sorrento-00855164.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 38 mm, Henrietta",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-38-mm-henrietta-00855193.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 40 mm, Chester",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-40-mm-chester-00854992.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 40 mm, Land",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-40-mm-land-01527901.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 41 mm, Como",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-41-mm-como-01496444.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 41 x 21 mm, Shapes",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-41-x-21-mm-shapes-00854953.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 43 mm, Constance",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-43-mm-constance-00854887.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 49 x 34 mm, Bianca",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-49-x-34-mm-bianca-00855480.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, \u00d8 50 mm, Tocco",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-50-mm-tocco-01638759.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 57 x 57 mm, Flynn",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-57-x-57-mm-flynn-00854877.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 60 mm, Gemini",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-60-mm-gemini-00855290.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, 65 x 22 mm, Twister",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-65-x-22-mm-twister-00854980.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Arco",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-arco-00854884.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Fixing Centres 16 mm, Lara",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-fixing-centres-16-mm-lara-00855062.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Fixing Centres 32 mm, Beuvron",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-fixing-centres-32-mm-beuvron-00854951.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy & Glass, 35 x 35 mm, Glacio",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-glass-35-x-35-mm-glacio-00855620.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy & Glass, \u00d8 44 mm, Glacio",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-glass-44-mm-glacio-00855619.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, H\u00e4fele Design, 24 x 19 mm, Concavo",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-h-fele-design-24-x-19-mm-concavo-01638758.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, H\u00e4fele Design, \u00d8 9 x 47 mm, Conica",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-h-fele-design-9-x-47-mm-conica-01638760.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, H\u00e4fele Design, Split",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-h-fele-design-split-01638761.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Hafele Design, Inverto",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-hafele-design-inverto-01638762.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Height 60 mm, Width 60 mm, Amber",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-height-60-mm-width-60-mm-amber-00855061.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Up, H\u00e4fele Design",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-up-h-fele-design-01981166.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy, Width 28 mm, Height 18 mm, Pearl",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-width-28-mm-height-18-mm-pearl-00855128.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Knob, Zinc Alloy with Swarovski Crystal, Diamond",
+"type": "knob",
+"file": "hafele-knob-zinc-alloy-with-swarovski-crystal-diamond-00855105.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Loop Handle, 70 x 22 mm, Flexa",
+"type": "bow",
+"file": "hafele-loop-handle-70-x-22-mm-flexa-01690505.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Connectors, for Internal/External Corners, Gola System B Plus",
+"type": "profile",
+"file": "hafele-profile-connectors-for-internal-external-corners-gola-system-b-plus-01458785.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Connectors, for Internal/External Corners, Gola System C Plus",
+"type": "profile",
+"file": "hafele-profile-connectors-for-internal-external-corners-gola-system-c-plus-01458786.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centre 32-128 mm, Curve",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centre-32-128-mm-curve-00854782.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centres 128-256 mm, Noma",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centres-128-256-mm-noma-00854668.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centres 128-320 mm, Vidya",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centres-128-320-mm-vidya-02064500.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centres 32-1056 mm, Ona",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centres-32-1056-mm-ona-00925553.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centres 32-416 mm, Curve",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centres-32-416-mm-curve-00854709.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Aluminium, Fixing Centres 64-1120 mm, Vann",
+"type": "profile",
+"file": "hafele-profile-handle-aluminium-fixing-centres-64-1120-mm-vann-01298102.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, Cabinet Wide Grip, Aluminium, Saane",
+"type": "profile",
+"file": "hafele-profile-handle-cabinet-wide-grip-aluminium-saane-00854679.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Fixing Between Worktop and Door or Drawer, Gola System B Plus",
+"type": "profile",
+"file": "hafele-profile-handle-for-fixing-between-worktop-and-door-or-drawer-gola-syst-00854701.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing Between Doors and Drawers, Gola System C Plus",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-between-doors-and-drawers-gola-sy-00854702.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing Between Doors and Drawers, GOLA System C Plus",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-between-doors-and-drawers-gola-sy-01933553.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing Under Wall Units, Gola System A",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-under-wall-units-gola-system-a-00854713.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing Under Wall Units, with Shock Absorber",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-under-wall-units-with-shock-absor-01704642.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing Under Worktops, GOLA System B Plus",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-under-worktops-gola-system-b-plus-01933538.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Horizontal Fixing, with Slot for LED Strip, Gola System A",
+"type": "profile",
+"file": "hafele-profile-handle-for-horizontal-fixing-with-slot-for-led-strip-gola-syst-00925562.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing Between Cabinet and Oven, Gola System D",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-between-cabinet-and-oven-gola-syste-00854706.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing Between Doors, Gola System D",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-between-doors-gola-system-d-00854703.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing Between Doors, GOLA System D",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-between-doors-gola-system-d-01933643.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing Between Doors, Gola System E",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-between-doors-gola-system-e-00854705.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing Between Doors, GOLA System E",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-between-doors-gola-system-e-01933664.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, for Vertical Fixing in Oven Cavity, for Profiles, Gola System E",
+"type": "profile",
+"file": "hafele-profile-handle-for-vertical-fixing-in-oven-cavity-for-profiles-gola-sy-00854704.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Profile Handle, H\u00e4fele Design, Shetlan",
+"type": "profile",
+"file": "hafele-profile-handle-h-fele-design-shetlan-02001183.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 128 mm, Luella",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-128-mm-luella-00852479.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 160-320 mm, Brooklyn",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-160-320-mm-brooklyn-02025510.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 160-320 mm, Moon",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-160-320-mm-moon-02043552.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 160 mm, Dropp",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-160-mm-dropp-02043612.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 160 mm, Hinoki",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-160-mm-hinoki-02043602.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 192-288 mm, Putney",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-192-288-mm-putney-00853475.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 192-320 mm, Casey",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-192-320-mm-casey-02043646.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 320 mm, Rille Mini",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-320-mm-rille-mini-02021939.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 50 mm, Quinn",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-50-mm-quinn-00852777.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 64 mm, Dropp",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-64-mm-dropp-02043603.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 96-320 mm, Cutt",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-96-320-mm-cutt-01298103.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium, Fixing Centres 96-640 mm, Angle",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-fixing-centres-96-640-mm-angle-01297954.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminium/Zinc Alloy, H\u00e4fele Design Amberley",
+"type": "pull",
+"file": "hafele-pull-handle-aluminium-zinc-alloy-h-fele-design-amberley-01935738.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminum, Fixing Centre 160 mm, Fusion",
+"type": "pull",
+"file": "hafele-pull-handle-aluminum-fixing-centre-160-mm-fusion-01973713.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminum, Fixing Centres 192 mm, Point",
+"type": "pull",
+"file": "hafele-pull-handle-aluminum-fixing-centres-192-mm-point-01973884.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminum, Fixing Centres 192 mm, Riss",
+"type": "pull",
+"file": "hafele-pull-handle-aluminum-fixing-centres-192-mm-riss-01907379.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Aluminum, Fixing Centres 192 mm, Torre",
+"type": "pull",
+"file": "hafele-pull-handle-aluminum-fixing-centres-192-mm-torre-01973696.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Ash, Ultra",
+"type": "pull",
+"file": "hafele-pull-handle-ash-ultra-01298087.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Burbridge",
+"type": "pull",
+"file": "hafele-pull-handle-brass-burbridge-00852367.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centre 160 mm, Plima",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centre-160-mm-plima-01644795.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centre 64 mm, Luna Linear",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centre-64-mm-luna-linear-01911150.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centre 64 mm, Luna Plain",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centre-64-mm-luna-plain-01911149.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centres 160-320 mm, Langham",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centres-160-320-mm-langham-01909203.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centres 160 mm, Rio",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centres-160-mm-rio-01298008.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centres 96-224 mm, Nile",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centres-96-224-mm-nile-01935943.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Brass, Fixing Centres 96-224 mm, Thaxted",
+"type": "pull",
+"file": "hafele-pull-handle-brass-fixing-centres-96-224-mm-thaxted-01934620.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Cast Iron, Fixing Centre 128-160 mm, Varaita",
+"type": "pull",
+"file": "hafele-pull-handle-cast-iron-fixing-centre-128-160-mm-varaita-01644693.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Cast Iron, Fixing Centres 96-192 mm, Burbridge",
+"type": "pull",
+"file": "hafele-pull-handle-cast-iron-fixing-centres-96-192-mm-burbridge-00852867.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Cast Iron, Fixing Centres 96-224 mm, Mayfair",
+"type": "pull",
+"file": "hafele-pull-handle-cast-iron-fixing-centres-96-224-mm-mayfair-01624887.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fion, H\u00e4fele Design",
+"type": "pull",
+"file": "hafele-pull-handle-fion-h-fele-design-02001195.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fixing Centres 128-160 mm, Rhea",
+"type": "pull",
+"file": "hafele-pull-handle-fixing-centres-128-160-mm-rhea-01318465.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fixing Centres 128-160 mm, Tarvos",
+"type": "pull",
+"file": "hafele-pull-handle-fixing-centres-128-160-mm-tarvos-01318463.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fixing Centres 128 mm, Leather and Zinc Alloy, Flexa",
+"type": "pull",
+"file": "hafele-pull-handle-fixing-centres-128-mm-leather-and-zinc-alloy-flexa-02003511.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fixing Centres 128 mm, Square10",
+"type": "pull",
+"file": "hafele-pull-handle-fixing-centres-128-mm-square10-01928408.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Fixing Centres 160 - 320 mm, Encanto",
+"type": "pull",
+"file": "hafele-pull-handle-fixing-centres-160-320-mm-encanto-01318464.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, H\u00e4fele Design, Cona",
+"type": "pull",
+"file": "hafele-pull-handle-h-fele-design-cona-02001135.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, H\u00e4fele Design, Onega",
+"type": "pull",
+"file": "hafele-pull-handle-h-fele-design-onega-01984618.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Mild Steel, Fixing Centre 160-320 mm, Harlington",
+"type": "pull",
+"file": "hafele-pull-handle-mild-steel-fixing-centre-160-320-mm-harlington-01911119.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Mohawk, H\u00e4fele Design",
+"type": "pull",
+"file": "hafele-pull-handle-mohawk-h-fele-design-02001207.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Oak, Fixing Centres 128-224 mm, Venus",
+"type": "pull",
+"file": "hafele-pull-handle-oak-fixing-centres-128-224-mm-venus-01298089.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Oak, Fixing Centres 192-512 mm, Eros",
+"type": "pull",
+"file": "hafele-pull-handle-oak-fixing-centres-192-512-mm-eros-01298088.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Stainless Steel, Length 192-448 mm, Metropolis",
+"type": "pull",
+"file": "hafele-pull-handle-stainless-steel-length-192-448-mm-metropolis-00852621.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Steel, Fixing Centres 160-320 mm, Longham",
+"type": "pull",
+"file": "hafele-pull-handle-steel-fixing-centres-160-320-mm-longham-02055982.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Up, Fixing Centres 160-320 mm, H\u00e4fele Design",
+"type": "pull",
+"file": "hafele-pull-handle-up-fixing-centres-160-320-mm-h-fele-design-01985077.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Walnut, Fixing Centres 192 mm, Oval",
+"type": "pull",
+"file": "hafele-pull-handle-walnut-fixing-centres-192-mm-oval-01298090.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, with Washers, Iron, Fixing Centres 160-320 mm, Barchester",
+"type": "pull",
+"file": "hafele-pull-handle-with-washers-iron-fixing-centres-160-320-mm-barchester-01911461.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Wood, Fixing Centre 160 mm, Luv Wood",
+"type": "pull",
+"file": "hafele-pull-handle-wood-fixing-centre-160-mm-luv-wood-02043614.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centre 128 mm, Split",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centre-128-mm-split-01638755.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centre 64 mm, Bau",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centre-64-mm-bau-01973326.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128-320 mm, Ceylon",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-320-mm-ceylon-01297949.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128-492 mm, U",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-492-mm-u-01297955.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Jazz",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-jazz-01298001.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Jutland",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-jutland-00853568.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Kane",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-kane-00854140.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Kyle",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-kyle-00853825.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Mitford",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-mitford-00852570.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Regency",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-regency-01960679.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, Sophia",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-sophia-01297944.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 128 mm, St. Vincent",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-128-mm-st-vincent-00854147.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 16 mm, Crystal",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-16-mm-crystal-01298079.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 16 mm, Jazz",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-16-mm-jazz-01298000.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 16 mm, Luca",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-16-mm-luca-01297942.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160/192 mm, Disco",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-192-mm-disco-01297958.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 - 320 mm, Aqua",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-320-mm-aqua-02088198.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160-320 mm, Lama",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-320-mm-lama-00852888.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160-320 mm, Plane",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-320-mm-plane-00915222.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Belt",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-belt-01906926.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Charlotte",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-charlotte-01298004.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Colibri",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-colibri-01297971.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Crawford",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-crawford-00854146.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, ESTE",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-este-01496333.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Juke",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-juke-01297967.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Lyle",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-lyle-01297953.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Omnia",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-omnia-01298101.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Palladium",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-palladium-01926447.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Pura",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-pura-02021938.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 160 mm, Scallop",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-160-mm-scallop-01960669.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32-160 mm, Nick",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-160-mm-nick-00853607.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32-96 mm, Libra",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-96-mm-libra-00853149.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32 mm",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-mm-00853360.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32 mm, Crystal",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-mm-crystal-01318436.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32 mm, Dexter",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-mm-dexter-00854943.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 32 mm, Maddox",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-32-mm-maddox-00852528.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 64 mm, Norfolk",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-64-mm-norfolk-01297946.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 96-320 mm, Osaka",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-96-320-mm-osaka-00852390.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Authie",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-96-mm-authie-01298082.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Azalea",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-96-mm-azalea-01297952.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Fixing Centres 96 mm, Oxford",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-fixing-centres-96-mm-oxford-01297948.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy & Glass, Glacio",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-glass-glacio-01298081.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, H\u00e4fele Design, Fixing Centres 160 mm, Ashton",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-h-fele-design-fixing-centres-160-mm-ashton-01638740.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, H\u00e4fele Design, Fixing Centres 160 mm, Concavo",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-h-fele-design-fixing-centres-160-mm-concavo-01638749.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, H\u00e4fele Design, Fixing Centres 160 mm, Conica",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-h-fele-design-fixing-centres-160-mm-conica-01638754.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, H\u00e4fele Design, Fixing Centres 160 mm, Pebble",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-h-fele-design-fixing-centres-160-mm-pebble-01496362.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Hafele Design, Fixing Centres 192 mm, Inverto",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-hafele-design-fixing-centres-192-mm-inverto-01638756.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy/Iron, Fixing Centres 96-192 mm, Allaro",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-iron-fixing-centres-96-192-mm-allaro-01318458.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Pull Handle, Zinc Alloy, Melina",
+"type": "pull",
+"file": "hafele-pull-handle-zinc-alloy-melina-01297969.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Shaker Knob, \u00d8 45 mm, Cross Grain",
+"type": "knob",
+"file": "hafele-shaker-knob-45-mm-cross-grain-00855360.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Soft Pull Handle, Fixing Centre 160 mm, Encanto",
+"type": "pull",
+"file": "hafele-soft-pull-handle-fixing-centre-160-mm-encanto-01929774.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Spacer Profile, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 C",
+"type": "bow",
+"file": "hafele-spacer-profile-aluminium-for-sliding-doors-h-fele-slido-f-handle26-c-01708743.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Strengthening Strip, Aluminium, for Sliding Doors, H\u00e4fele Slido F-Handle26 B",
+"type": "bow",
+"file": "hafele-strengthening-strip-aluminium-for-sliding-doors-h-fele-slido-f-handle2-01708742.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Handle, Aluminium, Rille Mini",
+"type": "bow",
+"file": "hafele-t-handle-aluminium-rille-mini-02022288.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, 17 x 60 mm, Aluminium, Tiberius",
+"type": "knob",
+"file": "hafele-t-knob-17-x-60-mm-aluminium-tiberius-01496503.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Aluminium, \u00d8 10 mm, Graf 2",
+"type": "knob",
+"file": "hafele-t-knob-aluminium-10-mm-graf-2-00925567.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Aluminium, \u00d8 15 x 55 mm, Rille",
+"type": "knob",
+"file": "hafele-t-knob-aluminium-15-x-55-mm-rille-01705741.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Aluminium, Torre",
+"type": "knob",
+"file": "hafele-t-knob-aluminium-torre-01973708.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Aluminium/Zinc Alloy, H\u00e4fele Design Amberley",
+"type": "knob",
+"file": "hafele-t-knob-aluminium-zinc-alloy-h-fele-design-amberley-01947232.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Aluminum, Point",
+"type": "knob",
+"file": "hafele-t-knob-aluminum-point-01973892.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Brass, Langham",
+"type": "knob",
+"file": "hafele-t-knob-brass-langham-01909212.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Mild Steel, \u00d8 19.5 mm, Harlington",
+"type": "knob",
+"file": "hafele-t-knob-mild-steel-19-5-mm-harlington-01911142.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Steel, \u00d812 mm, Longham",
+"type": "knob",
+"file": "hafele-t-knob-steel-12-mm-longham-02055988.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Steel, \u00d8 12 x 50 mm, Pencil",
+"type": "knob",
+"file": "hafele-t-knob-steel-12-x-50-mm-pencil-01709593.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob with Backplate, Aluminium, \u00d8 14x 70 mm, Arpa",
+"type": "knob",
+"file": "hafele-t-knob-with-backplate-aluminium-14x-70-mm-arpa-01705609.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Zinc Alloy, \u00d8 16 mm, St. Vincent",
+"type": "knob",
+"file": "hafele-t-knob-zinc-alloy-16-mm-st-vincent-00855641.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Zinc Alloy, Fusion",
+"type": "knob",
+"file": "hafele-t-knob-zinc-alloy-fusion-01973726.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "T Knob, Zinc Alloy, Regency",
+"type": "knob",
+"file": "hafele-t-knob-zinc-alloy-regency-01960678.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Caps, for Profiles, Gola System B Plus",
+"type": "profile",
+"file": "hafele-trim-caps-for-profiles-gola-system-b-plus-00854741.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Caps, for Profiles, Gola System C Plus",
+"type": "profile",
+"file": "hafele-trim-caps-for-profiles-gola-system-c-plus-00854739.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Caps, Plastic, Gola System B Plus",
+"type": "profile",
+"file": "hafele-trim-caps-plastic-gola-system-b-plus-01899951.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Caps, Plastic, Gola System C Plus",
+"type": "profile",
+"file": "hafele-trim-caps-plastic-gola-system-c-plus-01899952.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Handle, Aluminium, Calavon",
+"type": "profile",
+"file": "hafele-trim-handle-aluminium-calavon-01298076.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Handle, Aluminium, Fixing Centres 128-256 mm, Lister",
+"type": "profile",
+"file": "hafele-trim-handle-aluminium-fixing-centres-128-256-mm-lister-01298077.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Handle, Aluminium, Fixing Centres 192 mm, Finn",
+"type": "profile",
+"file": "hafele-trim-handle-aluminium-fixing-centres-192-mm-finn-01297988.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Trim Handle, Brass, Fixing Centres 102 mm, Giona",
+"type": "profile",
+"file": "hafele-trim-handle-brass-fixing-centres-102-mm-giona-01644864.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-end-grain-00855357.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Oak, \u00d8 44 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-oak-44-mm-end-grain-00855367.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 34 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-34-mm-end-grain-00855363.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 34 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-34-mm-end-grain-00855365.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 34 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-34-mm-end-grain-00855372.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 38 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-38-mm-end-grain-00855370.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 44 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-44-mm-end-grain-00855371.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 44 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-44-mm-end-grain-00855373.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, \u00d8 44 mm, End Grain",
+"type": "knob",
+"file": "hafele-turned-knob-wood-44-mm-end-grain-00855377.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, End Grain, \u00d8 39 mm",
+"type": "knob",
+"file": "hafele-turned-knob-wood-end-grain-39-mm-00855375.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Turned Knob, Wood, End Grain, \u00d8 49 mm",
+"type": "knob",
+"file": "hafele-turned-knob-wood-end-grain-49-mm-00855374.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Vertical Middle Profile, Length 2670 mm, Snap On, Aluminium, Gola System",
+"type": "profile",
+"file": "hafele-vertical-middle-profile-length-2670-mm-snap-on-aluminium-gola-system-01459081.webp",
+"brand": "H\u00e4fele"
+},
+{
+"name": "Victorian Knob, Wood, \u00d8 50-54 mm, Cross Grain",
+"type": "knob",
+"file": "hafele-victorian-knob-wood-50-54-mm-cross-grain-00855362.webp",
+"brand": "H\u00e4fele"
+}
+]
