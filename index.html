@@ -238,9 +238,37 @@
   .bhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .55s var(--ease-out)}
   .bhero img.on{opacity:1}
   .bhero .bcap{position:absolute;left:0;bottom:0;z-index:3;padding:14px 16px;font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.06em;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)}
-  .bthumbs{display:flex;gap:10px;margin-top:14px}
-  .bthumbs button{flex:1;aspect-ratio:3/2;border-radius:10px;border:1px solid var(--line-pale);background-size:cover;background-position:center;cursor:pointer;opacity:.55;transition:opacity .2s;padding:0}
+  .bthumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+  .bthumbs button{aspect-ratio:3/2;border-radius:9px;border:1px solid var(--line-pale);background-size:cover;background-position:center;cursor:pointer;opacity:.5;transition:opacity .2s,outline-color .2s;padding:0}
   .bthumbs button.on{opacity:1;outline:2px solid var(--gold);outline-offset:1px}
+  .bcapline{margin-top:12px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.05em;color:rgba(250,248,242,.6)}
+  /* systems band */
+  .bsystems{position:relative;max-width:1180px;margin:0 auto;padding:0 clamp(18px,5vw,40px) clamp(20px,4vw,44px)}
+  .bsys-head{border-top:1px solid var(--line-pale);padding-top:clamp(30px,5vw,54px)}
+  .bsys-head .kicker{color:var(--gold)}
+  .bsys-head h3{color:var(--paper);font-size:clamp(22px,3vw,32px);margin:10px 0 0;line-height:1.1;max-width:20ch}
+  .bsys-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:clamp(26px,4vw,40px)}
+  @media(max-width:900px){.bsys-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.bsys-grid{grid-template-columns:1fr}}
+  .bsys{position:relative;border:1px solid var(--line-pale);border-radius:14px;padding:18px 16px 20px;background:rgba(250,248,242,.035);overflow:hidden;transition:transform .3s var(--ease-out),background .3s var(--ease-out),border-color .3s}
+  .bsys:hover{transform:translateY(-4px);background:rgba(250,248,242,.07);border-color:rgba(212,170,88,.5)}
+  .bsys .n{font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--gold)}
+  .bsys .t{font-size:15px;font-weight:600;color:var(--paper);margin:9px 0 0;line-height:1.25}
+  .bsys p{color:rgba(250,248,242,.62);font-size:13px;line-height:1.5;margin:8px 0 0;max-width:none}
+  /* lifestyle strip */
+  .blife{position:relative;max-width:1320px;margin:0 auto;padding:clamp(8px,2vw,20px) clamp(18px,5vw,40px) clamp(54px,9vw,104px)}
+  .blife-head{margin-bottom:clamp(20px,3vw,30px)}
+  .blife-head .kicker{color:var(--gold)}
+  .blife-head h3{color:var(--paper);font-size:clamp(22px,3vw,34px);margin:8px 0 0;line-height:1.08}
+  .blife-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(120px,15vw,190px);gap:12px}
+  @media(max-width:900px){.blife-grid{grid-template-columns:repeat(2,1fr)}}
+  .blife-f{position:relative;margin:0;border-radius:14px;overflow:hidden;cursor:zoom-in;background:#0d1216;box-shadow:0 18px 40px rgba(0,0,0,.42)}
+  .blife-f img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s var(--ease-out)}
+  .blife-f:hover img{transform:scale(1.05)}
+  .blife-f figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:24px 14px 12px;font-family:var(--f-mono);font-weight:600;font-size:10.5px;letter-spacing:.05em;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.66),transparent);opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s}
+  .blife-f:hover figcaption{opacity:1;transform:none}
+  .blife-f.w2{grid-column:span 2}.blife-f.w3{grid-column:span 3}.blife-f.h2{grid-row:span 2}
+  @media(max-width:900px){.blife-f.w3{grid-column:span 2}.blife-f.h2{grid-row:span 1}}
   /* ===== Oval horizontal feature ===== */
   .ovalfeat{position:relative;z-index:5;background:var(--paper)}
   .ovaltrackwrap{height:340vh;position:relative}
@@ -312,6 +340,7 @@
     <a class="hideM" href="#offices">Home offices</a>
     <a class="hideM" href="#oval">Projects</a>
     <a class="hideM" href="#finishes">Finishes</a>
+    <a class="hideM" href="#hardware">Hardware</a>
     <a class="hideM" href="/studio.html">Studio</a>
     <a class="cta" href="#enquire">Book a visit</a>
   </nav>
@@ -519,17 +548,43 @@
   </section>
 
   <!-- Blum hardware showcase -->
-  <section class="blum" id="hardware">
+  <section class="blum" id="hardware" data-section="hardware">
     <div class="bwrap">
       <div>
         <div class="kicker reveal">The hardware</div>
         <h2 class="reveal">Engineered to disappear.</h2>
-        <p class="reveal">Every door runs on Blum — soft-close BLUMOTION catches the last few degrees and pulls it shut without a sound, tool-free CLIP-on mounting, fine three-way adjustment. The parts you never see are the ones that last.</p>
-        <div class="bfeat reveal"><span>Soft-close BLUMOTION</span><span>110° opening</span><span>Tool-free CLIP-on</span><span>TIP-ON push-open</span><span>Lifetime guarantee</span></div>
+        <p class="reveal">Every door, drawer and lift-up in a Sturij room runs on Blum — the Austrian motion hardware the trade builds on. Soft-close BLUMOTION catches the last few degrees and draws it shut without a sound. Tool-free CLIP-on mounting. Fine three-way adjustment. It's the part you never see that decides whether a room still feels new in twenty years.</p>
+        <div class="bfeat reveal"><span>Soft-close BLUMOTION</span><span>170° opening</span><span>Tool-free CLIP-on</span><span>TIP-ON push-open</span><span>SERVO-DRIVE electric</span><span>Lifetime guarantee</span></div>
       </div>
       <div class="bstage reveal">
-        <div class="bhero" id="bhero"><div class="binner float" id="binner"><img class="on" src="/showcase/blum/blum-hero.jpg" alt="Blum CLIP top soft-close hinge"></div><div class="bcap" id="bcap">CLIP top · soft-close hinge</div></div>
+        <div class="bhero" id="bhero"><div class="binner float" id="binner"><img class="on" src="/showcase/blum/blum-aventos-oak.jpg" alt="Blum AVENTOS lift-up in oak"></div><div class="bcap" id="bcap">AVENTOS HK · lift-up in oak</div></div>
         <div class="bthumbs" id="bthumbs"></div>
+        <div class="bcapline">Tap a system to see it — every one goes into the furniture we fit.</div>
+      </div>
+    </div>
+
+    <!-- the five systems -->
+    <div class="bsystems">
+      <div class="bsys-head reveal"><div class="kicker">The systems</div><h3>Five Blum systems, one standard.</h3></div>
+      <div class="bsys-grid">
+        <article class="bsys reveal"><div class="n">CLIP top</div><div class="t">BLUMOTION hinges</div><p>Concealed, soft-close, tool-free clip-on. Three-way adjustable so the gaps line up and stay lined up.</p></article>
+        <article class="bsys reveal"><div class="n">LEGRABOX</div><div class="t">Drawer boxes</div><p>Slim steel sides, silky full-extension runners and a synchronised glide — dynamic-loaded to 70kg.</p></article>
+        <article class="bsys reveal"><div class="n">AVENTOS</div><div class="t">Lift systems</div><p>Wall units that lift up and stay put at any angle — HK, HF and HL for tall runs and glass fronts.</p></article>
+        <article class="bsys reveal"><div class="n">MOVENTO</div><div class="t">Concealed runners</div><p>Hidden under the drawer, feather-light action with BLUMOTION and optional TIP-ON push-to-open.</p></article>
+        <article class="bsys reveal"><div class="n">SERVO-DRIVE</div><div class="t">Electric open</div><p>A light touch and the drawer glides open on its own — handleless fronts with nothing to grab.</p></article>
+      </div>
+    </div>
+
+    <!-- Blum in the room -->
+    <div class="blife">
+      <div class="blife-head reveal"><div class="kicker">In the room</div><h3>Where you actually live with it.</h3></div>
+      <div class="blife-grid" id="blifegrid">
+        <figure class="blife-f w3 h2 reveal"><img src="/showcase/blum/blum-life-kitchen.jpg" alt="Blum drawer opening in a fitted kitchen"><figcaption>LEGRABOX · fitted kitchen drawer</figcaption></figure>
+        <figure class="blife-f w3 reveal"><img src="/showcase/blum/blum-life-wardrobe.jpg" alt="Fitted wardrobe interior with LED and Blum runners"><figcaption>Wardrobe interior · runners &amp; LED</figcaption></figure>
+        <figure class="blife-f reveal"><img src="/showcase/blum/blum-life-liftup.jpg" alt="Oak lift-up wall cabinet on Blum Aventos"><figcaption>AVENTOS · oak lift-up</figcaption></figure>
+        <figure class="blife-f reveal"><img src="/showcase/blum/blum-life-media.jpg" alt="Oak media wall with fold-out and Blum hardware"><figcaption>Media wall · fold-out</figcaption></figure>
+        <figure class="blife-f w2 reveal"><img src="/showcase/blum/blum-life-office.jpg" alt="Fitted home office with Blum drawers"><figcaption>Home office · concealed runners</figcaption></figure>
+        <figure class="blife-f w3 reveal"><img src="/showcase/blum/blum-life-eaves.jpg" alt="Under-eaves fitted wardrobe on Blum hinges"><figcaption>Under-eaves wardrobe · CLIP top hinges</figcaption></figure>
       </div>
     </div>
   </section>
@@ -796,7 +851,7 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
 (function(){
   var hero=document.getElementById('bhero'); if(!hero) return;
   var inner=document.getElementById('binner'), cap=document.getElementById('bcap'), thumbs=document.getElementById('bthumbs');
-  var shots=[['blum-hero','CLIP top · soft-close hinge'],['blum-glass','Aluminium-frame glass door'],['blum-clip','Tool-free CLIP-on mount'],['blum-tipon','TIP-ON push-to-open'],['blum-detail','Concealed & adjustable']];
+  var shots=[['blum-aventos-oak','AVENTOS HK · lift-up in oak'],['blum-clip-hinge','CLIP top · soft-close hinge'],['blum-legrabox-dark','LEGRABOX · steel drawer box'],['blum-aventos-glass','AVENTOS HF · glass front'],['blum-tandem-drawer','MOVENTO · concealed runner'],['blum-parts','The mechanism, laid out'],['blum-movento','MOVENTO · full-extension runner'],['blum-aventos-arm','AVENTOS · lift arm']];
   var cur=0;
   shots.forEach(function(sh,i){var b=document.createElement('button');b.style.backgroundImage="url('/showcase/blum/"+sh[0]+".jpg')";if(i===0)b.classList.add('on');
     b.onclick=function(){ if(i===cur)return; var img=document.createElement('img');img.src='/showcase/blum/'+sh[0]+'.jpg';img.alt=sh[1];inner.appendChild(img);
@@ -807,6 +862,12 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
   hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
     hero.style.transform='rotateY('+(px*9)+'deg) rotateX('+(-py*9)+'deg)';});
   hero.addEventListener('pointerleave',function(){hero.style.transform='';});
+})();
+
+/* Blum lifestyle strip → shared lightbox */
+(function(){var grid=document.getElementById('blifegrid'); if(!grid)return;
+  var figs=[].slice.call(grid.querySelectorAll('.blife-f')); var urls=figs.map(function(f){return f.querySelector('img').getAttribute('src');});
+  figs.forEach(function(f,i){f.addEventListener('click',function(){ if(window.lightboxOpen)window.lightboxOpen(urls,i,'Blum · in the room'); });});
 })();
 
 /* ---- category director: image pools that feed the feature slots ---- */
@@ -855,10 +916,11 @@ function buildGalleries(){
   var img=lb.querySelector('img'), cap=lb.querySelector('figcaption');
   var active=null; /* {urls,cur,cat} */
   function render(){ if(!active)return; img.src=active.urls[active.cur]; cap.textContent=active.cat||''; }
-  function open(slot){ if(document.body.classList.contains('admin'))return;
-    var g=slot._gal; if(!g)return; var cat=slot.getAttribute('data-gal');
-    active={urls:g.urls,cur:g.cur||0,cat:GAL_LABEL[cat]||''}; render();
+  function openUrls(urls,start,label){ if(document.body.classList.contains('admin'))return;
+    if(!urls||!urls.length)return; active={urls:urls,cur:start||0,cat:label||''}; render();
     lb.classList.add('show'); requestAnimationFrame(function(){lb.classList.add('in');}); document.body.style.overflow='hidden'; }
+  function open(slot){ var g=slot._gal; if(!g)return; openUrls(g.urls,g.cur||0,GAL_LABEL[slot.getAttribute('data-gal')]||''); }
+  window.lightboxOpen=openUrls;
   function close(){ lb.classList.remove('in'); document.body.style.overflow='';
     setTimeout(function(){lb.classList.remove('show'); img.src='';},380); active=null; }
   function step(d){ if(!active)return; active.cur=(active.cur+d+active.urls.length)%active.urls.length; render(); }
