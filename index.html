@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://sturij.com/og.jpg">
 <link rel="icon" href="/favicon.ico">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Sturij","description":"Bespoke fitted kitchens and wardrobes, made to measure in Britain.","url":"https://sturij.com/","image":"https://sturij.com/og.jpg","areaServed":"United Kingdom","priceRange":"££££","knowsAbout":["Fitted kitchens","Fitted wardrobes","Bespoke furniture"]}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Sturij","legalName":"Storage Innovation Limited","description":"Bespoke fitted kitchens and wardrobes, made to measure in Britain.","url":"https://sturij.com/","image":"https://sturij.com/og.jpg","telephone":"+441937326011","email":"contact@sturij.com","areaServed":"United Kingdom","priceRange":"££££","knowsAbout":["Fitted kitchens","Fitted wardrobes","Bespoke furniture"],"sameAs":["https://www.facebook.com/SturijWardrobes","https://www.instagram.com/sturij_wardrobes"]}
 </script>
 <style>
   :root{
@@ -101,8 +101,17 @@
   .form textarea{min-height:96px;resize:vertical}
   .form button{width:100%;margin-top:4px;background:var(--accent);color:#FAF7F0;font-family:var(--serif);font-weight:600;font-size:1rem;border:0;border-radius:999px;padding:13px;cursor:pointer}
   .note{font-size:.82rem;color:var(--ink-faint);margin:12px 0 0;text-align:center}
-  footer{border-top:1px solid var(--rule);padding:40px 0 60px}
-  footer .legal{max-width:62em;color:var(--ink-soft);font-size:.92rem;line-height:1.65;margin:0 0 26px}
+  footer{border-top:1px solid var(--rule);padding:44px 0 60px}
+  footer .ftop{display:grid;grid-template-columns:1fr;gap:34px;margin:0 0 30px}
+  @media(min-width:760px){footer .ftop{grid-template-columns:230px 1fr}}
+  footer .fh{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+  footer .fcontact a{display:block;color:var(--ink-soft);font-size:1.02rem;margin:0 0 6px}
+  footer .fcontact a:hover{color:var(--accent)}
+  footer .social{display:flex;gap:12px;margin-top:16px}
+  footer .social a{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border:1px solid var(--rule);border-radius:999px;color:var(--ink-soft);margin:0}
+  footer .social a:hover{color:var(--accent);border-color:var(--accent)}
+  footer .social svg{width:17px;height:17px;fill:currentColor;display:block}
+  footer .legal{color:var(--ink-soft);font-size:.92rem;line-height:1.65;margin:0}
   footer .legal p{margin:0 0 10px}
   footer .legal strong{color:var(--ink)}
   footer .legal .commit{color:var(--ink-faint);font-size:.84rem}
@@ -206,9 +215,20 @@
 </div>
 
 <div class="wrap"><footer>
-  <div class="legal">
-    <p data-edit="footer.legal" data-html><strong>Sturij</strong> is a trading name of Storage Innovation Limited, registered in England &amp; Wales under company number 12903072.</p>
-    <p class="commit" data-edit="footer.commit">Storage Innovation Limited is committed to providing a quality service and working in an open and accountable way that builds trust and respect. One of the ways in which we can continue to improve our service is by listening and responding to the views of our clients and stakeholders, and in particular by responding positively to complaints, and by putting mistakes right.</p>
+  <div class="ftop">
+    <div class="fcontact">
+      <p class="fh">Contact</p>
+      <a href="tel:+441937326011" data-edit="footer.phone">01937 326011</a>
+      <a href="mailto:contact@sturij.com" data-edit="footer.email">contact@sturij.com</a>
+      <div class="social">
+        <a href="https://www.facebook.com/SturijWardrobes" target="_blank" rel="noopener" aria-label="Sturij on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.3-.04-1.3-.13-2.47-.13-2.45 0-4.13 1.5-4.13 4.25v2.17H7.7V13h2.7v8z"/></svg></a>
+        <a href="https://www.instagram.com/sturij_wardrobes" target="_blank" rel="noopener" aria-label="Sturij on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.6c2.4 0 2.68.01 3.63.05.88.04 1.35.19 1.67.31.42.16.72.36 1.03.67.31.31.51.61.67 1.03.12.32.27.79.31 1.67.04.95.05 1.23.05 3.63s-.01 2.68-.05 3.63c-.04.88-.19 1.35-.31 1.67-.16.42-.36.72-.67 1.03-.31.31-.61.51-1.03.67-.32.12-.79.27-1.67.31-.95.04-1.23.05-3.63.05s-2.68-.01-3.63-.05c-.88-.04-1.35-.19-1.67-.31a2.78 2.78 0 0 1-1.03-.67 2.78 2.78 0 0 1-.67-1.03c-.12-.32-.27-.79-.31-1.67C4.61 14.68 4.6 14.4 4.6 12s.01-2.68.05-3.63c.04-.88.19-1.35.31-1.67.16-.42.36-.72.67-1.03.31-.31.61-.51 1.03-.67.32-.12.79-.27 1.67-.31C9.32 4.61 9.6 4.6 12 4.6m0-1.6c-2.44 0-2.75.01-3.71.06-.96.04-1.61.2-2.18.42-.59.23-1.09.54-1.59 1.03-.5.5-.8 1-1.03 1.59-.22.57-.38 1.22-.42 2.18C3.01 9.25 3 9.56 3 12s.01 2.75.06 3.71c.04.96.2 1.61.42 2.18.23.59.54 1.09 1.03 1.59.5.5 1 .8 1.59 1.03.57.22 1.22.38 2.18.42.96.05 1.27.06 3.71.06s2.75-.01 3.71-.06c.96-.04 1.61-.2 2.18-.42a4.4 4.4 0 0 0 1.59-1.03c.5-.5.8-1 1.03-1.59.22-.57.38-1.22.42-2.18.05-.96.06-1.27.06-3.71s-.01-2.75-.06-3.71c-.04-.96-.2-1.61-.42-2.18a4.4 4.4 0 0 0-1.03-1.59c-.5-.5-1-.8-1.59-1.03-.57-.22-1.22-.38-2.18-.42C14.75 3.01 14.44 3 12 3zm0 4.38A4.62 4.62 0 1 0 12 16.6a4.62 4.62 0 0 0 0-9.24zm0 7.62A3 3 0 1 1 12 9a3 3 0 0 1 0 6zm4.8-7.8a1.08 1.08 0 1 0 0 2.16 1.08 1.08 0 0 0 0-2.16z"/></svg></a>
+      </div>
+    </div>
+    <div class="legal">
+      <p data-edit="footer.legal" data-html><strong>Sturij</strong> is a trading name of Storage Innovation Limited, registered in England &amp; Wales under company number 12903072.</p>
+      <p class="commit" data-edit="footer.commit">Storage Innovation Limited is committed to providing a quality service and working in an open and accountable way that builds trust and respect. One of the ways in which we can continue to improve our service is by listening and responding to the views of our clients and stakeholders, and in particular by responding positively to complaints, and by putting mistakes right.</p>
+    </div>
   </div>
   <div class="meta"><span data-edit="footer.left">Sturij · fitted furniture · made in Britain</span><span class="g" data-edit="footer.right">Measured · made · fitted</span></div>
 </footer></div>
