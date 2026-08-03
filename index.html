@@ -174,6 +174,20 @@
   .montage .mt.on::after{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.montage .mt::after{opacity:1;transform:none;transition:none}}
   .tile .fx{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:1;transition:opacity 1.1s var(--ease-out);pointer-events:none}
+  /* ===== per-section background colour ===== */
+  [data-bgcol="paper"]{background:var(--paper)!important}
+  [data-bgcol="warm"]{background:var(--paper-warm)!important}
+  [data-bgcol="navy"]{background:var(--navy)!important}
+  [data-bgcol="char"]{background:var(--band-b)!important}
+  [data-bgcol="navy"] :is(h1,h2,h3,p,.lead,.feat-txt h2,.feat-txt p,.fgrouplabel,.step h3,.step p,.spec h3,.spec p),
+  [data-bgcol="char"] :is(h1,h2,h3,p,.lead,.feat-txt h2,.feat-txt p,.fgrouplabel,.step h3,.step p,.spec h3,.spec p){color:var(--paper)!important}
+  [data-bgcol="navy"] .sub,[data-bgcol="char"] .sub{color:rgba(250,248,242,.72)!important}
+  [data-bgcol="navy"] .spec,[data-bgcol="char"] .spec{background:rgba(250,248,242,.06)!important;border-color:var(--line-pale)!important}
+  .bgchips{position:absolute;top:10px;left:10px;z-index:40;display:none;gap:5px;background:rgba(253,252,248,.92);border:1px solid var(--line);border-radius:999px;padding:5px}
+  body.admin .bgchips{display:flex}
+  .bgchips .bgc{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);cursor:pointer;padding:0}
+  .bgchips .bgc.on{outline:2px solid var(--gold);outline-offset:1px}
+  .bgc-paper{background:var(--paper)}.bgc-warm{background:var(--paper-warm)}.bgc-navy{background:var(--navy)}.bgc-char{background:var(--band-b)}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -289,7 +303,7 @@
   </section>
 
   <!-- range features: alternating image / text, slide in from the sides -->
-  <section class="ranges">
+  <section class="ranges" data-bg="range1">
     <div class="feat" id="wardrobes">
       <div class="feat-img imgph reveal-l" data-img="feat.ward"><img src="/showcase/wardrobe-cream-straight.jpg" alt="Fitted three-door wardrobe"></div>
       <div class="feat-txt reveal-r">
@@ -310,14 +324,14 @@
     </div>
   </section>
 
-  <section class="breather">
+  <section class="breather" data-bg="breather">
     <div class="wrap">
       <div class="kicker reveal">The Sturij way</div>
       <h2 class="reveal" data-edit="breath.h">Every millimetre of your room — priced from the cutting list, and fitted by the people who built it.</h2>
     </div>
   </section>
 
-  <section class="ranges">
+  <section class="ranges" data-bg="range2">
     <div class="feat" id="kitchens">
       <div class="feat-img imgph reveal-l" data-img="feat.kitchen"><img src="/showcase/kitchen-bright.jpg" alt="Bright handleless fitted kitchen"></div>
       <div class="feat-txt reveal-r">
@@ -387,7 +401,7 @@
   </section>
 
   <!-- our work -->
-  <section class="band" id="work" data-section="work">
+  <section class="band" id="work" data-section="work" data-bg="work">
     <div class="wrap">
       <div class="kicker reveal">Our work</div>
       <h2 class="lead reveal" data-edit="work.h" data-html>Real rooms. <span class="em">Real fits.</span></h2>
@@ -407,7 +421,7 @@
   </section>
 
   <!-- finishes swatches -->
-  <section class="swatches" id="finishes">
+  <section class="swatches" id="finishes" data-bg="finishes">
     <div class="fwrap">
       <div class="kicker reveal">Finishes</div>
       <h2 class="lead reveal" data-html data-edit="sw.h">The material is <span style="color:var(--gold)">the product.</span></h2>
@@ -521,6 +535,7 @@ function applyContent(c){
     else { setImg(el,v); }
   });
   if(c.va){Object.keys(c.va).forEach(k=>{const el=document.querySelector('[data-va="'+k+'"]');if(el)el.setAttribute('data-vapos',c.va[k]);});}
+  if(c.bg){Object.keys(c.bg).forEach(function(k){var el=document.querySelector('[data-bg="'+k+'"]');if(el)el.setAttribute('data-bgcol',c.bg[k]);});}
   if(Array.isArray(c._order)) reorder(c._order);
 }
 function reorder(order){const box=document.getElementById('sections');order.forEach(name=>{const s=box.querySelector(`section[data-section="${name}"]`);if(s)box.appendChild(s)})}
@@ -545,6 +560,7 @@ function collect(){
     let o=c;keys.forEach(k=>o=o[k]=o[k]||{});o[last]=val;
   });
   document.querySelectorAll('[data-va]').forEach(el=>{const pos=el.getAttribute('data-vapos')||'end';if(pos==='end')return;const keys=('va.'+el.getAttribute('data-va')).split('.');const last=keys.pop();let o=c;keys.forEach(k=>o=o[k]=o[k]||{});o[last]=pos;});
+  document.querySelectorAll('[data-bg]').forEach(function(el){var col=el.getAttribute('data-bgcol');if(!col)return;var keys=('bg.'+el.getAttribute('data-bg')).split('.');var last=keys.pop();var o=c;keys.forEach(function(k){o=o[k]=o[k]||{};});o[last]=col;});
   return c;
 }
 
@@ -555,9 +571,19 @@ function enterAdmin(){
   document.body.classList.add('admin');
   document.querySelectorAll('[data-edit]').forEach(el=>el.setAttribute('contenteditable','true'));
   enableImg();
+  enableBg();
 }
 function exitAdmin(){document.body.classList.remove('admin');deselect();document.querySelectorAll('[data-edit]').forEach(el=>el.removeAttribute('contenteditable'))}
 function status(t){document.getElementById('astatus').textContent=t}
+function enableBg(){document.querySelectorAll('[data-bg]').forEach(function(sec){
+  if(sec.querySelector(':scope > .bgchips'))return;
+  var box=document.createElement('div');box.className='bgchips';
+  [['paper','Paper'],['warm','Warm'],['navy','Navy'],['char','Charcoal']].forEach(function(o){
+    var b=document.createElement('button');b.type='button';b.className='bgc bgc-'+o[0];b.title=o[1];
+    b.onclick=function(e){e.stopPropagation();sec.setAttribute('data-bgcol',o[0]);box.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');status('background set — remember to Save');};
+    box.appendChild(b);});
+  var cur=sec.getAttribute('data-bgcol');if(cur){var a=box.querySelector('.bgc-'+cur);if(a)a.classList.add('on');}
+  sec.appendChild(box);});}
 
 /* ---- image slot editor: click to select, then zoom / drag-move / overlay / change ---- */
 let sel=null;
