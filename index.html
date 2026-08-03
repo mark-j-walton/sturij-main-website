@@ -173,6 +173,7 @@
   .montage .mt::after{content:"";position:absolute;inset:0;background-image:var(--img);background-size:calc(var(--cols)*100%) calc(var(--rows)*100%);background-position:var(--pos);opacity:0;transform:scale(1.14);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
   .montage .mt.on::after{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.montage .mt::after{opacity:1;transform:none;transition:none}}
+  .tile .fx{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;z-index:1;transition:opacity 1.1s var(--ease-out);pointer-events:none}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -398,6 +399,9 @@
         <div class="tile reveal imgph" data-img="g.4"><img src="/showcase/eaves-wardrobe-open.jpg" alt="Under-eaves fitted wardrobe, open"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g4">Under-eaves wardrobe</div></div>
         <div class="tile reveal imgph" data-img="g.5"><img src="/showcase/handle-brass.jpg" alt="Knurled brass bar handle on a navy shaker door"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g5">Handle &amp; finish detail</div></div>
         <div class="tile reveal imgph" data-img="g.6"><img src="/showcase/mudroom.jpg" alt="Fitted boot room with coat hooks and bench"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g6">Boot room &amp; hallway</div></div>
+        <div class="tile reveal imgph" data-img="g.7"><img src="/showcase/understairs-2.jpg" alt="Slatted-oak understairs storage"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g7">Slatted understairs</div></div>
+        <div class="tile reveal imgph" data-img="g.8"><img src="/showcase/walkin-2.jpg" alt="Walk-in wardrobe"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g8">Walk-in wardrobe</div></div>
+        <div class="tile reveal imgph" data-img="g.9"><img src="/showcase/kitchen-media2.jpg" alt="Fitted kitchen with island"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g9">Kitchen &amp; island</div></div>
       </div>
     </div>
   </section>
@@ -624,6 +628,26 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
     for(var k=0;k<total;k++) tiles[order[k]].classList.toggle('on',k<show); }
   function onScroll(){ if(!raf) raf=requestAnimationFrame(upd); }
   window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); upd();
+})();
+
+/* living gallery: random images fade in and out over the tiles */
+(function(){
+  var tiles=[].slice.call(document.querySelectorAll('.galgrid .tile')); if(!tiles.length) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var pool=['understairs-drawers','walkin','kitchen-tv','kitchen-bright','media-wall-led','mudroom','handle-brass','eaves-wardrobe-open','wardrobe-cream-straight','wardrobe-open-shelves','office-desk-clean','walkin-2','walkin-3','kitchen-media2','kitchen-4','understairs-2','mudroom-2'].map(function(n){return '/showcase/'+n+'.jpg';});
+  tiles.forEach(function(t){var fx=document.createElement('img');fx.className='fx';fx.alt='';t.appendChild(fx);t._fx=fx;t._busy=false;});
+  function tick(){
+    var free=tiles.filter(function(t){return !t._busy;});
+    if(free.length){
+      var t=free[Math.floor(Math.random()*free.length)];
+      var url=pool[Math.floor(Math.random()*pool.length)];
+      t._busy=true; var fx=t._fx; fx.src=url;
+      fx.onload=function(){ fx.style.opacity='1'; setTimeout(function(){ fx.style.opacity='0'; setTimeout(function(){t._busy=false;},1200); }, 2000+Math.random()*1600); };
+      fx.onerror=function(){t._busy=false;};
+    }
+    setTimeout(tick, 1500+Math.random()*1800);
+  }
+  setTimeout(tick, 1800);
 })();
 </script>
 
