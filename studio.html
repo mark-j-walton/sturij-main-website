@@ -123,6 +123,32 @@
   .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
   .fexp .fn{font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.48);padding:10px 14px;border-radius:8px}
   .fexp .fchg{font:600 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 14px;cursor:pointer}
+  /* ===== properties cog + modal ===== */
+  .cog{position:fixed;right:14px;bottom:16px;z-index:29;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(253,252,248,.9);color:var(--ink);font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+  body.hasfloor .cog{bottom:100px}
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;background:rgba(26,23,20,.38);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+  .modal.on{display:flex}
+  .mcard{width:min(460px,92vw);max-height:86vh;overflow-y:auto;background:var(--paper);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);font-family:var(--f-sans);color:var(--ink)}
+  .mhead{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--line)}
+  .mhead h3{margin:0;font-family:var(--f-serif);font-size:19px}
+  .mhead button{border:0;background:none;font-size:16px;cursor:pointer;color:var(--ink-muted)}
+  .msec{padding:14px 18px;border-bottom:1px solid var(--line)}
+  .msec h4{margin:0 0 10px;font:600 10.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted)}
+  .split{display:flex;align-items:center;gap:10px;font:600 11px var(--f-mono)}
+  .split input[type=range]{flex:1;accent-color:var(--bronze)}
+  .grid2{display:flex;gap:10px;margin-top:12px}
+  .gcell{flex:1;border:1px dashed var(--line);border-radius:8px;padding:10px;text-align:center}
+  .gcell label{display:block;font:600 9px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px}
+  .gcell input{width:74px;text-align:center;font:600 14px var(--f-mono);border:1px solid var(--line);border-radius:6px;padding:6px}
+  .gcell input:disabled{background:var(--paper-warm);color:var(--ink-muted)}
+  .mrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .mrow:last-child{border-bottom:0}
+  .mrow .ml{display:flex;align-items:center;gap:8px;font-size:13px;min-width:120px}
+  .mrow .brands{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+  .mrow .brands label{display:flex;align-items:center;gap:5px;font:600 10px var(--f-mono);color:var(--ink-muted)}
+  .mrow input{accent-color:var(--bronze)}
+  .mfoot{padding:14px 18px;display:flex;justify-content:flex-end}
+  .mfoot button{font:600 13px var(--f-sans);color:var(--navy);background:var(--gold);border:0;border-radius:10px;padding:10px 22px;cursor:pointer}
   /* ===== peel-off post-it tag ===== */
   .pad{position:fixed;left:16px;bottom:18px;z-index:28;width:126px;height:92px;cursor:grab;font-family:var(--f-mono)}
   .pad .sheet{position:absolute;inset:0;background:#efe3c4;border-radius:3px;box-shadow:0 5px 14px rgba(0,0,0,.22)}
@@ -196,6 +222,23 @@
 
 <div class="tray" id="tray"><h4>Your shortlist</h4><div class="items" id="items"></div><div class="foot"><button class="zip" id="bzip">Download zip</button><span class="n" id="zipn"></span></div></div>
 <div class="toast" id="toast"></div>
+
+<button class="cog" id="cog" title="Properties">⚙</button>
+<div class="modal" id="modal">
+  <div class="mcard">
+    <div class="mhead"><h3>Studio properties</h3><button id="mx">✕</button></div>
+    <div class="msec">
+      <h4>Layout · 50/50 split</h4>
+      <div class="split"><span>Wall</span><input type="range" id="splitr" min="20" max="80" value="50"><span>Wood</span></div>
+      <div class="grid2">
+        <div class="gcell"><label>Wall %</label><input type="number" id="cw0" value="50" min="10" max="90"></div>
+        <div class="gcell"><label>Wood % · fills</label><input type="number" id="cw1" value="50" disabled></div>
+      </div>
+    </div>
+    <div class="msec"><h4>Materials &amp; brands</h4><div id="matlist"></div></div>
+    <div class="mfoot"><button id="msave">Save</button></div>
+  </div>
+</div>
 
 <script>
 var FB=[["Wimborne White", "#f2ece0"], ["Pointing", "#efe9d8"], ["Skimming Stone", "#d5cec2"], ["Cornforth White", "#d3ccc0"], ["Ammonite", "#d0cabc"], ["Elephant's Breath", "#cebfb0"], ["Setting Plaster", "#e4c9c0"], ["Dead Salmon", "#b18d7f"], ["Sulking Room Pink", "#c9a29a"], ["Purbeck Stone", "#cbc0b0"], ["Pigeon", "#8d9084"], ["Mole's Breath", "#98938c"], ["Plummett", "#8f9691"], ["Pavilion Gray", "#b6b1a8"], ["Lamp Room Gray", "#b7b6ae"], ["Down Pipe", "#56585a"], ["Railings", "#43474a"], ["Off-Black", "#38393b"], ["Hague Blue", "#2f3f4a"], ["Stiffkey Blue", "#43536a"], ["De Nimes", "#6b7c8b"], ["Inchyra Blue", "#4f5d5d"], ["Oval Room Blue", "#84948f"], ["Green Smoke", "#6c7671"], ["Card Room Green", "#767c6b"], ["Bancha", "#5c5b45"], ["Studio Green", "#33413a"], ["Lichen", "#9a998a"], ["French Gray", "#a9a897"], ["Cromarty", "#cfd2c7"], ["Borrowed Light", "#dde5e2"], ["Pale Powder", "#d6ded5"], ["Light Blue", "#a4ada2"], ["Dix Blue", "#a4b1ab"], ["India Yellow", "#c48a3f"], ["Babouche", "#e6b64a"], ["Charlotte's Locks", "#e15e26"], ["Preference Red", "#7d3a34"], ["Brinjal", "#5a4247"], ["Tanner's Brown", "#4b3d33"], ["London Clay", "#6b5d53"]], BOARDS=[{"s": "alba-walnut", "n": "Alba Walnut"}, {"s": "beige-ambiance-granite", "n": "Beige Ambiance Granite"}, {"s": "black-ambiance-granite", "n": "Black Ambiance Granite"}, {"s": "black-ambiance-marble", "n": "Black Ambiance Marble"}, {"s": "bookmatch-oak", "n": "Bookmatch Oak"}, {"s": "brighton-chestnut", "n": "Brighton Chestnut"}, {"s": "brown-bolivar-wood", "n": "Brown Bolivar Wood"}, {"s": "caramel-beige", "n": "Caramel Beige"}, {"s": "cassis", "n": "Cassis"}, {"s": "champagne-crossed-metal", "n": "Champagne Crossed Metal"}, {"s": "dark-berry", "n": "Dark Berry"}, {"s": "deep-blue", "n": "Deep Blue"}, {"s": "estate-green", "n": "Estate Green"}, {"s": "graphite-sheffield-acacia", "n": "Graphite Sheffield Acacia"}, {"s": "havanna-grey", "n": "Havanna Grey"}, {"s": "light-natural-rovato-oak", "n": "Light Natural Rovato Oak"}, {"s": "monument-grey", "n": "Monument Grey"}, {"s": "natural-bolivar-wood", "n": "Natural Bolivar Wood"}, {"s": "natural-dimaro-walnut", "n": "Natural Dimaro Walnut"}, {"s": "pebble-grey-calcit-stone", "n": "Pebble Grey Calcit Stone"}, {"s": "reed-green", "n": "Reed Green"}, {"s": "sand-beige-calcit-stone", "n": "Sand Beige Calcit Stone"}, {"s": "sand-casella-oak", "n": "Sand Casella Oak"}, {"s": "soft-beige", "n": "Soft Beige"}, {"s": "taormina-travertine", "n": "Taormina Travertine"}];
@@ -432,6 +475,34 @@ el('bzip').onclick=function(){
     }
     document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
   });
+})();
+/* ===== properties modal (the hidden cog) ===== */
+(function(){
+  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Wood / boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
+  var props={split:50,mats:{},brands:{}};
+  MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
+  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv){if(sv.split)props.split=sv.split;Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
+  function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
+  function applyProps(){
+    var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=props.split+'% '+(100-props.split)+'%';
+    showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
+    if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
+    if(el('sideBoard'))el('sideBoard').style.display=props.mats.wood?'':'none';
+  }
+  function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
+    var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
+    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});}
+  el('cog').onclick=function(){el('splitr').value=props.split;el('cw0').value=props.split;el('cw1').value=100-props.split;buildMat();el('modal').classList.add('on');};
+  el('mx').onclick=function(){el('modal').classList.remove('on');};
+  el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
+  el('splitr').oninput=function(){el('cw0').value=this.value;el('cw1').value=100-this.value;};
+  el('cw0').oninput=function(){var v=Math.max(10,Math.min(90,parseInt(this.value)||50));el('splitr').value=v;el('cw1').value=100-v;};
+  el('msave').onclick=function(){props.split=parseInt(el('splitr').value)||50;
+    [].forEach.call(el('matlist').querySelectorAll('[data-mat]'),function(c){props.mats[c.getAttribute('data-mat')]=c.checked;});
+    [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
+    try{localStorage.setItem('sturij-studio-props',JSON.stringify(props));}catch(_){}
+    applyProps();el('modal').classList.remove('on');toast('Properties saved');};
+  applyProps();
 })();
 </script>
 </body>
