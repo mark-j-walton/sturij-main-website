@@ -152,6 +152,17 @@
   .stackx .card .cc{position:relative;z-index:2;padding:clamp(20px,3vw,36px)}
   .stackx .card .cc .k{font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
   .stackx .card .cc h3{color:var(--paper);font-size:clamp(23px,3.4vw,40px);margin:6px 0 0;text-shadow:0 2px 22px rgba(0,0,0,.32)}
+  /* ===== finishes swatches ===== */
+  .swatches{position:relative;z-index:5;background:var(--paper-warm);border-top:1px solid var(--line-soft)}
+  .fwrap{max-width:1160px;margin:0 auto;padding:clamp(54px,9vw,110px) clamp(18px,5vw,40px);scroll-margin-top:var(--nav)}
+  .fgrouplabel{font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin:clamp(30px,5vw,52px) 0 clamp(14px,2vw,20px)}
+  .swgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(150px,21vw,200px),1fr));gap:clamp(10px,1.5vw,16px)}
+  .sw{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line-soft);box-shadow:var(--sh-card);aspect-ratio:16/10;background:#d8d2c8;transition-delay:calc(var(--d,0)*45ms)}
+  .sw img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease-out)}
+  .sw:hover img{transform:scale(1.06)}
+  .sw span{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:9px 11px;font-family:var(--f-mono);font-weight:600;font-size:10.5px;letter-spacing:.05em;color:var(--paper);background:linear-gradient(to top,rgba(16,26,34,.72),transparent)}
+  .sw.reveal{transform:translateY(22px) scale(.95)}
+  .sw.reveal.in{transform:none}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -206,6 +217,7 @@
     <a class="hideM" href="#media">Media walls</a>
     <a class="hideM" href="#kitchens">Kitchens</a>
     <a class="hideM" href="#offices">Home offices</a>
+    <a class="hideM" href="#finishes">Finishes</a>
     <a class="cta" href="#enquire">Book a visit</a>
   </nav>
 </header>
@@ -366,6 +378,36 @@
         <div class="tile reveal imgph" data-img="g.4"><img src="/showcase/eaves-wardrobe-open.jpg" alt="Under-eaves fitted wardrobe, open"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g4">Under-eaves wardrobe</div></div>
         <div class="tile reveal imgph" data-img="g.5"><img src="/showcase/handle-brass.jpg" alt="Knurled brass bar handle on a navy shaker door"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g5">Handle &amp; finish detail</div></div>
         <div class="tile reveal imgph" data-img="g.6"><img src="/showcase/mudroom.jpg" alt="Fitted boot room with coat hooks and bench"><div class="slot"><b>1200×1500</b> · 4:5</div><div class="tcap" data-edit="g6">Boot room &amp; hallway</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- finishes swatches -->
+  <section class="swatches" id="finishes">
+    <div class="fwrap">
+      <div class="kicker reveal">Finishes</div>
+      <h2 class="lead reveal" data-html data-edit="sw.h">The material is <span style="color:var(--gold)">the product.</span></h2>
+      <p class="sub reveal" data-edit="sw.p">Three thousand Egger decors — real oak grains, walnut, painted colours and stone-look matts. We build the same way in all of them; the finish is where it becomes yours.</p>
+      <div class="fgrouplabel reveal">Woods &amp; grains</div>
+      <div class="swgrid">
+        <div class="sw reveal" style="--d:0"><img src="/showcase/finishes/graphite-sheffield-acacia.webp" alt="Graphite Sheffield Acacia finish" loading="lazy"><span>Graphite Sheffield Acacia</span></div>
+        <div class="sw reveal" style="--d:1"><img src="/showcase/finishes/natural-dimaro-walnut.webp" alt="Natural Dimaro Walnut finish" loading="lazy"><span>Natural Dimaro Walnut</span></div>
+        <div class="sw reveal" style="--d:2"><img src="/showcase/finishes/alba-walnut.webp" alt="Alba Walnut finish" loading="lazy"><span>Alba Walnut</span></div>
+        <div class="sw reveal" style="--d:3"><img src="/showcase/finishes/bookmatch-oak.webp" alt="Bookmatch Oak finish" loading="lazy"><span>Bookmatch Oak</span></div>
+        <div class="sw reveal" style="--d:4"><img src="/showcase/finishes/light-natural-rovato-oak.webp" alt="Light Natural Rovato Oak finish" loading="lazy"><span>Light Natural Rovato Oak</span></div>
+        <div class="sw reveal" style="--d:5"><img src="/showcase/finishes/sand-casella-oak.webp" alt="Sand Casella Oak finish" loading="lazy"><span>Sand Casella Oak</span></div>
+        <div class="sw reveal" style="--d:6"><img src="/showcase/finishes/brighton-chestnut.webp" alt="Brighton Chestnut finish" loading="lazy"><span>Brighton Chestnut</span></div>
+        <div class="sw reveal" style="--d:7"><img src="/showcase/finishes/natural-bolivar-wood.webp" alt="Natural Bolivar Wood finish" loading="lazy"><span>Natural Bolivar Wood</span></div>
+        <div class="sw reveal" style="--d:8"><img src="/showcase/finishes/brown-bolivar-wood.webp" alt="Brown Bolivar Wood finish" loading="lazy"><span>Brown Bolivar Wood</span></div>
+      </div>
+      <div class="fgrouplabel reveal">Stone, metal &amp; colour</div>
+      <div class="swgrid">
+        <div class="sw reveal" style="--d:0"><img src="/showcase/finishes/taormina-travertine.webp" alt="Taormina Travertine finish" loading="lazy"><span>Taormina Travertine</span></div>
+        <div class="sw reveal" style="--d:1"><img src="/showcase/finishes/black-ambiance-marble.webp" alt="Black Ambiance Marble finish" loading="lazy"><span>Black Ambiance Marble</span></div>
+        <div class="sw reveal" style="--d:2"><img src="/showcase/finishes/beige-ambiance-granite.webp" alt="Beige Ambiance Granite finish" loading="lazy"><span>Beige Ambiance Granite</span></div>
+        <div class="sw reveal" style="--d:3"><img src="/showcase/finishes/pebble-grey-calcit-stone.webp" alt="Pebble Grey Calcit Stone finish" loading="lazy"><span>Pebble Grey Calcit Stone</span></div>
+        <div class="sw reveal" style="--d:4"><img src="/showcase/finishes/champagne-crossed-metal.webp" alt="Champagne Crossed Metal finish" loading="lazy"><span>Champagne Crossed Metal</span></div>
+        <div class="sw reveal" style="--d:5"><img src="/showcase/finishes/estate-green.webp" alt="Estate Green finish" loading="lazy"><span>Estate Green</span></div>
       </div>
     </div>
   </section>
