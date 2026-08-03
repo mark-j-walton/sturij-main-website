@@ -136,6 +136,28 @@
   .feat-txt .flink{display:inline-block;margin-top:20px;font-family:var(--f-mono);font-weight:600;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);text-decoration:none}
   .feat-txt .flink:hover{color:var(--gold)}
   @media(max-width:760px){.feat{grid-template-columns:1fr;gap:20px}.feat.rev .feat-img{order:0}}
+  /* fade-gallery: category-fed rotating images inside a slot */
+  .feat-img img.gl{opacity:0;transition:opacity 1.05s var(--ease-out);z-index:0}
+  .feat-img img.gl.on{opacity:1;z-index:1}
+  .gdots{position:absolute;z-index:3;left:0;right:0;bottom:12px;display:flex;gap:7px;justify-content:center;pointer-events:none}
+  .gdots button{pointer-events:auto;width:8px;height:8px;padding:0;border:0;border-radius:50%;cursor:pointer;background:rgba(250,248,242,.5);box-shadow:0 1px 3px rgba(16,26,34,.4);transition:transform .25s var(--ease-out),background .25s var(--ease-out)}
+  .gdots button:hover{background:rgba(250,248,242,.85)}
+  .gdots button.on{background:var(--gold);transform:scale(1.35)}
+  body:not(.admin) [data-gal]{cursor:zoom-in}
+  /* clean lightbox: blurred backdrop, shadowed floating image */
+  #lightbox{position:fixed;inset:0;z-index:220;display:none;align-items:center;justify-content:center;padding:4vh 4vw;background:rgba(16,26,34,.5);backdrop-filter:blur(16px) saturate(.92);-webkit-backdrop-filter:blur(16px) saturate(.92);opacity:0;transition:opacity .4s ease}
+  #lightbox.show{display:flex}
+  #lightbox.in{opacity:1}
+  #lightbox figure{margin:0;max-width:min(1100px,92vw);max-height:90vh;transform:scale(.94);transition:transform .45s var(--ease-out);display:flex;flex-direction:column;align-items:center}
+  #lightbox.in figure{transform:scale(1)}
+  #lightbox img{max-width:100%;max-height:82vh;border-radius:14px;display:block;box-shadow:0 50px 130px rgba(0,0,0,.62),0 14px 40px rgba(0,0,0,.42),0 0 0 1px rgba(250,248,242,.06)}
+  #lightbox figcaption{margin-top:16px;font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);opacity:.82}
+  #lightbox .lb-x{position:fixed;top:20px;right:24px;width:44px;height:44px;border:0;border-radius:50%;cursor:pointer;background:rgba(250,248,242,.14);color:var(--paper);font-size:22px;line-height:1;backdrop-filter:blur(6px);transition:background .2s ease}
+  #lightbox .lb-x:hover{background:rgba(250,248,242,.28)}
+  #lightbox .lb-nav{position:fixed;top:50%;transform:translateY(-50%);width:52px;height:52px;border:0;border-radius:50%;cursor:pointer;background:rgba(250,248,242,.12);color:var(--paper);font-size:26px;line-height:1;backdrop-filter:blur(6px);transition:background .2s ease}
+  #lightbox .lb-nav:hover{background:rgba(250,248,242,.26)}
+  #lightbox .lb-prev{left:22px}#lightbox .lb-next{right:22px}
+  @media(max-width:640px){#lightbox .lb-nav{display:none}}
   /* text-only breather band */
   .breather{position:relative;z-index:5;background:var(--band-b);color:var(--paper)}
   .breather .wrap{text-align:center;padding:clamp(46px,7vw,92px) clamp(18px,5vw,40px)}
@@ -370,7 +392,7 @@
   <!-- range features: alternating image / text, slide in from the sides -->
   <section class="ranges" data-bg="range1">
     <div class="feat" id="wardrobes">
-      <div class="feat-img imgph reveal-l" data-img="feat.ward"><img src="/showcase/wardrobe-cream-straight.jpg" alt="Fitted three-door wardrobe"></div>
+      <div class="feat-img imgph reveal-l" data-img="feat.ward" data-gal="wardrobes"><img src="/showcase/wardrobe-cream-straight.jpg" alt="Fitted three-door wardrobe"></div>
       <div class="feat-txt reveal-r">
         <div class="kicker">Wardrobes &amp; bedrooms</div>
         <h2 data-edit="fward.h" data-html>Wardrobes that fit <span style="color:var(--gold)">like they grew there.</span></h2>
@@ -379,7 +401,7 @@
       </div>
     </div>
     <div class="feat rev" id="media">
-      <div class="feat-img imgph reveal-r" data-img="feat.media"><img src="/showcase/media-wall-led.jpg" alt="LED-backlit fitted media wall"></div>
+      <div class="feat-img imgph reveal-r" data-img="feat.media" data-gal="living"><img src="/showcase/media-wall-led.jpg" alt="LED-backlit fitted media wall"></div>
       <div class="feat-txt reveal-l">
         <div class="kicker">Living rooms</div>
         <h2 data-edit="fmedia.h">Media walls, built as one piece.</h2>
@@ -398,7 +420,7 @@
 
   <section class="ranges" data-bg="range2">
     <div class="feat" id="kitchens">
-      <div class="feat-img imgph reveal-l" data-img="feat.kitchen"><img src="/showcase/kitchen-bright.jpg" alt="Bright handleless fitted kitchen"></div>
+      <div class="feat-img imgph reveal-l" data-img="feat.kitchen" data-gal="kitchens"><img src="/showcase/kitchen-bright.jpg" alt="Bright handleless fitted kitchen"></div>
       <div class="feat-txt reveal-r">
         <div class="kicker">Kitchens</div>
         <h2 data-edit="fkit.h">Handleless kitchens, made to your walls.</h2>
@@ -407,7 +429,7 @@
       </div>
     </div>
     <div class="feat rev" id="offices">
-      <div class="feat-img imgph reveal-r" data-img="feat.office"><img src="/showcase/office-desk-clean.jpg" alt="Fitted home-office desk"></div>
+      <div class="feat-img imgph reveal-r" data-img="feat.office" data-gal="offices"><img src="/showcase/office-desk-clean.jpg" alt="Fitted home-office desk"></div>
       <div class="feat-txt reveal-l">
         <div class="kicker">Home offices</div>
         <h2 data-edit="foff.h">Home offices that mean business.</h2>
@@ -603,7 +625,7 @@ function applyContent(c){
 function reorder(order){const box=document.getElementById('sections');order.forEach(name=>{const s=box.querySelector(`section[data-section="${name}"]`);if(s)box.appendChild(s)})}
 /* record the baked-in default image url on each slot so framing edits save too */
 document.querySelectorAll('[data-img]').forEach(el=>{const im=el.querySelector('img');if(im&&!el.dataset.url)el.dataset.url=im.getAttribute('src');});
-fetch(SITE_FN).then(r=>r.json()).then(j=>applyContent(j.data)).catch(()=>{});
+fetch(SITE_FN).then(r=>r.json()).then(j=>{applyContent(j.data);buildGalleries();}).catch(()=>{buildGalleries();});
 
 /* build content object from current DOM */
 function collect(){
@@ -785,6 +807,69 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
   hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;
     hero.style.transform='rotateY('+(px*9)+'deg) rotateX('+(-py*9)+'deg)';});
   hero.addEventListener('pointerleave',function(){hero.style.transform='';});
+})();
+
+/* ---- category director: image pools that feed the feature slots ---- */
+var DIRECTOR={
+  wardrobes:['/showcase/wardrobe-cream-straight.jpg','/showcase/wardrobe-open-shelves.jpg','/showcase/eaves-wardrobe-open.jpg','/showcase/walkin.jpg','/showcase/walkin-2.jpg','/showcase/walkin-3.jpg','/showcase/understairs-drawers.jpg','/showcase/understairs-2.jpg','/showcase/projects/oval/oval-a3-12.jpg','/showcase/projects/oval/oval-a3-08.jpg'],
+  living:['/showcase/media-wall-led.jpg','/showcase/kitchen-media2.jpg','/showcase/kitchen-tv.jpg','/showcase/kitchen-4.jpg'],
+  kitchens:['/showcase/kitchen-bright.jpg','/showcase/kitchen-4.jpg','/showcase/kitchen-tv.jpg','/showcase/kitchen-media2.jpg','/showcase/projects/oval/oval-a2-01.jpg','/showcase/projects/oval/oval-a2-04.jpg','/showcase/projects/oval/oval-a2-06.jpg'],
+  offices:['/showcase/office-desk-clean.jpg','/showcase/projects/vne/vne-deskrun.jpg','/showcase/projects/vne/vne-desks.jpg','/showcase/mudroom.jpg','/showcase/mudroom-2.jpg']
+};
+var GAL_LABEL={wardrobes:'Wardrobes & bedrooms',living:'Living rooms',kitchens:'Kitchens',offices:'Home offices'};
+
+/* build a cross-fading, dot-navigable gallery inside every [data-gal] slot */
+function buildGalleries(){
+  var slots=document.querySelectorAll('[data-gal]'), idx=0;
+  slots.forEach(function(slot){
+    if(slot.dataset.gbuilt) return; slot.dataset.gbuilt='1';
+    var cat=slot.getAttribute('data-gal'), pool=(DIRECTOR[cat]||[]).slice();
+    var first=slot.querySelector('img'); var lead=first?first.getAttribute('src'):(pool[0]||'');
+    /* lead image first, then the rest of the pool (deduped) */
+    var urls=[lead].concat(pool.filter(function(u){return u!==lead;}));
+    if(urls.length<2){ /* still make it clickable for the lightbox */ if(first){first.classList.add('gl','on');} slot._gal={urls:urls,cur:0}; return; }
+    var alt=first?first.alt:''; if(first) first.remove();
+    var layers=urls.map(function(u,i){var im=new Image();im.src=u;im.alt=alt;im.className='gl'+(i===0?' on':'');im.loading=i===0?'eager':'lazy';slot.appendChild(im);return im;});
+    var dots=document.createElement('div');dots.className='gdots';
+    var btns=urls.map(function(u,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','View '+(i+1));if(i===0)b.className='on';
+      b.addEventListener('click',function(e){e.stopPropagation();go(i,true);});dots.appendChild(b);return b;});
+    slot.appendChild(dots);
+    var cur=0,timer=null,paused=false;
+    function go(n,manual){ if(n===cur)return; layers[cur].classList.remove('on'); btns[cur].classList.remove('on');
+      cur=(n+urls.length)%urls.length; layers[cur].classList.add('on'); btns[cur].classList.add('on');
+      slot._gal.cur=cur; if(manual){paused=true;clearTimeout(timer);setTimeout(function(){paused=false;},9000);} }
+    function tick(){ timer=setTimeout(function(){ if(!paused && !document.hidden) go(cur+1,false); tick(); }, 5200); }
+    slot.addEventListener('mouseenter',function(){paused=true;});
+    slot.addEventListener('mouseleave',function(){paused=false;});
+    slot._gal={urls:urls,cur:0,go:go};
+    /* stagger the auto-advance so the blocks don't all flip together */
+    setTimeout(tick, 1400*(idx++%4));
+  });
+}
+
+/* ---- clean lightbox: click a slot → big image, blurred backdrop, shadow depth ---- */
+(function(){
+  var lb=document.createElement('div'); lb.id='lightbox';
+  lb.innerHTML='<button class="lb-x" aria-label="Close">×</button><button class="lb-nav lb-prev" aria-label="Previous">‹</button><button class="lb-nav lb-next" aria-label="Next">›</button><figure><img alt=""><figcaption></figcaption></figure>';
+  document.body.appendChild(lb);
+  var img=lb.querySelector('img'), cap=lb.querySelector('figcaption');
+  var active=null; /* {urls,cur,cat} */
+  function render(){ if(!active)return; img.src=active.urls[active.cur]; cap.textContent=active.cat||''; }
+  function open(slot){ if(document.body.classList.contains('admin'))return;
+    var g=slot._gal; if(!g)return; var cat=slot.getAttribute('data-gal');
+    active={urls:g.urls,cur:g.cur||0,cat:GAL_LABEL[cat]||''}; render();
+    lb.classList.add('show'); requestAnimationFrame(function(){lb.classList.add('in');}); document.body.style.overflow='hidden'; }
+  function close(){ lb.classList.remove('in'); document.body.style.overflow='';
+    setTimeout(function(){lb.classList.remove('show'); img.src='';},380); active=null; }
+  function step(d){ if(!active)return; active.cur=(active.cur+d+active.urls.length)%active.urls.length; render(); }
+  lb.querySelector('.lb-x').addEventListener('click',close);
+  lb.querySelector('.lb-prev').addEventListener('click',function(e){e.stopPropagation();step(-1);});
+  lb.querySelector('.lb-next').addEventListener('click',function(e){e.stopPropagation();step(1);});
+  lb.addEventListener('click',function(e){ if(e.target===lb||e.target.tagName==='FIGURE') close(); });
+  document.addEventListener('keydown',function(e){ if(!lb.classList.contains('show'))return;
+    if(e.key==='Escape')close(); else if(e.key==='ArrowRight')step(1); else if(e.key==='ArrowLeft')step(-1); });
+  document.querySelectorAll('[data-gal]').forEach(function(slot){
+    slot.addEventListener('click',function(){ open(slot); }); });
 })();
 
 /* Oval horizontal scroll-across */
