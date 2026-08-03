@@ -400,7 +400,7 @@ function rail(sideEl, railEl, kind, items, paint){
   railEl.addEventListener('pointermove',function(e){if(!dragging)return;var dy=e.clientY-lastY;lastY=e.clientY;vy=dy;moved+=Math.abs(dy);y-=dy;apply();});
   function momentum(){vy*=0.93;if(Math.abs(vy)<0.4)return;y-=vy;apply();raf=requestAnimationFrame(momentum);}
   railEl.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false;railEl.classList.remove('grabbing');
-    if(moved<6){ tap(e.clientX,e.clientY); } else momentum(); });
+    if(moved<14){ tap(e.clientX,e.clientY); } else momentum(); });
   railEl.addEventListener('pointercancel',function(){dragging=false;railEl.classList.remove('grabbing');});
   function tap(x,yy){
     var t=document.elementFromPoint(x,yy); if(!t)return;
@@ -493,7 +493,7 @@ el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
   function mom(){vx*=0.92;if(Math.abs(vx)<0.4)return;x-=vx;ap();raf=requestAnimationFrame(mom);}
   rail.addEventListener('pointerup',function(){if(!down)return;down=false;rail.classList.remove('grabbing');mom();});
   rail.addEventListener('pointercancel',function(){down=false;rail.classList.remove('grabbing');});
-  rail.addEventListener('click',function(e){if(fmoved>6)return;var t=e.target.closest('.ftile');if(!t)return;var fl=(FLOORS[floorType]||[])[parseInt(t.getAttribute('data-i'))];if(!fl)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});
+  rail.addEventListener('click',function(e){if(fmoved>14)return;var t=e.target.closest('.ftile');if(!t)return;var fl=(FLOORS[floorType]||[])[parseInt(t.getAttribute('data-i'))];if(!fl)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});
 })();
 /* Post-it tags on/off */
 el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
