@@ -1,0 +1,1480 @@
+{
+"hard": [
+{
+"file": "alba-walnut.webp",
+"name": "Alba Walnut",
+"avg": "#5d3f2b",
+"dir": "finishes"
+},
+{
+"file": "bookmatch-oak.webp",
+"name": "Bookmatch Oak",
+"avg": "#be966f",
+"dir": "finishes"
+},
+{
+"file": "brighton-chestnut.webp",
+"name": "Brighton Chestnut",
+"avg": "#af8e73",
+"dir": "finishes"
+},
+{
+"file": "brown-bolivar-wood.webp",
+"name": "Brown Bolivar Wood",
+"avg": "#664733",
+"dir": "finishes"
+},
+{
+"file": "graphite-sheffield-acacia.webp",
+"name": "Graphite Sheffield Acaci",
+"avg": "#40332e",
+"dir": "finishes"
+},
+{
+"file": "light-natural-rovato-oak.webp",
+"name": "Light Natural Rovato Oak",
+"avg": "#bea27e",
+"dir": "finishes"
+},
+{
+"file": "natural-bolivar-wood.webp",
+"name": "Natural Bolivar Wood",
+"avg": "#9b7963",
+"dir": "finishes"
+},
+{
+"file": "natural-dimaro-walnut.webp",
+"name": "Natural Dimaro Walnut",
+"avg": "#9c8470",
+"dir": "finishes"
+},
+{
+"file": "sand-casella-oak.webp",
+"name": "Sand Casella Oak",
+"avg": "#d5bda4",
+"dir": "finishes"
+}
+],
+"soft": [
+{
+"file": "111-Wool_Pride_SilverPearl_WP353.jpg",
+"name": "111 Wool Pride Silverpea",
+"avg": "#5e6067"
+},
+{
+"file": "215244f6-6d13-418d-b4ab-de87a859926f.jpg",
+"name": "215244F6 6D13 418D B4Ab ",
+"avg": "#696968"
+},
+{
+"file": "AH101-GoldenSol.jpg",
+"name": "Goldensol",
+"avg": "#948562"
+},
+{
+"file": "AH102-Fired-Ember.jpg",
+"name": "Fired Ember",
+"avg": "#9b5e46"
+},
+{
+"file": "AH103-Charred-Earth.jpg",
+"name": "Charred Earth",
+"avg": "#433f3a"
+},
+{
+"file": "AH104-Desert-Lace.jpg",
+"name": "Desert Lace",
+"avg": "#b2ab9f"
+},
+{
+"file": "AH105-Parchment-Glow.jpg",
+"name": "Parchment Glow",
+"avg": "#8b7b61"
+},
+{
+"file": "AH106-Soft-Umber.jpg",
+"name": "Soft Umber",
+"avg": "#6d614f"
+},
+{
+"file": "AH107-Woodland-Shade.jpg",
+"name": "Woodland Shade",
+"avg": "#76755c"
+},
+{
+"file": "AP101-Golden-Sol.jpg",
+"name": "Golden Sol",
+"avg": "#918361"
+},
+{
+"file": "AP102-Fired-Ember.jpg",
+"name": "Fired Ember",
+"avg": "#965a44"
+},
+{
+"file": "AP103-Charred-Earth.jpg",
+"name": "Charred Earth",
+"avg": "#433f3a"
+},
+{
+"file": "AP104-Desert-Lace.jpg",
+"name": "Desert Lace",
+"avg": "#b3aca0"
+},
+{
+"file": "AP105-Parchment-Glow.jpg",
+"name": "Parchment Glow",
+"avg": "#8b7b61"
+},
+{
+"file": "AP106-Soft-Umber.jpg",
+"name": "Soft Umber",
+"avg": "#706552"
+},
+{
+"file": "AP107-Woodland-Shade.jpg",
+"name": "Woodland Shade",
+"avg": "#78775e"
+},
+{
+"file": "Audrey-Sunrise-WFS1-Stairs.jpg",
+"name": "Audrey Sunrise Wfs1 Stai",
+"avg": "#ae9f99"
+},
+{
+"file": "Audrey_WFS4_1139.jpg",
+"name": "Audrey Wfs4 1139",
+"avg": "#504c4c"
+},
+{
+"file": "Autumn-Glow-WH2071.jpg",
+"name": "Autumn Glow",
+"avg": "#584240"
+},
+{
+"file": "Barley-TW111.jpg",
+"name": "Barley",
+"avg": "#635d4e"
+},
+{
+"file": "Basketweave_SBW_344-1.jpg",
+"name": "Basketweave Sbw 344 1",
+"avg": "#817055"
+},
+{
+"file": "Baysand.jpg",
+"name": "Baysand",
+"avg": "#9f9283"
+},
+{
+"file": "Biscayne_Grey_Ash_BS121_045.jpg",
+"name": "Biscayne Grey Ash Bs121 ",
+"avg": "#7d746e"
+},
+{
+"file": "Biscayne_Wild_Mushroom_BS120_046.jpg",
+"name": "Biscayne Wild Mushroom B",
+"avg": "#999182"
+},
+{
+"file": "Boucle-Natural-BNL-1.jpg",
+"name": "Boucle Natural Bnl 1",
+"avg": "#937143"
+},
+{
+"file": "Buttercup_WB100_051.jpg",
+"name": "Buttercup Wb100 051",
+"avg": "#c6c0aa"
+},
+{
+"file": "Buttercup_WB101_056.jpg",
+"name": "Buttercup Wb101 056",
+"avg": "#a79c8a"
+},
+{
+"file": "Buttercup_WB102_058.jpg",
+"name": "Buttercup Wb102 058",
+"avg": "#968a80"
+},
+{
+"file": "Buttercup_WB103_054.jpg",
+"name": "Buttercup Wb103 054",
+"avg": "#a79f96"
+},
+{
+"file": "Buttercup_WB104_060.jpg",
+"name": "Buttercup Wb104 060",
+"avg": "#888480"
+},
+{
+"file": "Buttercup_WB105_062.jpg",
+"name": "Buttercup Wb105 062",
+"avg": "#726c69"
+},
+{
+"file": "Calm-Breeze-WH2011.jpg",
+"name": "Calm Breeze",
+"avg": "#99928e"
+},
+{
+"file": "City-Noir-CY314.jpg",
+"name": "City Noir",
+"avg": "#1b1b1e"
+},
+{
+"file": "Coir-Luxury-Herringbone-Natural-HBN-L.jpg",
+"name": "Coir Luxury Herringbone ",
+"avg": "#9d7c4e"
+},
+{
+"file": "Collage-Juxtaposition-CG101.jpg",
+"name": "Collage Juxtaposition",
+"avg": "#503d36"
+},
+{
+"file": "Collage-Mixed-Media-CG103.jpg",
+"name": "Collage Mixed Media",
+"avg": "#303537"
+},
+{
+"file": "Collage-Modernity-CG105.jpg",
+"name": "Collage Modernity",
+"avg": "#454442"
+},
+{
+"file": "Collage-Paper-Layer-CG104.jpg",
+"name": "Collage Paper Layer",
+"avg": "#645549"
+},
+{
+"file": "Collage-Soft-Focus-CG102.jpg",
+"name": "Collage Soft Focus",
+"avg": "#4b4c4c"
+},
+{
+"file": "Coral-Drift.jpg",
+"name": "Coral Drift",
+"avg": "#a29387"
+},
+{
+"file": "Cotton-Chenille-Calico-ccn18.jpg",
+"name": "Cotton Chenille Calico",
+"avg": "#b9b3a3"
+},
+{
+"file": "Cotton-Chenille-Dark-olive-ccn15.jpg",
+"name": "Cotton Chenille Dark Oli",
+"avg": "#706854"
+},
+{
+"file": "Cotton-Chenille-Ink-ccn17.jpg",
+"name": "Cotton Chenille Ink",
+"avg": "#28272e"
+},
+{
+"file": "Cotton-Chenille-Marine-ccn16.jpg",
+"name": "Cotton Chenille Marine",
+"avg": "#848984"
+},
+{
+"file": "Cotton-Chenille-Pale-stoneccn19.jpg",
+"name": "Cotton Chenille Pale Sto",
+"avg": "#989381"
+},
+{
+"file": "Cotton-Chenille-Sumac-ccn14.jpg",
+"name": "Cotton Chenille Sumac",
+"avg": "#86685d"
+},
+{
+"file": "Cotton-herringbone-Paprika-C49.jpg",
+"name": "Cotton Herringbone Papri",
+"avg": "#5d3031"
+},
+{
+"file": "Cotton-herringbone-Wisp-C50.jpg",
+"name": "Cotton Herringbone Wisp",
+"avg": "#85837a"
+},
+{
+"file": "Dawn-Light-WA135-scaled-1.jpg",
+"name": "Dawn Light 1",
+"avg": "#a19c99"
+},
+{
+"file": "Deep-Purple-WH2031.jpg",
+"name": "Deep Purple",
+"avg": "#5f565e"
+},
+{
+"file": "Ecru-Tides.jpg",
+"name": "Ecru Tides",
+"avg": "#b2a494"
+},
+{
+"file": "Emerald-Tide-WH208.jpg",
+"name": "Emerald Tide",
+"avg": "#2c3232"
+},
+{
+"file": "Fabulous_WFW602_1043.jpg",
+"name": "Fabulous Wfw602 1043",
+"avg": "#5d5039"
+},
+{
+"file": "Fabulous_WFW602_Emerald-1.jpg",
+"name": "Fabulous Wfw602 Emerald ",
+"avg": "#a8aeb1"
+},
+{
+"file": "Felted-wool-marl-Aluminium-wfm3.jpg",
+"name": "Felted Wool Marl Alumini",
+"avg": "#666665"
+},
+{
+"file": "Felted-wool-marl-Chartreuse-wfm2.jpg",
+"name": "Felted Wool Marl Chartre",
+"avg": "#7c6f47"
+},
+{
+"file": "Felted-wool-marl-Graphite-wfm5.jpg",
+"name": "Felted Wool Marl Graphit",
+"avg": "#494843"
+},
+{
+"file": "Felted-wool-marl-Midnight-wfm4.jpg",
+"name": "Felted Wool Marl Midnigh",
+"avg": "#1c2027"
+},
+{
+"file": "Felted-wool-marl-Obsidian-wfm1.jpg",
+"name": "Felted Wool Marl Obsidia",
+"avg": "#232424"
+},
+{
+"file": "Felted-wool-marl-Pebble-wfm6.jpg",
+"name": "Felted Wool Marl Pebble ",
+"avg": "#7a756c"
+},
+{
+"file": "Felted-wool-marl-Slate-wfm7.jpg",
+"name": "Felted Wool Marl Slate W",
+"avg": "#222222"
+},
+{
+"file": "Felted-wool-marl-sandstone-wfm8.jpg",
+"name": "Felted Wool Marl Sandsto",
+"avg": "#929088"
+},
+{
+"file": "Felted-wool-plain-Smoke-wfp4.jpg",
+"name": "Felted Wool Plain Smoke ",
+"avg": "#2a2b2c"
+},
+{
+"file": "GPC20198788.jpg",
+"name": "Gpc20198788",
+"avg": "#9b937a"
+},
+{
+"file": "GPC20198885.jpg",
+"name": "Gpc20198885",
+"avg": "#78705e"
+},
+{
+"file": "GPC20205636.jpg",
+"name": "Gpc20205636",
+"avg": "#9d7b50"
+},
+{
+"file": "GPC20205661.jpg",
+"name": "Gpc20205661",
+"avg": "#92866f"
+},
+{
+"file": "GPC20205679.jpg",
+"name": "Gpc20205679",
+"avg": "#9a8670"
+},
+{
+"file": "GPC20205971.jpg",
+"name": "Gpc20205971",
+"avg": "#aa8f69"
+},
+{
+"file": "GPC20205989.jpg",
+"name": "Gpc20205989",
+"avg": "#b6926f"
+},
+{
+"file": "GPC20206381.jpg",
+"name": "Gpc20206381",
+"avg": "#927d62"
+},
+{
+"file": "GPC20206390.jpg",
+"name": "Gpc20206390",
+"avg": "#a39278"
+},
+{
+"file": "GPC20206403.jpg",
+"name": "Gpc20206403",
+"avg": "#8c6c44"
+},
+{
+"file": "GPC20206942.jpg",
+"name": "Gpc20206942",
+"avg": "#947c5f"
+},
+{
+"file": "GPC20206951.jpg",
+"name": "Gpc20206951",
+"avg": "#7e6c54"
+},
+{
+"file": "GPC20206969.jpg",
+"name": "Gpc20206969",
+"avg": "#917d61"
+},
+{
+"file": "GPC20206977.jpg",
+"name": "Gpc20206977",
+"avg": "#987e65"
+},
+{
+"file": "GPC20207078.jpg",
+"name": "Gpc20207078",
+"avg": "#a6835a"
+},
+{
+"file": "GPC20208171.jpg",
+"name": "Gpc20208171",
+"avg": "#b7a883"
+},
+{
+"file": "GPC20209437.jpg",
+"name": "Gpc20209437",
+"avg": "#1e1f1f"
+},
+{
+"file": "GPC20346451.jpg",
+"name": "Gpc20346451",
+"avg": "#b19875"
+},
+{
+"file": "GPC20346469.jpg",
+"name": "Gpc20346469",
+"avg": "#917a5c"
+},
+{
+"file": "GPC20346477.jpg",
+"name": "Gpc20346477",
+"avg": "#7f6b53"
+},
+{
+"file": "GPC20346795.jpg",
+"name": "Gpc20346795",
+"avg": "#c9baa8"
+},
+{
+"file": "GPC20346809.jpg",
+"name": "Gpc20346809",
+"avg": "#b29e82"
+},
+{
+"file": "GPC20346817.jpg",
+"name": "Gpc20346817",
+"avg": "#b1a38c"
+},
+{
+"file": "GPC20346825.jpg",
+"name": "Gpc20346825",
+"avg": "#cab396"
+},
+{
+"file": "GPC20346833.jpg",
+"name": "Gpc20346833",
+"avg": "#aa8e6a"
+},
+{
+"file": "GPC20484411.jpg",
+"name": "Gpc20484411",
+"avg": "#9f8f80"
+},
+{
+"file": "GPC20484438.jpg",
+"name": "Gpc20484438",
+"avg": "#9d8770"
+},
+{
+"file": "GPC20484454.jpg",
+"name": "Gpc20484454",
+"avg": "#635746"
+},
+{
+"file": "GPC20484471.jpg",
+"name": "Gpc20484471",
+"avg": "#4b3e33"
+},
+{
+"file": "GPC20484497.jpg",
+"name": "Gpc20484497",
+"avg": "#564637"
+},
+{
+"file": "GPC20484519.jpg",
+"name": "Gpc20484519",
+"avg": "#2b241f"
+},
+{
+"file": "GPC20530367.jpg",
+"name": "Gpc20530367",
+"avg": "#ada493"
+},
+{
+"file": "GPC20530375.jpg",
+"name": "Gpc20530375",
+"avg": "#a69d92"
+},
+{
+"file": "GPC20530383.jpg",
+"name": "Gpc20530383",
+"avg": "#786e60"
+},
+{
+"file": "GPC20530391.jpg",
+"name": "Gpc20530391",
+"avg": "#514c44"
+},
+{
+"file": "GPC20530405.jpg",
+"name": "Gpc20530405",
+"avg": "#504b42"
+},
+{
+"file": "GPC20530413.jpg",
+"name": "Gpc20530413",
+"avg": "#b3a590"
+},
+{
+"file": "GPC20530421.jpg",
+"name": "Gpc20530421",
+"avg": "#a79d90"
+},
+{
+"file": "GPC20530464.jpg",
+"name": "Gpc20530464",
+"avg": "#cac0b6"
+},
+{
+"file": "GPC20530472.jpg",
+"name": "Gpc20530472",
+"avg": "#b8afa3"
+},
+{
+"file": "GPC20530481.jpg",
+"name": "Gpc20530481",
+"avg": "#9e9689"
+},
+{
+"file": "GPC20530499.jpg",
+"name": "Gpc20530499",
+"avg": "#998876"
+},
+{
+"file": "GPC20530502.jpg",
+"name": "Gpc20530502",
+"avg": "#7f7773"
+},
+{
+"file": "GPC20606975.jpg",
+"name": "Gpc20606975",
+"avg": "#82725d"
+},
+{
+"file": "GPC20606983.jpg",
+"name": "Gpc20606983",
+"avg": "#7c6a57"
+},
+{
+"file": "GPC20607009.jpg",
+"name": "Gpc20607009",
+"avg": "#4c4942"
+},
+{
+"file": "GPC20607033.jpg",
+"name": "Gpc20607033",
+"avg": "#6c5d48"
+},
+{
+"file": "GPC20607050.jpg",
+"name": "Gpc20607050",
+"avg": "#3f3a34"
+},
+{
+"file": "GPC20643625.jpg",
+"name": "Gpc20643625",
+"avg": "#b2a896"
+},
+{
+"file": "GPC20643641.jpg",
+"name": "Gpc20643641",
+"avg": "#ad9f8a"
+},
+{
+"file": "GPC20643668.jpg",
+"name": "Gpc20643668",
+"avg": "#948470"
+},
+{
+"file": "GPC20643684.jpg",
+"name": "Gpc20643684",
+"avg": "#6c6157"
+},
+{
+"file": "GPC20643706.jpg",
+"name": "Gpc20643706",
+"avg": "#7e786b"
+},
+{
+"file": "GPC20643722.jpg",
+"name": "Gpc20643722",
+"avg": "#c9baa2"
+},
+{
+"file": "GPC20676515.jpg",
+"name": "Gpc20676515",
+"avg": "#959590"
+},
+{
+"file": "GPC20676523.jpg",
+"name": "Gpc20676523",
+"avg": "#51442b"
+},
+{
+"file": "GPC20676531.jpg",
+"name": "Gpc20676531",
+"avg": "#814a3e"
+},
+{
+"file": "GPC20676540.jpg",
+"name": "Gpc20676540",
+"avg": "#88796c"
+},
+{
+"file": "GPC20676566.jpg",
+"name": "Gpc20676566",
+"avg": "#90918c"
+},
+{
+"file": "GPC20676574.jpg",
+"name": "Gpc20676574",
+"avg": "#5a4e3d"
+},
+{
+"file": "GPC20676582.jpg",
+"name": "Gpc20676582",
+"avg": "#744336"
+},
+{
+"file": "GPC20676591.jpg",
+"name": "Gpc20676591",
+"avg": "#8d7d71"
+},
+{
+"file": "GPC20707976.jpg",
+"name": "Gpc20707976",
+"avg": "#9e957b"
+},
+{
+"file": "GPC20707984.jpg",
+"name": "Gpc20707984",
+"avg": "#9f8e6f"
+},
+{
+"file": "GPC20707992.jpg",
+"name": "Gpc20707992",
+"avg": "#7d7b6c"
+},
+{
+"file": "GPC20730030.jpg",
+"name": "Gpc20730030",
+"avg": "#5a5245"
+},
+{
+"file": "GPC20730048.jpg",
+"name": "Gpc20730048",
+"avg": "#564635"
+},
+{
+"file": "GPC20730064.jpg",
+"name": "Gpc20730064",
+"avg": "#8a795b"
+},
+{
+"file": "GPC20730072.jpg",
+"name": "Gpc20730072",
+"avg": "#998c73"
+},
+{
+"file": "GPC20730081.jpg",
+"name": "Gpc20730081",
+"avg": "#463e34"
+},
+{
+"file": "GPC20742356.jpg",
+"name": "Gpc20742356",
+"avg": "#6c655d"
+},
+{
+"file": "GPC20813261.jpg",
+"name": "Gpc20813261",
+"avg": "#a5947e"
+},
+{
+"file": "GPC209486471.jpg",
+"name": "Gpc209486471",
+"avg": "#978767"
+},
+{
+"file": "GPC20948655.jpg",
+"name": "Gpc20948655",
+"avg": "#988768"
+},
+{
+"file": "GPC20948671.jpg",
+"name": "Gpc20948671",
+"avg": "#887a69"
+},
+{
+"file": "GPC20948698.jpg",
+"name": "Gpc20948698",
+"avg": "#81786f"
+},
+{
+"file": "GPC20948701.jpg",
+"name": "Gpc20948701",
+"avg": "#8b877a"
+},
+{
+"file": "GPC20948710.jpg",
+"name": "Gpc20948710",
+"avg": "#9e9689"
+},
+{
+"file": "GPC20948744.jpg",
+"name": "Gpc20948744",
+"avg": "#5b544d"
+},
+{
+"file": "GPC20948752.jpg",
+"name": "Gpc20948752",
+"avg": "#766a53"
+},
+{
+"file": "GPC20948809.jpg",
+"name": "Gpc20948809",
+"avg": "#a48f6a"
+},
+{
+"file": "GPC20948817.jpg",
+"name": "Gpc20948817",
+"avg": "#9a845f"
+},
+{
+"file": "GPC20948833.jpg",
+"name": "Gpc20948833",
+"avg": "#92836c"
+},
+{
+"file": "GPC20948850.jpg",
+"name": "Gpc20948850",
+"avg": "#6c6053"
+},
+{
+"file": "GPC20948868.jpg",
+"name": "Gpc20948868",
+"avg": "#857e70"
+},
+{
+"file": "GPC20948876.jpg",
+"name": "Gpc20948876",
+"avg": "#9e9484"
+},
+{
+"file": "GPC20948906.jpg",
+"name": "Gpc20948906",
+"avg": "#4d4841"
+},
+{
+"file": "GPC20948914.jpg",
+"name": "Gpc20948914",
+"avg": "#70634c"
+},
+{
+"file": "GPC20954329.jpg",
+"name": "Gpc20954329",
+"avg": "#beb09a"
+},
+{
+"file": "GPC20954337.jpg",
+"name": "Gpc20954337",
+"avg": "#b7a995"
+},
+{
+"file": "GPC20954345.jpg",
+"name": "Gpc20954345",
+"avg": "#b3ac9c"
+},
+{
+"file": "GPC20954353.jpg",
+"name": "Gpc20954353",
+"avg": "#998f7f"
+},
+{
+"file": "GPC20954361.jpg",
+"name": "Gpc20954361",
+"avg": "#847b6d"
+},
+{
+"file": "GPC20975377.jpg",
+"name": "Gpc20975377",
+"avg": "#c4b9a7"
+},
+{
+"file": "GPC20975393.jpg",
+"name": "Gpc20975393",
+"avg": "#b4a797"
+},
+{
+"file": "GPC20975415.jpg",
+"name": "Gpc20975415",
+"avg": "#a19485"
+},
+{
+"file": "GPC20975431.jpg",
+"name": "Gpc20975431",
+"avg": "#b8aa95"
+},
+{
+"file": "GPC20975458.jpg",
+"name": "Gpc20975458",
+"avg": "#9b8f7d"
+},
+{
+"file": "GPC20975474.jpg",
+"name": "Gpc20975474",
+"avg": "#aea18e"
+},
+{
+"file": "GPC20975539.jpg",
+"name": "Gpc20975539",
+"avg": "#a18b6e"
+},
+{
+"file": "GPC209804941.jpg",
+"name": "Gpc209804941",
+"avg": "#90887d"
+},
+{
+"file": "GPC20980508.jpg",
+"name": "Gpc20980508",
+"avg": "#7e7465"
+},
+{
+"file": "GPC20980532.jpg",
+"name": "Gpc20980532",
+"avg": "#73726e"
+},
+{
+"file": "GPC20980648.jpg",
+"name": "Gpc20980648",
+"avg": "#cdbfa4"
+},
+{
+"file": "GPC20980656.jpg",
+"name": "Gpc20980656",
+"avg": "#b7ae98"
+},
+{
+"file": "GPC20980664.jpg",
+"name": "Gpc20980664",
+"avg": "#898278"
+},
+{
+"file": "GPC20980672.jpg",
+"name": "Gpc20980672",
+"avg": "#978778"
+},
+{
+"file": "GPC20980681.jpg",
+"name": "Gpc20980681",
+"avg": "#65594d"
+},
+{
+"file": "GPC30231741.jpg",
+"name": "Gpc30231741",
+"avg": "#a9aaa1"
+},
+{
+"file": "GPC30231783.jpg",
+"name": "Gpc30231783",
+"avg": "#a6a095"
+},
+{
+"file": "GPC30231791.jpg",
+"name": "Gpc30231791",
+"avg": "#a6a191"
+},
+{
+"file": "GPC30231902.jpg",
+"name": "Gpc30231902",
+"avg": "#d1c9b8"
+},
+{
+"file": "GPC30231911.jpg",
+"name": "Gpc30231911",
+"avg": "#7c7c78"
+},
+{
+"file": "GPC30231929.jpg",
+"name": "Gpc30231929",
+"avg": "#636363"
+},
+{
+"file": "Golden-Glaze-WH2021.jpg",
+"name": "Golden Glaze",
+"avg": "#907a67"
+},
+{
+"file": "Grand_Herringbone_GH102_196.jpg",
+"name": "Grand Herringbone Gh102 ",
+"avg": "#6c6b55"
+},
+{
+"file": "Grey-Mist-WH2041.jpg",
+"name": "Grey Mist",
+"avg": "#747376"
+},
+{
+"file": "Harmony-Boucle-HB261-Fresh-Silver.jpg",
+"name": "Harmony Boucle Fresh Sil",
+"avg": "#595b5a"
+},
+{
+"file": "Kind-Gales-WA136-scaled-1.jpg",
+"name": "Kind Gales 1",
+"avg": "#a9a5a0"
+},
+{
+"file": "Knotted-Rope-WH2051.jpg",
+"name": "Knotted Rope",
+"avg": "#7a6e67"
+},
+{
+"file": "Linen-twill-Coffee-Lt34.jpg",
+"name": "Linen Twill Coffee",
+"avg": "#76654f"
+},
+{
+"file": "Marble-TW110.jpg",
+"name": "Marble",
+"avg": "#645e53"
+},
+{
+"file": "Marine-Blue-WH2001.jpg",
+"name": "Marine Blue",
+"avg": "#808a93"
+},
+{
+"file": "Mississippi-WS140-Ginkgo-Green-1.jpg",
+"name": "Mississippi Ginkgo Green",
+"avg": "#70684e"
+},
+{
+"file": "Mississippi-WS142-Warm-clay-1.jpg",
+"name": "Mississippi Warm Clay 1",
+"avg": "#725b51"
+},
+{
+"file": "Mississippi-WS148-Dark-Ocl-1.jpg",
+"name": "Mississippi Dark Ocl 1",
+"avg": "#605d59"
+},
+{
+"file": "Mississippi-WS149-Indigo-Russet-1.jpg",
+"name": "Mississippi Indigo Russe",
+"avg": "#5a4941"
+},
+{
+"file": "Mississippi-WS157-Deep-Thimking-1.jpg",
+"name": "Mississippi Deep Thimkin",
+"avg": "#675a4e"
+},
+{
+"file": "Mississippi-WS222-Chai-blue-1.jpg",
+"name": "Mississippi Chai Blue 1",
+"avg": "#7b6d5b"
+},
+{
+"file": "Mississippi-WS253-Light-Reflection-1.jpg",
+"name": "Mississippi Light Reflec",
+"avg": "#696a65"
+},
+{
+"file": "Mississippi-WS254-Parchment-1.jpg",
+"name": "Mississippi Parchment 1",
+"avg": "#766a5e"
+},
+{
+"file": "Mississippi_Premium_MP108_035.jpg",
+"name": "Mississippi Premium Mp10",
+"avg": "#79726c"
+},
+{
+"file": "Mississippi_Premium_MP110_030.jpg",
+"name": "Mississippi Premium Mp11",
+"avg": "#5f5953"
+},
+{
+"file": "Mississippi_Premium_MP112_040.jpg",
+"name": "Mississippi Premium Mp11",
+"avg": "#766969"
+},
+{
+"file": "Mississippi_Premium_MP113_046.jpg",
+"name": "Mississippi Premium Mp11",
+"avg": "#917f77"
+},
+{
+"file": "Mississippi_Premium_MP114_014.jpg",
+"name": "Mississippi Premium Mp11",
+"avg": "#766961"
+},
+{
+"file": "Mississippi_Premium_MP115_038.jpg",
+"name": "Mississippi Premium Mp11",
+"avg": "#75655d"
+},
+{
+"file": "Mississippi_Premium_MP120_018.jpg",
+"name": "Mississippi Premium Mp12",
+"avg": "#6f6d6e"
+},
+{
+"file": "Mississippi_Premium_MP121_024.jpg",
+"name": "Mississippi Premium Mp12",
+"avg": "#60554e"
+},
+{
+"file": "Mississippi_Premium_MP123_043.jpg",
+"name": "Mississippi Premium Mp12",
+"avg": "#684950"
+},
+{
+"file": "Mississippi_WS113_891.jpg",
+"name": "Mississippi Ws113 891",
+"avg": "#b29b73"
+},
+{
+"file": "Mistral-Skies-WA139-scaled-1.jpg",
+"name": "Mistral Skies 1",
+"avg": "#afa79e"
+},
+{
+"file": "Moonlit-Bay.jpg",
+"name": "Moonlit Bay",
+"avg": "#9b674e"
+},
+{
+"file": "Morning-Wave.jpg",
+"name": "Morning Wave",
+"avg": "#65615f"
+},
+{
+"file": "Natural-Stone-WH2061.jpg",
+"name": "Natural Stone",
+"avg": "#747177"
+},
+{
+"file": "Ogee-Turn-P1801.jpg",
+"name": "Ogee Turn",
+"avg": "#776b5a"
+},
+{
+"file": "Oriental_E111_034.jpg",
+"name": "Oriental E111 034",
+"avg": "#786f60"
+},
+{
+"file": "Oriental_E112_035.jpg",
+"name": "Oriental E112 035",
+"avg": "#726957"
+},
+{
+"file": "Oriental_E113_041.jpg",
+"name": "Oriental E113 041",
+"avg": "#7d735f"
+},
+{
+"file": "Oriental_E114_043.jpg",
+"name": "Oriental E114 043",
+"avg": "#5b5141"
+},
+{
+"file": "Oriental_E115_031.jpg",
+"name": "Oriental E115 031",
+"avg": "#58554f"
+},
+{
+"file": "Panama-Natural-PNL-1.jpg",
+"name": "Panama Natural Pnl 1",
+"avg": "#987545"
+},
+{
+"file": "Partly-Cloudy-Wa138-scaled-1.jpg",
+"name": "Partly Cloudy 1",
+"avg": "#a8a093"
+},
+{
+"file": "SUNBEAM-WFS11-.jpg",
+"name": "Sunbeam",
+"avg": "#88574d"
+},
+{
+"file": "Sisool_Masai_M606_414.jpg",
+"name": "Sisool Masai M606 414",
+"avg": "#b8b18c"
+},
+{
+"file": "Sisool_Plaid_ChalkWhite_101_Retouched.jpg",
+"name": "Sisool Plaid Chalkwhite ",
+"avg": "#959791"
+},
+{
+"file": "Sisool_Plaid_SP302_402-1.jpg",
+"name": "Sisool Plaid Sp302 402 1",
+"avg": "#958873"
+},
+{
+"file": "Small_Boucle_Accents_C858_269-1.jpg",
+"name": "Small Boucle Accents C85",
+"avg": "#8f2629"
+},
+{
+"file": "Snow-Blanket-WA141-scaled-1.jpg",
+"name": "Snow Blanket 1",
+"avg": "#aea9a6"
+},
+{
+"file": "Three-stripe-Biscotti-cs302-1.jpg",
+"name": "Three Stripe Biscotti 1",
+"avg": "#797267"
+},
+{
+"file": "Three-stripe-Brindle-cs309.jpg",
+"name": "Three Stripe Brindle",
+"avg": "#5a4f47"
+},
+{
+"file": "Three-stripe-Cocolatte-cs307.jpg",
+"name": "Three Stripe Cocolatte",
+"avg": "#362f2c"
+},
+{
+"file": "Three-stripe-Varsity-cs3010.jpg",
+"name": "Three Stripe Varsity",
+"avg": "#38383a"
+},
+{
+"file": "Three-stripe-Victoriana-cs3013.jpg",
+"name": "Three Stripe Victoriana",
+"avg": "#3a3e4a"
+},
+{
+"file": "Treasure_WT502_014.jpg",
+"name": "Treasure Wt502 014",
+"avg": "#a39787"
+},
+{
+"file": "WA150.jpg",
+"name": "Carpet",
+"avg": "#e7e4d0"
+},
+{
+"file": "WA500.jpg",
+"name": "Carpet",
+"avg": "#989993"
+},
+{
+"file": "WA501.jpg",
+"name": "Carpet",
+"avg": "#9f9a8b"
+},
+{
+"file": "WA502.jpg",
+"name": "Carpet",
+"avg": "#a1998c"
+},
+{
+"file": "WA511.jpg",
+"name": "Carpet",
+"avg": "#93918a"
+},
+{
+"file": "WA512.jpg",
+"name": "Carpet",
+"avg": "#958e83"
+},
+{
+"file": "WA513.jpg",
+"name": "Carpet",
+"avg": "#a39889"
+},
+{
+"file": "WA514.jpg",
+"name": "Carpet",
+"avg": "#989187"
+},
+{
+"file": "WA515.jpg",
+"name": "Carpet",
+"avg": "#9c988f"
+},
+{
+"file": "WA516.jpg",
+"name": "Carpet",
+"avg": "#8d8e87"
+},
+{
+"file": "WA517.jpg",
+"name": "Carpet",
+"avg": "#a0988c"
+},
+{
+"file": "WA518.jpg",
+"name": "Carpet",
+"avg": "#897e74"
+},
+{
+"file": "WE510-2.jpg",
+"name": "2",
+"avg": "#a39f89"
+},
+{
+"file": "WE511.jpg",
+"name": "Carpet",
+"avg": "#9e9688"
+},
+{
+"file": "WE512.jpg",
+"name": "Carpet",
+"avg": "#abab9d"
+},
+{
+"file": "WE513.jpg",
+"name": "Carpet",
+"avg": "#adaf9f"
+},
+{
+"file": "WE514.jpg",
+"name": "Carpet",
+"avg": "#94948d"
+},
+{
+"file": "WE516.jpg",
+"name": "Carpet",
+"avg": "#686861"
+},
+{
+"file": "WFS11-GOLDEN-HOUR-FULL-PATTERN-REPEAT.jpg",
+"name": "Golden Hour Full Pattern",
+"avg": "#94674f"
+},
+{
+"file": "WFS12-DAYBREAK-FULL-PATTERN-REPEAT.jpg",
+"name": "Daybreak Full Pattern Re",
+"avg": "#818075"
+},
+{
+"file": "WFS6-SUNRISE-FULL-PATTERN-REPEAT.jpg",
+"name": "Wfs6 Sunrise Full Patter",
+"avg": "#9a6754"
+},
+{
+"file": "WFS9-MOON-GLOW-FULL-PATTERN-REPEAT-.jpg",
+"name": "Wfs9 Moon Glow Full Patt",
+"avg": "#75756a"
+},
+{
+"file": "Wool_Pearl_WP101_033-scaled.jpg",
+"name": "Wool Pearl Wp101 033",
+"avg": "#d4cdb2"
+},
+{
+"file": "Wool_Pearl_WP102_034-scaled.jpg",
+"name": "Wool Pearl Wp102 034",
+"avg": "#afa691"
+},
+{
+"file": "Wool_Pearl_WP103_036-scaled.jpg",
+"name": "Wool Pearl Wp103 036",
+"avg": "#988b70"
+},
+{
+"file": "Wool_Pearl_WP104_038-scaled.jpg",
+"name": "Wool Pearl Wp104 038",
+"avg": "#8d8c80"
+},
+{
+"file": "Wool_Pearl_WP105_039-scaled.jpg",
+"name": "Wool Pearl Wp105 039",
+"avg": "#88837f"
+},
+{
+"file": "Wool_Pearl_WP106_041-scaled.jpg",
+"name": "Wool Pearl Wp106 041",
+"avg": "#747774"
+},
+{
+"file": "aura-202-flow.jpg",
+"name": "Aura 202 Flow",
+"avg": "#858078"
+},
+{
+"file": "aura-a101-essence.jpg",
+"name": "Aura Essence",
+"avg": "#817971"
+},
+{
+"file": "aura-a102-beam.jpg",
+"name": "Aura Beam",
+"avg": "#615c59"
+},
+{
+"file": "aura-a103-mirage.jpg",
+"name": "Aura Mirage",
+"avg": "#87807b"
+},
+{
+"file": "aura-a104-stellar.jpg",
+"name": "Aura Stellar",
+"avg": "#7d6f6b"
+},
+{
+"file": "aura-a201-canopy.jpg",
+"name": "Aura Canopy",
+"avg": "#62605a"
+},
+{
+"file": "aura-a203-vibe.jpg",
+"name": "Aura Vibe",
+"avg": "#64534b"
+},
+{
+"file": "aura-a204-glow.jpg",
+"name": "Aura Glow",
+"avg": "#917a6f"
+},
+{
+"file": "calm_nights_SN505.jpg",
+"name": "Calm Nights Sn505",
+"avg": "#68655d"
+},
+{
+"file": "carpet.jpg",
+"name": "Carpet",
+"avg": "#6e6e6e"
+},
+{
+"file": "cotton_white_sn500.jpg",
+"name": "Cotton White Sn500",
+"avg": "#beb79c"
+},
+{
+"file": "dawn-husk-800x454-1.jpg",
+"name": "Dawn Husk 1",
+"avg": "#bea181"
+},
+{
+"file": "delicate_feather_sn504.jpg",
+"name": "Delicate Feather Sn504",
+"avg": "#78736c"
+},
+{
+"file": "midnight-mocha-800x454-1.jpg",
+"name": "Midnight Mocha 1",
+"avg": "#343233"
+},
+{
+"file": "moonlight-mist-800x454-1.jpg",
+"name": "Moonlight Mist 1",
+"avg": "#7f7570"
+},
+{
+"file": "soft_sands_sn501.jpg",
+"name": "Soft Sands Sn501",
+"avg": "#9d9180"
+},
+{
+"file": "starlight_grey_SN503.jpg",
+"name": "Starlight Grey Sn503",
+"avg": "#9f9c90"
+},
+{
+"file": "tweed-seal-tw113.jpg",
+"name": "Tweed Seal",
+"avg": "#42403c"
+},
+{
+"file": "tweed-shadow-tw112.jpg",
+"name": "Tweed Shadow",
+"avg": "#585449"
+},
+{
+"file": "twilight-veil-800x454-1.jpg",
+"name": "Twilight Veil 1",
+"avg": "#878280"
+},
+{
+"file": "warm_glow_SN502.jpg",
+"name": "Warm Glow Sn502",
+"avg": "#8b8070"
+},
+{
+"file": "we517-v2.jpg",
+"name": "V2",
+"avg": "#504d28"
+},
+{
+"file": "we518-v2.jpg",
+"name": "V2",
+"avg": "#4a3929"
+},
+{
+"file": "weather-watching-harvest-dawn-copy-1.jpg",
+"name": "Weather Watching Harvest",
+"avg": "#967e59"
+},
+{
+"file": "weather-watching-harvest-dawn-copy.jpg",
+"name": "Weather Watching Harvest",
+"avg": "#967e59"
+},
+{
+"file": "weather-watching-sandy-path-copy.jpg",
+"name": "Weather Watching Sandy P",
+"avg": "#978260"
+},
+{
+"file": "weather-watching-warm-snug-copy.jpg",
+"name": "Weather Watching Warm Sn",
+"avg": "#9e8469"
+},
+{
+"file": "weather-watching-warming-light-copy.jpg",
+"name": "Weather Watching Warming",
+"avg": "#927146"
+}
+]
+}
