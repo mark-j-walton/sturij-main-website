@@ -103,7 +103,25 @@
   .fchips{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px;max-height:196px;overflow-y:auto;padding-right:2px}
   .fchip{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background-size:cover;cursor:pointer}
   .fchip.on{outline:2px solid var(--bronze);outline-offset:1px}
-  @media(max-width:560px){.strip{height:58px}}
+  /* ===== peel-off post-it tag ===== */
+  .pad{position:fixed;left:16px;bottom:18px;z-index:28;width:126px;height:92px;cursor:grab;font-family:var(--f-mono)}
+  .pad .sheet{position:absolute;inset:0;background:#efe3c4;border-radius:3px;box-shadow:0 5px 14px rgba(0,0,0,.22)}
+  .pad .sheet:first-child{transform:rotate(-3.5deg)}.pad .sheet:nth-child(2){transform:rotate(2.5deg)}
+  .pad .top{position:absolute;inset:0;z-index:2;background:#f6edd6;background-image:linear-gradient(135deg,rgba(255,255,255,.5),rgba(0,0,0,.04));border-radius:3px;box-shadow:0 9px 20px rgba(0,0,0,.26);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;overflow:hidden}
+  .pad .top .wm,.note .wm{background:url('/brand/sturij-mark-white.png') center/contain no-repeat;filter:brightness(0)}
+  .pad .top .wm{width:30px;height:30px;opacity:.32}
+  .pad .top .pl{font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#8a5a2e}
+  .pad:active{cursor:grabbing}
+  .note{position:fixed;z-index:40;width:152px;min-height:98px;padding:12px 13px 11px;background:#f5ecd6;background-image:linear-gradient(135deg,rgba(255,255,255,.55),rgba(0,0,0,.045));border-radius:2px;box-shadow:0 11px 26px rgba(0,0,0,.32);overflow:hidden;font-family:var(--f-mono);transform:rotate(-4deg)}
+  .note .wm{position:absolute;inset:0;background-size:52%;opacity:.09;pointer-events:none}
+  .note .tape{position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(-2deg);width:50px;height:15px;background:rgba(206,184,140,.55);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+  .note .brand{position:relative;font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#9a6a34}
+  .note .nm{position:relative;font-size:13px;font-weight:600;color:#34312a;margin-top:5px;line-height:1.25}
+  .note .meta{position:relative;margin-top:9px;font-size:8px;letter-spacing:.06em;color:#9a938686;color:#9c948a}
+  .note .curl{position:absolute;right:0;bottom:0;width:22px;height:22px;background:linear-gradient(135deg,transparent 46%,rgba(0,0,0,.13) 50%,rgba(255,255,255,.5) 55%);border-bottom-right-radius:2px}
+  .note.drag{pointer-events:none;opacity:.97;transform:rotate(-6deg) scale(1.02)}
+  .note.stuck{cursor:pointer}
+  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}}
 </style>
 </head>
 <body>
@@ -140,6 +158,8 @@
     <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">⟳ change</button></div>
   </div>
 </div>
+
+<div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
 
 <div class="bar" id="bar">
   <button class="p" id="cam" title="Snapshot"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.1"/></svg><span>Photo</span></button>
@@ -201,11 +221,11 @@ function renderRoom(){
   var cols=paints.map(function(p){
     return '<div class="rcol">'
       +'<div class="rceil'+(zones.ceiling?'':' rzoff')+'" '+(zones.ceiling?'style="background:'+p[1]+'"':'')+'></div>'
-      +'<div class="rwall" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'><span class="rnm">'+p[0]+(zones.walls&&wallMode==='wallpaper'?' · paper':'')+'</span></div>'
+      +'<div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'><span class="rnm">'+p[0]+(zones.walls&&wallMode==='wallpaper'?' · paper':'')+'</span></div>'
       +'<div class="rskirt'+(zones.skirting?'':' rzoff')+'" '+(zones.skirting?'style="background:'+p[1]+'"':'')+'></div>'
       +'</div>';
   }).join('');
-  var fl=(zones.floor&&floor)?'<div class="rfloor" style="background-image:url(\''+floor.url+'\')"><span class="rnm">Floor · '+floor.name+'</span></div>':'';
+  var fl=(zones.floor&&floor)?'<div class="rfloor" data-tag data-brand="'+(floor.type==='hard'?'Egger':'Crucial Trading')+'" data-name="'+floor.name+'" style="background-image:url(\''+floor.url+'\')"><span class="rnm">Floor · '+floor.name+'</span></div>':'';
   f.innerHTML='<div class="room"><div class="rcols">'+cols+'</div>'+fl+'</div>'
     +'<div class="roomtools"><button class="rt add" id="paddcol">＋ colour</button><button class="rt" id="pclear">⟳ reset</button></div>';
   el('paddcol').onclick=function(){el('sidePaint').classList.remove('chosen');toast('Tap another colour to compare');};
@@ -222,6 +242,7 @@ function fillSide(kind,it){
   if(kind==='paint'){ addPaint(it); return; }
   sel[kind]=it;
   el('fillBoard').style.backgroundImage="url('/showcase/finishes/"+it.s+".webp')"; el('fillBoard').querySelector('.fn').textContent='Board · '+it.n; el('sideBoard').classList.add('chosen');
+  var fb=el('fillBoard');fb.setAttribute('data-tag','');fb.setAttribute('data-brand','Egger');fb.setAttribute('data-name',it.n);
   updateBar();
 }
 /* ---- Options tab: zones + wall mode + flooring ---- */
@@ -337,6 +358,37 @@ el('bzip').onclick=function(){
     var blob=new Blob([zip(files)],{type:'application/zip'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sturij-pairings.zip';a.click();toast('Zip downloaded');
   });
 };
+
+/* ===== peel-off post-it tag: drag from pad, drop on a finish ===== */
+(function(){
+  var pad=el('pad'); if(!pad) return;
+  function noteHTML(brand,name,meta){return '<div class="wm"></div><span class="tape"></span><div class="brand">'+brand+'</div><div class="nm">'+name+'</div><div class="meta">'+(meta||'Sturij')+'</div><div class="curl"></div>';}
+  function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
+  pad.addEventListener('pointerdown',function(e){
+    e.preventDefault();
+    var note=document.createElement('div'); note.className='note drag';
+    note.innerHTML=noteHTML('Sturij','Drop on a finish…','peel &amp; place');
+    document.body.appendChild(note);
+    function place(cx,cy){note.style.left=(cx-76)+'px';note.style.top=(cy-50)+'px';}
+    place(e.clientX,e.clientY);
+    function mv(ev){place(ev.clientX,ev.clientY);}
+    function up(ev){
+      document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);
+      note.style.display='none';
+      var under=document.elementFromPoint(ev.clientX,ev.clientY); note.remove();
+      var info=tagOf(under);
+      if(info){
+        var s=document.createElement('div'); s.className='note stuck';
+        s.innerHTML=noteHTML(info.brand,info.name,'Sturij · tap ✕');
+        s.style.left=(ev.clientX-76)+'px'; s.style.top=(ev.clientY-50)+'px';
+        s.style.transform='rotate('+(((ev.clientX%9)-4)).toFixed(0)+'deg)';
+        s.onclick=function(){s.remove();};
+        document.body.appendChild(s); toast('Tagged · '+info.name);
+      } else toast('Drop it on a colour, board or floor');
+    }
+    document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
+  });
+})();
 </script>
 </body>
 </html>
