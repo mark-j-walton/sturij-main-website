@@ -183,7 +183,9 @@
   .note .meta{position:relative;margin-top:9px;font-size:8px;letter-spacing:.06em;color:#9a938686;color:#9c948a}
   .note .curl{position:absolute;right:0;bottom:0;width:22px;height:22px;background:linear-gradient(135deg,transparent 46%,rgba(0,0,0,.13) 50%,rgba(255,255,255,.5) 55%);border-bottom-right-radius:2px}
   .note.drag{pointer-events:none;opacity:.97;transform:rotate(-6deg) scale(1.02)}
-  .note.stuck{cursor:pointer}
+  .note.stuck{cursor:grab;touch-action:none}
+  .note.dragging{cursor:grabbing;opacity:.97;box-shadow:0 18px 36px rgba(0,0,0,.4)}
+  .note .nx{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;z-index:3}
   /* ---- Handles drawer + drag-on-canvas ---- */
   .htab{position:fixed;right:0;top:calc(var(--nav) + 84px);z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
   .hdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:36;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
@@ -577,6 +579,14 @@ el('bzip').onclick=function(){
   var pad=el('pad'); if(!pad) return;
   function noteHTML(brand,name,meta){return '<div class="wm"></div><span class="tape"></span><div class="brand">'+brand+'</div><div class="nm">'+name+'</div><div class="meta">'+(meta||'Sturij')+'</div><div class="curl"></div>';}
   function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
+  function makeNoteMovable(s){
+    var xb=s.querySelector('.nx'); if(xb) xb.onclick=function(e){e.stopPropagation();s.remove();};
+    s.addEventListener('pointerdown',function(e){ if(e.target===xb)return; e.stopPropagation();
+      s.classList.add('dragging'); var mx=e.clientX,my=e.clientY,l=parseFloat(s.style.left),t=parseFloat(s.style.top); try{s.setPointerCapture(e.pointerId);}catch(_){}
+      function mv(ev){s.style.left=(l+ev.clientX-mx)+'px';s.style.top=(t+ev.clientY-my)+'px';}
+      function up(){s.classList.remove('dragging');document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up); });
+  }
   pad.addEventListener('pointerdown',function(e){
     e.preventDefault(); try{pad.setPointerCapture(e.pointerId);}catch(_){}
     var note=document.createElement('div'); note.className='note drag';
@@ -592,11 +602,10 @@ el('bzip').onclick=function(){
       var info=tagOf(under);
       if(info){
         var s=document.createElement('div'); s.className='note stuck';
-        s.innerHTML=noteHTML(info.brand,info.name,'Sturij · tap ✕');
+        s.innerHTML=noteHTML(info.brand,info.name,'Sturij')+'<button class="nx" title="Remove">✕</button>';
         s.style.left=(ev.clientX-76)+'px'; s.style.top=(ev.clientY-50)+'px';
         s.style.transform='rotate('+(((ev.clientX%9)-4)).toFixed(0)+'deg)';
-        s.onclick=function(){s.remove();};
-        document.body.appendChild(s); toast('Tagged · '+info.name);
+        document.body.appendChild(s); makeNoteMovable(s); toast('Tagged · '+info.name);
       } else toast('Drop it on a colour, board or floor');
     }
     document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
