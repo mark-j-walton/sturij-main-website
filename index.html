@@ -352,7 +352,7 @@
     <div class="track">
       <div class="stage">
         <div class="mlabel reveal">Made to your millimetre</div>
-        <div class="mosaic" id="mosaic" style="--cols:9;--rows:6;--img:url('/showcase/kitchen-bright.jpg')"></div>
+        <div class="mosaic" id="mosaic" style="--cols:9;--rows:6;--imga:url('/showcase/kitchen-bright.jpg');--imgb:url('/showcase/media-wall-led.jpg');--img:url('/showcase/kitchen-bright.jpg')"></div>
       </div>
     </div>
   </section>
@@ -622,12 +622,18 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
     m.appendChild(d); tiles.push(d); order.push(tiles.length-1);
   }
   for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
-  var track=document.querySelector('#montage .track'), raf=null;
-  function upd(){ raf=null; var rect=track.getBoundingClientRect(), vh=window.innerHeight;
-    var pr=Math.min(1,Math.max(0,(-rect.top)/(rect.height-vh))); var show=Math.ceil(pr*total*1.15);
+  var track=document.querySelector('#montage .track'), raf=null, lastY=window.scrollY, dir='down', curKey='';
+  function setImg(key){ if(key===curKey) return; curKey=key; m.style.setProperty('--img', getComputedStyle(m).getPropertyValue(key==='b'?'--imgb':'--imga').trim()); }
+  function upd(){ raf=null;
+    var y=window.scrollY; if(Math.abs(y-lastY)>3){ dir = y<lastY?'up':'down'; lastY=y; }
+    var rect=track.getBoundingClientRect(), vh=window.innerHeight;
+    var pr=Math.min(1,Math.max(0,(-rect.top)/(rect.height-vh)));
+    setImg(dir==='up'?'b':'a');
+    var prog = dir==='up' ? (1-pr) : pr;         // scroll up grows the other image
+    var show=Math.ceil(prog*total*1.15);
     for(var k=0;k<total;k++) tiles[order[k]].classList.toggle('on',k<show); }
   function onScroll(){ if(!raf) raf=requestAnimationFrame(upd); }
-  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); upd();
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); setImg('a'); upd();
 })();
 
 /* living gallery: random images fade in and out over the tiles */
