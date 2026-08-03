@@ -188,6 +188,17 @@
   .bgchips .bgc{width:20px;height:20px;border-radius:50%;border:1px solid var(--line);cursor:pointer;padding:0}
   .bgchips .bgc.on{outline:2px solid var(--gold);outline-offset:1px}
   .bgc-paper{background:var(--paper)}.bgc-warm{background:var(--paper-warm)}.bgc-navy{background:var(--navy)}.bgc-char{background:var(--band-b)}
+  /* ===== interactive board wall ===== */
+  .boardwall{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:clamp(78px,11vw,132px);grid-auto-flow:dense;gap:clamp(6px,1vw,12px);margin-top:clamp(28px,4vw,44px)}
+  @media(max-width:820px){.boardwall{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:520px){.boardwall{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(92px,30vw,150px)}}
+  .bp{position:relative;overflow:hidden;border-radius:12px;border:1px solid var(--line-soft);box-shadow:var(--sh-card);cursor:pointer;background:#d8d2c8;opacity:0;transform:translateY(22px) scale(.96);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+  .bp.in{opacity:1;transform:none}
+  .bp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s var(--ease-out)}
+  .bp .bl{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:8px 10px;font-family:var(--f-mono);font-weight:600;font-size:10px;letter-spacing:.05em;color:#fff;background:linear-gradient(to top,rgba(16,26,34,.66),transparent);opacity:0;transition:opacity .3s}
+  .bp:hover .bl{opacity:1}
+  .bp.s2{grid-column:span 2}.bp.s3{grid-row:span 2}.bp.s4{grid-column:span 2;grid-row:span 2}
+  @media(prefers-reduced-motion:reduce){.bp{transition:none}}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -428,27 +439,7 @@
       <h2 class="lead reveal" data-html data-edit="sw.h">The material is <span style="color:var(--gold)">the product.</span></h2>
       <p class="sub reveal" data-edit="sw.p">Three thousand Egger decors — real oak grains, walnut, painted colours and stone-look matts. We build the same way in all of them; the finish is where it becomes yours.</p>
       <a class="flink reveal" href="/studio.html" style="display:inline-block;margin-top:18px;font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);border:1px solid var(--navy);border-radius:999px;padding:11px 20px;text-decoration:none">Open the pairing studio →</a>
-      <div class="fgrouplabel reveal">Woods &amp; grains</div>
-      <div class="swgrid">
-        <div class="sw reveal" style="--d:0"><img src="/showcase/finishes/graphite-sheffield-acacia.webp" alt="Graphite Sheffield Acacia finish" loading="lazy"><span>Graphite Sheffield Acacia</span></div>
-        <div class="sw reveal" style="--d:1"><img src="/showcase/finishes/natural-dimaro-walnut.webp" alt="Natural Dimaro Walnut finish" loading="lazy"><span>Natural Dimaro Walnut</span></div>
-        <div class="sw reveal" style="--d:2"><img src="/showcase/finishes/alba-walnut.webp" alt="Alba Walnut finish" loading="lazy"><span>Alba Walnut</span></div>
-        <div class="sw reveal" style="--d:3"><img src="/showcase/finishes/bookmatch-oak.webp" alt="Bookmatch Oak finish" loading="lazy"><span>Bookmatch Oak</span></div>
-        <div class="sw reveal" style="--d:4"><img src="/showcase/finishes/light-natural-rovato-oak.webp" alt="Light Natural Rovato Oak finish" loading="lazy"><span>Light Natural Rovato Oak</span></div>
-        <div class="sw reveal" style="--d:5"><img src="/showcase/finishes/sand-casella-oak.webp" alt="Sand Casella Oak finish" loading="lazy"><span>Sand Casella Oak</span></div>
-        <div class="sw reveal" style="--d:6"><img src="/showcase/finishes/brighton-chestnut.webp" alt="Brighton Chestnut finish" loading="lazy"><span>Brighton Chestnut</span></div>
-        <div class="sw reveal" style="--d:7"><img src="/showcase/finishes/natural-bolivar-wood.webp" alt="Natural Bolivar Wood finish" loading="lazy"><span>Natural Bolivar Wood</span></div>
-        <div class="sw reveal" style="--d:8"><img src="/showcase/finishes/brown-bolivar-wood.webp" alt="Brown Bolivar Wood finish" loading="lazy"><span>Brown Bolivar Wood</span></div>
-      </div>
-      <div class="fgrouplabel reveal">Stone, metal &amp; colour</div>
-      <div class="swgrid">
-        <div class="sw reveal" style="--d:0"><img src="/showcase/finishes/taormina-travertine.webp" alt="Taormina Travertine finish" loading="lazy"><span>Taormina Travertine</span></div>
-        <div class="sw reveal" style="--d:1"><img src="/showcase/finishes/black-ambiance-marble.webp" alt="Black Ambiance Marble finish" loading="lazy"><span>Black Ambiance Marble</span></div>
-        <div class="sw reveal" style="--d:2"><img src="/showcase/finishes/beige-ambiance-granite.webp" alt="Beige Ambiance Granite finish" loading="lazy"><span>Beige Ambiance Granite</span></div>
-        <div class="sw reveal" style="--d:3"><img src="/showcase/finishes/pebble-grey-calcit-stone.webp" alt="Pebble Grey Calcit Stone finish" loading="lazy"><span>Pebble Grey Calcit Stone</span></div>
-        <div class="sw reveal" style="--d:4"><img src="/showcase/finishes/champagne-crossed-metal.webp" alt="Champagne Crossed Metal finish" loading="lazy"><span>Champagne Crossed Metal</span></div>
-        <div class="sw reveal" style="--d:5"><img src="/showcase/finishes/estate-green.webp" alt="Estate Green finish" loading="lazy"><span>Estate Green</span></div>
-      </div>
+      <div class="boardwall" id="boardwall"></div>
     </div>
   </section>
 
@@ -682,6 +673,32 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
     setTimeout(tick, 1500+Math.random()*1800);
   }
   setTimeout(tick, 1800);
+})();
+
+/* interactive board wall: fade-in, click to swap + shift neighbours (FLIP) */
+(function(){
+  var wall=document.getElementById('boardwall'); if(!wall) return;
+  var boards=[{"s": "alba-walnut", "n": "Alba Walnut"}, {"s": "beige-ambiance-granite", "n": "Beige Ambiance Granite"}, {"s": "black-ambiance-granite", "n": "Black Ambiance Granite"}, {"s": "black-ambiance-marble", "n": "Black Ambiance Marble"}, {"s": "bookmatch-oak", "n": "Bookmatch Oak"}, {"s": "brighton-chestnut", "n": "Brighton Chestnut"}, {"s": "brown-bolivar-wood", "n": "Brown Bolivar Wood"}, {"s": "caramel-beige", "n": "Caramel Beige"}, {"s": "cassis", "n": "Cassis"}, {"s": "champagne-crossed-metal", "n": "Champagne Crossed Metal"}, {"s": "dark-berry", "n": "Dark Berry"}, {"s": "deep-blue", "n": "Deep Blue"}, {"s": "estate-green", "n": "Estate Green"}, {"s": "graphite-sheffield-acacia", "n": "Graphite Sheffield Acacia"}, {"s": "havanna-grey", "n": "Havanna Grey"}, {"s": "light-natural-rovato-oak", "n": "Light Natural Rovato Oak"}, {"s": "monument-grey", "n": "Monument Grey"}, {"s": "natural-bolivar-wood", "n": "Natural Bolivar Wood"}, {"s": "natural-dimaro-walnut", "n": "Natural Dimaro Walnut"}, {"s": "pebble-grey-calcit-stone", "n": "Pebble Grey Calcit Stone"}, {"s": "reed-green", "n": "Reed Green"}, {"s": "sand-beige-calcit-stone", "n": "Sand Beige Calcit Stone"}, {"s": "sand-casella-oak", "n": "Sand Casella Oak"}, {"s": "soft-beige", "n": "Soft Beige"}, {"s": "taormina-travertine", "n": "Taormina Travertine"}];
+  var sizes=['s4','','s2','s3','','s2','','s3','s2','','s2','s3','','s4','','s2','','s3'];
+  var used=boards.slice(); for(var i=used.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=used[i];used[i]=used[j];used[j]=t;}
+  var panels=[];
+  for(var i=0;i<sizes.length;i++){var b=used[i%used.length];var d=document.createElement('div');d.className='bp '+sizes[i];d.style.transitionDelay=(i*40)+'ms';
+    d.innerHTML='<img src="/showcase/finishes/'+b.s+'.webp" alt="'+b.n+'"><span class="bl">'+b.n+'</span>';d._b=b;wall.appendChild(d);panels.push(d);}
+  var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  panels.forEach(function(p){io.observe(p);});
+  function flip(mut){var first=panels.map(function(el){return el.getBoundingClientRect();});mut();
+    panels.forEach(function(el,i){var l=el.getBoundingClientRect();var dx=first[i].left-l.left,dy=first[i].top-l.top,sx=l.width?first[i].width/l.width:1,sy=l.height?first[i].height/l.height:1;
+      if(dx||dy||Math.abs(sx-1)>.01||Math.abs(sy-1)>.01){el.style.transition='none';el.style.transformOrigin='top left';el.style.transform='translate('+dx+'px,'+dy+'px) scale('+sx+','+sy+')';el.getBoundingClientRect();
+        requestAnimationFrame(function(){el.style.transition='transform .55s cubic-bezier(.2,.7,.3,1)';el.style.transform='';});}});}
+  var SZ=['','s2','s3','s4'];
+  function cycle(el){var cur='';SZ.forEach(function(c){if(c&&el.classList.contains(c))cur=c;});var ni=(SZ.indexOf(cur)+1)%SZ.length;SZ.forEach(function(c){if(c)el.classList.remove(c);});if(SZ[ni])el.classList.add(SZ[ni]);}
+  wall.addEventListener('click',function(e){var el=e.target.closest('.bp');if(!el)return;var idx=panels.indexOf(el);
+    var nb;do{nb=boards[Math.floor(Math.random()*boards.length)];}while(nb.s===el._b.s);
+    var img=el.querySelector('img');img.style.opacity='0';
+    setTimeout(function(){img.onload=function(){img.style.opacity='1';};img.onerror=function(){img.style.opacity='1';};img.src='/showcase/finishes/'+nb.s+'.webp';img.alt=nb.n;el.querySelector('.bl').textContent=nb.n;el._b=nb;},240);
+    var neigh=[panels[idx-1],panels[idx+1],panels[idx+2]].filter(Boolean).sort(function(){return Math.random()-.5;}).slice(0,1+Math.floor(Math.random()*2));
+    flip(function(){cycle(el);neigh.forEach(cycle);});
+  });
 })();
 </script>
 
