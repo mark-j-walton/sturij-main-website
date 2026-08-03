@@ -516,9 +516,11 @@ el('bzip').onclick=function(){
 (function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
-  var props={panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
+  var PVER=3;
+  var props={ver:PVER,panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
   MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
-  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv){if(sv.panelW)Object.assign(props.panelW,sv.panelW);Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
+  // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
+  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv&&sv.ver===PVER){if(sv.panelW)Object.assign(props.panelW,sv.panelW);Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
   function panelCols(){var order=PANELS.map(function(p){return p.k;}),sum=0;for(var i=0;i<order.length-1;i++)sum+=(props.panelW[order[i]]||0);props.panelW[order[order.length-1]]=Math.max(6,100-sum);return order.map(function(k){return props.panelW[k]+'%';}).join(' ');}
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
