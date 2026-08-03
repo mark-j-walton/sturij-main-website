@@ -43,6 +43,12 @@
   .side.active .colhint{pointer-events:auto;cursor:pointer;mix-blend-mode:normal;color:#fff;background:rgba(26,23,20,.42);border-radius:0 0 10px 10px;padding:6px 12px;left:50%;right:auto;transform:translateX(-50%);width:max-content;max-width:88%}
   .side.active .colhint::after{content:' ✕';opacity:.7;font-size:9px}
   .msec label.future{opacity:.5}.future-note{font:600 8px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin:11px 0 3px;opacity:.7}
+  /* Egger colour banding — dot filter on the open board panels */
+  .cbands{position:absolute;top:30px;left:0;right:0;z-index:6;display:none;flex-wrap:wrap;gap:5px;justify-content:center;align-items:center;padding:6px 8px;background:linear-gradient(rgba(250,248,242,.94),rgba(250,248,242,0));pointer-events:none}
+  .side.active .cbands{display:flex}
+  .cband{pointer-events:auto;width:19px;height:19px;border-radius:50%;border:2px solid #fff;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3);padding:0}
+  .cband.on{border-color:var(--gold);transform:scale(1.12)}
+  .cband.all{pointer-events:auto;width:auto;height:19px;border-radius:10px;padding:0 9px;font:600 8px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:#fff;border-color:#fff}
   .side .filled .fn{display:none}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   .change{position:absolute;top:14px;right:14px;font-size:14px;line-height:1;color:rgba(255,255,255,.6);background:rgba(26,23,20,.2);border:1px solid rgba(250,248,242,.22);border-radius:999px;padding:5px 8px;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
@@ -351,17 +357,44 @@ function el(id){return document.getElementById(id)}
 function slug(s){return s.replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'')}
 function toast(t){var e=el('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('on');},1400);}
 
+/* Egger colour banding — one of Egger's decor colour families per board decor */
+var BAND_COLOURS={Brown:'#6f4a2b',Beige:'#cdb996',Grey:'#8d9094',Black:'#2b2b2b',White:'#efeae0',Blue:'#4f6b86',Green:'#5f7356',Red:'#9e4740',Orange:'#d98a3d',Yellow:'#e3c766',Pink:'#d6a0a8',Violet:'#6b5b86','Not defined':'#b3ada1'};
+var BAND_ORDER=['Brown','Beige','Grey','Black','White','Blue','Green','Red','Orange','Yellow','Pink','Violet','Not defined'];
+function boardBand(b){var n=(b.n||'').toLowerCase();
+  if(/black/.test(n))return'Black';
+  if(/grey|gray|graphite|monument|pebble/.test(n))return'Grey';
+  if(/blue/.test(n))return'Blue';
+  if(/green|reed/.test(n))return'Green';
+  if(/berry|cassis|\bred\b|rosso|bordeaux/.test(n))return'Red';
+  if(/walnut|oak|chestnut|acacia|bolivar|wood|rovato|casella|bookmatch|alba|dimaro/.test(n))return'Brown';
+  if(/beige|sand|caramel|champagne|travertine|soft|cream|natural/.test(n))return'Beige';
+  return'Not defined';
+}
+function addBandFilter(sideEl, all, build){
+  var seen={}; all.forEach(function(b){var bd=boardBand(b);seen[bd]=(seen[bd]||0)+1;});
+  var bar=document.createElement('div'); bar.className='cbands';
+  var allBtn=document.createElement('button'); allBtn.className='cband all on'; allBtn.textContent='All'; bar.appendChild(allBtn);
+  var chips=[];
+  BAND_ORDER.forEach(function(bd){ if(!seen[bd])return;
+    var c=document.createElement('button'); c.className='cband'; c.style.background=BAND_COLOURS[bd]||'#ccc'; c.title=bd+' ('+seen[bd]+')'; c.setAttribute('data-band',bd);
+    bar.appendChild(c); chips.push(c);
+  });
+  function setActive(t){ allBtn.classList.toggle('on',t===allBtn); chips.forEach(function(x){x.classList.toggle('on',x===t);}); }
+  allBtn.onclick=function(e){e.stopPropagation();setActive(allBtn);build(all);};
+  chips.forEach(function(c){ c.onclick=function(e){e.stopPropagation();setActive(c);var bd=c.getAttribute('data-band');build(all.filter(function(b){return boardBand(b)===bd;}));}; });
+  sideEl.appendChild(bar);
+}
 function rail(sideEl, railEl, kind, items, paint){
   var track=railEl.querySelector('.track'), SH=(window.innerWidth<560?58:66);
+  var all=items.slice(), cur=all, H=all.length*SH, y=0, dragging=false, lastY=0, vy=0, moved=0, raf=null;
   function strip(it,i){
     var bg = paint ? 'background:'+it[1] : "background-image:url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
     var nm = paint ? it[0] : it.n;
     var brand = paint ? 'Farrow &amp; Ball' : (kind==='worktop'?'Omega Stone':'Egger');
     return '<div class="strip" data-i="'+i+'" data-tag data-brand="'+brand+'" data-name="'+nm+'" style="'+bg+'"><span class="lab"><span class="nm">'+nm+'</span><span class="add">＋ Add swatch</span></span></div>';
   }
-  track.innerHTML=items.map(function(it,i){return strip(it,i);}).concat(items.map(function(it,i){return strip(it,i);})).join('');
-  var H=items.length*SH, y=0, dragging=false, lastY=0, vy=0, moved=0, raf=null;
   function apply(){var w=((y%H)+H)%H;track.style.transform='translateY('+(-w)+'px)';}
+  function build(list){cur=(list&&list.length)?list:all;H=cur.length*SH;track.innerHTML=cur.map(strip).concat(cur.map(strip)).join('');y=0;apply();}
   railEl.addEventListener('wheel',function(e){e.preventDefault();y+=e.deltaY;apply();},{passive:false});
   railEl.addEventListener('pointerdown',function(e){dragging=true;lastY=e.clientY;vy=0;moved=0;if(raf)cancelAnimationFrame(raf);railEl.setPointerCapture(e.pointerId);railEl.classList.add('grabbing');});
   railEl.addEventListener('pointermove',function(e){if(!dragging)return;var dy=e.clientY-lastY;lastY=e.clientY;vy=dy;moved+=Math.abs(dy);y-=dy;apply();});
@@ -372,10 +405,12 @@ function rail(sideEl, railEl, kind, items, paint){
   function tap(x,yy){
     var t=document.elementFromPoint(x,yy); if(!t)return;
     var addBtn=t.closest('.add'); var st=t.closest('.strip'); if(!st)return;
-    var i=parseInt(st.getAttribute('data-i'))%items.length; var it=items[i];
+    var i=parseInt(st.getAttribute('data-i'))%cur.length; var it=cur[i];
     if(addBtn){ addSwatch(kind,it); var lab=st.querySelector('.lab'); lab.classList.add('added'); setTimeout(function(){lab.classList.remove('added');},420); }
     else { fillSide(kind,it); }
   }
+  build(all);
+  if(kind==='board'||kind==='doors'||kind==='carcass') addBandFilter(sideEl, all, build);
 }
 
 var sel={paint:null,board:null,doors:null,carcass:null,worktop:null};
