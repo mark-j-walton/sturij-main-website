@@ -117,6 +117,26 @@
   #imgctl button{flex:1;font-family:var(--f-sans);font-weight:600;font-size:12.5px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink-body);padding:8px;cursor:pointer;min-height:34px}
   #imgctl button.prim{background:var(--navy);border-color:var(--navy);color:var(--paper)}
   #imgctl .hint{font-family:var(--f-mono);font-size:10px;letter-spacing:.03em;color:var(--ink-faint);line-height:1.5}
+  /* ===== range features (alternating slide-in) ===== */
+  .reveal-l{opacity:0;transform:translateX(-46px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+  .reveal-r{opacity:0;transform:translateX(46px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+  .reveal-l.in,.reveal-r.in{opacity:1;transform:none}
+  .ranges{position:relative;z-index:5;background:var(--paper)}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,60px);align-items:center;max-width:1180px;margin:0 auto;padding:clamp(38px,6vw,84px) clamp(18px,5vw,40px);scroll-margin-top:var(--nav)}
+  .feat.rev .feat-img{order:2}
+  .feat-img{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;box-shadow:var(--sh-card);background:linear-gradient(150deg,#2a3f4d,#1a2833)}
+  .feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--ox,50%) var(--oy,50%);transform:scale(var(--sc,1));transform-origin:center;display:block}
+  .feat-img::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(16,26,34,var(--ov,0));pointer-events:none}
+  .feat-txt h2{font-size:clamp(26px,3.6vw,40px);line-height:1.1;margin:12px 0 0;text-wrap:balance}
+  .feat-txt p{color:var(--ink-muted);font-size:clamp(15px,1.6vw,17.5px);margin:16px 0 0;max-width:46ch;line-height:1.6}
+  .feat-txt .flink{display:inline-block;margin-top:20px;font-family:var(--f-mono);font-weight:600;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);text-decoration:none}
+  .feat-txt .flink:hover{color:var(--gold)}
+  @media(max-width:760px){.feat{grid-template-columns:1fr;gap:20px}.feat.rev .feat-img{order:0}}
+  /* text-only breather band */
+  .breather{position:relative;z-index:5;background:var(--band-b);color:var(--paper)}
+  .breather .wrap{text-align:center;padding:clamp(46px,7vw,92px) clamp(18px,5vw,40px)}
+  .breather h2{color:var(--paper);font-size:clamp(24px,3.4vw,38px);line-height:1.16;max-width:24ch;margin:12px auto 0;text-wrap:balance}
+  .breather .kicker{color:var(--gold)}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -167,8 +187,10 @@
 <header class="nav">
   <a class="brand" href="#top">sturij<span class="dot">.</span></a>
   <nav class="navlinks">
-    <a class="hideM" href="#make">Why Sturij</a>
-    <a class="hideM" href="#work">Our work</a>
+    <a class="hideM" href="#wardrobes">Wardrobes</a>
+    <a class="hideM" href="#media">Media walls</a>
+    <a class="hideM" href="#kitchens">Kitchens</a>
+    <a class="hideM" href="#offices">Home offices</a>
     <a class="cta" href="#enquire">Book a visit</a>
   </nav>
 </header>
@@ -226,6 +248,56 @@
       </div>
     </article>
 
+  </section>
+
+  <!-- range features: alternating image / text, slide in from the sides -->
+  <section class="ranges">
+    <div class="feat" id="wardrobes">
+      <div class="feat-img imgph reveal-l" data-img="feat.ward"><img src="/showcase/wardrobe-cream-straight.jpg" alt="Fitted three-door wardrobe"></div>
+      <div class="feat-txt reveal-r">
+        <div class="kicker">Wardrobes &amp; bedrooms</div>
+        <h2 data-edit="fward.h" data-html>Wardrobes that fit <span style="color:var(--gold)">like they grew there.</span></h2>
+        <p data-edit="fward.p">Fitted, corner returns and walk-ins — hinged or mirrored, planned around what you actually own. Measured to the millimetre, so there's no filler and no gap.</p>
+        <a class="flink" href="#enquire">Book a design visit →</a>
+      </div>
+    </div>
+    <div class="feat rev" id="media">
+      <div class="feat-img imgph reveal-r" data-img="feat.media"><img src="/showcase/media-wall-led.jpg" alt="LED-backlit fitted media wall"></div>
+      <div class="feat-txt reveal-l">
+        <div class="kicker">Living rooms</div>
+        <h2 data-edit="fmedia.h">Media walls, built as one piece.</h2>
+        <p data-edit="fmedia.p">A floating base that takes real weight, shelving that lines through, LED accents and a cable spine so the wall stays clean — not a flat-pack tower.</p>
+        <a class="flink" href="#enquire">Book a design visit →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="breather">
+    <div class="wrap">
+      <div class="kicker reveal">The Sturij way</div>
+      <h2 class="reveal" data-edit="breath.h">Every millimetre of your room — priced from the cutting list, and fitted by the people who built it.</h2>
+    </div>
+  </section>
+
+  <section class="ranges">
+    <div class="feat" id="kitchens">
+      <div class="feat-img imgph reveal-l" data-img="feat.kitchen"><img src="/showcase/kitchen-bright.jpg" alt="Bright handleless fitted kitchen"></div>
+      <div class="feat-txt reveal-r">
+        <div class="kicker">Kitchens</div>
+        <h2 data-edit="fkit.h">Handleless kitchens, made to your walls.</h2>
+        <p data-edit="fkit.p">Quartz islands, integrated appliances and run-through worktops — designed around how you cook, and finished in the decor that's yours.</p>
+        <a class="flink" href="#enquire">Book a design visit →</a>
+      </div>
+    </div>
+    <div class="feat rev" id="offices">
+      <div class="feat-img imgph reveal-r" data-img="feat.office"><img src="/showcase/office-desk-clean.jpg" alt="Fitted home-office desk"></div>
+      <div class="feat-txt reveal-l">
+        <div class="kicker">Home offices</div>
+        <h2 data-edit="foff.h">Home offices that mean business.</h2>
+        <p data-edit="foff.p">A desk at the right height, storage that swallows the paperwork and a back panel that hides every wire — built into the alcoves a bought desk never fits.</p>
+        <a class="flink" href="#enquire">Book a design visit →</a>
+      </div>
+    </div>
   </section>
 
   <div id="sections">
@@ -332,7 +404,7 @@ let PASS=null, imgTarget=null;
 
 /* ---- reveal on scroll ---- */
 (function(){
-  var rev=[].slice.call(document.querySelectorAll('.reveal'));
+  var rev=[].slice.call(document.querySelectorAll('.reveal,.reveal-l,.reveal-r'));
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.18,rootMargin:'0px 0px -6% 0px'});
     rev.forEach(function(e){io.observe(e);});
