@@ -14,7 +14,7 @@
   .top .b{font-family:var(--f-serif);font-size:21px;text-decoration:none;color:var(--paper)}.top .b i{color:var(--gold);font-style:normal}
   .top .t{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.66)}
   .top a.x{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);border-radius:999px;padding:6px 13px}
-  .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:34% 26% 14% 26%}
+  .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30% 18% 20% 12% 20%}
   .side{position:relative;overflow:hidden}
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
@@ -195,6 +195,11 @@
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">⟳ change</button></div>
   </div>
+  <div class="side board" id="sideWorktop">
+    <div class="colhint">Worktop · tap</div>
+    <div class="rail" id="railWorktop"><div class="track"></div></div>
+    <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">⟳ change</button></div>
+  </div>
   <div class="side board" id="sideDoors">
     <div class="colhint">Doors · drag · tap to fill</div>
     <div class="rail" id="railDoors"><div class="track"></div></div>
@@ -255,9 +260,9 @@ function toast(t){var e=el('toast');e.textContent=t;e.classList.add('on');clearT
 function rail(sideEl, railEl, kind, items, paint){
   var track=railEl.querySelector('.track'), SH=(window.innerWidth<560?58:66);
   function strip(it,i){
-    var bg = paint ? 'background:'+it[1] : "background-image:url('/showcase/finishes/"+it.s+".webp')";
+    var bg = paint ? 'background:'+it[1] : "background-image:url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
     var nm = paint ? it[0] : it.n;
-    var brand = paint ? 'Farrow &amp; Ball' : 'Egger';
+    var brand = paint ? 'Farrow &amp; Ball' : (kind==='worktop'?'Omega Stone':'Egger');
     return '<div class="strip" data-i="'+i+'" data-tag data-brand="'+brand+'" data-name="'+nm+'" style="'+bg+'"><span class="lab"><span class="nm">'+nm+'</span><span class="add">＋ Add swatch</span></span></div>';
   }
   track.innerHTML=items.map(function(it,i){return strip(it,i);}).concat(items.map(function(it,i){return strip(it,i);})).join('');
@@ -279,7 +284,7 @@ function rail(sideEl, railEl, kind, items, paint){
   }
 }
 
-var sel={paint:null,board:null,doors:null,carcass:null};
+var sel={paint:null,board:null,doors:null,carcass:null,worktop:null};
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 /* ---- room: multi-colour paint side + ceiling/walls/skirting zones ---- */
 var paints=[], zones={ceiling:false,walls:true,skirting:false,floor:false};
@@ -315,11 +320,11 @@ function addPaint(it){
 function fillSide(kind,it){
   if(kind==='paint'){ addPaint(it); return; }
   sel[kind]=it;
-  var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind));
-  fillEl.style.backgroundImage="url('/showcase/finishes/"+it.s+".webp')";
+  var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
+  fillEl.style.backgroundImage="url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
   fillEl.querySelector('.fn').textContent=label+' · '+it.n;
   el('side'+cap(kind)).classList.add('chosen');
-  fillEl.setAttribute('data-tag','');fillEl.setAttribute('data-brand','Egger');fillEl.setAttribute('data-name',it.n);
+  fillEl.setAttribute('data-tag','');fillEl.setAttribute('data-brand',brand);fillEl.setAttribute('data-name',it.n);
   updateBar();
 }
 /* ---- Options: walls switch + zones + floor bottom rail ---- */
@@ -369,6 +374,8 @@ rail(el('sidePaint'), el('railPaint'), 'paint', FB, true);
 rail(el('sideDoors'), el('railDoors'), 'doors', BOARDS, false);
 rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
 rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false);
+var WORKTOPS=[];
+fetch('/showcase/worktops/worktops.json').then(function(r){return r.json();}).then(function(m){WORKTOPS=m.map(function(w){return {s:w.file,n:w.name,img:'/showcase/worktops/'+w.file};});rail(el('sideWorktop'),el('railWorktop'),'worktop',WORKTOPS,false);}).catch(function(){});
 
 var HANDLES=[
  {n:'Bar handle',svg:'<svg width="360" height="60"><rect x="6" y="24" width="348" height="12" rx="6" fill="#2b2b2b"/><rect x="30" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/><rect x="318" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/></svg>'},
@@ -499,9 +506,9 @@ el('bzip').onclick=function(){
 })();
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
-  var PANELS=[{k:'wall',label:'Wall'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
+  var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
-  var props={panelW:{wall:34,doors:26,carcass:14,boards:26},mats:{},brands:{}};
+  var props={panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
   MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
   try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv){if(sv.panelW)Object.assign(props.panelW,sv.panelW);Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
@@ -511,7 +518,7 @@ el('bzip').onclick=function(){
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
-    showPanel('sideDoors',props.mats.doors!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
+    showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideDoors',props.mats.doors!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
   }
   function buildGrid(){var box=el('pgrid');box.innerHTML='';PANELS.forEach(function(p,i){var last=(i===PANELS.length-1);var cell=document.createElement('div');cell.className='gcell';cell.innerHTML='<label>'+p.label+(last?' · fills':' %')+'</label><input type="number" data-pk="'+p.k+'" value="'+(props.panelW[p.k]||0)+'" '+(last?'disabled':'min="6" max="80"')+'>';box.appendChild(cell);});
     [].forEach.call(box.querySelectorAll('input:not([disabled])'),function(inp){inp.oninput=function(){var sum=0;[].forEach.call(box.querySelectorAll('input:not([disabled])'),function(x){sum+=parseInt(x.value)||0;});var lastInp=box.querySelector('input[disabled]');if(lastInp)lastInp.value=Math.max(6,100-sum);};});}
