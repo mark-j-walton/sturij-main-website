@@ -14,7 +14,7 @@
   .top .b{font-family:var(--f-serif);font-size:21px;text-decoration:none;color:var(--paper)}.top .b i{color:var(--gold);font-style:normal}
   .top .t{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.66)}
   .top a.x{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);border-radius:999px;padding:6px 13px}
-  .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:1fr 1fr}
+  .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:34% 26% 14% 26%}
   .side{position:relative;overflow:hidden}
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
@@ -195,6 +195,16 @@
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">⟳ change</button></div>
   </div>
+  <div class="side board" id="sideDoors">
+    <div class="colhint">Doors · drag · tap to fill</div>
+    <div class="rail" id="railDoors"><div class="track"></div></div>
+    <div class="filled" id="fillDoors"><span class="fn"></span><button class="change" data-k="doors">⟳ change</button></div>
+  </div>
+  <div class="side board" id="sideCarcass">
+    <div class="colhint">Carcass · tap</div>
+    <div class="rail" id="railCarcass"><div class="track"></div></div>
+    <div class="filled" id="fillCarcass"><span class="fn"></span><button class="change" data-k="carcass">⟳ change</button></div>
+  </div>
   <div class="side board" id="sideBoard">
     <div class="colhint">Boards · drag · tap to fill</div>
     <div class="rail" id="railBoard"><div class="track"></div></div>
@@ -228,12 +238,8 @@
   <div class="mcard">
     <div class="mhead"><h3>Studio properties</h3><button id="mx">✕</button></div>
     <div class="msec">
-      <h4>Layout · 50/50 split</h4>
-      <div class="split"><span>Wall</span><input type="range" id="splitr" min="20" max="80" value="50"><span>Wood</span></div>
-      <div class="grid2">
-        <div class="gcell"><label>Wall %</label><input type="number" id="cw0" value="50" min="10" max="90"></div>
-        <div class="gcell"><label>Wood % · fills</label><input type="number" id="cw1" value="50" disabled></div>
-      </div>
+      <h4>Layout · panel widths %</h4>
+      <div class="grid2" id="pgrid"></div>
     </div>
     <div class="msec"><h4>Materials &amp; brands</h4><div id="matlist"></div></div>
     <div class="mfoot"><button id="msave">Save</button></div>
@@ -273,7 +279,8 @@ function rail(sideEl, railEl, kind, items, paint){
   }
 }
 
-var sel={paint:null,board:null};
+var sel={paint:null,board:null,doors:null,carcass:null};
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 /* ---- room: multi-colour paint side + ceiling/walls/skirting zones ---- */
 var paints=[], zones={ceiling:false,walls:true,skirting:false,floor:false};
 var wallMode='paint', floorType='hard', floor=null, paintTarget='wall', ceilCol=FB[0], skirtCol=FB[0];
@@ -308,8 +315,11 @@ function addPaint(it){
 function fillSide(kind,it){
   if(kind==='paint'){ addPaint(it); return; }
   sel[kind]=it;
-  el('fillBoard').style.backgroundImage="url('/showcase/finishes/"+it.s+".webp')"; el('fillBoard').querySelector('.fn').textContent='Board · '+it.n; el('sideBoard').classList.add('chosen');
-  var fb=el('fillBoard');fb.setAttribute('data-tag','');fb.setAttribute('data-brand','Egger');fb.setAttribute('data-name',it.n);
+  var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind));
+  fillEl.style.backgroundImage="url('/showcase/finishes/"+it.s+".webp')";
+  fillEl.querySelector('.fn').textContent=label+' · '+it.n;
+  el('side'+cap(kind)).classList.add('chosen');
+  fillEl.setAttribute('data-tag','');fillEl.setAttribute('data-brand','Egger');fillEl.setAttribute('data-name',it.n);
   updateBar();
 }
 /* ---- Options: walls switch + zones + floor bottom rail ---- */
@@ -351,11 +361,13 @@ el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
 /* Post-it tags on/off */
 el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
 syncSub();
-[].forEach.call(document.querySelectorAll('.change'),function(b){b.onclick=function(){var k=b.getAttribute('data-k');(k==='paint'?el('sidePaint'):el('sideBoard')).classList.remove('chosen');sel[k]=null;if(k==='paint')paints=[];updateBar();el('suggest').classList.remove('show','on');};});
+[].forEach.call(document.querySelectorAll('.change'),function(b){b.onclick=function(){var k=b.getAttribute('data-k');var side=(k==='paint'?el('sidePaint'):el('side'+cap(k)));if(side)side.classList.remove('chosen');sel[k]=null;if(k==='paint')paints=[];updateBar();el('suggest').classList.remove('show','on');};});
 function bothChosen(){return sel.paint&&sel.board;}
 function updateBar(){ el('bar').classList.toggle('on',!!bothChosen()); if(bothChosen()) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
 
 rail(el('sidePaint'), el('railPaint'), 'paint', FB, true);
+rail(el('sideDoors'), el('railDoors'), 'doors', BOARDS, false);
+rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
 rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false);
 
 var HANDLES=[
@@ -487,26 +499,30 @@ el('bzip').onclick=function(){
 })();
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
-  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Wood / boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
-  var props={split:50,mats:{},brands:{}};
+  var PANELS=[{k:'wall',label:'Wall'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
+  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
+  var props={panelW:{wall:34,doors:26,carcass:14,boards:26},mats:{},brands:{}};
   MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
-  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv){if(sv.split)props.split=sv.split;Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
+  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv){if(sv.panelW)Object.assign(props.panelW,sv.panelW);Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
+  function panelCols(){var order=PANELS.map(function(p){return p.k;}),sum=0;for(var i=0;i<order.length-1;i++)sum+=(props.panelW[order[i]]||0);props.panelW[order[order.length-1]]=Math.max(6,100-sum);return order.map(function(k){return props.panelW[k]+'%';}).join(' ');}
+  function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
   function applyProps(){
-    var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=props.split+'% '+(100-props.split)+'%';
+    var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
-    if(el('sideBoard'))el('sideBoard').style.display=props.mats.wood?'':'none';
+    showPanel('sideDoors',props.mats.doors!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
   }
+  function buildGrid(){var box=el('pgrid');box.innerHTML='';PANELS.forEach(function(p,i){var last=(i===PANELS.length-1);var cell=document.createElement('div');cell.className='gcell';cell.innerHTML='<label>'+p.label+(last?' · fills':' %')+'</label><input type="number" data-pk="'+p.k+'" value="'+(props.panelW[p.k]||0)+'" '+(last?'disabled':'min="6" max="80"')+'>';box.appendChild(cell);});
+    [].forEach.call(box.querySelectorAll('input:not([disabled])'),function(inp){inp.oninput=function(){var sum=0;[].forEach.call(box.querySelectorAll('input:not([disabled])'),function(x){sum+=parseInt(x.value)||0;});var lastInp=box.querySelector('input[disabled]');if(lastInp)lastInp.value=Math.max(6,100-sum);};});}
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
     row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});}
-  el('cog').onclick=function(){el('splitr').value=props.split;el('cw0').value=props.split;el('cw1').value=100-props.split;buildMat();el('modal').classList.add('on');};
+  el('cog').onclick=function(){buildGrid();buildMat();el('modal').classList.add('on');};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
   el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
-  el('splitr').oninput=function(){el('cw0').value=this.value;el('cw1').value=100-this.value;};
-  el('cw0').oninput=function(){var v=Math.max(10,Math.min(90,parseInt(this.value)||50));el('splitr').value=v;el('cw1').value=100-v;};
-  el('msave').onclick=function(){props.split=parseInt(el('splitr').value)||50;
+  el('msave').onclick=function(){
+    [].forEach.call(el('pgrid').querySelectorAll('input[data-pk]'),function(inp){if(!inp.disabled)props.panelW[inp.getAttribute('data-pk')]=Math.max(6,Math.min(80,parseInt(inp.value)||10));});
     [].forEach.call(el('matlist').querySelectorAll('[data-mat]'),function(c){props.mats[c.getAttribute('data-mat')]=c.checked;});
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
     try{localStorage.setItem('sturij-studio-props',JSON.stringify(props));}catch(_){}
