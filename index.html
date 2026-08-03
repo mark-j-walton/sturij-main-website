@@ -50,6 +50,10 @@
   /* ===== sticky stack ===== */
   .stack{position:relative}
   .panel{position:sticky;top:var(--nav);height:calc(100svh - var(--nav));overflow:hidden;display:flex;align-items:flex-end}
+  .panel[data-vapos="start"]{align-items:flex-start}
+  .panel[data-vapos="start"] .cap{padding-top:clamp(84px,11vh,130px)}
+  .panel[data-vapos="center"]{align-items:center}
+  .panel[data-vapos="center"] .cap{padding-bottom:0}
   .panel .img{position:absolute;inset:0;z-index:0}
   .panel .img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--ox,50%) var(--oy,50%);transform:scale(var(--sc,1));transform-origin:center;display:block}
   .panel .img::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(16,26,34,var(--ov,0));pointer-events:none}
@@ -198,7 +202,7 @@
 <main id="top">
   <section class="stack">
 
-    <article class="panel p-hero">
+    <article class="panel p-hero" data-va="hero">
       <div class="img imgph" data-img="img.hero"><img src="/showcase/kitchen-bright.jpg" alt="Bright handleless fitted kitchen with island"></div><div class="scrim"></div>
       <div class="slot">Image slot · <b>2400 × 1500</b> · 16:10</div>
       <div class="cap">
@@ -208,7 +212,7 @@
       </div>
     </article>
 
-    <article class="panel p-ward">
+    <article class="panel p-ward" data-va="ward">
       <div class="img imgph" data-img="img.ward"><img src="/showcase/wardrobe-cream-straight.jpg" alt="Fitted three-door wardrobe, straight elevation"></div><div class="scrim"></div>
       <div class="slot">Image slot · <b>2400 × 1500</b> · 16:10</div>
       <div class="cap">
@@ -218,7 +222,7 @@
       </div>
     </article>
 
-    <article class="panel p-media">
+    <article class="panel p-media" data-va="media">
       <div class="img imgph" data-img="img.media"><img src="/showcase/media-wall-led.jpg" alt="LED-backlit fitted media wall with display shelving"></div><div class="scrim"></div>
       <div class="slot">Image slot · <b>2400 × 1500</b> · 16:10</div>
       <div class="cap">
@@ -228,7 +232,7 @@
       </div>
     </article>
 
-    <article class="panel p-office">
+    <article class="panel p-office" data-va="office">
       <div class="img imgph" data-img="img.office"><img src="/showcase/office-desk-clean.jpg" alt="Fitted home-office desk and cabinet under the eaves"></div><div class="scrim"></div>
       <div class="slot">Image slot · <b>2400 × 1500</b> · 16:10</div>
       <div class="cap">
@@ -238,7 +242,7 @@
       </div>
     </article>
 
-    <article class="panel p-mat">
+    <article class="panel p-mat" data-va="mat">
       <div class="img imgph" data-img="img.mat"><img src="/showcase/wardrobe-open-shelves.jpg" alt="Oak-lined wardrobe interior — rails and shelving"></div><div class="scrim"></div>
       <div class="slot">Image slot · <b>2400 × 1500</b> · 16:10</div>
       <div class="cap">
@@ -394,6 +398,7 @@
   <label>Overlay <input id="ic-ov" type="range" min="0" max="80" step="1"></label>
   <div class="hint">Drag the image to reposition it.</div>
   <div class="row"><button class="prim" id="ic-photo">Change photo</button><button id="ic-reset">Reset</button></div>
+  <div class="row" id="ic-textpos" style="display:none"><button data-va="start">Text top</button><button data-va="center">Middle</button><button data-va="end">Bottom</button></div>
   <button id="ic-done">Done</button>
 </div>
 
@@ -429,6 +434,7 @@ function applyContent(c){
     if(typeof v==='object'){ if(v.u) setImg(el,v.u); setFrame(el,v); }
     else { setImg(el,v); }
   });
+  if(c.va){Object.keys(c.va).forEach(k=>{const el=document.querySelector('[data-va="'+k+'"]');if(el)el.setAttribute('data-vapos',c.va[k]);});}
   if(Array.isArray(c._order)) reorder(c._order);
 }
 function reorder(order){const box=document.getElementById('sections');order.forEach(name=>{const s=box.querySelector(`section[data-section="${name}"]`);if(s)box.appendChild(s)})}
@@ -452,6 +458,7 @@ function collect(){
     const keys=el.getAttribute('data-img').split('.');const last=keys.pop();
     let o=c;keys.forEach(k=>o=o[k]=o[k]||{});o[last]=val;
   });
+  document.querySelectorAll('[data-va]').forEach(el=>{const pos=el.getAttribute('data-vapos')||'end';if(pos==='end')return;const keys=('va.'+el.getAttribute('data-va')).split('.');const last=keys.pop();let o=c;keys.forEach(k=>o=o[k]=o[k]||{});o[last]=pos;});
   return c;
 }
 
@@ -470,13 +477,14 @@ function status(t){document.getElementById('astatus').textContent=t}
 let sel=null;
 const ctl=document.getElementById('imgctl'), icZoom=document.getElementById('ic-zoom'), icOv=document.getElementById('ic-ov');
 function enableImg(){document.querySelectorAll('.imgph').forEach(el=>{el.onclick=()=>{if(!document.body.classList.contains('admin'))return;if(el._dragged){el._dragged=false;return;}selectSlot(el);};});}
-function selectSlot(el){if(sel&&sel!==el)sel.classList.remove('slot-sel');sel=el;el.classList.add('slot-sel');const f=getFrame(el);icZoom.value=Math.round(f.s*100);icOv.value=Math.round(f.o*100);ctl.classList.add('on');status('framing — drag to move');}
+function selectSlot(el){if(sel&&sel!==el)sel.classList.remove('slot-sel');sel=el;el.classList.add('slot-sel');const f=getFrame(el);icZoom.value=Math.round(f.s*100);icOv.value=Math.round(f.o*100);var tp=document.getElementById('ic-textpos');var panel=el.closest('.panel');if(panel&&panel.hasAttribute('data-va')){tp.style.display='flex';var cur=panel.getAttribute('data-vapos')||'end';[].forEach.call(tp.children,function(b){b.classList.toggle('prim',b.getAttribute('data-va')===cur);});}else{tp.style.display='none';}ctl.classList.add('on');status('framing — drag to move');}
 function deselect(){if(sel)sel.classList.remove('slot-sel');sel=null;ctl.classList.remove('on');}
 icZoom.oninput=()=>{if(sel)sel.style.setProperty('--sc',(icZoom.value/100));};
 icOv.oninput=()=>{if(sel)sel.style.setProperty('--ov',(icOv.value/100));};
 document.getElementById('ic-reset').onclick=()=>{if(!sel)return;setFrame(sel,{s:1,x:50,y:50,o:0});icZoom.value=100;icOv.value=0;};
 document.getElementById('ic-done').onclick=deselect;
 document.getElementById('ic-photo').onclick=()=>{if(!sel)return;imgTarget=sel;document.getElementById('imgfile').click();};
+(function(){var tp=document.getElementById('ic-textpos');[].forEach.call(tp.children,function(b){b.onclick=function(){var panel=sel&&sel.closest('.panel');if(!panel)return;panel.setAttribute('data-vapos',b.getAttribute('data-va'));[].forEach.call(tp.children,function(x){x.classList.toggle('prim',x===b);});};});})();
 /* drag the selected slot to reposition the image */
 (function(){let down=false,sx,sy,ox,oy,W,H;
   document.addEventListener('pointerdown',e=>{if(!sel||!document.body.classList.contains('admin')||!sel.contains(e.target))return;down=true;sel._dragged=false;const f=getFrame(sel);ox=f.x;oy=f.y;sx=e.clientX;sy=e.clientY;const r=sel.getBoundingClientRect();W=r.width;H=r.height;});
