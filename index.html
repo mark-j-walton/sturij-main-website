@@ -163,6 +163,16 @@
   .sw span{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:9px 11px;font-family:var(--f-mono);font-weight:600;font-size:10.5px;letter-spacing:.05em;color:var(--paper);background:linear-gradient(to top,rgba(16,26,34,.72),transparent)}
   .sw.reveal{transform:translateY(22px) scale(.95)}
   .sw.reveal.in{transform:none}
+  /* ===== scroll-built montage ===== */
+  .montage{position:relative;z-index:5;background:var(--paper)}
+  .montage .track{height:240vh}
+  .montage .stage{position:sticky;top:var(--nav);height:calc(100svh - var(--nav));display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:clamp(16px,3vw,30px)}
+  .montage .mlabel{font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);margin-bottom:16px}
+  .montage .mosaic{position:relative;width:min(94vw,calc((100svh - var(--nav) - 96px)*1.4));aspect-ratio:7/5;display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:repeat(var(--rows),1fr);border-radius:14px;overflow:hidden;box-shadow:var(--sh-card),0 26px 54px rgba(35,31,27,.18)}
+  .montage .mt{position:relative;overflow:hidden;background:var(--paper-warm)}
+  .montage .mt::after{content:"";position:absolute;inset:0;background-image:var(--img);background-size:calc(var(--cols)*100%) calc(var(--rows)*100%);background-position:var(--pos);opacity:0;transform:scale(1.14);transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
+  .montage .mt.on::after{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.montage .mt::after{opacity:1;transform:none;transition:none}}
   /* ===== enquiry ===== */
   .enq{background:var(--navy);color:var(--paper)}
   .enq .kicker{color:var(--gold)}
@@ -334,6 +344,16 @@
     <div class="card imgph" data-img="stack.2" style="--i:1"><img src="/showcase/media-wall-led.jpg" alt="Media walls"><div class="cc"><div class="k">02 — Living rooms</div><h3 data-edit="st2">Media walls, built as one piece</h3></div></div>
     <div class="card imgph" data-img="stack.3" style="--i:2"><img src="/showcase/kitchen-bright.jpg" alt="Kitchens"><div class="cc"><div class="k">03 — Kitchens</div><h3 data-edit="st3">Handleless kitchens, made to measure</h3></div></div>
     <div class="card imgph" data-img="stack.4" style="--i:3"><img src="/showcase/mudroom.jpg" alt="Boot rooms"><div class="cc"><div class="k">04 — Hallways</div><h3 data-edit="st4">Boot rooms &amp; hallways</h3></div></div>
+  </section>
+
+  <!-- scroll-built montage -->
+  <section class="montage" id="montage">
+    <div class="track">
+      <div class="stage">
+        <div class="mlabel reveal">Made to your millimetre</div>
+        <div class="mosaic" id="mosaic" style="--cols:9;--rows:6;--img:url('/showcase/kitchen-bright.jpg')"></div>
+      </div>
+    </div>
   </section>
 
   <div id="sections">
@@ -584,6 +604,27 @@ async function enq(e){e.preventDefault();const f=e.target,btn=f.querySelector('.
     note.textContent='Thanks — your enquiry is in. We’ll be in touch within a working day.';btn.textContent='Sent ✓';f.reset();
   }catch(_){note.innerHTML='Sorry, that didn’t send. Please call <a href="tel:+441937326011">01937 326011</a> or email <a href="mailto:contact@sturij.com">contact@sturij.com</a>.';btn.disabled=false;btn.textContent='Book my visit →';}
   return false}
+
+/* scroll-built montage: blocks fill in with slices of the image to assemble it */
+(function(){
+  var m=document.getElementById('mosaic'); if(!m) return;
+  var cols=parseInt(getComputedStyle(m).getPropertyValue('--cols'))||9;
+  var rows=parseInt(getComputedStyle(m).getPropertyValue('--rows'))||6;
+  var total=cols*rows, tiles=[], order=[];
+  for(var r=0;r<rows;r++)for(var c=0;c<cols;c++){
+    var d=document.createElement('div'); d.className='mt';
+    var px=cols>1?(c/(cols-1)*100):50, py=rows>1?(r/(rows-1)*100):50;
+    d.style.setProperty('--pos',px+'% '+py+'%');
+    m.appendChild(d); tiles.push(d); order.push(tiles.length-1);
+  }
+  for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}
+  var track=document.querySelector('#montage .track'), raf=null;
+  function upd(){ raf=null; var rect=track.getBoundingClientRect(), vh=window.innerHeight;
+    var pr=Math.min(1,Math.max(0,(-rect.top)/(rect.height-vh))); var show=Math.ceil(pr*total*1.15);
+    for(var k=0;k<total;k++) tiles[order[k]].classList.toggle('on',k<show); }
+  function onScroll(){ if(!raf) raf=requestAnimationFrame(upd); }
+  window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); upd();
+})();
 </script>
 
 </body>
