@@ -175,7 +175,30 @@
   .note .curl{position:absolute;right:0;bottom:0;width:22px;height:22px;background:linear-gradient(135deg,transparent 46%,rgba(0,0,0,.13) 50%,rgba(255,255,255,.5) 55%);border-bottom-right-radius:2px}
   .note.drag{pointer-events:none;opacity:.97;transform:rotate(-6deg) scale(1.02)}
   .note.stuck{cursor:pointer}
-  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}}
+  /* ---- Handles drawer + drag-on-canvas ---- */
+  .htab{position:fixed;right:0;top:calc(var(--nav) + 84px);z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
+  .hdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:36;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
+  .hdraw.on{transform:none}
+  .hdh{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--line);font-family:var(--f-serif);font-size:16px;color:var(--ink)}
+  .hdh .cnt{font:600 9px var(--f-mono);letter-spacing:.1em;color:var(--ink-muted);text-transform:uppercase}
+  .hdh button{border:0;background:none;font-size:15px;cursor:pointer;color:var(--ink-muted)}
+  .hcar{flex:1;overflow:hidden;position:relative;touch-action:none}
+  .hct{position:absolute;left:0;right:0;top:0;will-change:transform}
+  .hcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 12px;cursor:grab;border-bottom:1px solid rgba(0,0,0,.05)}
+  .hcard:active{cursor:grabbing}.hcard .im{width:100%;height:82px;display:flex;align-items:center;justify-content:center}
+  .hcard img{max-width:88%;max-height:82px;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.16));pointer-events:none}
+  .hcard .nm{font:600 8.5px var(--f-mono);letter-spacing:.05em;color:var(--ink-muted);text-align:center;text-transform:uppercase}
+  .hdfoot{padding:10px 14px;font:9px var(--f-mono);letter-spacing:.03em;color:var(--ink-muted);border-top:1px solid var(--line);text-align:center;line-height:1.5}
+  .hlayer{position:fixed;inset:var(--nav) 0 0 0;z-index:33;pointer-events:none;overflow:hidden}
+  .hplaced{position:absolute;pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+  .hplaced img{width:100%;height:100%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 6px 13px rgba(0,0,0,.34))}
+  .hplaced.sel{outline:1.5px dashed var(--gold);outline-offset:5px;border-radius:3px}
+  .hplaced .hx{position:absolute;top:-11px;right:-11px;width:21px;height:21px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+  .hplaced.sel .hx{display:flex}
+  .hplaced .hgrip{position:absolute;right:-8px;bottom:-8px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid #fff;cursor:nwse-resize;display:none}
+  .hplaced.sel .hgrip{display:block}
+  .hghost{position:fixed;z-index:70;pointer-events:none;opacity:.92;filter:drop-shadow(0 9px 17px rgba(0,0,0,.42))}
+  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}.hdraw{width:190px}}
 </style>
 </head>
 <body>
@@ -218,6 +241,14 @@
   <div class="fhint">Floor · drag · tap to lay</div>
   <div class="frail" id="frail"><div class="ftrack"></div></div>
   <div class="fexp" id="fexp"><span class="fn"></span><button class="fchg" id="fchg">⟳ change</button></div>
+</div>
+
+<div class="hlayer" id="hlayer"></div>
+<button class="htab" id="htab" title="Handles">⚒ Handles</button>
+<div class="hdraw" id="hdraw">
+  <div class="hdh"><span>Handles</span><span class="cnt" id="hcnt"></span><button id="hdx">✕</button></div>
+  <div class="hcar" id="hcar"><div class="hct"></div></div>
+  <div class="hdfoot">Drag a handle onto the scene · drag to move · double-tap or ✕ to remove</div>
 </div>
 
 <div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
@@ -514,6 +545,87 @@ el('bzip').onclick=function(){
     document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
   });
 })();
+/* ===== Handles drawer: endless carousel → drag onto canvas → move/resize/remove ===== */
+(function(){
+  function hsvg(k){
+    var g="<defs><linearGradient id='m' x1='0' y1='0' x2='.4' y2='1'><stop offset='0' stop-color='#eef0f2'/><stop offset='.45' stop-color='#c3c9cf'/><stop offset='1' stop-color='#868d94'/></linearGradient></defs>";
+    var shapes={
+      bar:"<rect x='16' y='30' width='168' height='15' rx='7.5' fill='url(#m)'/><rect x='26' y='44' width='11' height='20' rx='5' fill='url(#m)'/><rect x='163' y='44' width='11' height='20' rx='5' fill='url(#m)'/>",
+      bow:"<path d='M30 62 V44 a70 70 0 0 1 140 0 V62' fill='none' stroke='url(#m)' stroke-width='13' stroke-linecap='round'/>",
+      tbar:"<rect x='30' y='30' width='140' height='13' rx='6.5' fill='url(#m)'/><rect x='93' y='42' width='14' height='24' rx='4' fill='url(#m)'/>",
+      knob:"<circle cx='100' cy='42' r='26' fill='url(#m)'/><rect x='92' y='60' width='16' height='12' rx='3' fill='url(#m)'/>",
+      cup:"<path d='M40 34 h120 a60 60 0 0 1 -120 0 z' fill='url(#m)'/><rect x='40' y='30' width='120' height='7' rx='3.5' fill='url(#m)'/>"
+    };
+    var b=shapes[k]||shapes.bar;
+    return "data:image/svg+xml;utf8,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 84'>"+g+b+"</svg>");
+  }
+  var PLACE=[{name:'Bar 160',type:'bar',img:hsvg('bar')},{name:'Bow D',type:'bow',img:hsvg('bow')},{name:'T-bar',type:'tbar',img:hsvg('tbar')},{name:'Knob',type:'knob',img:hsvg('knob')},{name:'Cup pull',type:'cup',img:hsvg('cup')}];
+  var HANDLES=PLACE.slice(), real=false;
+  var car=el('hcar'), ct=car&&car.querySelector('.hct'), layer=el('hlayer');
+  if(!car||!ct||!layer) return;
+  function build(){
+    var one=HANDLES.map(function(h,i){return '<div class="hcard" data-i="'+i+'"><div class="im"><img src="'+h.img+'" alt="'+h.name+'" draggable="false"></div><div class="nm">'+h.name+'</div></div>';}).join('');
+    ct.innerHTML=one+one;
+    if(el('hcnt'))el('hcnt').textContent=HANDLES.length+(real?' handles':' · demo');
+    setTimeout(measure,60);
+  }
+  fetch('/showcase/handles/handles.json').then(function(r){return r.json();}).then(function(m){
+    if(m&&m.length){ HANDLES=m.map(function(h){return {name:h.name,type:h.type,img:'/showcase/handles/'+h.file};}); real=true; build(); }
+  }).catch(function(){});
+  var y=0, setH=0;
+  function measure(){ setH=ct.scrollHeight/2; ap(); }
+  function ap(){ if(setH){var mm=((y%setH)+setH)%setH; ct.style.transform='translateY('+(-mm)+'px)';} }
+  car.addEventListener('wheel',function(e){ e.preventDefault(); y+=e.deltaY; ap(); },{passive:false});
+  el('htab').onclick=function(){ el('hdraw').classList.toggle('on'); setTimeout(measure,20); };
+  el('hdx').onclick=function(){ el('hdraw').classList.remove('on'); };
+  // pointerdown on a card: vertical = scroll carousel, drag-left = pull a handle out onto the scene
+  ct.addEventListener('pointerdown',function(e){
+    var card=e.target.closest('.hcard'); if(!card)return;
+    var sx=e.clientX, sy=e.clientY, ys=y, idx=(+card.getAttribute('data-i'))%HANDLES.length, mode=0, ghost=null;
+    function mv(ev){
+      var dx=ev.clientX-sx, dy=ev.clientY-sy;
+      if(!mode){ if(Math.abs(dx)<7&&Math.abs(dy)<7) return; mode=(Math.abs(dx)>Math.abs(dy)+2)?'out':'scroll'; }
+      if(mode==='scroll'){ y=ys-(ev.clientY-sy); ap(); return; }
+      if(!ghost){ ghost=document.createElement('img'); ghost.src=HANDLES[idx].img; ghost.className='hghost'; ghost.style.width='120px'; document.body.appendChild(ghost); }
+      ghost.style.left=(ev.clientX-60)+'px'; ghost.style.top=(ev.clientY-40)+'px';
+    }
+    function up(ev){
+      document.removeEventListener('pointermove',mv); document.removeEventListener('pointerup',up);
+      if(ghost){ ghost.remove(); var lr=layer.getBoundingClientRect();
+        if(ev.clientX<lr.right-10 && ev.clientY>lr.top){ place(idx, ev.clientX-lr.left, ev.clientY-lr.top); if(window.innerWidth<560)el('hdraw').classList.remove('on'); } }
+    }
+    document.addEventListener('pointermove',mv); document.addEventListener('pointerup',up);
+  });
+  var selEl=null;
+  function selectPlaced(d){ if(selEl&&selEl!==d)selEl.classList.remove('sel'); selEl=d; d.classList.add('sel'); }
+  function place(idx,px,py){
+    var S=118, h=HANDLES[idx];
+    var d=document.createElement('div'); d.className='hplaced'; d.style.left=(px-S/2)+'px'; d.style.top=(py-S/2)+'px'; d.style.width=S+'px'; d.style.height=(S*0.52)+'px';
+    d.setAttribute('data-tag',''); d.setAttribute('data-brand', real?'Häfele / Hendel':'Handle'); d.setAttribute('data-name', h.name);
+    d.innerHTML='<img src="'+h.img+'" draggable="false"><button class="hx" title="Remove">✕</button><span class="hgrip"></span>';
+    layer.appendChild(d); selectPlaced(d);
+    var grip=d.querySelector('.hgrip'), xb=d.querySelector('.hx');
+    xb.onclick=function(e){ e.stopPropagation(); d.remove(); if(selEl===d)selEl=null; };
+    d.addEventListener('dblclick',function(){ d.remove(); if(selEl===d)selEl=null; });
+    d.addEventListener('pointerdown',function(e){
+      if(e.target===grip||e.target===xb)return; e.stopPropagation(); selectPlaced(d);
+      var mx=e.clientX,my=e.clientY,l=parseFloat(d.style.left),t=parseFloat(d.style.top);
+      function mv(ev){ d.style.left=(l+ev.clientX-mx)+'px'; d.style.top=(t+ev.clientY-my)+'px'; }
+      function up(){ document.removeEventListener('pointermove',mv); document.removeEventListener('pointerup',up); }
+      document.addEventListener('pointermove',mv); document.addEventListener('pointerup',up);
+    });
+    grip.addEventListener('pointerdown',function(e){
+      e.stopPropagation(); selectPlaced(d);
+      var mx=e.clientX, w=d.offsetWidth, ar=d.offsetHeight/d.offsetWidth;
+      function mv(ev){ var nw=Math.max(34,w+(ev.clientX-mx)); d.style.width=nw+'px'; d.style.height=(nw*ar)+'px'; }
+      function up(){ document.removeEventListener('pointermove',mv); document.removeEventListener('pointerup',up); }
+      document.addEventListener('pointermove',mv); document.addEventListener('pointerup',up);
+    });
+  }
+  document.addEventListener('pointerdown',function(e){ if(selEl && !e.target.closest('.hplaced') && !e.target.closest('.hdraw') && !e.target.closest('.htab')){ selEl.classList.remove('sel'); selEl=null; } });
+  build();
+})();
+
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
