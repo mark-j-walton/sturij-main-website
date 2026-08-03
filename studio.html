@@ -29,13 +29,13 @@
   .strip:hover .lab,.strip.hot .lab{background:rgba(253,252,248,.94);color:var(--ink)}
   .strip:hover .lab .add,.strip.hot .lab .add{max-height:26px}
   .lab.added{opacity:0}
-  .colhint{position:absolute;top:10px;left:0;right:0;z-index:5;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.6);pointer-events:none;mix-blend-mode:difference}
+  .colhint{position:absolute;top:10px;left:0;right:0;z-index:5;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.6);pointer-events:none;mix-blend-mode:difference;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px}
   .filled{position:absolute;inset:0;display:none;align-items:flex-end;background-size:cover;background-position:center}
   .side.chosen .filled{display:flex}.side.chosen .rail{display:none}.side.chosen .colhint{display:none}
-  .filled .fn{font-family:var(--f-mono);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:14px 16px;margin:16px;border-radius:9px;background:rgba(253,252,248,.9);color:var(--ink)}
-  .board.side .filled .fn{background:rgba(26,23,20,.55);color:#fff}
-  .change{position:absolute;top:14px;right:14px;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(26,23,20,.5);border:1px solid rgba(250,248,242,.4);border-radius:999px;padding:7px 12px;cursor:pointer}
-  .paint.side .change{color:var(--ink);background:rgba(253,252,248,.8);border-color:var(--line)}
+  .side .filled .fn{display:none}
+  .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
+  .change{position:absolute;top:14px;right:14px;font-size:14px;line-height:1;color:rgba(255,255,255,.6);background:rgba(26,23,20,.2);border:1px solid rgba(250,248,242,.22);border-radius:999px;padding:5px 8px;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
+  .paint.side .change{color:rgba(40,36,32,.55);background:rgba(253,252,248,.42);border-color:rgba(0,0,0,.08)}
   .bar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);z-index:26;display:none;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px;box-shadow:0 12px 34px rgba(0,0,0,.3);opacity:0;transition:opacity .4s,transform .4s}
   .bar.on{display:flex;opacity:1;transform:translateX(-50%)}
   .bar button{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-sans);font-weight:600;font-size:13.5px;border:1px solid var(--line);background:var(--paper);color:var(--ink-body);border-radius:999px;padding:9px 15px;cursor:pointer}
@@ -112,14 +112,14 @@
   .fchip.on{outline:2px solid var(--bronze);outline-offset:1px}
   #floorpick .fchips{display:none}   /* floor now chosen from the bottom rail */
   /* ===== floor coverings: horizontal rail along the bottom ===== */
-  .floorbar{position:fixed;left:0;right:0;bottom:0;z-index:23;height:100px;display:none;background:var(--navy);box-shadow:0 -3px 16px rgba(0,0,0,.34)}
+  .floorbar{position:fixed;left:0;right:0;bottom:0;z-index:23;height:20vh;min-height:132px;display:none;background:var(--navy);box-shadow:0 -3px 16px rgba(0,0,0,.34)}
   .floorbar.on{display:block}
   body.hasfloor .bar{bottom:120px}body.hasfloor .pad{bottom:116px}body.hasfloor .roomtools{bottom:108px}
   .fhint{position:absolute;top:5px;left:0;right:0;text-align:center;font:600 9px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.55);pointer-events:none;z-index:2}
   .frail{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none}
   .frail.grabbing{cursor:grabbing}
   .ftrack{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
-  .ftile{width:88px;flex:none;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.28);position:relative}
+  .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.28);position:relative}
   .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(0,0,0,.42);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .fexp{position:absolute;inset:0;display:none;background-size:cover;background-position:center;align-items:center;justify-content:space-between;padding:0 18px}
   .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
@@ -216,34 +216,34 @@
     <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
-    <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">⟳ change</button></div>
+    <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">☀</button></div>
   </div>
   <div class="side board" id="sideWorktop">
     <div class="colhint">Worktop · tap</div>
     <div class="rail" id="railWorktop"><div class="track"></div></div>
-    <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">⟳ change</button></div>
+    <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">☀</button></div>
   </div>
   <div class="side board" id="sideDoors">
     <div class="colhint">Doors · drag · tap to fill</div>
     <div class="rail" id="railDoors"><div class="track"></div></div>
-    <div class="filled" id="fillDoors"><span class="fn"></span><button class="change" data-k="doors">⟳ change</button></div>
+    <div class="filled" id="fillDoors"><span class="fn"></span><button class="change" data-k="doors">☀</button></div>
   </div>
   <div class="side board" id="sideCarcass">
     <div class="colhint">Carcass · tap</div>
     <div class="rail" id="railCarcass"><div class="track"></div></div>
-    <div class="filled" id="fillCarcass"><span class="fn"></span><button class="change" data-k="carcass">⟳ change</button></div>
+    <div class="filled" id="fillCarcass"><span class="fn"></span><button class="change" data-k="carcass">☀</button></div>
   </div>
   <div class="side board" id="sideBoard">
     <div class="colhint">Boards · drag · tap to fill</div>
     <div class="rail" id="railBoard"><div class="track"></div></div>
-    <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">⟳ change</button></div>
+    <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">☀</button></div>
   </div>
 </div>
 
 <div class="floorbar" id="floorbar">
   <div class="fhint">Floor · drag · tap to lay</div>
   <div class="frail" id="frail"><div class="ftrack"></div></div>
-  <div class="fexp" id="fexp"><span class="fn"></span><button class="fchg" id="fchg">⟳ change</button></div>
+  <div class="fexp" id="fexp"><span class="fn"></span><button class="fchg" id="fchg">☀</button></div>
 </div>
 
 <div class="hlayer" id="hlayer"></div>
@@ -387,6 +387,7 @@ updateWallRail();
 var FTW=(window.innerWidth<560?76:88);
 function renderFloorRail(){
   var rail=el('frail'), track=rail&&rail.querySelector('.ftrack'); if(!track)return;
+  var bh=(el('floorbar')&&el('floorbar').clientHeight)||0; if(bh>40) FTW=bh;   // square tiles = bar height
   var items=FLOORS[floorType]||[]; if(!items.length){track.innerHTML='';return;}
   function tHTML(fl,i){return '<div class="ftile" data-i="'+i+'" data-tag data-brand="'+(floorType==='hard'?'Egger':'Crucial Trading')+'" data-name="'+fl.name+'" style="background-image:url(\''+fl.url+'\')"><span class="fl">'+fl.name+'</span></div>';}
   var one=items.map(tHTML).join(''), setW=items.length*FTW;
@@ -408,7 +409,26 @@ el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
 /* Post-it tags on/off */
 el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
 syncSub();
-[].forEach.call(document.querySelectorAll('.change'),function(b){b.onclick=function(){var k=b.getAttribute('data-k');var side=(k==='paint'?el('sidePaint'):el('side'+cap(k)));if(side)side.classList.remove('chosen');sel[k]=null;if(k==='paint')paints=[];updateBar();el('suggest').classList.remove('show','on');};});
+/* sun button = subtle blur slider: slide right→left to white-blur the panel (focus 1-2 others);
+   the button grows LESS transparent as blur increases so it stands out; tap it to reset to normal */
+(function(){
+  function ensureBlur(side){var pb=side.querySelector('.pblur');if(!pb){pb=document.createElement('div');pb.className='pblur';side.insertBefore(pb,side.firstChild);}return pb;}
+  function paint(side,b,amt){
+    side._blur=amt; var pb=ensureBlur(side), w=side.clientWidth||200, maxB=Math.max(6,w*0.06), pn=side.classList.contains('paint');
+    if(amt<=0.01){pb.style.opacity='0';pb.style.backdropFilter='none';pb.style.webkitBackdropFilter='none';pb.style.background='none';}
+    else{var bl=(amt*maxB).toFixed(1)+'px';pb.style.opacity='1';pb.style.background='rgba(255,255,255,'+(amt*0.6).toFixed(2)+')';pb.style.backdropFilter='blur('+bl+')';pb.style.webkitBackdropFilter='blur('+bl+')';}
+    b.style.background=pn?'rgba(253,252,248,'+(0.4+amt*0.55).toFixed(2)+')':'rgba(26,23,20,'+(0.2+amt*0.65).toFixed(2)+')';
+    b.style.color=pn?'rgba(40,36,32,'+(0.55+amt*0.45).toFixed(2)+')':'rgba(255,255,255,'+(0.6+amt*0.4).toFixed(2)+')';
+    b.style.right=(14+amt*(w-64))+'px';
+  }
+  [].forEach.call(document.querySelectorAll('.change'),function(b){
+    var side=b.closest('.side'); if(side)ensureBlur(side);
+    var sx=0,sa=0,moved=false,dragging=false;
+    b.addEventListener('pointerdown',function(e){e.stopPropagation();dragging=true;moved=false;sx=e.clientX;sa=(side&&side._blur)||0;try{b.setPointerCapture(e.pointerId);}catch(_){}});
+    b.addEventListener('pointermove',function(e){if(!dragging||!side)return;var dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;var range=(side.clientWidth||200)*0.8;var amt=Math.max(0,Math.min(1,sa-dx/range));paint(side,b,amt);});
+    b.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false; if(!moved&&side){ paint(side,b,0); b.style.right='14px'; } });
+  });
+})();
 function bothChosen(){return sel.paint&&sel.board;}
 function updateBar(){ el('bar').classList.toggle('on',!!bothChosen()); if(bothChosen()) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
 
@@ -644,7 +664,7 @@ el('bzip').onclick=function(){
   var props={ver:PVER,panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
   MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
   // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
-  try{var sv=JSON.parse(localStorage.getItem('sturij-studio-props')||'null');if(sv&&sv.ver===PVER){if(sv.panelW)Object.assign(props.panelW,sv.panelW);Object.assign(props.mats,sv.mats||{});Object.assign(props.brands,sv.brands||{});}}catch(_){}
+  /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
   function panelCols(){var order=PANELS.map(function(p){return p.k;}),sum=0;for(var i=0;i<order.length-1;i++)sum+=(props.panelW[order[i]]||0);props.panelW[order[order.length-1]]=Math.max(6,100-sum);return order.map(function(k){return props.panelW[k]+'%';}).join(' ');}
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
@@ -666,7 +686,6 @@ el('bzip').onclick=function(){
     [].forEach.call(el('pgrid').querySelectorAll('input[data-pk]'),function(inp){if(!inp.disabled)props.panelW[inp.getAttribute('data-pk')]=Math.max(6,Math.min(80,parseInt(inp.value)||10));});
     [].forEach.call(el('matlist').querySelectorAll('[data-mat]'),function(c){props.mats[c.getAttribute('data-mat')]=c.checked;});
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
-    try{localStorage.setItem('sturij-studio-props',JSON.stringify(props));}catch(_){}
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
   applyProps();
 })();
