@@ -193,6 +193,7 @@
   <div class="side paint" id="sidePaint">
     <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
+    <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">⟳ change</button></div>
   </div>
   <div class="side board" id="sideWorktop">
@@ -294,11 +295,13 @@ fetch('/showcase/floors/floors.json').then(function(r){return r.json();}).then(f
   ['hard','soft'].forEach(function(t){FLOORS[t]=(m[t]||[]).map(function(f){f.url='/showcase/'+(f.dir||('floors/'+t))+'/'+f.file;f.type=t;return f;});});
   renderFloorRail();
 }).catch(function(){});
-function wallCss(c){return wallMode==='wallpaper'?'background-color:'+c+';background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 11px,rgba(0,0,0,.06) 11px 22px),radial-gradient(rgba(255,255,255,.12) 1.4px,transparent 1.6px);background-size:auto,24px 24px':'background:'+c;}
+function wallCss(c){if(wallMode==='wallpaper'){return wallPaper?'background-image:url(\''+wallPaper.img+'\');background-size:cover;background-position:center':'background-color:'+c+';background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 11px,rgba(0,0,0,.06) 11px 22px);background-size:24px 24px';}return 'background:'+c;}
 function renderRoom(){
   var f=el('fillPaint');
-  var cols=paints.map(function(p){
-    return '<div class="rcol"><div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+p[0]+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'></div></div>';
+  var wallList=(wallMode==='wallpaper'&&!paints.length)?[['Wallpaper','#ded8cc']]:paints;
+  var cols=wallList.map(function(p){
+    var wname=(wallMode==='wallpaper'&&wallPaper)?wallPaper.n:p[0];
+    return '<div class="rcol"><div class="rwall" data-tag data-brand="Farrow &amp; Ball" data-name="'+wname+'" '+(zones.walls?'style="'+wallCss(p[1])+'"':'')+'></div></div>';
   }).join('');
   var ceil=zones.ceiling?'<div class="rceil rband'+(paintTarget==='ceiling'?' rtsel':'')+'" data-surf="ceiling" data-tag data-brand="Farrow &amp; Ball" data-name="'+ceilCol[0]+'" style="background:'+ceilCol[1]+'"></div>':'';
   var skirt=zones.skirting?'<div class="rskirt rband'+(paintTarget==='skirting'?' rtsel':'')+'" data-surf="skirting" data-tag data-brand="Farrow &amp; Ball" data-name="'+skirtCol[0]+'" style="background:'+skirtCol[1]+'"></div>':'';
@@ -319,6 +322,7 @@ function addPaint(it){
 }
 function fillSide(kind,it){
   if(kind==='paint'){ addPaint(it); return; }
+  if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); renderRoom(); toast('Wallpaper · '+it.n); return; }
   sel[kind]=it;
   var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
   fillEl.style.backgroundImage="url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
@@ -338,7 +342,8 @@ function bindZone(id,key){el(id).onchange=function(){zones[key]=el(id).checked;
   syncSub();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
 bindZone('zc','ceiling');bindZone('zs','skirting');bindZone('zf','floor');
 /* Walls: Paint | Wallpaper — the tick switches, never blank */
-[].forEach.call(el('wallseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('wallseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');wallMode=b.getAttribute('data-w');if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
+[].forEach.call(el('wallseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('wallseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');wallMode=b.getAttribute('data-w');updateWallRail();if(wallMode==='wallpaper'&&!wallPaper)el('sidePaint').classList.remove('chosen');if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
+updateWallRail();
 /* Floor: Hard | Carpet — tick moves */
 [].forEach.call(el('floorseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('floorseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');floorType=b.getAttribute('data-t');floor=FLOORS[floorType][0]||null;el('floorbar').classList.remove('filled');renderFloorRail();if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
 /* floor coverings tiled along the bottom; tap lays it across the full floor */
@@ -376,6 +381,9 @@ rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
 rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false);
 var WORKTOPS=[];
 fetch('/showcase/worktops/worktops.json').then(function(r){return r.json();}).then(function(m){WORKTOPS=m.map(function(w){return {s:w.file,n:w.name,img:'/showcase/worktops/'+w.file};});rail(el('sideWorktop'),el('railWorktop'),'worktop',WORKTOPS,false);}).catch(function(){});
+var WALLPAPERS=[], wallPaper=null;
+fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).then(function(m){WALLPAPERS=m.map(function(w){return {s:w.file,n:w.name,img:'/showcase/wallpaper/'+w.file};});rail(el('sidePaint'),el('railWallpaper'),'wallpaper',WALLPAPERS,false);}).catch(function(){});
+function updateWallRail(){if(el('railPaint'))el('railPaint').style.display=wallMode==='paint'?'':'none';if(el('railWallpaper'))el('railWallpaper').style.display=wallMode==='wallpaper'?'':'none';if(el('colhint'))el('colhint').textContent=wallMode==='wallpaper'?'Wallpaper · tap to apply':'Wall · tap to add · compare colours';}
 
 var HANDLES=[
  {n:'Bar handle',svg:'<svg width="360" height="60"><rect x="6" y="24" width="348" height="12" rx="6" fill="#2b2b2b"/><rect x="30" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/><rect x="318" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/></svg>'},
