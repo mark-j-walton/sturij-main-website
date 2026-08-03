@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><title>Sturij — The Oval</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
- :root{--navy:#20384a;--gold:#d4aa58;--bronze:#8b5e2c;--paper:#faf8f2;--paper-warm:#f0ece4;--ink:#241f1a;--ink-body:#3d3830;--ink-muted:#6b6358;--line-soft:rgba(35,31,27,.07);--nav:66px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--ease-out:cubic-bezier(.2,.7,.3,1)}
+ :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line-soft:rgba(52,49,42,.07);--nav:66px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--ease-out:cubic-bezier(.2,.7,.3,1)}
  *{box-sizing:border-box}body{margin:0;font-family:var(--f-sans);color:var(--ink-body);background:var(--paper);font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
  h1,h2{font-family:var(--f-serif);font-weight:400;color:var(--ink);margin:0}
  .nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,40px)}
@@ -11,12 +11,12 @@
  .nav a.back{font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);border-radius:999px;padding:8px 15px}
  .hero{position:relative;min-height:82vh;display:flex;align-items:flex-end;margin-top:var(--nav);overflow:hidden}
  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
- .hero .scr{position:absolute;inset:0;background:linear-gradient(to top,rgba(16,26,34,.72),rgba(16,26,34,.05) 55%,transparent)}
+ .hero .scr{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,23,20,.72),rgba(26,23,20,.05) 55%,transparent)}
  .hero .cap{position:relative;z-index:2;padding:clamp(28px,6vw,72px);max-width:900px}
  .hero .k{font-family:var(--f-mono);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
  .hero h1{color:var(--paper);font-size:clamp(40px,8vw,88px);line-height:1.02;margin:12px 0 0;text-shadow:0 2px 30px rgba(0,0,0,.4)}
  .intro{max-width:760px;margin:0 auto;padding:clamp(44px,7vw,84px) clamp(18px,5vw,40px) clamp(20px,3vw,30px)}
- .intro p{font-size:clamp(19px,2.4vw,25px);line-height:1.45;color:var(--ink-heading,#332e27);text-wrap:balance;margin:0}
+ .intro p{font-size:clamp(19px,2.4vw,25px);line-height:1.45;color:var(--ink-heading,#34312a);text-wrap:balance;margin:0}
  .gal{max-width:1180px;margin:0 auto;padding:clamp(20px,3vw,30px) clamp(12px,3vw,26px) clamp(60px,10vw,120px);display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(8px,1.2vw,14px);grid-auto-flow:dense}
  .gal figure{margin:0;position:relative;overflow:hidden;border-radius:12px;grid-column:span 2;aspect-ratio:3/2;opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
  .gal figure.in{opacity:1;transform:none}
