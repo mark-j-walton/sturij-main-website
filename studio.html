@@ -182,6 +182,9 @@
   .hdh{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--line);font-family:var(--f-serif);font-size:16px;color:var(--ink)}
   .hdh .cnt{font:600 9px var(--f-mono);letter-spacing:.1em;color:var(--ink-muted);text-transform:uppercase}
   .hdh button{border:0;background:none;font-size:15px;cursor:pointer;color:var(--ink-muted)}
+  .hfilt{display:flex;flex-wrap:wrap;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line)}
+  .hchip{font:600 8.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:5px 9px;cursor:pointer}
+  .hchip.on{color:var(--paper);background:var(--bronze);border-color:var(--bronze)}
   .hcar{flex:1;overflow:hidden;position:relative;touch-action:none}
   .hct{position:absolute;left:0;right:0;top:0;will-change:transform}
   .hcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 12px;cursor:grab;border-bottom:1px solid rgba(0,0,0,.05)}
@@ -247,6 +250,7 @@
 <button class="htab" id="htab" title="Handles">⚒ Handles</button>
 <div class="hdraw" id="hdraw">
   <div class="hdh"><span>Handles</span><span class="cnt" id="hcnt"></span><button id="hdx">✕</button></div>
+  <div class="hfilt" id="hfilt"></div>
   <div class="hcar" id="hcar"><div class="hct"></div></div>
   <div class="hdfoot">Drag a handle onto the scene · drag to move · double-tap or ✕ to remove</div>
 </div>
@@ -563,12 +567,18 @@ el('bzip').onclick=function(){
   var HANDLES=PLACE.slice(), real=false;
   var car=el('hcar'), ct=car&&car.querySelector('.hct'), layer=el('hlayer');
   if(!car||!ct||!layer) return;
+  var curType='all';
+  function types(){ var s={}; HANDLES.forEach(function(h){s[h.type||'other']=1;}); return Object.keys(s).sort(); }
+  function chips(){ if(!el('hfilt'))return; var ts=['all'].concat(types()); el('hfilt').innerHTML=ts.map(function(t){return '<button class="hchip'+(t===curType?' on':'')+'" data-t="'+t+'">'+(t==='all'?'All':t)+'</button>';}).join(''); }
   function build(){
-    var one=HANDLES.map(function(h,i){return '<div class="hcard" data-i="'+i+'"><div class="im"><img src="'+h.img+'" alt="'+h.name+'" draggable="false"></div><div class="nm">'+h.name+'</div></div>';}).join('');
+    HANDLES.forEach(function(h,i){h._i=i;});
+    var list=(curType==='all')?HANDLES:HANDLES.filter(function(h){return (h.type||'other')===curType;});
+    var one=list.map(function(h){return '<div class="hcard" data-i="'+h._i+'"><div class="im"><img loading="lazy" src="'+h.img+'" alt="'+h.name+'" draggable="false"></div><div class="nm">'+h.name+'</div></div>';}).join('');
     ct.innerHTML=one+one;
-    if(el('hcnt'))el('hcnt').textContent=HANDLES.length+(real?' handles':' · demo');
-    setTimeout(measure,60);
+    if(el('hcnt'))el('hcnt').textContent=(curType==='all'?HANDLES.length:list.length)+(real?'':' · demo');
+    chips(); y=0; setTimeout(measure,60);
   }
+  if(el('hfilt'))el('hfilt').addEventListener('click',function(e){var b=e.target.closest('.hchip');if(!b)return;curType=b.getAttribute('data-t');build();});
   fetch('/showcase/handles/handles.json').then(function(r){return r.json();}).then(function(m){
     if(m&&m.length){ HANDLES=m.map(function(h){return {name:h.name,type:h.type,img:'/showcase/handles/'+h.file};}); real=true; build(); }
   }).catch(function(){});
