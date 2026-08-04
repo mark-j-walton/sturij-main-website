@@ -63,15 +63,17 @@
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — white embossed pebbles (like the recommendation card); large panels only */
   .change,.pclose{position:absolute;right:14px;width:30px;height:30px;display:none;align-items:center;justify-content:center;line-height:1;color:#4a443c;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.10);border-radius:50%;cursor:pointer;padding:0;box-shadow:0 4px 12px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -2px 3px rgba(0,0,0,.05);transition:transform .15s,box-shadow .18s}
-  .change{top:14px;font-size:14px;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
-  .pclose{top:52px;font-size:12px;z-index:12}
+  /* horizontal pair, both on top row: ✕ on the outer edge, blur (☀) just inside it */
+  .change{top:14px;right:52px;font-size:14px;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
+  .pclose{top:14px;right:14px;font-size:12px;z-index:12}
   .side.chosen .pclose,.side.chosen .change{display:flex}
-  /* left panel: buttons on the LEFT so they clear the centre Search tab */
-  .side.paint .pclose,.side.paint .change{left:14px;right:auto}
+  /* left panel: buttons on the LEFT — ✕ outermost, so they clear the centre Search tab */
+  .side.paint .pclose{left:14px;right:auto}
+  .side.paint .change{left:52px;right:auto}
   .change:hover,.pclose:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(0,0,0,.26),0 2px 4px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.95)}
   /* blur (transparency) slider: an indented track it slides in, glowing while dragged */
-  .btrack{position:absolute;top:12px;right:14px;width:96px;height:34px;border-radius:999px;background:rgba(0,0,0,.06);box-shadow:inset 0 2px 6px rgba(0,0,0,.3),inset 0 -1px 0 rgba(255,255,255,.5);opacity:0;transition:opacity .2s;pointer-events:none;z-index:7}
-  .side.paint .btrack{left:14px;right:auto}
+  .btrack{position:absolute;top:12px;right:52px;width:96px;height:34px;border-radius:999px;background:rgba(0,0,0,.06);box-shadow:inset 0 2px 6px rgba(0,0,0,.3),inset 0 -1px 0 rgba(255,255,255,.5);opacity:0;transition:opacity .2s;pointer-events:none;z-index:7}
+  .side.paint .btrack{left:52px;right:auto}
   .side.sliding .btrack{opacity:1}
   .change.sliding{box-shadow:0 0 0 4px rgba(214,178,106,.22),0 6px 16px rgba(0,0,0,.3),0 0 18px rgba(214,178,106,.6),inset 0 1px 0 rgba(255,255,255,.95)}
   .handles{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:24;display:none;align-items:center;gap:18px}
@@ -621,13 +623,13 @@ syncSub();
     side._blur=amt; var pb=ensureBlur(side), w=side.clientWidth||200, maxB=Math.max(6,w*0.06);
     if(amt<=0.01){pb.style.opacity='0';pb.style.backdropFilter='none';pb.style.webkitBackdropFilter='none';pb.style.background='none';}
     else{var bl=(amt*maxB).toFixed(1)+'px';pb.style.opacity='1';pb.style.background='rgba(255,255,255,'+(amt*0.6).toFixed(2)+')';pb.style.backdropFilter='blur('+bl+')';pb.style.webkitBackdropFilter='blur('+bl+')';}
-    var pos=(14+amt*BTRAVEL)+'px';   /* knob follows the finger inside the indented track */
+    var pos=(52+amt*BTRAVEL)+'px';   /* knob home is inside the ✕; follows the finger inside the indented track */
     if(side.classList.contains('paint')){b.style.left=pos;b.style.right='auto';}else{b.style.right=pos;b.style.left='auto';}
   }
   [].forEach.call(document.querySelectorAll('.change'),function(b){
     var side=b.closest('.side'); if(side){ensureBlur(side);ensureTrack(side);}
     var sx=0,sa=0,moved=false,dragging=false;
-    function resetPos(){if(side&&side.classList.contains('paint')){b.style.left='14px';b.style.right='auto';}else{b.style.right='14px';b.style.left='auto';}}
+    function resetPos(){if(side&&side.classList.contains('paint')){b.style.left='52px';b.style.right='auto';}else{b.style.right='52px';b.style.left='auto';}}
     b.addEventListener('pointerdown',function(e){e.stopPropagation();dragging=true;moved=false;sx=e.clientX;sa=(side&&side._blur)||0;if(side)side.classList.add('sliding');b.classList.add('sliding');try{b.setPointerCapture(e.pointerId);}catch(_){}});
     b.addEventListener('pointermove',function(e){if(!dragging||!side)return;var dx=e.clientX-sx;if(Math.abs(dx)>4)moved=true;var dir=side.classList.contains('paint')?1:-1;var amt=Math.max(0,Math.min(1,sa+dir*dx/BTRAVEL));paint(side,b,amt);});
     b.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false;if(side)side.classList.remove('sliding');b.classList.remove('sliding');if(!moved&&side){paint(side,b,0);resetPos();}});

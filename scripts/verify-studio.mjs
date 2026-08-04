@@ -55,7 +55,8 @@ try {
       paintClose: circle('#sidePaint .pclose'),
       paintBlurLeft: leftOf('#sidePaint .change'),
       paintCloseLeft: leftOf('#sidePaint .pclose'),
-      padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })()
+      padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })(),
+      horiz: (function () { const c = document.querySelector('#sideBoard .pclose'), bb = document.querySelector('#sideBoard .change'); if (!c || !bb) return null; const cr = c.getBoundingClientRect(), br = bb.getBoundingClientRect(); return { sameTop: Math.abs(cr.top - br.top) <= 2, xOutside: cr.right >= br.right - 1 }; })()
     };
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
@@ -65,7 +66,8 @@ try {
   ok('header buttons uniform height', chrome.hdrHeights && chrome.hdrHeights.every((h) => h === chrome.hdrHeights[0]), JSON.stringify(chrome.hdrHeights));
   ok('chrome buttons white embossed', chrome.embossed, 'gradient=' + chrome.embossed);
   ok('paint (left) panel keeps blur + close', round(chrome.paintBlur) && round(chrome.paintClose), 'blur=' + JSON.stringify(chrome.paintBlur) + ' close=' + JSON.stringify(chrome.paintClose));
-  ok('left panel buttons on the LEFT (clear of Search)', chrome.paintBlurLeft !== null && chrome.paintBlurLeft <= 40 && chrome.paintCloseLeft <= 40, 'blurLeft=' + chrome.paintBlurLeft + ' closeLeft=' + chrome.paintCloseLeft);
+  ok('left panel: ✕ outermost-left, blur inside it', chrome.paintCloseLeft !== null && chrome.paintCloseLeft <= 30 && chrome.paintBlurLeft > chrome.paintCloseLeft, 'closeLeft=' + chrome.paintCloseLeft + ' blurLeft=' + chrome.paintBlurLeft);
+  ok('close+blur horizontal, ✕ on the outside', chrome.horiz && chrome.horiz.sameTop && chrome.horiz.xOutside, JSON.stringify(chrome.horiz));
   ok('post-it pad visible', chrome.padVisible, 'visible=' + chrome.padVisible);
 
   // reset chosen state so the property checks below start clean
