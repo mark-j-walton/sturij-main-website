@@ -112,6 +112,15 @@ try {
   }));
   ok('settings persist across refresh', after.swh === '118px' && after.floorbarOn === true, JSON.stringify(after));
 
+  // Drag-to-reorder: grip on each panel, drop-target bar, order changes + persists
+  const gripsOk = await pg.evaluate(() => document.querySelectorAll('.pgrip').length >= 2 && !!document.querySelector('.dropbar'));
+  ok('drag grips + drop bar present', gripsOk);
+  const ord0 = await pg.evaluate(() => (JSON.parse(localStorage.getItem('sturij.studio.props') || '{}').order) || []);
+  const g = await pg.evaluate(() => { const e = document.querySelector('#sidePaint .pgrip'); if (!e) return null; const r = e.getBoundingClientRect(); return { x: Math.round(r.x + r.width / 2), y: Math.round(r.y + r.height / 2) }; });
+  if (g) { await pg.mouse.move(g.x, g.y); await pg.mouse.down(); await pg.mouse.move(1150, g.y, { steps: 12 }); await pg.waitForTimeout(80); await pg.mouse.up(); await pg.waitForTimeout(250); }
+  const ord1 = await pg.evaluate(() => (JSON.parse(localStorage.getItem('sturij.studio.props') || '{}').order) || []);
+  ok('drag reorders panels + persists', g && ord0[0] === 'wall' && ord1[0] !== 'wall' && JSON.stringify(ord0) !== JSON.stringify(ord1), 'before=' + JSON.stringify(ord0) + ' after=' + JSON.stringify(ord1));
+
 } catch (e) {
   ok('run completed', false, String(e && e.message || e));
 } finally {

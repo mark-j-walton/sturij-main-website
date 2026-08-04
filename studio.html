@@ -21,6 +21,13 @@
   .hbtn:active{transform:translateY(1px)}
   .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30% 18% 20% 12% 20%}
   .side{position:relative;overflow:hidden}
+  /* drag-to-reorder: a grip per panel + a glowing drop-target bar */
+  .pgrip{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:16;width:40px;height:17px;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;letter-spacing:1px;color:#8a8172;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.1);border-radius:0 0 9px 9px;border-top:0;cursor:grab;box-shadow:0 3px 8px rgba(0,0,0,.2),inset 0 -1px 2px rgba(0,0,0,.06);touch-action:none;-webkit-user-select:none;user-select:none;opacity:.55;transition:opacity .15s,box-shadow .15s}
+  .side:hover .pgrip{opacity:.95}
+  .pgrip:active{cursor:grabbing}
+  .side.dragging{opacity:.72;outline:2px dashed rgba(214,178,106,.85);outline-offset:-5px}
+  .dropbar{position:fixed;top:var(--nav);bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(180deg,var(--gold),rgba(214,178,106,.35));box-shadow:0 0 14px rgba(214,178,106,.9);z-index:45;display:none;pointer-events:none;border-radius:2px}
+  .dropbar.on{display:block}
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
   .track{position:absolute;left:0;right:0;top:0;will-change:transform}
@@ -1140,7 +1147,7 @@ el('bzip').onclick=function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{},swatchH:66,floorH:120};
+  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{},swatchH:66,floorH:120,order:['wall','worktop','carcass','boards']};
   /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
      instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
      Post-it tags stay on. Suppliers all available by default. */
@@ -1156,6 +1163,7 @@ el('bzip').onclick=function(){
       if(_sv.brands)for(var _b in _sv.brands){if(props.brands.hasOwnProperty(_b))props.brands[_b]=_sv.brands[_b];}
       if(typeof _sv.swatchH==='number')props.swatchH=_sv.swatchH;
       if(typeof _sv.floorH==='number')props.floorH=_sv.floorH;
+      if(Array.isArray(_sv.order)){var _def=['wall','worktop','carcass','boards'];if(_sv.order.length===_def.length&&_def.every(function(k){return _sv.order.indexOf(k)>=0;}))props.order=_sv.order.slice();}
     }
   }catch(e){}
   function saveProps(){try{localStorage.setItem(PKEY,JSON.stringify(props));}catch(e){}}
@@ -1175,7 +1183,9 @@ el('bzip').onclick=function(){
   function panelMat(k){return k==='wall'?'walls':(k==='boards'?'wood':k);}
   /* The wall panel (sidePaint) is always shown; the rest follow their material toggle.
      activeKeys = the panels that are actually visible, in DOM order. */
-  function activeKeys(){return PANELS.map(function(p){return p.k;}).filter(function(k){return k==='wall'||props.mats[panelMat(k)]!==false;});}
+  var SIDEID={wall:'sidePaint',worktop:'sideWorktop',carcass:'sideCarcass',boards:'sideBoard'};
+  function activeKeys(){var ks=PANELS.map(function(p){return p.k;}).filter(function(k){return k==='wall'||props.mats[panelMat(k)]!==false;});
+    return ks.sort(function(a,b){var ia=props.order.indexOf(a),ib=props.order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});}
   function normWidths(keys){
     if(!keys.length)return;
     var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;
@@ -1191,6 +1201,7 @@ el('bzip').onclick=function(){
     document.documentElement.style.setProperty('--swh',(props.swatchH||66)+'px');
     document.documentElement.style.setProperty('--floorh',(props.floorH||120)+'px');
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
+    activeKeys().forEach(function(k,i){var e=el(SIDEID[k]);if(e)e.style.order=i;});
     if(el('pad'))el('pad').style.display=(props.mats.tags!==false)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
     saveProps();
@@ -1250,6 +1261,38 @@ el('bzip').onclick=function(){
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
     normWidths(activeKeys());
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
+  /* ---- Drag-to-reorder panels: grip on each panel + a drop-target bar; order persists ---- */
+  (function(){
+    var wrap=document.querySelector('.wrap'); if(!wrap)return;
+    var bar=document.createElement('div'); bar.className='dropbar'; document.body.appendChild(bar);
+    function visSides(){ return activeKeys().map(function(k){var e=el(SIDEID[k]);return (e&&e.style.display!=='none')?{k:k,el:e}:null;}).filter(Boolean); }
+    Object.keys(SIDEID).forEach(function(k){
+      var side=el(SIDEID[k]); if(!side)return;
+      var grip=document.createElement('button'); grip.className='pgrip'; grip.type='button'; grip.title='Drag to reorder this panel'; grip.textContent='⠿'; side.appendChild(grip);
+      var dragging=false, curIdx=-1;
+      function locate(x){
+        var ss=visSides(); curIdx=ss.length;
+        for(var i=0;i<ss.length;i++){var r=ss[i].el.getBoundingClientRect();if(x<r.left+r.width/2){curIdx=i;break;}}
+        var bx; if(curIdx>=ss.length){var last=ss[ss.length-1].el.getBoundingClientRect();bx=last.right;} else {bx=ss[curIdx].el.getBoundingClientRect().left;}
+        bar.style.left=bx+'px'; bar.classList.add('on');
+      }
+      grip.addEventListener('pointerdown',function(e){e.preventDefault();e.stopPropagation();dragging=true;side.classList.add('dragging');try{grip.setPointerCapture(e.pointerId);}catch(_){}locate(e.clientX);});
+      grip.addEventListener('pointermove',function(e){if(dragging)locate(e.clientX);});
+      grip.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false;side.classList.remove('dragging');bar.classList.remove('on');drop();});
+      grip.addEventListener('pointercancel',function(){dragging=false;side.classList.remove('dragging');bar.classList.remove('on');});
+      function drop(){
+        if(curIdx<0)return;
+        var ss=visSides().map(function(s){return s.k;});
+        var from=ss.indexOf(k); if(from<0)return;
+        var to=curIdx>from?curIdx-1:curIdx;
+        var vis=ss.slice(); vis.splice(from,1); to=Math.max(0,Math.min(vis.length,to)); vis.splice(to,0,k);
+        var vi=0, newOrder=props.order.map(function(x){return ss.indexOf(x)>=0?vis[vi++]:x;});
+        ['wall','worktop','carcass','boards'].forEach(function(x){if(newOrder.indexOf(x)<0)newOrder.push(x);});
+        props.order=newOrder; applyProps(); saveProps();
+        if(el('sidePaint').classList.contains('chosen'))renderRoom();
+      }
+    });
+  })();
   syncStudioFromProps();applyProps();
 })();
 /* ===== welcome / landing modal ===== */
