@@ -29,6 +29,12 @@
   .strip:hover .lab,.strip.hot .lab{background:rgba(253,252,248,.94);color:var(--ink)}
   .strip:hover .lab .add,.strip.hot .lab .add{max-height:26px}
   .lab.added{opacity:0}
+  /* Colour names OFF by default — clean first impression. The heart reveals them. */
+  .lab{display:none}
+  body.shownames .lab{display:block}
+  .nameheart{background:none;border:0;color:rgba(250,247,240,.45);font-size:16px;line-height:1;cursor:pointer;padding:4px 7px;transition:color .2s,transform .2s}
+  .nameheart:hover{color:rgba(250,247,240,.8)}
+  body.shownames .nameheart{color:var(--gold);transform:scale(1.08)}
   .colhint{position:absolute;top:10px;left:0;right:0;z-index:5;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.6);pointer-events:none;mix-blend-mode:difference;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px}
   .filled{position:absolute;inset:0;display:none;align-items:flex-end;background-size:cover;background-position:center}
   .side.chosen .filled{display:flex}.side.chosen .rail{display:none}.side.chosen .colhint{display:none}
@@ -255,7 +261,7 @@
 <header class="top">
   <a class="b" href="/">sturij<i>.</i></a>
   <span class="t">Pairing studio</span>
-  <span class="tr"><button class="pbtn" id="cog" title="Studio properties">⚙ Properties</button><a class="x" href="/">Close</a></span>
+  <span class="tr"><button class="nameheart" id="nameheart" title="Show / hide colour names">♡</button><button class="pbtn" id="cog" title="Studio properties">⚙ Properties</button><a class="x" href="/">Close</a></span>
 </header>
 
 <button class="stab" id="stab" title="Describe your scheme">⌕ Search</button>
@@ -281,11 +287,6 @@
     <div class="colhint">Worktop · tap</div>
     <div class="rail" id="railWorktop"><div class="track"></div></div>
     <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">☀</button></div>
-  </div>
-  <div class="side board" id="sideDoors">
-    <div class="colhint">Doors · drag · tap to fill</div>
-    <div class="rail" id="railDoors"><div class="track"></div></div>
-    <div class="filled" id="fillDoors"><span class="fn"></span><button class="change" data-k="doors">☀</button></div>
   </div>
   <div class="side board" id="sideCarcass">
     <div class="colhint">Carcass · tap</div>
@@ -524,7 +525,6 @@ function bothChosen(){return sel.paint&&sel.board;}
 function updateBar(){ el('bar').classList.toggle('on',!!bothChosen()); if(bothChosen()) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
 
 rail(el('sidePaint'), el('railPaint'), 'paint', FB, true);
-rail(el('sideDoors'), el('railDoors'), 'doors', BOARDS, false);
 rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
 rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false);
 var WORKTOPS=[];
@@ -533,7 +533,7 @@ var WALLPAPERS=[], wallPaper=null;
 fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).then(function(m){WALLPAPERS=m.map(function(w){return {s:w.file,n:w.name,img:'/showcase/wallpaper/'+w.file};});rail(el('sidePaint'),el('railWallpaper'),'wallpaper',WALLPAPERS,false);}).catch(function(){});
 /* ===== One method for every panel: idle block → tap to select → splits into swatches ===== */
 (function(){
-  var sides=[el('sidePaint'),el('sideWorktop'),el('sideDoors'),el('sideCarcass'),el('sideBoard')].filter(Boolean);
+  var sides=[el('sidePaint'),el('sideWorktop'),el('sideCarcass'),el('sideBoard')].filter(Boolean);
   function idle(s){s.classList.remove('active');if(!s.classList.contains('chosen'))s.classList.add('idle');}
   function open(s){if(s.classList.contains('chosen'))return;sides.forEach(function(o){if(o!==s)idle(o);});s.classList.remove('idle');s.classList.add('active');}
   window._openSide=open;
@@ -830,17 +830,23 @@ el('bzip').onclick=function(){
 
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
-  var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
-  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
+  var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
+  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
-  MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
+  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{}};
+  /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
+     instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
+     Post-it tags stay on. Suppliers all available by default. */
+  MATS.forEach(function(m){props.mats[m.k]=false;m.brands.forEach(function(b){props.brands[b]=true;});});
+  props.mats.walls=true;props.mats.wood=true;props.mats.tags=true;
   // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
   /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
   var MINW=6;
   function panelMat(k){return k==='wall'?'walls':(k==='boards'?'wood':k);}
-  function activeKeys(){return PANELS.map(function(p){return p.k;}).filter(function(k){return props.mats[panelMat(k)]!==false;});}
+  /* The wall panel (sidePaint) is always shown; the rest follow their material toggle.
+     activeKeys = the panels that are actually visible, in DOM order. */
+  function activeKeys(){return PANELS.map(function(p){return p.k;}).filter(function(k){return k==='wall'||props.mats[panelMat(k)]!==false;});}
   function normWidths(keys){
     if(!keys.length)return;
     var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;
@@ -848,13 +854,15 @@ el('bzip').onclick=function(){
     var diff=100-keys.reduce(function(s,k){return s+props.panelW[k];},0);
     if(diff!==0){var big=keys.slice().sort(function(a,b){return props.panelW[b]-props.panelW[a];})[0];props.panelW[big]=Math.max(MINW,props.panelW[big]+diff);}
   }
-  function panelCols(){return PANELS.map(function(p){var on=props.mats[panelMat(p.k)]!==false;return (on?(props.panelW[p.k]||0):0)+'%';}).join(' ');}
+  /* Only emit columns for the SHOWN panels (hidden ones are display:none and leave the grid),
+     normalised to 100% so the visible panels always tile the canvas cleanly. */
+  function panelCols(){var keys=activeKeys();var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;return keys.map(function(k){return Math.round((props.panelW[k]||MINW)*100/sum)+'%';}).join(' ');}
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
   function applyProps(){
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
-    showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideDoors',props.mats.doors!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
+    showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
   }
   function slide(changed,val,keys){
     var maxV=100-(keys.length-1)*MINW;
@@ -882,8 +890,11 @@ el('bzip').onclick=function(){
   }
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
-    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});}
+    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});
+    /* Toggling a material LIVE: bring its panel on/off, re-share the widths, and rebuild the sliders. */
+    [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){props.mats[c.getAttribute('data-mat')]=c.checked;normWidths(activeKeys());applyProps();buildGrid();};});}
   el('cog').onclick=function(){buildGrid();buildMat();el('modal').classList.add('on');};
+  if(el('nameheart'))el('nameheart').onclick=function(){var on=document.body.classList.toggle('shownames');this.textContent=on?'♥':'♡';};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
   el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
   el('msave').onclick=function(){
