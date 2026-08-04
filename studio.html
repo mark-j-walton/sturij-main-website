@@ -58,6 +58,9 @@
   .side .filled .fn{display:none}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   .change{position:absolute;top:14px;right:14px;font-size:14px;line-height:1;color:rgba(255,255,255,.6);background:rgba(26,23,20,.2);border:1px solid rgba(250,248,242,.22);border-radius:999px;padding:5px 8px;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
+  .pclose{position:absolute;top:52px;right:14px;z-index:12;width:27px;height:27px;border-radius:999px;border:1px solid rgba(250,248,242,.3);background:rgba(26,23,20,.4);color:#fff;font-size:13px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
+  .side.chosen .pclose,.side.active .pclose{display:flex}
+  .paint.side .pclose{color:rgba(40,36,32,.72);background:rgba(253,252,248,.55);border-color:rgba(0,0,0,.1)}
   .paint.side .change{color:rgba(40,36,32,.55);background:rgba(253,252,248,.42);border-color:rgba(0,0,0,.08)}
   .bar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(20px);z-index:26;display:none;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px;box-shadow:0 12px 34px rgba(0,0,0,.3);opacity:0;transition:opacity .4s,transform .4s}
   .bar.on{display:flex;opacity:1;transform:translateX(-50%)}
@@ -330,22 +333,26 @@
 
 <div class="wrap">
   <div class="side paint" id="sidePaint">
+    <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">☀</button></div>
   </div>
   <div class="side board" id="sideWorktop">
+    <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Worktop · tap</div>
     <div class="rail" id="railWorktop"><div class="track"></div></div>
     <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">☀</button></div>
   </div>
   <div class="side board" id="sideCarcass">
+    <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Carcass · tap</div>
     <div class="rail" id="railCarcass"><div class="track"></div></div>
     <div class="filled" id="fillCarcass"><span class="fn"></span><button class="change" data-k="carcass">☀</button></div>
   </div>
   <div class="side board" id="sideBoard">
+    <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Boards · drag · tap to fill</div>
     <div class="rail" id="railBoard"><div class="track"></div></div>
     <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">☀</button></div>
@@ -387,8 +394,6 @@
 
 <div class="bar" id="bar">
   <button class="p" id="cam" title="Snapshot"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.1"/></svg><span>Photo</span></button>
-  <button id="addpair">＋ Add</button>
-  <button id="bhandles">Handles</button>
 </div>
 
 <div class="handles" id="handles"><button class="hbtn" id="hprev">‹</button><div class="hview" id="hview"></div><button class="hbtn" id="hnext">›</button><div class="hname" id="hname"></div></div>
@@ -603,7 +608,7 @@ fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).
 (function(){
   var sides=[el('sidePaint'),el('sideWorktop'),el('sideCarcass'),el('sideBoard')].filter(Boolean);
   function idle(s){s.classList.remove('active');if(!s.classList.contains('chosen'))s.classList.add('idle');}
-  function open(s){if(s.classList.contains('chosen'))return;sides.forEach(function(o){if(o!==s)idle(o);});s.classList.remove('idle');s.classList.add('active');}
+  function open(s){if(s.classList.contains('chosen'))return;s.classList.remove('idle');s.classList.add('active');}
   window._openSide=open;
   sides.forEach(function(s){
     if(!s.classList.contains('chosen'))s.classList.add('idle');
@@ -613,6 +618,28 @@ fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).
     });
   });
 })();
+/* ---- Per-panel close: clear this panel back to the carousel (independent of the others) ---- */
+function clearPanel(side){
+  if(!side)return; var id=side.id;
+  if(id==='sidePaint'){
+    paints=[]; sel.paint=null; paintTarget='wall'; wallMode='paint'; wallPaper=null;
+    var fp=el('fillPaint'); if(fp){fp.innerHTML=''; fp.removeAttribute('data-tag'); fp.removeAttribute('data-name');}
+    var seg=el('wallseg'); if(seg){[].forEach.call(seg.querySelectorAll('button'),function(x){x.classList.toggle('on',x.getAttribute('data-w')==='paint');});}
+    updateWallRail();
+  } else {
+    var kind=id==='sideWorktop'?'worktop':(id==='sideCarcass'?'carcass':'board');
+    if(sel)sel[kind]=null;
+    var fe=el('fill'+kind.charAt(0).toUpperCase()+kind.slice(1));
+    if(fe){fe.style.backgroundImage=''; fe.removeAttribute('data-tag'); fe.removeAttribute('data-name'); var fn=fe.querySelector('.fn'); if(fn)fn.textContent='';}
+  }
+  side.classList.remove('chosen','active'); side.classList.add('idle');
+  if(typeof updateBar==='function')updateBar();
+}
+[].forEach.call(document.querySelectorAll('.side .pclose'),function(b){
+  var side=b.closest('.side');
+  b.addEventListener('pointerdown',function(e){e.stopPropagation();});
+  b.addEventListener('click',function(e){e.stopPropagation();clearPanel(side);});
+});
 function updateWallRail(){if(el('railPaint'))el('railPaint').style.display=wallMode==='paint'?'':'none';if(el('railWallpaper'))el('railWallpaper').style.display=wallMode==='wallpaper'?'':'none';if(el('colhint'))el('colhint').textContent=wallMode==='wallpaper'?'Wallpaper · tap to apply':'Wall · tap to add · compare colours';}
 
 var HANDLES=[
@@ -625,7 +652,6 @@ var hi=0, handleOn=false;
 function drawHandle(){el('hview').innerHTML=HANDLES[hi].svg;el('hname').textContent='Handle · '+HANDLES[hi].n;}
 el('hprev').onclick=function(){hi=(hi-1+HANDLES.length)%HANDLES.length;drawHandle();};
 el('hnext').onclick=function(){hi=(hi+1)%HANDLES.length;drawHandle();};
-el('bhandles').onclick=function(){handleOn=!handleOn;el('handles').classList.toggle('on',handleOn);if(handleOn)drawHandle();};
 
 var items=[];
 function renderTray(){
@@ -679,7 +705,6 @@ function pairPNG(cb){
 }
 function pairName(){return slug(sel.paint[0]+'__'+sel.board.n);}
 el('cam').onclick=function(){pairPNG(function(cv){items.push({name:'Room — '+(sel.paint?sel.paint[0]:'')+' + '+(sel.board?sel.board.n:''),file:pairName()+'.png',sub:'room photo',swatchCss:'background:'+(sel.paint?sel.paint[1]:'#ccc'),png:cv.toDataURL('image/png')});renderTray();toast('Photo added to zip');});};
-el('addpair').onclick=function(){pairPNG(function(cv){items.push({name:sel.paint[0]+' + '+sel.board.n,file:pairName()+'.png',sub:'pairing',swatchCss:'background:'+sel.paint[1],png:cv.toDataURL('image/png')});renderTray();toast('Added pairing');});};
 
 function placeWood(b,x,y){
   var layer=el('hlayer'); if(!layer)return;
@@ -740,7 +765,7 @@ el('bzip').onclick=function(){
 (function(){
   var pad=el('pad'); if(!pad) return;
   function noteHTML(brand,name,meta){return '<div class="wm"></div><span class="tape"></span><div class="brand">'+brand+'</div><div class="nm">'+name+'</div><div class="meta">'+(meta||'Sturij')+'</div><div class="curl"></div>';}
-  function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
+  function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; if(t.classList&&t.classList.contains('strip')) return null; /* browse swatches in the carousel aren't taggable — only committed finishes on the canvas */ var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
   function makeNoteMovable(s){
     var xb=s.querySelector('.nx'); if(xb) xb.onclick=function(e){e.stopPropagation();s.remove();};
     s.addEventListener('pointerdown',function(e){ if(e.target===xb)return; e.stopPropagation();
