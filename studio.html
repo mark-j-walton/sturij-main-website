@@ -13,9 +13,9 @@
   .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
   .top .b{display:flex;align-items:center;text-decoration:none}
   .top .b img{height:50px;width:auto;display:block}
-  .camhdr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;font:600 11px/1 var(--f-sans);color:var(--navy);background:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:9px 17px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,filter .2s}
+  .camhdr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1 var(--f-sans);letter-spacing:.02em;color:var(--navy);background:var(--gold);border:1px solid rgba(0,0,0,.16);border-radius:999px;padding:10px 19px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .18s,box-shadow .2s;box-shadow:0 10px 26px rgba(0,0,0,.34),0 3px 8px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.42)}
   .camhdr.show{opacity:1;pointer-events:auto}
-  .camhdr:hover{filter:brightness(1.08)}
+  .camhdr:hover{transform:translate(-50%,-50%) translateY(-2px);box-shadow:0 15px 34px rgba(0,0,0,.4),0 4px 10px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.45)}
   .top a.x{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);border-radius:999px;padding:6px 13px}
   .top .tr{display:flex;align-items:center;gap:11px}
   .top .pbtn{font:600 10.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
@@ -61,11 +61,12 @@
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
   .side .filled .fn{display:none}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
-  .change{position:absolute;top:14px;right:14px;font-size:14px;line-height:1;color:rgba(255,255,255,.6);background:rgba(26,23,20,.2);border:1px solid rgba(250,248,242,.22);border-radius:999px;padding:5px 8px;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
-  .pclose{position:absolute;top:52px;right:14px;z-index:12;width:27px;height:27px;border-radius:999px;border:1px solid rgba(250,248,242,.3);background:rgba(26,23,20,.4);color:#fff;font-size:13px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
-  .side.chosen .pclose,.side.active .pclose{display:flex}
-  .paint.side .pclose{color:rgba(40,36,32,.72);background:rgba(253,252,248,.55);border-color:rgba(0,0,0,.1)}
-  .paint.side .change{color:rgba(40,36,32,.55);background:rgba(253,252,248,.42);border-color:rgba(0,0,0,.08)}
+  /* panel chrome buttons — solid black circles with depth; only on a large (chosen) panel */
+  .change{position:absolute;top:14px;right:14px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:#fff;background:#1a1714;border:0;border-radius:50%;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
+  .change:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
+  .pclose{position:absolute;top:52px;right:14px;z-index:12;width:30px;height:30px;border-radius:50%;border:0;background:#1a1714;color:#fff;font-size:12px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
+  .side.chosen .pclose{display:flex}
+  .pclose:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
   .camhdr svg{display:block}
   .handles{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:24;display:none;align-items:center;gap:18px}
   .handles.on{display:flex}
@@ -104,7 +105,7 @@
   .favchip img{width:100%;height:48px;object-fit:cover;border-radius:7px;display:block;pointer-events:none}
   .favchip .cn{font:600 7px var(--f-mono);letter-spacing:.02em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .favchip .fx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
-  .floorbar::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 20px 34px -28px rgba(0,0,0,.5)}
+  /* no inset bevel on the floor dock — depth comes purely from the outer drop shadow at the top seam */
   .scard{flex:none;width:144px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
   .scard:hover{transform:translateY(-3px)}
   .scard .si{height:92px;background-size:cover;background-position:center}
@@ -525,6 +526,7 @@ var wallMode='paint', floorType='hard', floor=null, paintTarget='wall', ceilCol=
 var FLOORS={hard:[],soft:[]};   // Crucial Trading — Hard (sisal/coir/weaves) + Soft (wool), loaded from manifest
 fetch('/showcase/floors/floors.json').then(function(r){return r.json();}).then(function(m){
   ['hard','soft'].forEach(function(t){FLOORS[t]=(m[t]||[]).map(function(f){f.url='/showcase/'+(f.dir||('floors/'+t))+'/'+f.file;f.type=t;return f;});});
+  if(zones.floor&&!floor&&FLOORS[floorType]&&FLOORS[floorType][0])floor=FLOORS[floorType][0];
   renderFloorRail();
 }).catch(function(){});
 function wallCss(c){if(wallMode==='wallpaper'){return wallPaper?'background-image:url(\''+wallPaper.img+'\');background-size:cover;background-position:center':'background-color:'+c+';background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 11px,rgba(0,0,0,.06) 11px 22px);background-size:24px 24px';}return 'background:'+c;}
@@ -766,7 +768,7 @@ function placeWood(b,x,y){
 }
 function showSuggest(){if(!bothChosen())return;var row=el('srow');
   var picks=BOARDS.filter(function(b){return b.s!==sel.board.s;}).sort(function(){return Math.random()-.5;}).slice(0,6);
-  row.innerHTML=picks.map(function(b){return '<div class="scard" data-s="'+b.s+'" data-n="'+b.n+'"><img src="/showcase/finishes/'+b.s+'.webp" draggable="false"><div class="cn">'+b.n+'</div></div>';}).join('');
+  row.innerHTML=picks.map(function(b){return '<div class="scard" data-s="'+b.s+'" data-n="'+b.n+'" title="'+b.n+'"><img src="/showcase/finishes/'+b.s+'.webp" draggable="false"></div>';}).join('');
   [].forEach.call(row.querySelectorAll('.scard'),function(c){
     c.addEventListener('pointerdown',function(e){
       var sx=e.clientX,sy=e.clientY,ghost=null,moved=false,s=c.getAttribute('data-s'),n=c.getAttribute('data-n');
@@ -1124,8 +1126,30 @@ el('bzip').onclick=function(){
      Post-it tags stay on. Suppliers all available by default. */
   MATS.forEach(function(m){props.mats[m.k]=false;m.brands.forEach(function(b){props.brands[b]=true;});});
   props.mats.walls=true;props.mats.wood=true;props.mats.tags=true;
-  // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
-  /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
+  /* Persist Properties across refreshes. Load saved state only when it matches the current
+     layout version (PVER); a stale/mismatched blob self-heals to defaults so no panel is hidden. */
+  var PKEY='sturij.studio.props';
+  try{var _sv=JSON.parse(localStorage.getItem(PKEY)||'null');
+    if(_sv&&_sv.ver===PVER){
+      if(_sv.panelW)for(var _k in _sv.panelW){if(props.panelW.hasOwnProperty(_k))props.panelW[_k]=_sv.panelW[_k];}
+      if(_sv.mats)for(var _m in _sv.mats){if(props.mats.hasOwnProperty(_m))props.mats[_m]=_sv.mats[_m];}
+      if(_sv.brands)for(var _b in _sv.brands){if(props.brands.hasOwnProperty(_b))props.brands[_b]=_sv.brands[_b];}
+      if(typeof _sv.swatchH==='number')props.swatchH=_sv.swatchH;
+      if(typeof _sv.floorH==='number')props.floorH=_sv.floorH;
+    }
+  }catch(e){}
+  function saveProps(){try{localStorage.setItem(PKEY,JSON.stringify(props));}catch(e){}}
+  /* Push the loaded materials into the live studio state on boot (zones, floor dock, tags),
+     so a persisted layout reappears instead of the toggles snapping back to defaults. */
+  function syncStudioFromProps(){
+    zones.walls=props.mats.walls!==false; zones.ceiling=!!props.mats.ceiling; zones.skirting=!!props.mats.skirting; zones.floor=!!props.mats.floor;
+    document.body.classList.toggle('hasfloor',zones.floor);
+    if(el('floorbar'))el('floorbar').classList.toggle('on',zones.floor);
+    if(zones.floor&&!floor&&FLOORS[floorType]&&FLOORS[floorType][0])floor=FLOORS[floorType][0];
+    if(el('pad'))el('pad').style.display=(props.mats.tags!==false)?'':'none';
+    if(typeof syncSub==='function')syncSub();
+    if(typeof renderFloorRail==='function')renderFloorRail();
+  }
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
   var MINW=6;
   function panelMat(k){return k==='wall'?'walls':(k==='boards'?'wood':k);}
@@ -1149,6 +1173,7 @@ el('bzip').onclick=function(){
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
+    saveProps();
   }
   function slide(changed,val,keys){
     var maxV=100-(keys.length-1)*MINW;
@@ -1205,7 +1230,7 @@ el('bzip').onclick=function(){
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
     normWidths(activeKeys());
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
-  applyProps();
+  syncStudioFromProps();applyProps();
 })();
 /* ===== welcome / landing modal ===== */
 (function(){var w=el('welcome');if(!w)return;
