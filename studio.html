@@ -191,6 +191,19 @@
   .mrow input{accent-color:var(--bronze)}
   .mfoot{padding:14px 18px;display:flex;justify-content:flex-end}
   .mfoot button{font:600 13px var(--f-sans);color:var(--navy);background:var(--gold);border:0;border-radius:10px;padding:10px 22px;cursor:pointer}
+  /* ===== welcome / landing modal (top layer) ===== */
+  .welcome{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(26,23,20,.5);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);transition:opacity .45s}
+  .welcome.gone{opacity:0;pointer-events:none}
+  .welcome-bg{position:absolute;inset:0;z-index:0;display:grid;grid-template-rows:1fr 1fr}
+  .wshot{background:linear-gradient(135deg,#efe9dd,#e0d9c9);opacity:.45}
+  .wshot-b{background:linear-gradient(135deg,#e7e2d5,#d7d0bf)}
+  .welcome-card{position:relative;z-index:1;width:min(560px,94vw);max-height:88vh;overflow-y:auto;background:var(--paper);border-radius:16px;border:1px solid var(--line);border-left:4px solid var(--bronze);box-shadow:0 30px 80px rgba(0,0,0,.5);padding:30px 32px 26px;font-family:var(--f-sans);color:var(--ink)}
+  .welcome-card .wx{position:absolute;top:13px;right:15px;border:0;background:none;font-size:15px;color:var(--ink-muted);cursor:pointer}
+  .weyebrow{margin:0 0 12px;font:600 10.5px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--bronze)}
+  .welcome-card h2{margin:0 0 16px;font-family:var(--f-serif);font-weight:400;font-size:25px;line-height:1.22;color:var(--ink)}
+  .wbody p{margin:0 0 11px;font-size:14px;line-height:1.6;color:var(--ink-body)}
+  .wbody b{color:var(--ink)}
+  .wcta{margin-top:6px;font:600 14px var(--f-sans);color:var(--navy);background:var(--gold);border:0;border-radius:999px;padding:12px 26px;cursor:pointer}
   /* ===== peel-off post-it tag ===== */
   .pad{position:fixed;left:16px;bottom:18px;z-index:28;width:126px;height:92px;cursor:grab;font-family:var(--f-mono)}
   .pad .sheet{position:absolute;inset:0;background:#efe3c4;border-radius:3px;box-shadow:0 5px 14px rgba(0,0,0,.22)}
@@ -258,6 +271,22 @@
 </style>
 </head>
 <body>
+<div class="welcome" id="welcome" role="dialog" aria-label="Welcome to the Pairing Studio">
+  <div class="welcome-bg"><div class="wshot wshot-a"></div><div class="wshot wshot-b"></div></div>
+  <div class="welcome-card">
+    <button class="wx" id="welcomeX" aria-label="Close">✕</button>
+    <p class="weyebrow">Sturij · Pairing Studio</p>
+    <h2>Start with two materials — the rest is yours to explore.</h2>
+    <div class="wbody">
+      <p>We've started you off with your <b>wall colour</b> and your <b>board (door &amp; panel) finish</b>. Together these set the general scheme, so you can feel the space straight away.</p>
+      <p>Add any of the other materials to build a full interior scheme — an unrestricted playground to test as many variations as your project needs.</p>
+      <p><b>Want a hand?</b> Use it alongside your own interior designer, or try our AI helper — it's not an interior designer, but it'll suggest combinations that work across the materials. It's young and still learning, so if you like a suggestion, ask for the parts you don't to be remixed.</p>
+      <p>We've drawn on popular makers of paint, wallpaper and flooring, plus quality suppliers of the other pieces of a room — from switch finishes to worktops. More ranges are added over time, so check back on any home-improvement adventure.</p>
+      <p><b>Sturij</b> designs, manufactures and installs bespoke furniture — or works supply-only with your own trusted trades. No-one's selling to you here; it's simply a lovely place to create.</p>
+    </div>
+    <button class="wcta" id="welcomeGo">Start exploring</button>
+  </div>
+</div>
 <header class="top">
   <a class="b" href="/">sturij<i>.</i></a>
   <span class="t">Pairing studio</span>
@@ -902,6 +931,14 @@ el('bzip').onclick=function(){
     normWidths(activeKeys());
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
   applyProps();
+})();
+/* ===== welcome / landing modal ===== */
+(function(){var w=el('welcome');if(!w)return;
+  function close(){w.classList.add('gone');setTimeout(function(){w.style.display='none';},450);}
+  var go=el('welcomeGo'),x=el('welcomeX');
+  if(go)go.onclick=close; if(x)x.onclick=close;
+  w.addEventListener('click',function(e){if(e.target===w)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!w.classList.contains('gone'))close();});
 })();
 </script>
 </body>
