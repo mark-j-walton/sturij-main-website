@@ -28,6 +28,36 @@ try {
   });
   ok('floor dock: no inset bevel', bevel === 'none' || bevel === '' , 'box-shadow=' + bevel);
 
+  // Panel chrome: close (✕) must NOT show on a carousel (active) panel
+  await pg.evaluate(() => { const s = document.getElementById('sidePaint'); if (s && s.classList.contains('idle')) s.click(); });
+  await pg.waitForTimeout(200);
+  const activeClose = await pg.evaluate(() => {
+    const s = document.getElementById('sidePaint');
+    const p = s && s.querySelector('.pclose');
+    return { active: s && s.classList.contains('active'), disp: p ? getComputedStyle(p).display : 'none' };
+  });
+  ok('close hidden on carousel (active) panel', activeClose.disp === 'none', JSON.stringify(activeClose));
+
+  // Drive a panel to its large (chosen) state and check the chrome buttons
+  const chrome = await pg.evaluate(() => {
+    try { fillSide('paint', ['Bancha', '#676a49']); fillSide('board', { s: 'alba-walnut', n: 'Alba Walnut' }); } catch (e) { return { err: e.message }; }
+    const g = (sel, prop) => { const e = document.querySelector(sel); return e ? getComputedStyle(e)[prop] : null; };
+    const circle = (sel) => { const e = document.querySelector(sel); if (!e) return null; const cs = getComputedStyle(e); return { disp: cs.display, radius: cs.borderTopLeftRadius, shadow: cs.boxShadow !== 'none' }; };
+    return {
+      close: circle('#sideBoard .pclose'),
+      blur: circle('#sideBoard .change'),
+      camShadow: g('#cam', 'boxShadow') !== 'none',
+      camShow: document.getElementById('cam').classList.contains('show')
+    };
+  });
+  const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
+  ok('close = black circle + depth, on large panel', round(chrome.close), JSON.stringify(chrome.close));
+  ok('blur = black circle + depth, on large panel', round(chrome.blur), JSON.stringify(chrome.blur));
+  ok('camera has depth', chrome.camShadow && chrome.camShow, 'shadow=' + chrome.camShadow + ' show=' + chrome.camShow);
+
+  // reset chosen state so the property checks below start clean
+  await pg.reload({ waitUntil: 'networkidle' }); await pg.waitForTimeout(400); await dismiss(); await pg.waitForTimeout(200);
+
   // Open properties, turn several panels on
   await pg.evaluate(() => document.getElementById('cog').click());
   await pg.waitForTimeout(300);

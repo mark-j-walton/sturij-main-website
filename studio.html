@@ -13,9 +13,9 @@
   .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
   .top .b{display:flex;align-items:center;text-decoration:none}
   .top .b img{height:50px;width:auto;display:block}
-  .camhdr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:7px;font:600 11px/1 var(--f-sans);color:var(--navy);background:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:9px 17px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,filter .2s}
+  .camhdr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:30;display:inline-flex;align-items:center;gap:7px;font:700 11.5px/1 var(--f-sans);letter-spacing:.02em;color:var(--navy);background:var(--gold);border:1px solid rgba(0,0,0,.16);border-radius:999px;padding:10px 19px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .18s,box-shadow .2s;box-shadow:0 10px 26px rgba(0,0,0,.34),0 3px 8px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.42)}
   .camhdr.show{opacity:1;pointer-events:auto}
-  .camhdr:hover{filter:brightness(1.08)}
+  .camhdr:hover{transform:translate(-50%,-50%) translateY(-2px);box-shadow:0 15px 34px rgba(0,0,0,.4),0 4px 10px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.45)}
   .top a.x{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold);border-radius:999px;padding:6px 13px}
   .top .tr{display:flex;align-items:center;gap:11px}
   .top .pbtn{font:600 10.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--gold);border:0;border-radius:999px;padding:7px 14px;cursor:pointer}
@@ -61,11 +61,12 @@
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
   .side .filled .fn{display:none}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
-  .change{position:absolute;top:14px;right:14px;font-size:14px;line-height:1;color:rgba(255,255,255,.6);background:rgba(26,23,20,.2);border:1px solid rgba(250,248,242,.22);border-radius:999px;padding:5px 8px;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none}
-  .pclose{position:absolute;top:52px;right:14px;z-index:12;width:27px;height:27px;border-radius:999px;border:1px solid rgba(250,248,242,.3);background:rgba(26,23,20,.4);color:#fff;font-size:13px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0}
-  .side.chosen .pclose,.side.active .pclose{display:flex}
-  .paint.side .pclose{color:rgba(40,36,32,.72);background:rgba(253,252,248,.55);border-color:rgba(0,0,0,.1)}
-  .paint.side .change{color:rgba(40,36,32,.55);background:rgba(253,252,248,.42);border-color:rgba(0,0,0,.08)}
+  /* panel chrome buttons — solid black circles with depth; only on a large (chosen) panel */
+  .change{position:absolute;top:14px;right:14px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:#fff;background:#1a1714;border:0;border-radius:50%;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
+  .change:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
+  .pclose{position:absolute;top:52px;right:14px;z-index:12;width:30px;height:30px;border-radius:50%;border:0;background:#1a1714;color:#fff;font-size:12px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
+  .side.chosen .pclose{display:flex}
+  .pclose:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
   .camhdr svg{display:block}
   .handles{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:24;display:none;align-items:center;gap:18px}
   .handles.on{display:flex}
