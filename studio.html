@@ -1172,7 +1172,9 @@ el('bzip').onclick=function(){
       box.appendChild(row);
     });
     [].forEach.call(box.querySelectorAll('input[type=range]'),function(inp){inp.oninput=function(){slide(inp.getAttribute('data-pk'),parseInt(inp.value)||MINW,keys);};});
-    if(!box.nextSibling||!box.nextSibling.className){var h=document.createElement('div');h.className='pwhint';h.textContent='Move one and the others adjust to fit — always totals 100%.';box.parentNode.appendChild(h);}
+    /* exactly one hint — clear any that piled up from earlier rebuilds, then add a single copy */
+    [].forEach.call(box.parentNode.querySelectorAll('.pwhint'),function(n){n.remove();});
+    var h=document.createElement('div');h.className='pwhint';h.textContent='Move one and the others adjust to fit — always totals 100%.';box.parentNode.appendChild(h);
   }
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
