@@ -43,17 +43,26 @@ try {
     try { fillSide('paint', ['Bancha', '#676a49']); fillSide('board', { s: 'alba-walnut', n: 'Alba Walnut' }); } catch (e) { return { err: e.message }; }
     const g = (sel, prop) => { const e = document.querySelector(sel); return e ? getComputedStyle(e)[prop] : null; };
     const circle = (sel) => { const e = document.querySelector(sel); if (!e) return null; const cs = getComputedStyle(e); return { disp: cs.display, radius: cs.borderTopLeftRadius, shadow: cs.boxShadow !== 'none' }; };
+    const leftOf = (sel) => { const e = document.querySelector(sel); return e ? Math.round(e.getBoundingClientRect().left) : null; };
     return {
       close: circle('#sideBoard .pclose'),
       blur: circle('#sideBoard .change'),
       camShadow: g('#cam', 'boxShadow') !== 'none',
-      camShow: document.getElementById('cam').classList.contains('show')
+      camShow: document.getElementById('cam').classList.contains('show'),
+      paintBlur: circle('#sidePaint .change'),
+      paintClose: circle('#sidePaint .pclose'),
+      paintBlurLeft: leftOf('#sidePaint .change'),
+      paintCloseLeft: leftOf('#sidePaint .pclose'),
+      padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })()
     };
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
   ok('close = black circle + depth, on large panel', round(chrome.close), JSON.stringify(chrome.close));
   ok('blur = black circle + depth, on large panel', round(chrome.blur), JSON.stringify(chrome.blur));
   ok('camera has depth', chrome.camShadow && chrome.camShow, 'shadow=' + chrome.camShadow + ' show=' + chrome.camShow);
+  ok('paint (left) panel keeps blur + close', round(chrome.paintBlur) && round(chrome.paintClose), 'blur=' + JSON.stringify(chrome.paintBlur) + ' close=' + JSON.stringify(chrome.paintClose));
+  ok('left panel buttons on the LEFT (clear of Search)', chrome.paintBlurLeft !== null && chrome.paintBlurLeft <= 40 && chrome.paintCloseLeft <= 40, 'blurLeft=' + chrome.paintBlurLeft + ' closeLeft=' + chrome.paintCloseLeft);
+  ok('post-it pad visible', chrome.padVisible, 'visible=' + chrome.padVisible);
 
   // reset chosen state so the property checks below start clean
   await pg.reload({ waitUntil: 'networkidle' }); await pg.waitForTimeout(400); await dismiss(); await pg.waitForTimeout(200);

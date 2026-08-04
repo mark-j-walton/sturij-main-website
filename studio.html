@@ -62,10 +62,12 @@
   .side .filled .fn{display:none}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — solid black circles with depth; only on a large (chosen) panel */
-  .change{position:absolute;top:14px;right:14px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;color:#fff;background:#1a1714;border:0;border-radius:50%;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
+  .change{position:absolute;top:14px;right:14px;width:30px;height:30px;display:none;align-items:center;justify-content:center;font-size:14px;line-height:1;color:#fff;background:#1a1714;border:0;border-radius:50%;cursor:pointer;z-index:8;touch-action:none;-webkit-user-select:none;user-select:none;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
   .change:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
   .pclose{position:absolute;top:52px;right:14px;z-index:12;width:30px;height:30px;border-radius:50%;border:0;background:#1a1714;color:#fff;font-size:12px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center;padding:0;box-shadow:0 5px 14px rgba(0,0,0,.42),0 1px 3px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.14);transition:transform .15s,box-shadow .15s}
-  .side.chosen .pclose{display:flex}
+  .side.chosen .pclose,.side.chosen .change{display:flex}
+  /* left panel: buttons on the LEFT so they clear the centre Search tab */
+  .side.paint .pclose,.side.paint .change{left:14px;right:auto}
   .pclose:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.48),0 2px 5px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.16)}
   .camhdr svg{display:block}
   .handles{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:24;display:none;align-items:center;gap:18px}
@@ -360,10 +362,11 @@
 <div class="wrap">
   <div class="side paint" id="sidePaint">
     <button class="pclose" title="Clear · back to carousel">✕</button>
+    <button class="change" data-k="paint" title="Focus blur — drag; tap to reset">☀</button>
     <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
-    <div class="filled" id="fillPaint"><span class="fn"></span><button class="change" data-k="paint">☀</button></div>
+    <div class="filled" id="fillPaint"><span class="fn"></span></div>
   </div>
   <div class="side board" id="sideWorktop">
     <button class="pclose" title="Clear · back to carousel">✕</button>
@@ -1171,7 +1174,7 @@ el('bzip').onclick=function(){
     document.documentElement.style.setProperty('--swh',(props.swatchH||66)+'px');
     document.documentElement.style.setProperty('--floorh',(props.floorH||120)+'px');
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
-    if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
+    if(el('pad'))el('pad').style.display=(props.mats.tags!==false)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
     saveProps();
   }
