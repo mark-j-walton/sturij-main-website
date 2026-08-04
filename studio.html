@@ -833,8 +833,12 @@ el('bzip').onclick=function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
-  MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
+  var props={ver:PVER,panelW:{wall:50,worktop:18,doors:20,carcass:12,boards:50},mats:{},brands:{}};
+  /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
+     instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
+     Post-it tags stay on. Suppliers all available by default. */
+  MATS.forEach(function(m){props.mats[m.k]=false;m.brands.forEach(function(b){props.brands[b]=true;});});
+  props.mats.walls=true;props.mats.wood=true;props.mats.tags=true;
   // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
   /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
