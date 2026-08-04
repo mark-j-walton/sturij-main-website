@@ -525,6 +525,7 @@ var wallMode='paint', floorType='hard', floor=null, paintTarget='wall', ceilCol=
 var FLOORS={hard:[],soft:[]};   // Crucial Trading — Hard (sisal/coir/weaves) + Soft (wool), loaded from manifest
 fetch('/showcase/floors/floors.json').then(function(r){return r.json();}).then(function(m){
   ['hard','soft'].forEach(function(t){FLOORS[t]=(m[t]||[]).map(function(f){f.url='/showcase/'+(f.dir||('floors/'+t))+'/'+f.file;f.type=t;return f;});});
+  if(zones.floor&&!floor&&FLOORS[floorType]&&FLOORS[floorType][0])floor=FLOORS[floorType][0];
   renderFloorRail();
 }).catch(function(){});
 function wallCss(c){if(wallMode==='wallpaper'){return wallPaper?'background-image:url(\''+wallPaper.img+'\');background-size:cover;background-position:center':'background-color:'+c+';background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.10) 0 11px,rgba(0,0,0,.06) 11px 22px);background-size:24px 24px';}return 'background:'+c;}
@@ -1124,8 +1125,30 @@ el('bzip').onclick=function(){
      Post-it tags stay on. Suppliers all available by default. */
   MATS.forEach(function(m){props.mats[m.k]=false;m.brands.forEach(function(b){props.brands[b]=true;});});
   props.mats.walls=true;props.mats.wood=true;props.mats.tags=true;
-  // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
-  /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
+  /* Persist Properties across refreshes. Load saved state only when it matches the current
+     layout version (PVER); a stale/mismatched blob self-heals to defaults so no panel is hidden. */
+  var PKEY='sturij.studio.props';
+  try{var _sv=JSON.parse(localStorage.getItem(PKEY)||'null');
+    if(_sv&&_sv.ver===PVER){
+      if(_sv.panelW)for(var _k in _sv.panelW){if(props.panelW.hasOwnProperty(_k))props.panelW[_k]=_sv.panelW[_k];}
+      if(_sv.mats)for(var _m in _sv.mats){if(props.mats.hasOwnProperty(_m))props.mats[_m]=_sv.mats[_m];}
+      if(_sv.brands)for(var _b in _sv.brands){if(props.brands.hasOwnProperty(_b))props.brands[_b]=_sv.brands[_b];}
+      if(typeof _sv.swatchH==='number')props.swatchH=_sv.swatchH;
+      if(typeof _sv.floorH==='number')props.floorH=_sv.floorH;
+    }
+  }catch(e){}
+  function saveProps(){try{localStorage.setItem(PKEY,JSON.stringify(props));}catch(e){}}
+  /* Push the loaded materials into the live studio state on boot (zones, floor dock, tags),
+     so a persisted layout reappears instead of the toggles snapping back to defaults. */
+  function syncStudioFromProps(){
+    zones.walls=props.mats.walls!==false; zones.ceiling=!!props.mats.ceiling; zones.skirting=!!props.mats.skirting; zones.floor=!!props.mats.floor;
+    document.body.classList.toggle('hasfloor',zones.floor);
+    if(el('floorbar'))el('floorbar').classList.toggle('on',zones.floor);
+    if(zones.floor&&!floor&&FLOORS[floorType]&&FLOORS[floorType][0])floor=FLOORS[floorType][0];
+    if(el('pad'))el('pad').style.display=(props.mats.tags!==false)?'':'none';
+    if(typeof syncSub==='function')syncSub();
+    if(typeof renderFloorRail==='function')renderFloorRail();
+  }
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
   var MINW=6;
   function panelMat(k){return k==='wall'?'walls':(k==='boards'?'wood':k);}
@@ -1149,6 +1172,7 @@ el('bzip').onclick=function(){
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
+    saveProps();
   }
   function slide(changed,val,keys){
     var maxV=100-(keys.length-1)*MINW;
@@ -1205,7 +1229,7 @@ el('bzip').onclick=function(){
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
     normWidths(activeKeys());
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
-  applyProps();
+  syncStudioFromProps();applyProps();
 })();
 /* ===== welcome / landing modal ===== */
 (function(){var w=el('welcome');if(!w)return;
