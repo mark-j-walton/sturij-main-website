@@ -232,7 +232,7 @@
   .note.dragging{cursor:grabbing;opacity:.97;box-shadow:0 18px 36px rgba(0,0,0,.4)}
   .note .nx{position:absolute;top:-9px;right:-9px;width:20px;height:20px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;z-index:3}
   /* ---- Handles drawer + drag-on-canvas ---- */
-  .htab{position:fixed;right:0;top:calc(var(--nav) + 84px);z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
+  .htab{top:calc(var(--nav) + 84px)}
   .hdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:36;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
   .hdraw.on{transform:none}
   .hdh{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--line);font-family:var(--f-serif);font-size:16px;color:var(--ink)}
@@ -275,9 +275,9 @@
   .rescard .rx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .sask{max-width:900px;margin:12px auto 0;font:400 12.5px var(--f-sans);color:var(--ink-muted);text-align:center}
   /* ---- Sockets & switches drawer (mirrors Handles) ---- */
-  .sktab,.tptab{position:fixed;right:0;z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
-  .sktab{top:calc(var(--nav) + 220px)}
-  .tptab{top:calc(var(--nav) + 300px)}
+  .htab,.sktab,.tptab{position:fixed;right:0;z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;justify-content:center;min-height:120px;font:600 10.5px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:14px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
+  .sktab{top:calc(var(--nav) + 222px)}
+  .tptab{top:calc(var(--nav) + 360px)}
   .skdraw,.tpdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:37;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
   .skdraw.on,.tpdraw.on{transform:none}
   .skfin{display:flex;flex-wrap:wrap;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line)}
@@ -358,7 +358,7 @@
 </div>
 
 <div class="hlayer" id="hlayer"></div>
-<button class="htab" id="htab" title="Handles">⚒ Handles</button>
+<button class="htab" id="htab" title="Handles">Handles</button>
 <div class="hdraw" id="hdraw">
   <div class="hdh"><span>Handles</span><span class="cnt" id="hcnt"></span><button id="hdx">✕</button></div>
   <div class="hfilt" id="hfilt"></div>
@@ -366,15 +366,15 @@
   <div class="hdfoot">Drag a handle onto the scene · drag to move · double-tap or ✕ to remove</div>
 </div>
 
-<button class="sktab" id="sktab" title="Sockets &amp; switches">⌁ Sockets</button>
+<button class="sktab" id="sktab" title="Electrical — sockets &amp; switches">Electrical</button>
 <div class="skdraw" id="skdraw">
-  <div class="hdh"><span>Sockets &amp; switches</span><button id="skx">✕</button></div>
+  <div class="hdh"><span>Electrical · sockets &amp; switches</span><button id="skx">✕</button></div>
   <div class="skfin" id="skfin"></div>
   <div class="hcar" id="skcar"><div class="hct"></div></div>
   <div class="hdfoot">Pick a finish · drag a socket onto the wall · drag to move · ✕ to remove</div>
 </div>
 
-<button class="tptab" id="tptab" title="Taps">🚰 Taps</button>
+<button class="tptab" id="tptab" title="Taps">Taps</button>
 <div class="tpdraw" id="tpdraw">
   <div class="hdh"><span>Taps</span><button id="tpx">✕</button></div>
   <div class="skfin" id="tpfin"></div>
