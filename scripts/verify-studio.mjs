@@ -56,7 +56,8 @@ try {
       paintBlurLeft: leftOf('#sidePaint .change'),
       paintCloseLeft: leftOf('#sidePaint .pclose'),
       padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })(),
-      horiz: (function () { const c = document.querySelector('#sideBoard .pclose'), bb = document.querySelector('#sideBoard .change'); if (!c || !bb) return null; const cr = c.getBoundingClientRect(), br = bb.getBoundingClientRect(); return { sameTop: Math.abs(cr.top - br.top) <= 2, xOutside: cr.right >= br.right - 1 }; })()
+      horiz: (function () { const c = document.querySelector('#sideBoard .pclose'), bb = document.querySelector('#sideBoard .change'); if (!c || !bb) return null; const cr = c.getBoundingClientRect(), br = bb.getBoundingClientRect(); return { sameTop: Math.abs(cr.top - br.top) <= 2, xOutside: cr.right >= br.right - 1 }; })(),
+      searchClear: (function () { const st = document.getElementById('stab'); if (!st) return true; const sr = st.getBoundingClientRect(); return ['sidePaint', 'sideWorktop', 'sideCarcass', 'sideBoard'].every(function (id) { const s = document.getElementById(id); if (!s || s.style.display === 'none') return true; return ['.pclose', '.change'].every(function (sel) { const e = s.querySelector(sel); if (!e) return true; const r = e.getBoundingClientRect(); const ov = r.right > sr.left && r.left < sr.right && r.bottom > sr.top && r.top < sr.bottom; return !ov; }); }); })()
     };
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
@@ -68,6 +69,7 @@ try {
   ok('paint (left) panel keeps blur + close', round(chrome.paintBlur) && round(chrome.paintClose), 'blur=' + JSON.stringify(chrome.paintBlur) + ' close=' + JSON.stringify(chrome.paintClose));
   ok('left panel: ✕ outermost-left, blur inside it', chrome.paintCloseLeft !== null && chrome.paintCloseLeft <= 30 && chrome.paintBlurLeft > chrome.paintCloseLeft, 'closeLeft=' + chrome.paintCloseLeft + ' blurLeft=' + chrome.paintBlurLeft);
   ok('close+blur horizontal, ✕ on the outside', chrome.horiz && chrome.horiz.sameTop && chrome.horiz.xOutside, JSON.stringify(chrome.horiz));
+  ok('panel buttons clear of the Search tab', chrome.searchClear, 'clear=' + chrome.searchClear);
   ok('post-it pad visible', chrome.padVisible, 'visible=' + chrome.padVisible);
 
   // reset chosen state so the property checks below start clean
