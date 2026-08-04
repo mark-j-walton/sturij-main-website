@@ -767,7 +767,7 @@ function placeWood(b,x,y){
 }
 function showSuggest(){if(!bothChosen())return;var row=el('srow');
   var picks=BOARDS.filter(function(b){return b.s!==sel.board.s;}).sort(function(){return Math.random()-.5;}).slice(0,6);
-  row.innerHTML=picks.map(function(b){return '<div class="scard" data-s="'+b.s+'" data-n="'+b.n+'"><img src="/showcase/finishes/'+b.s+'.webp" draggable="false"><div class="cn">'+b.n+'</div></div>';}).join('');
+  row.innerHTML=picks.map(function(b){return '<div class="scard" data-s="'+b.s+'" data-n="'+b.n+'" title="'+b.n+'"><img src="/showcase/finishes/'+b.s+'.webp" draggable="false"></div>';}).join('');
   [].forEach.call(row.querySelectorAll('.scard'),function(c){
     c.addEventListener('pointerdown',function(e){
       var sx=e.clientX,sy=e.clientY,ghost=null,moved=false,s=c.getAttribute('data-s'),n=c.getAttribute('data-n');
