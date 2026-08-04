@@ -104,7 +104,7 @@
   .favchip img{width:100%;height:48px;object-fit:cover;border-radius:7px;display:block;pointer-events:none}
   .favchip .cn{font:600 7px var(--f-mono);letter-spacing:.02em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .favchip .fx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
-  .floorbar::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 20px 34px -28px rgba(0,0,0,.5)}
+  /* no inset bevel on the floor dock — depth comes purely from the outer drop shadow at the top seam */
   .scard{flex:none;width:144px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
   .scard:hover{transform:translateY(-3px)}
   .scard .si{height:92px;background-size:cover;background-position:center}
