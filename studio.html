@@ -254,7 +254,28 @@
   .rescard .rl{font:600 7.5px var(--f-mono);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .rescard .rx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .sask{max-width:900px;margin:12px auto 0;font:400 12.5px var(--f-sans);color:var(--ink-muted);text-align:center}
-  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}.hdraw{width:190px}}
+  /* ---- Sockets & switches drawer (mirrors Handles) ---- */
+  .sktab{position:fixed;right:0;top:calc(var(--nav) + 220px);z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
+  .skdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:37;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
+  .skdraw.on{transform:none}
+  .skfin{display:flex;flex-wrap:wrap;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line)}
+  .skchip{display:inline-flex;align-items:center;gap:5px;font:600 8px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 8px;cursor:pointer}
+  .skchip span{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+  .skchip.on{color:var(--paper);background:var(--bronze);border-color:var(--bronze)}
+  .skcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 12px;cursor:grab;border-bottom:1px solid rgba(0,0,0,.05)}
+  .skcard:active{cursor:grabbing}
+  .skcard .im{width:100%;height:82px;display:flex;align-items:center;justify-content:center}
+  .skcard .im svg{width:70px;height:70px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.16));pointer-events:none}
+  .skcard .nm{font:600 8.5px var(--f-mono);letter-spacing:.05em;color:var(--ink-muted);text-align:center;text-transform:uppercase}
+  .skplaced{position:absolute;pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+  .skplaced svg{width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 6px 13px rgba(0,0,0,.34))}
+  .skplaced.sel{outline:1.5px dashed var(--gold);outline-offset:5px;border-radius:3px}
+  .skplaced .hx{position:absolute;top:-11px;right:-11px;width:21px;height:21px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+  .skplaced.sel .hx{display:flex}
+  .skplaced .hgrip{position:absolute;right:-8px;bottom:-8px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid #fff;cursor:nwse-resize;display:none}
+  .skplaced.sel .hgrip{display:block}
+  .skghost svg{width:96px;height:96px}
+  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}.hdraw{width:190px}.skdraw{width:190px}}
 </style>
 </head>
 <body>
@@ -313,6 +334,14 @@
   <div class="hfilt" id="hfilt"></div>
   <div class="hcar" id="hcar"><div class="hct"></div></div>
   <div class="hdfoot">Drag a handle onto the scene · drag to move · double-tap or ✕ to remove</div>
+</div>
+
+<button class="sktab" id="sktab" title="Sockets &amp; switches">⌁ Sockets</button>
+<div class="skdraw" id="skdraw">
+  <div class="hdh"><span>Sockets &amp; switches</span><button id="skx">✕</button></div>
+  <div class="skfin" id="skfin"></div>
+  <div class="hcar" id="skcar"><div class="hct"></div></div>
+  <div class="hdfoot">Pick a finish · drag a socket onto the wall · drag to move · ✕ to remove</div>
 </div>
 
 <div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
@@ -790,6 +819,64 @@ el('bzip').onclick=function(){
   }
   document.addEventListener('pointerdown',function(e){ if(selEl && !e.target.closest('.hplaced') && !e.target.closest('.hdraw') && !e.target.closest('.htab')){ selEl.classList.remove('sel'); selEl=null; } });
   build();
+})();
+
+/* ===== Sockets & switches drawer — clones the Handles pattern; SVG assets, drag onto the wall ===== */
+(function(){
+  var layer=el('hlayer'), car=el('skcar'), ct=car&&car.querySelector('.hct'), finBox=el('skfin');
+  if(!car||!ct||!layer||!finBox) return;
+  var FIN=[['Steel','#c9ccd0'],['Matt Black','#2b2b2d'],['Brass','#b9974f'],['Chrome','#dfe3e7'],['White','#f4f2ec']];
+  var TYPES=[{k:'double',n:'Double socket'},{k:'single',n:'Single socket'},{k:'switch',n:'Light switch'},{k:'usb',n:'USB socket'}];
+  var curFin=0;
+  function outlet(cx,cy,pc){return '<g fill="'+pc+'"><rect x="'+(cx-3)+'" y="'+(cy-15)+'" width="6" height="10" rx="1.5"/><rect x="'+(cx-14)+'" y="'+(cy+1)+'" width="11" height="5" rx="1.5"/><rect x="'+(cx+3)+'" y="'+(cy+1)+'" width="11" height="5" rx="1.5"/></g>';}
+  function svg(type,color){
+    var dark=(color==='#2b2b2d'), pc=dark?'#9a9a9a':'#3a3a3a', inner='';
+    if(type==='double') inner=outlet(32,50,pc)+outlet(68,50,pc);
+    else if(type==='single') inner=outlet(50,50,pc);
+    else if(type==='switch') inner='<rect x="35" y="26" width="30" height="48" rx="5" fill="'+pc+'" opacity=".9"/><rect x="41" y="33" width="18" height="17" rx="3" fill="'+(dark?'#3a3a3a':'#ededed')+'"/>';
+    else inner='<g fill="'+pc+'"><rect x="30" y="41" width="17" height="8" rx="2.5"/><rect x="53" y="41" width="17" height="8" rx="2.5"/><rect x="33" y="43.5" width="11" height="3" rx="1" fill="'+(dark?'#2b2b2d':'#d2d2d2')+'"/><rect x="56" y="43.5" width="11" height="3" rx="1" fill="'+(dark?'#2b2b2d':'#d2d2d2')+'"/></g>';
+    return '<svg viewBox="0 0 100 100"><rect x="7" y="7" width="86" height="86" rx="11" fill="'+color+'" stroke="rgba(0,0,0,.22)" stroke-width="1.5"/>'+inner+'</svg>';
+  }
+  function chips(){ finBox.innerHTML=FIN.map(function(f,i){return '<button class="skchip'+(i===curFin?' on':'')+'" data-i="'+i+'"><span style="background:'+f[1]+'"></span>'+f[0]+'</button>';}).join(''); }
+  function build(){ var c=FIN[curFin][1]; ct.innerHTML=TYPES.map(function(t,i){return '<div class="skcard" data-i="'+i+'"><div class="im">'+svg(t.k,c)+'</div><div class="nm">'+t.n+'</div></div>';}).join(''); }
+  finBox.addEventListener('click',function(e){var b=e.target.closest('.skchip');if(!b)return;curFin=+b.getAttribute('data-i');chips();build();});
+  el('sktab').onclick=function(){el('skdraw').classList.toggle('on');};
+  el('skx').onclick=function(){el('skdraw').classList.remove('on');};
+  ct.addEventListener('pointerdown',function(e){
+    var card=e.target.closest('.skcard'); if(!card)return;
+    var sx=e.clientX,sy=e.clientY,idx=+card.getAttribute('data-i'),moved=false,ghost=null;
+    function mv(ev){ var dx=ev.clientX-sx,dy=ev.clientY-sy; if(!moved){if(Math.abs(dx)<7&&Math.abs(dy)<7)return;moved=true;}
+      if(!ghost){ghost=document.createElement('div');ghost.className='hghost skghost';ghost.innerHTML=svg(TYPES[idx].k,FIN[curFin][1]);document.body.appendChild(ghost);}
+      ghost.style.left=(ev.clientX-48)+'px';ghost.style.top=(ev.clientY-48)+'px'; }
+    function up(ev){ document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);
+      if(ghost){ghost.remove();var lr=layer.getBoundingClientRect();
+        if(ev.clientX<lr.right-10&&ev.clientY>lr.top){place(idx,ev.clientX-lr.left,ev.clientY-lr.top);if(window.innerWidth<560)el('skdraw').classList.remove('on');}} }
+    document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
+  });
+  var selEl=null;
+  function sel(d){if(selEl&&selEl!==d)selEl.classList.remove('sel');selEl=d;d.classList.add('sel');}
+  function place(idx,px,py){
+    var S=68,t=TYPES[idx],c=FIN[curFin][1];
+    var d=document.createElement('div');d.className='skplaced';d.style.left=(px-S/2)+'px';d.style.top=(py-S/2)+'px';d.style.width=S+'px';d.style.height=S+'px';
+    d.setAttribute('data-tag','');d.setAttribute('data-brand','Socket');d.setAttribute('data-name',t.n+' · '+FIN[curFin][0]);
+    d.innerHTML=svg(t.k,c)+'<button class="hx" title="Remove">✕</button><span class="hgrip"></span>';
+    layer.appendChild(d);sel(d);
+    var grip=d.querySelector('.hgrip'),xb=d.querySelector('.hx');
+    xb.onclick=function(e){e.stopPropagation();d.remove();if(selEl===d)selEl=null;};
+    d.addEventListener('dblclick',function(){d.remove();if(selEl===d)selEl=null;});
+    d.addEventListener('pointerdown',function(e){ if(e.target===grip||e.target===xb)return;e.stopPropagation();sel(d);
+      var mx=e.clientX,my=e.clientY,l=parseFloat(d.style.left),tp=parseFloat(d.style.top);
+      function mv(ev){d.style.left=(l+ev.clientX-mx)+'px';d.style.top=(tp+ev.clientY-my)+'px';}
+      function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up); });
+    grip.addEventListener('pointerdown',function(e){ e.stopPropagation();sel(d);
+      var mx=e.clientX,w=d.offsetWidth;
+      function mv(ev){var nw=Math.max(30,w+(ev.clientX-mx));d.style.width=nw+'px';d.style.height=nw+'px';}
+      function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up); });
+  }
+  document.addEventListener('pointerdown',function(e){ if(selEl&&!e.target.closest('.skplaced')&&!e.target.closest('.skdraw')&&!e.target.closest('.sktab')){selEl.classList.remove('sel');selEl=null;} });
+  chips();build();
 })();
 
 /* ===== Search drawer (top): keyword search over the catalogue now; swaps to a strong AI model when a key is wired ===== */
