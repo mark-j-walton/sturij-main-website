@@ -104,7 +104,7 @@
   .favchip img{width:100%;height:48px;object-fit:cover;border-radius:7px;display:block;pointer-events:none}
   .favchip .cn{font:600 7px var(--f-mono);letter-spacing:.02em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .favchip .fx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
-  .floorbar::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 26px 42px -26px rgba(0,0,0,.6),inset 0 -12px 26px -18px rgba(0,0,0,.42)}
+  .floorbar::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:3;box-shadow:inset 0 20px 34px -28px rgba(0,0,0,.5)}
   .scard{flex:none;width:144px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
   .scard:hover{transform:translateY(-3px)}
   .scard .si{height:92px;background-size:cover;background-position:center}
@@ -142,7 +142,7 @@
   .side.chosen #fillPaint{display:block}
   .room{position:absolute;inset:0;display:flex;flex-direction:column}
   .rcols{flex:1;min-height:0;display:flex}
-  .rfloor{height:clamp(70px,18vh,180px);position:relative;background-size:cover;background-position:center;box-shadow:inset 0 3px 6px rgba(0,0,0,.14)}
+  .rfloor{height:var(--floorh,clamp(70px,18vh,180px));position:relative;background-size:cover;background-position:center;box-shadow:inset 0 3px 6px rgba(0,0,0,.14)}
   .rcol{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid rgba(0,0,0,.10)}
   .rcol:last-child{border-right:0}
   .rband{position:relative;cursor:pointer}.rcols{cursor:pointer}
@@ -151,7 +151,7 @@
   .rwall{flex:1;position:relative;background:#ece6da}
   .rskirt{height:clamp(64px,20vh,200px);background:#fbf9f3;box-shadow:inset 0 2px 0 rgba(0,0,0,.06)}
   .rzoff{opacity:.55}
-  .rnm{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);font:600 10px/1.3 var(--f-mono);letter-spacing:.02em;color:#fff;background:rgba(26,23,20,.34);padding:5px 9px;border-radius:8px;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .rnm{position:absolute;left:10px;bottom:10px;max-width:calc(100% - 20px);font:600 10px/1.3 var(--f-mono);letter-spacing:.02em;color:#fff;background:rgba(26,23,20,.22);padding:5px 9px;border-radius:8px;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .roomtools{position:absolute;left:0;right:0;bottom:0;z-index:6;display:flex;gap:8px;justify-content:center;padding:14px}
   .roomtools .rt{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:rgba(253,252,248,.9);border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.16)}
   .roomtools .rt.add{color:var(--navy);background:var(--gold);border-color:var(--gold)}
@@ -165,7 +165,7 @@
   .fchip.on{outline:2px solid var(--bronze);outline-offset:1px}
   #floorpick .fchips{display:none}   /* floor now chosen from the bottom rail */
   /* ===== floor coverings: horizontal rail along the bottom ===== */
-  .floorbar{position:fixed;left:0;right:0;bottom:0;z-index:23;height:20vh;min-height:132px;display:none;background:var(--navy);box-shadow:0 -3px 16px rgba(0,0,0,.34)}
+  .floorbar{position:fixed;left:0;right:0;bottom:0;z-index:23;height:20vh;min-height:132px;display:none;background:var(--navy);box-shadow:0 -9px 26px rgba(0,0,0,.44),0 -1px 0 rgba(0,0,0,.5)}
   .floorbar.on{display:block}
   body.hasfloor .pad{bottom:116px}
   .fhint{position:absolute;top:5px;left:0;right:0;text-align:center;font:600 9px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.55);pointer-events:none;z-index:2}
@@ -173,10 +173,10 @@
   .frail.grabbing{cursor:grabbing}
   .ftrack{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
   .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.28);position:relative}
-  .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(0,0,0,.42);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(26,23,20,.22);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .fexp{position:absolute;inset:0;display:none;background-size:cover;background-position:center;align-items:center;justify-content:space-between;padding:0 18px}
   .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
-  .fexp .fn{font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;background:rgba(0,0,0,.48);padding:10px 14px;border-radius:8px}
+  .fexp .fn{font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;background:rgba(26,23,20,.22);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:10px 14px;border-radius:8px}
   .fexp .fchg{font:600 10px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:9px 14px;cursor:pointer}
   /* ===== properties cog + modal ===== */
   .cog{position:fixed;right:14px;bottom:16px;z-index:29;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(253,252,248,.9);color:var(--ink);font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(0,0,0,.2)}
@@ -204,6 +204,13 @@
   .pwrow input[type=range]:active{cursor:grabbing}
   .pwrow .pv{font:600 13px var(--f-mono);color:var(--ink);text-align:right}
   .pwhint{font:11px/1.45 var(--f-sans);color:var(--ink-muted);margin-top:11px}
+  /* vertical slider — floor sample depth */
+  .vslide{display:flex;align-items:center;gap:18px;padding:4px 2px 2px}
+  .vrange{writing-mode:vertical-lr;direction:rtl;-webkit-appearance:slider-vertical;appearance:slider-vertical;width:24px;height:150px;accent-color:var(--bronze);cursor:grab;flex:none}
+  .vrange:active{cursor:grabbing}
+  .vslabel{display:flex;flex-direction:column;gap:7px}
+  .vslabel .pv{font:600 15px var(--f-mono);color:var(--ink)}
+  .vs-cap{font:11px/1.45 var(--f-sans);color:var(--ink-muted);max-width:230px}
   .mrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
   .mrow:last-child{border-bottom:0}
   .mrow .ml{display:flex;align-items:center;gap:8px;font-size:13px;min-width:120px}
@@ -378,7 +385,6 @@
 </div>
 
 <div class="floorbar" id="floorbar">
-  <div class="fhint">Floor · drag · tap to lay</div>
   <div class="frail" id="frail"><div class="ftrack"></div></div>
   <div class="fexp" id="fexp"><span class="fn"></span><button class="fchg" id="fchg">☀</button></div>
 </div>
@@ -436,6 +442,13 @@
       <h4>Carousel · swatch height</h4>
       <div class="pwrow"><span class="pl">Swatch height</span><input type="range" min="44" max="150" step="1" id="swh"><span class="pv" id="swhv">66px</span></div>
       <div class="pwhint">Taller swatches reveal more of the wood grain or fabric. Images always scale in proportion — never stretched.</div>
+    </div>
+    <div class="msec">
+      <h4>Room · floor depth</h4>
+      <div class="vslide">
+        <input type="range" min="48" max="320" step="2" id="flh" class="vrange">
+        <div class="vslabel"><span class="pv" id="flhv">120px</span><span class="vs-cap">Drag up for a deeper floor. The walls above stay pinned to the top and give way as the floor grows — the sample always keeps its proportion, never stretched.</span></div>
+      </div>
     </div>
     <div class="msec"><h4>Materials &amp; brands</h4><div id="matlist"></div></div>
     <div class="mfoot"><button id="msave">Save</button></div>
@@ -1105,7 +1118,7 @@ el('bzip').onclick=function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{},swatchH:66};
+  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{},swatchH:66,floorH:120};
   /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
      instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
      Post-it tags stay on. Suppliers all available by default. */
@@ -1132,6 +1145,7 @@ el('bzip').onclick=function(){
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
   function applyProps(){
     document.documentElement.style.setProperty('--swh',(props.swatchH||66)+'px');
+    document.documentElement.style.setProperty('--floorh',(props.floorH||120)+'px');
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
@@ -1158,7 +1172,9 @@ el('bzip').onclick=function(){
       box.appendChild(row);
     });
     [].forEach.call(box.querySelectorAll('input[type=range]'),function(inp){inp.oninput=function(){slide(inp.getAttribute('data-pk'),parseInt(inp.value)||MINW,keys);};});
-    if(!box.nextSibling||!box.nextSibling.className){var h=document.createElement('div');h.className='pwhint';h.textContent='Move one and the others adjust to fit — always totals 100%.';box.parentNode.appendChild(h);}
+    /* exactly one hint — clear any that piled up from earlier rebuilds, then add a single copy */
+    [].forEach.call(box.parentNode.querySelectorAll('.pwhint'),function(n){n.remove();});
+    var h=document.createElement('div');h.className='pwhint';h.textContent='Move one and the others adjust to fit — always totals 100%.';box.parentNode.appendChild(h);
   }
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
@@ -1177,7 +1193,9 @@ el('bzip').onclick=function(){
     };});}
   function buildSwatchH(){var sh=el('swh');if(!sh)return;sh.value=props.swatchH||66;if(el('swhv'))el('swhv').textContent=(props.swatchH||66)+'px';
     sh.oninput=function(){props.swatchH=parseInt(sh.value)||66;if(el('swhv'))el('swhv').textContent=props.swatchH+'px';applyProps();};}
-  el('cog').onclick=function(){buildGrid();buildMat();buildSwatchH();el('modal').classList.add('on');};
+  function buildFloorH(){var fh=el('flh');if(!fh)return;fh.value=props.floorH||120;if(el('flhv'))el('flhv').textContent=(props.floorH||120)+'px';
+    fh.oninput=function(){props.floorH=parseInt(fh.value)||120;if(el('flhv'))el('flhv').textContent=props.floorH+'px';applyProps();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
+  el('cog').onclick=function(){buildGrid();buildMat();buildSwatchH();buildFloorH();el('modal').classList.add('on');};
   if(el('nameheart'))el('nameheart').onclick=function(){var on=document.body.classList.toggle('shownames');this.textContent=on?'♥':'♡';};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
   el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
