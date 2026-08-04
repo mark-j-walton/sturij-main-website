@@ -29,6 +29,12 @@
   .strip:hover .lab,.strip.hot .lab{background:rgba(253,252,248,.94);color:var(--ink)}
   .strip:hover .lab .add,.strip.hot .lab .add{max-height:26px}
   .lab.added{opacity:0}
+  /* Colour names OFF by default — clean first impression. The heart reveals them. */
+  .lab{display:none}
+  body.shownames .lab{display:block}
+  .nameheart{background:none;border:0;color:rgba(250,247,240,.45);font-size:16px;line-height:1;cursor:pointer;padding:4px 7px;transition:color .2s,transform .2s}
+  .nameheart:hover{color:rgba(250,247,240,.8)}
+  body.shownames .nameheart{color:var(--gold);transform:scale(1.08)}
   .colhint{position:absolute;top:10px;left:0;right:0;z-index:5;text-align:center;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,242,.6);pointer-events:none;mix-blend-mode:difference;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 10px}
   .filled{position:absolute;inset:0;display:none;align-items:flex-end;background-size:cover;background-position:center}
   .side.chosen .filled{display:flex}.side.chosen .rail{display:none}.side.chosen .colhint{display:none}
@@ -170,11 +176,13 @@
   .roomsec .floorpick.show{display:block}
   .split{display:flex;align-items:center;gap:10px;font:600 11px var(--f-mono)}
   .split input[type=range]{flex:1;accent-color:var(--bronze)}
-  .grid2{display:flex;gap:10px;margin-top:12px}
-  .gcell{flex:1;border:1px dashed var(--line);border-radius:8px;padding:10px;text-align:center}
-  .gcell label{display:block;font:600 9px var(--f-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:6px}
-  .gcell input{width:74px;text-align:center;font:600 14px var(--f-mono);border:1px solid var(--line);border-radius:6px;padding:6px}
-  .gcell input:disabled{background:var(--paper-warm);color:var(--ink-muted)}
+  .pw{display:flex;flex-direction:column;gap:13px;margin-top:12px}
+  .pwrow{display:grid;grid-template-columns:78px 1fr 42px;align-items:center;gap:12px}
+  .pwrow .pl{font:600 10px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted)}
+  .pwrow input[type=range]{width:100%;accent-color:var(--bronze);cursor:grab;height:22px}
+  .pwrow input[type=range]:active{cursor:grabbing}
+  .pwrow .pv{font:600 13px var(--f-mono);color:var(--ink);text-align:right}
+  .pwhint{font:11px/1.45 var(--f-sans);color:var(--ink-muted);margin-top:11px}
   .mrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
   .mrow:last-child{border-bottom:0}
   .mrow .ml{display:flex;align-items:center;gap:8px;font-size:13px;min-width:120px}
@@ -183,6 +191,19 @@
   .mrow input{accent-color:var(--bronze)}
   .mfoot{padding:14px 18px;display:flex;justify-content:flex-end}
   .mfoot button{font:600 13px var(--f-sans);color:var(--navy);background:var(--gold);border:0;border-radius:10px;padding:10px 22px;cursor:pointer}
+  /* ===== welcome / landing modal (top layer) ===== */
+  .welcome{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(26,23,20,.5);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);transition:opacity .45s}
+  .welcome.gone{opacity:0;pointer-events:none}
+  .welcome-bg{position:absolute;inset:0;z-index:0;display:grid;grid-template-rows:1fr 1fr}
+  .wshot{background:linear-gradient(135deg,#efe9dd,#e0d9c9);opacity:.45}
+  .wshot-b{background:linear-gradient(135deg,#e7e2d5,#d7d0bf)}
+  .welcome-card{position:relative;z-index:1;width:min(560px,94vw);max-height:88vh;overflow-y:auto;background:var(--paper);border-radius:16px;border:1px solid var(--line);border-left:4px solid var(--bronze);box-shadow:0 30px 80px rgba(0,0,0,.5);padding:30px 32px 26px;font-family:var(--f-sans);color:var(--ink)}
+  .welcome-card .wx{position:absolute;top:13px;right:15px;border:0;background:none;font-size:15px;color:var(--ink-muted);cursor:pointer}
+  .weyebrow{margin:0 0 12px;font:600 10.5px var(--f-mono);letter-spacing:.18em;text-transform:uppercase;color:var(--bronze)}
+  .welcome-card h2{margin:0 0 16px;font-family:var(--f-serif);font-weight:400;font-size:25px;line-height:1.22;color:var(--ink)}
+  .wbody p{margin:0 0 11px;font-size:14px;line-height:1.6;color:var(--ink-body)}
+  .wbody b{color:var(--ink)}
+  .wcta{margin-top:6px;font:600 14px var(--f-sans);color:var(--navy);background:var(--gold);border:0;border-radius:999px;padding:12px 26px;cursor:pointer}
   /* ===== peel-off post-it tag ===== */
   .pad{position:fixed;left:16px;bottom:18px;z-index:28;width:126px;height:92px;cursor:grab;font-family:var(--f-mono)}
   .pad .sheet{position:absolute;inset:0;background:#efe3c4;border-radius:3px;box-shadow:0 5px 14px rgba(0,0,0,.22)}
@@ -246,14 +267,51 @@
   .rescard .rl{font:600 7.5px var(--f-mono);text-transform:uppercase;color:var(--ink-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .rescard .rx{position:absolute;top:-7px;right:-7px;width:17px;height:17px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:9px;cursor:pointer;display:flex;align-items:center;justify-content:center}
   .sask{max-width:900px;margin:12px auto 0;font:400 12.5px var(--f-sans);color:var(--ink-muted);text-align:center}
-  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}.hdraw{width:190px}}
+  /* ---- Sockets & switches drawer (mirrors Handles) ---- */
+  .sktab{position:fixed;right:0;top:calc(var(--nav) + 220px);z-index:34;writing-mode:vertical-rl;display:flex;align-items:center;gap:7px;font:600 10.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--paper);background:var(--navy);border:0;border-radius:12px 0 0 12px;padding:15px 9px;cursor:pointer;box-shadow:-6px 8px 20px rgba(0,0,0,.28)}
+  .skdraw{position:fixed;top:var(--nav);right:0;bottom:0;width:236px;z-index:37;background:rgba(250,248,242,.98);border-left:1px solid var(--line);box-shadow:-18px 0 46px rgba(0,0,0,.24);transform:translateX(100%);transition:transform .3s cubic-bezier(.4,.1,.2,1);display:flex;flex-direction:column;font-family:var(--f-sans)}
+  .skdraw.on{transform:none}
+  .skfin{display:flex;flex-wrap:wrap;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line)}
+  .skchip{display:inline-flex;align-items:center;gap:5px;font:600 8px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 8px;cursor:pointer}
+  .skchip span{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+  .skchip.on{color:var(--paper);background:var(--bronze);border-color:var(--bronze)}
+  .skcard{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 12px;cursor:grab;border-bottom:1px solid rgba(0,0,0,.05)}
+  .skcard:active{cursor:grabbing}
+  .skcard .im{width:100%;height:82px;display:flex;align-items:center;justify-content:center}
+  .skcard .im svg{width:70px;height:70px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.16));pointer-events:none}
+  .skcard .nm{font:600 8.5px var(--f-mono);letter-spacing:.05em;color:var(--ink-muted);text-align:center;text-transform:uppercase}
+  .skplaced{position:absolute;pointer-events:auto;cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+  .skplaced svg{width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 6px 13px rgba(0,0,0,.34))}
+  .skplaced.sel{outline:1.5px dashed var(--gold);outline-offset:5px;border-radius:3px}
+  .skplaced .hx{position:absolute;top:-11px;right:-11px;width:21px;height:21px;border-radius:50%;border:0;background:var(--navy);color:#fff;font-size:11px;cursor:pointer;display:none;align-items:center;justify-content:center;line-height:1}
+  .skplaced.sel .hx{display:flex}
+  .skplaced .hgrip{position:absolute;right:-8px;bottom:-8px;width:15px;height:15px;border-radius:50%;background:var(--gold);border:2px solid #fff;cursor:nwse-resize;display:none}
+  .skplaced.sel .hgrip{display:block}
+  .skghost svg{width:96px;height:96px}
+  @media(max-width:560px){.strip{height:58px}.pad{width:104px;height:78px}.hdraw{width:190px}.skdraw{width:190px}}
 </style>
 </head>
 <body>
+<div class="welcome" id="welcome" role="dialog" aria-label="Welcome to the Pairing Studio">
+  <div class="welcome-bg"><div class="wshot wshot-a"></div><div class="wshot wshot-b"></div></div>
+  <div class="welcome-card">
+    <button class="wx" id="welcomeX" aria-label="Close">✕</button>
+    <p class="weyebrow">Sturij · Pairing Studio</p>
+    <h2>Start with two materials — the rest is yours to explore.</h2>
+    <div class="wbody">
+      <p>We've started you off with your <b>wall colour</b> and your <b>board (door &amp; panel) finish</b>. Together these set the general scheme, so you can feel the space straight away.</p>
+      <p>Add any of the other materials to build a full interior scheme — an unrestricted playground to test as many variations as your project needs.</p>
+      <p><b>Want a hand?</b> Use it alongside your own interior designer, or try our AI helper — it's not an interior designer, but it'll suggest combinations that work across the materials. It's young and still learning, so if you like a suggestion, ask for the parts you don't to be remixed.</p>
+      <p>We've drawn on popular makers of paint, wallpaper and flooring, plus quality suppliers of the other pieces of a room — from switch finishes to worktops. More ranges are added over time, so check back on any home-improvement adventure.</p>
+      <p><b>Sturij</b> designs, manufactures and installs bespoke furniture — or works supply-only with your own trusted trades. No-one's selling to you here; it's simply a lovely place to create.</p>
+    </div>
+    <button class="wcta" id="welcomeGo">Start exploring</button>
+  </div>
+</div>
 <header class="top">
   <a class="b" href="/">sturij<i>.</i></a>
   <span class="t">Pairing studio</span>
-  <span class="tr"><button class="pbtn" id="cog" title="Studio properties">⚙ Properties</button><a class="x" href="/">Close</a></span>
+  <span class="tr"><button class="nameheart" id="nameheart" title="Show / hide colour names">♡</button><button class="pbtn" id="cog" title="Studio properties">⚙ Properties</button><a class="x" href="/">Close</a></span>
 </header>
 
 <button class="stab" id="stab" title="Describe your scheme">⌕ Search</button>
@@ -280,11 +338,6 @@
     <div class="rail" id="railWorktop"><div class="track"></div></div>
     <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">☀</button></div>
   </div>
-  <div class="side board" id="sideDoors">
-    <div class="colhint">Doors · drag · tap to fill</div>
-    <div class="rail" id="railDoors"><div class="track"></div></div>
-    <div class="filled" id="fillDoors"><span class="fn"></span><button class="change" data-k="doors">☀</button></div>
-  </div>
   <div class="side board" id="sideCarcass">
     <div class="colhint">Carcass · tap</div>
     <div class="rail" id="railCarcass"><div class="track"></div></div>
@@ -310,6 +363,14 @@
   <div class="hfilt" id="hfilt"></div>
   <div class="hcar" id="hcar"><div class="hct"></div></div>
   <div class="hdfoot">Drag a handle onto the scene · drag to move · double-tap or ✕ to remove</div>
+</div>
+
+<button class="sktab" id="sktab" title="Sockets &amp; switches">⌁ Sockets</button>
+<div class="skdraw" id="skdraw">
+  <div class="hdh"><span>Sockets &amp; switches</span><button id="skx">✕</button></div>
+  <div class="skfin" id="skfin"></div>
+  <div class="hcar" id="skcar"><div class="hct"></div></div>
+  <div class="hdfoot">Pick a finish · drag a socket onto the wall · drag to move · ✕ to remove</div>
 </div>
 
 <div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
@@ -400,7 +461,7 @@ function rail(sideEl, railEl, kind, items, paint){
   railEl.addEventListener('pointermove',function(e){if(!dragging)return;var dy=e.clientY-lastY;lastY=e.clientY;vy=dy;moved+=Math.abs(dy);y-=dy;apply();});
   function momentum(){vy*=0.93;if(Math.abs(vy)<0.4)return;y-=vy;apply();raf=requestAnimationFrame(momentum);}
   railEl.addEventListener('pointerup',function(e){if(!dragging)return;dragging=false;railEl.classList.remove('grabbing');
-    if(moved<6){ tap(e.clientX,e.clientY); } else momentum(); });
+    if(moved<14){ tap(e.clientX,e.clientY); } else momentum(); });
   railEl.addEventListener('pointercancel',function(){dragging=false;railEl.classList.remove('grabbing');});
   function tap(x,yy){
     var t=document.elementFromPoint(x,yy); if(!t)return;
@@ -493,7 +554,7 @@ el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
   function mom(){vx*=0.92;if(Math.abs(vx)<0.4)return;x-=vx;ap();raf=requestAnimationFrame(mom);}
   rail.addEventListener('pointerup',function(){if(!down)return;down=false;rail.classList.remove('grabbing');mom();});
   rail.addEventListener('pointercancel',function(){down=false;rail.classList.remove('grabbing');});
-  rail.addEventListener('click',function(e){if(fmoved>6)return;var t=e.target.closest('.ftile');if(!t)return;var fl=(FLOORS[floorType]||[])[parseInt(t.getAttribute('data-i'))];if(!fl)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});
+  rail.addEventListener('click',function(e){if(fmoved>14)return;var t=e.target.closest('.ftile');if(!t)return;var fl=(FLOORS[floorType]||[])[parseInt(t.getAttribute('data-i'))];if(!fl)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});
 })();
 /* Post-it tags on/off */
 el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
@@ -522,7 +583,6 @@ function bothChosen(){return sel.paint&&sel.board;}
 function updateBar(){ el('bar').classList.toggle('on',!!bothChosen()); if(bothChosen()) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
 
 rail(el('sidePaint'), el('railPaint'), 'paint', FB, true);
-rail(el('sideDoors'), el('railDoors'), 'doors', BOARDS, false);
 rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
 rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false);
 var WORKTOPS=[];
@@ -531,7 +591,7 @@ var WALLPAPERS=[], wallPaper=null;
 fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).then(function(m){WALLPAPERS=m.map(function(w){return {s:w.file,n:w.name,img:'/showcase/wallpaper/'+w.file};});rail(el('sidePaint'),el('railWallpaper'),'wallpaper',WALLPAPERS,false);}).catch(function(){});
 /* ===== One method for every panel: idle block → tap to select → splits into swatches ===== */
 (function(){
-  var sides=[el('sidePaint'),el('sideWorktop'),el('sideDoors'),el('sideCarcass'),el('sideBoard')].filter(Boolean);
+  var sides=[el('sidePaint'),el('sideWorktop'),el('sideCarcass'),el('sideBoard')].filter(Boolean);
   function idle(s){s.classList.remove('active');if(!s.classList.contains('chosen'))s.classList.add('idle');}
   function open(s){if(s.classList.contains('chosen'))return;sides.forEach(function(o){if(o!==s)idle(o);});s.classList.remove('idle');s.classList.add('active');}
   window._openSide=open;
@@ -790,6 +850,64 @@ el('bzip').onclick=function(){
   build();
 })();
 
+/* ===== Sockets & switches drawer — clones the Handles pattern; SVG assets, drag onto the wall ===== */
+(function(){
+  var layer=el('hlayer'), car=el('skcar'), ct=car&&car.querySelector('.hct'), finBox=el('skfin');
+  if(!car||!ct||!layer||!finBox) return;
+  var FIN=[['Steel','#c9ccd0'],['Matt Black','#2b2b2d'],['Brass','#b9974f'],['Chrome','#dfe3e7'],['White','#f4f2ec']];
+  var TYPES=[{k:'double',n:'Double socket'},{k:'single',n:'Single socket'},{k:'switch',n:'Light switch'},{k:'usb',n:'USB socket'}];
+  var curFin=0;
+  function outlet(cx,cy,pc){return '<g fill="'+pc+'"><rect x="'+(cx-3)+'" y="'+(cy-15)+'" width="6" height="10" rx="1.5"/><rect x="'+(cx-14)+'" y="'+(cy+1)+'" width="11" height="5" rx="1.5"/><rect x="'+(cx+3)+'" y="'+(cy+1)+'" width="11" height="5" rx="1.5"/></g>';}
+  function svg(type,color){
+    var dark=(color==='#2b2b2d'), pc=dark?'#9a9a9a':'#3a3a3a', inner='';
+    if(type==='double') inner=outlet(32,50,pc)+outlet(68,50,pc);
+    else if(type==='single') inner=outlet(50,50,pc);
+    else if(type==='switch') inner='<rect x="35" y="26" width="30" height="48" rx="5" fill="'+pc+'" opacity=".9"/><rect x="41" y="33" width="18" height="17" rx="3" fill="'+(dark?'#3a3a3a':'#ededed')+'"/>';
+    else inner='<g fill="'+pc+'"><rect x="30" y="41" width="17" height="8" rx="2.5"/><rect x="53" y="41" width="17" height="8" rx="2.5"/><rect x="33" y="43.5" width="11" height="3" rx="1" fill="'+(dark?'#2b2b2d':'#d2d2d2')+'"/><rect x="56" y="43.5" width="11" height="3" rx="1" fill="'+(dark?'#2b2b2d':'#d2d2d2')+'"/></g>';
+    return '<svg viewBox="0 0 100 100"><rect x="7" y="7" width="86" height="86" rx="11" fill="'+color+'" stroke="rgba(0,0,0,.22)" stroke-width="1.5"/>'+inner+'</svg>';
+  }
+  function chips(){ finBox.innerHTML=FIN.map(function(f,i){return '<button class="skchip'+(i===curFin?' on':'')+'" data-i="'+i+'"><span style="background:'+f[1]+'"></span>'+f[0]+'</button>';}).join(''); }
+  function build(){ var c=FIN[curFin][1]; ct.innerHTML=TYPES.map(function(t,i){return '<div class="skcard" data-i="'+i+'"><div class="im">'+svg(t.k,c)+'</div><div class="nm">'+t.n+'</div></div>';}).join(''); }
+  finBox.addEventListener('click',function(e){var b=e.target.closest('.skchip');if(!b)return;curFin=+b.getAttribute('data-i');chips();build();});
+  el('sktab').onclick=function(){el('skdraw').classList.toggle('on');};
+  el('skx').onclick=function(){el('skdraw').classList.remove('on');};
+  ct.addEventListener('pointerdown',function(e){
+    var card=e.target.closest('.skcard'); if(!card)return;
+    var sx=e.clientX,sy=e.clientY,idx=+card.getAttribute('data-i'),moved=false,ghost=null;
+    function mv(ev){ var dx=ev.clientX-sx,dy=ev.clientY-sy; if(!moved){if(Math.abs(dx)<7&&Math.abs(dy)<7)return;moved=true;}
+      if(!ghost){ghost=document.createElement('div');ghost.className='hghost skghost';ghost.innerHTML=svg(TYPES[idx].k,FIN[curFin][1]);document.body.appendChild(ghost);}
+      ghost.style.left=(ev.clientX-48)+'px';ghost.style.top=(ev.clientY-48)+'px'; }
+    function up(ev){ document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);
+      if(ghost){ghost.remove();var lr=layer.getBoundingClientRect();
+        if(ev.clientX<lr.right-10&&ev.clientY>lr.top){place(idx,ev.clientX-lr.left,ev.clientY-lr.top);if(window.innerWidth<560)el('skdraw').classList.remove('on');}} }
+    document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
+  });
+  var selEl=null;
+  function sel(d){if(selEl&&selEl!==d)selEl.classList.remove('sel');selEl=d;d.classList.add('sel');}
+  function place(idx,px,py){
+    var S=68,t=TYPES[idx],c=FIN[curFin][1];
+    var d=document.createElement('div');d.className='skplaced';d.style.left=(px-S/2)+'px';d.style.top=(py-S/2)+'px';d.style.width=S+'px';d.style.height=S+'px';
+    d.setAttribute('data-tag','');d.setAttribute('data-brand','Socket');d.setAttribute('data-name',t.n+' · '+FIN[curFin][0]);
+    d.innerHTML=svg(t.k,c)+'<button class="hx" title="Remove">✕</button><span class="hgrip"></span>';
+    layer.appendChild(d);sel(d);
+    var grip=d.querySelector('.hgrip'),xb=d.querySelector('.hx');
+    xb.onclick=function(e){e.stopPropagation();d.remove();if(selEl===d)selEl=null;};
+    d.addEventListener('dblclick',function(){d.remove();if(selEl===d)selEl=null;});
+    d.addEventListener('pointerdown',function(e){ if(e.target===grip||e.target===xb)return;e.stopPropagation();sel(d);
+      var mx=e.clientX,my=e.clientY,l=parseFloat(d.style.left),tp=parseFloat(d.style.top);
+      function mv(ev){d.style.left=(l+ev.clientX-mx)+'px';d.style.top=(tp+ev.clientY-my)+'px';}
+      function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up); });
+    grip.addEventListener('pointerdown',function(e){ e.stopPropagation();sel(d);
+      var mx=e.clientX,w=d.offsetWidth;
+      function mv(ev){var nw=Math.max(30,w+(ev.clientX-mx));d.style.width=nw+'px';d.style.height=nw+'px';}
+      function up(){document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
+      document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up); });
+  }
+  document.addEventListener('pointerdown',function(e){ if(selEl&&!e.target.closest('.skplaced')&&!e.target.closest('.skdraw')&&!e.target.closest('.sktab')){selEl.classList.remove('sel');selEl=null;} });
+  chips();build();
+})();
+
 /* ===== Search drawer (top): keyword search over the catalogue now; swaps to a strong AI model when a key is wired ===== */
 (function(){
   var draw=el('sdraw'); if(!draw) return;
@@ -828,36 +946,88 @@ el('bzip').onclick=function(){
 
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
-  var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'doors',label:'Doors'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
-  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'doors',label:'Doors',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'wood',label:'Boards',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
+  var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
+  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:30,worktop:18,doors:20,carcass:12,boards:20},mats:{},brands:{}};
-  MATS.forEach(function(m){props.mats[m.k]=true;m.brands.forEach(function(b){props.brands[b]=true;});});
+  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{}};
+  /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
+     instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
+     Post-it tags stay on. Suppliers all available by default. */
+  MATS.forEach(function(m){props.mats[m.k]=false;m.brands.forEach(function(b){props.brands[b]=true;});});
+  props.mats.walls=true;props.mats.wood=true;props.mats.tags=true;
   // only re-apply saved state from the current layout version; stale state self-heals to defaults so no panel is left hidden
   /* session-only: widths & toggles are NOT persisted — every session starts from defaults */
   function showLabel(id,on){var e=el(id);if(e&&e.closest('label'))e.closest('label').style.display=on?'':'none';}
-  function panelCols(){var order=PANELS.map(function(p){return p.k;}),sum=0;for(var i=0;i<order.length-1;i++)sum+=(props.panelW[order[i]]||0);props.panelW[order[order.length-1]]=Math.max(6,100-sum);return order.map(function(k){return props.panelW[k]+'%';}).join(' ');}
+  var MINW=6;
+  function panelMat(k){return k==='wall'?'walls':(k==='boards'?'wood':k);}
+  /* The wall panel (sidePaint) is always shown; the rest follow their material toggle.
+     activeKeys = the panels that are actually visible, in DOM order. */
+  function activeKeys(){return PANELS.map(function(p){return p.k;}).filter(function(k){return k==='wall'||props.mats[panelMat(k)]!==false;});}
+  function normWidths(keys){
+    if(!keys.length)return;
+    var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;
+    keys.forEach(function(k){props.panelW[k]=Math.max(MINW,Math.round((props.panelW[k]||MINW)*100/sum));});
+    var diff=100-keys.reduce(function(s,k){return s+props.panelW[k];},0);
+    if(diff!==0){var big=keys.slice().sort(function(a,b){return props.panelW[b]-props.panelW[a];})[0];props.panelW[big]=Math.max(MINW,props.panelW[big]+diff);}
+  }
+  /* Only emit columns for the SHOWN panels (hidden ones are display:none and leave the grid),
+     normalised to 100% so the visible panels always tile the canvas cleanly. */
+  function panelCols(){var keys=activeKeys();var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;return keys.map(function(k){return Math.round((props.panelW[k]||MINW)*100/sum)+'%';}).join(' ');}
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
   function applyProps(){
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
-    showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideDoors',props.mats.doors!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
+    showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
   }
-  function buildGrid(){var box=el('pgrid');box.innerHTML='';PANELS.forEach(function(p,i){var last=(i===PANELS.length-1);var cell=document.createElement('div');cell.className='gcell';cell.innerHTML='<label>'+p.label+(last?' · fills':' %')+'</label><input type="number" data-pk="'+p.k+'" value="'+(props.panelW[p.k]||0)+'" '+(last?'disabled':'min="6" max="80"')+'>';box.appendChild(cell);});
-    [].forEach.call(box.querySelectorAll('input:not([disabled])'),function(inp){inp.oninput=function(){var sum=0;[].forEach.call(box.querySelectorAll('input:not([disabled])'),function(x){sum+=parseInt(x.value)||0;});var lastInp=box.querySelector('input[disabled]');if(lastInp)lastInp.value=Math.max(6,100-sum);};});}
+  function slide(changed,val,keys){
+    var maxV=100-(keys.length-1)*MINW;
+    val=Math.max(MINW,Math.min(maxV,Math.round(val)));
+    var others=keys.filter(function(k){return k!==changed;});
+    var oldOther=0;others.forEach(function(k){oldOther+=props.panelW[k];});
+    var rem=100-val;
+    others.forEach(function(k){props.panelW[k]= oldOther>0 ? Math.max(MINW,rem*props.panelW[k]/oldOther) : rem/others.length;});
+    props.panelW[changed]=val;
+    normWidths(keys);
+    applyProps();refreshWidthUI();
+  }
+  function refreshWidthUI(){[].forEach.call(el('pgrid').querySelectorAll('input[type=range]'),function(inp){var k=inp.getAttribute('data-pk');inp.value=props.panelW[k];var pv=inp.parentNode.querySelector('.pv');if(pv)pv.textContent=props.panelW[k]+'%';});}
+  function buildGrid(){
+    var box=el('pgrid');box.className='pw';box.innerHTML='';
+    var keys=activeKeys();normWidths(keys);
+    keys.forEach(function(k){
+      var p=PANELS.filter(function(x){return x.k===k;})[0];
+      var row=document.createElement('div');row.className='pwrow';
+      row.innerHTML='<span class="pl">'+p.label+'</span><input type="range" min="'+MINW+'" max="94" step="1" value="'+props.panelW[k]+'" data-pk="'+k+'"><span class="pv">'+props.panelW[k]+'%</span>';
+      box.appendChild(row);
+    });
+    [].forEach.call(box.querySelectorAll('input[type=range]'),function(inp){inp.oninput=function(){slide(inp.getAttribute('data-pk'),parseInt(inp.value)||MINW,keys);};});
+    if(!box.nextSibling||!box.nextSibling.className){var h=document.createElement('div');h.className='pwhint';h.textContent='Move one and the others adjust to fit — always totals 100%.';box.parentNode.appendChild(h);}
+  }
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
-    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});}
+    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});
+    /* Toggling a material LIVE: bring its panel on/off, re-share the widths, and rebuild the sliders. */
+    [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){props.mats[c.getAttribute('data-mat')]=c.checked;normWidths(activeKeys());applyProps();buildGrid();};});}
   el('cog').onclick=function(){buildGrid();buildMat();el('modal').classList.add('on');};
+  if(el('nameheart'))el('nameheart').onclick=function(){var on=document.body.classList.toggle('shownames');this.textContent=on?'♥':'♡';};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
   el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
   el('msave').onclick=function(){
-    [].forEach.call(el('pgrid').querySelectorAll('input[data-pk]'),function(inp){if(!inp.disabled)props.panelW[inp.getAttribute('data-pk')]=Math.max(6,Math.min(80,parseInt(inp.value)||10));});
+    /* panel widths are already live from the sliders (props.panelW); just read material + brand toggles */
     [].forEach.call(el('matlist').querySelectorAll('[data-mat]'),function(c){props.mats[c.getAttribute('data-mat')]=c.checked;});
     [].forEach.call(el('matlist').querySelectorAll('[data-brand]'),function(c){props.brands[c.getAttribute('data-brand')]=c.checked;});
+    normWidths(activeKeys());
     applyProps();el('modal').classList.remove('on');toast('Properties saved');};
   applyProps();
+})();
+/* ===== welcome / landing modal ===== */
+(function(){var w=el('welcome');if(!w)return;
+  function close(){w.classList.add('gone');setTimeout(function(){w.style.display='none';},450);}
+  var go=el('welcomeGo'),x=el('welcomeX');
+  if(go)go.onclick=close; if(x)x.onclick=close;
+  w.addEventListener('click',function(e){if(e.target===w)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!w.classList.contains('gone'))close();});
 })();
 </script>
 </body>
