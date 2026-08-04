@@ -21,7 +21,7 @@
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
   .track{position:absolute;left:0;right:0;top:0;will-change:transform}
-  .strip{height:66px;position:relative;border-bottom:1px solid rgba(0,0,0,.06);background-size:cover;background-position:center}
+  .strip{height:var(--swh,66px);position:relative;border-bottom:1px solid rgba(0,0,0,.06);background-size:cover;background-position:center}
   .lab{position:absolute;bottom:9px;max-width:74%;background:rgba(26,23,20,.22);color:#fff;border-radius:9px;overflow:hidden;transition:background .2s,color .2s,opacity .35s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
   .paint .lab{left:14px}.board .lab{right:14px;text-align:right}
   .lab .nm{display:block;padding:6px 13px;font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -421,6 +421,11 @@
     <div class="msec">
       <h4>Layout · panel widths %</h4>
       <div class="grid2" id="pgrid"></div>
+    </div>
+    <div class="msec">
+      <h4>Carousel · swatch height</h4>
+      <div class="pwrow"><span class="pl">Swatch height</span><input type="range" min="44" max="150" step="1" id="swh"><span class="pv" id="swhv">66px</span></div>
+      <div class="pwhint">Taller swatches reveal more of the wood grain or fabric. Images always scale in proportion — never stretched.</div>
     </div>
     <div class="msec"><h4>Materials &amp; brands</h4><div id="matlist"></div></div>
     <div class="mfoot"><button id="msave">Save</button></div>
@@ -1063,7 +1068,7 @@ el('bzip').onclick=function(){
   var PANELS=[{k:'wall',label:'Wall'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
   var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=3;
-  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{}};
+  var props={ver:PVER,panelW:{wall:50,worktop:18,carcass:12,boards:50},mats:{},brands:{},swatchH:66};
   /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
      instances of the same Egger board material; Ceiling/Skirting/Floor/Worktop are opt-in.
      Post-it tags stay on. Suppliers all available by default. */
@@ -1089,6 +1094,7 @@ el('bzip').onclick=function(){
   function panelCols(){var keys=activeKeys();var sum=0;keys.forEach(function(k){sum+=(props.panelW[k]||MINW);});if(sum<=0)sum=1;return keys.map(function(k){return Math.round((props.panelW[k]||MINW)*100/sum)+'%';}).join(' ');}
   function showPanel(id,on){var e=el(id);if(e)e.style.display=on?'':'none';}
   function applyProps(){
+    document.documentElement.style.setProperty('--swh',(props.swatchH||66)+'px');
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
     showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
@@ -1123,7 +1129,9 @@ el('bzip').onclick=function(){
     row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});
     /* Toggling a material LIVE: bring its panel on/off, re-share the widths, and rebuild the sliders. */
     [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){props.mats[c.getAttribute('data-mat')]=c.checked;normWidths(activeKeys());applyProps();buildGrid();};});}
-  el('cog').onclick=function(){buildGrid();buildMat();el('modal').classList.add('on');};
+  function buildSwatchH(){var sh=el('swh');if(!sh)return;sh.value=props.swatchH||66;if(el('swhv'))el('swhv').textContent=(props.swatchH||66)+'px';
+    sh.oninput=function(){props.swatchH=parseInt(sh.value)||66;if(el('swhv'))el('swhv').textContent=props.swatchH+'px';applyProps();};}
+  el('cog').onclick=function(){buildGrid();buildMat();buildSwatchH();el('modal').classList.add('on');};
   if(el('nameheart'))el('nameheart').onclick=function(){var on=document.body.classList.toggle('shownames');this.textContent=on?'♥':'♡';};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
   el('modal').addEventListener('click',function(e){if(e.target===el('modal'))el('modal').classList.remove('on');});
