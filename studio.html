@@ -395,17 +395,11 @@
 <div class="modal" id="modal">
   <div class="mcard">
     <div class="mhead"><h3>Studio properties</h3><button id="mx">✕</button></div>
-    <div class="msec roomsec">
-      <h4>Room</h4>
+    <div class="msec">
+      <h4>Surface options</h4>
       <div class="orow"><span class="ol">Walls</span><div class="fseg" id="wallseg"><button data-w="paint" class="on">Paint</button><button data-w="wallpaper">Wallpaper</button></div></div>
-      <label><input type="checkbox" id="zc"> Ceiling <span class="px">200px</span></label>
-      <label><input type="checkbox" id="zs"> Skirting <span class="px">200px</span></label>
-      <label><input type="checkbox" id="zf"> Floor</label>
-      <div class="floorpick" id="floorpick"><div class="fseg" id="floorseg"><button data-t="hard" class="on">Hard</button><button data-t="soft">Carpet</button></div></div>
-      <label><input type="checkbox" id="zt" checked> Post-it tags</label>
-      <div class="future-note">Future panels — coming soon</div>
-      <label class="future"><input type="checkbox" disabled> Window materials <span class="px">0%</span></label>
-      <label class="future"><input type="checkbox" disabled> Upholstery <span class="px">0%</span></label>
+      <div class="floorpick orow" id="floorpick"><span class="ol">Floor</span><div class="fseg" id="floorseg"><button data-t="hard" class="on">Hard</button><button data-t="soft">Carpet</button></div></div>
+      <div class="pwhint">Everything is turned on or off below in Materials — tick a material to bring its panel or surface in.</div>
     </div>
     <div class="msec">
       <h4>Layout · panel widths %</h4>
@@ -533,7 +527,6 @@ function bindZone(id,key){el(id).onchange=function(){zones[key]=el(id).checked;
     if(zones.floor&&!floor&&FLOORS[floorType][0])floor=FLOORS[floorType][0];renderFloorRail();}
   if(key==='ceiling'||key==='skirting'){ if(el(id).checked){setTarget(key);} else if(paintTarget===key){paintTarget='wall';} }
   syncSub();if(el('sidePaint').classList.contains('chosen'))renderRoom();};}
-bindZone('zc','ceiling');bindZone('zs','skirting');bindZone('zf','floor');
 /* Walls: Paint | Wallpaper — the tick switches, never blank */
 [].forEach.call(el('wallseg').querySelectorAll('button'),function(b){b.onclick=function(){[].forEach.call(el('wallseg').querySelectorAll('button'),function(x){x.classList.remove('on');});b.classList.add('on');wallMode=b.getAttribute('data-w');updateWallRail();if(wallMode==='wallpaper'&&!wallPaper)el('sidePaint').classList.remove('chosen');if(el('sidePaint').classList.contains('chosen'))renderRoom();};});
 updateWallRail();
@@ -563,7 +556,6 @@ el('fchg').onclick=function(){el('floorbar').classList.remove('filled');};
   rail.addEventListener('click',function(e){if(fmoved>14)return;var t=e.target.closest('.ftile');if(!t)return;var fl=(FLOORS[floorType]||[])[parseInt(t.getAttribute('data-i'))];if(!fl)return;floor=fl;el('floorbar').classList.add('filled');var ex=el('fexp');ex.style.backgroundImage="url('"+fl.url+"')";ex.querySelector('.fn').textContent=(floorType==='hard'?'Egger':'Crucial Trading')+' · '+fl.name;if(el('sidePaint').classList.contains('chosen'))renderRoom();});
 })();
 /* Post-it tags on/off */
-el('zt').onchange=function(){var on=el('zt').checked;el('pad').style.display=on?'':'none';if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();});};
 syncSub();
 /* sun button = subtle blur slider: slide right→left to white-blur the panel (focus 1-2 others);
    the button grows LESS transparent as blur increases so it stands out; tap it to reset to normal */
@@ -1058,7 +1050,6 @@ el('bzip').onclick=function(){
   function applyProps(){
     document.documentElement.style.setProperty('--swh',(props.swatchH||66)+'px');
     var w=document.querySelector('.wrap');if(w)w.style.gridTemplateColumns=panelCols();
-    showLabel('zc',props.mats.ceiling);showLabel('zs',props.mats.skirting);showLabel('zf',props.mats.floor);showLabel('zt',props.mats.tags);
     if(el('pad'))el('pad').style.display=(props.mats.tags&&el('zt')&&el('zt').checked)?'':'none';
     showPanel('sideWorktop',props.mats.worktop!==false);showPanel('sideCarcass',props.mats.carcass!==false);showPanel('sideBoard',props.mats.wood!==false);
   }
@@ -1090,7 +1081,17 @@ el('bzip').onclick=function(){
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
     row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});
     /* Toggling a material LIVE: bring its panel on/off, re-share the widths, and rebuild the sliders. */
-    [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){props.mats[c.getAttribute('data-mat')]=c.checked;normWidths(activeKeys());applyProps();buildGrid();};});}
+    [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){
+      var k=c.getAttribute('data-mat'), on=c.checked; props.mats[k]=on;
+      /* zone materials drive what renders inside the wall; panel materials show/hide their panel via applyProps */
+      if(k==='ceiling') zones.ceiling=on;
+      else if(k==='skirting') zones.skirting=on;
+      else if(k==='walls') zones.walls=on;
+      else if(k==='floor'){ zones.floor=on; document.body.classList.toggle('hasfloor',on); if(el('floorbar'))el('floorbar').classList.toggle('on',on); if(on&&!floor&&FLOORS[floorType]&&FLOORS[floorType][0])floor=FLOORS[floorType][0]; if(typeof renderFloorRail==='function')renderFloorRail(); if(typeof syncSub==='function')syncSub(); }
+      else if(k==='tags'){ if(el('pad'))el('pad').style.display=on?'':'none'; if(!on)[].forEach.call(document.querySelectorAll('.note.stuck'),function(n){n.remove();}); }
+      normWidths(activeKeys()); applyProps(); buildGrid();
+      if(el('sidePaint').classList.contains('chosen')) renderRoom();
+    };});}
   function buildSwatchH(){var sh=el('swh');if(!sh)return;sh.value=props.swatchH||66;if(el('swhv'))el('swhv').textContent=(props.swatchH||66)+'px';
     sh.oninput=function(){props.swatchH=parseInt(sh.value)||66;if(el('swhv'))el('swhv').textContent=props.swatchH+'px';applyProps();};}
   el('cog').onclick=function(){buildGrid();buildMat();buildSwatchH();el('modal').classList.add('on');};
