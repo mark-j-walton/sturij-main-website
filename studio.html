@@ -890,7 +890,9 @@ el('bzip').onclick=function(){
   }
   function buildMat(){var box=el('matlist');box.innerHTML='';MATS.forEach(function(m){var row=document.createElement('div');row.className='mrow';
     var bh=m.brands.map(function(b){return '<label><input type="checkbox" data-brand="'+b+'" '+(props.brands[b]?'checked':'')+'> '+b+'</label>';}).join('');
-    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});}
+    row.innerHTML='<span class="ml"><input type="checkbox" data-mat="'+m.k+'" '+(props.mats[m.k]?'checked':'')+'> '+m.label+'</span><div class="brands">'+bh+'</div>';box.appendChild(row);});
+    /* Toggling a material LIVE: bring its panel on/off, re-share the widths, and rebuild the sliders. */
+    [].forEach.call(box.querySelectorAll('[data-mat]'),function(c){c.onchange=function(){props.mats[c.getAttribute('data-mat')]=c.checked;normWidths(activeKeys());applyProps();buildGrid();};});}
   el('cog').onclick=function(){buildGrid();buildMat();el('modal').classList.add('on');};
   if(el('nameheart'))el('nameheart').onclick=function(){var on=document.body.classList.toggle('shownames');this.textContent=on?'♥':'♡';};
   el('mx').onclick=function(){el('modal').classList.remove('on');};
