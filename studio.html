@@ -66,7 +66,12 @@
   .cband.on{box-shadow:0 0 0 2px var(--gold)}
   .cband.all{pointer-events:auto;width:auto;height:17px;border-radius:999px;padding:0 8px;font:600 7.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);background:transparent;border:1px solid var(--line)}
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
-  .side .filled .fn{display:none}
+  /* quiet identity tag — a moved panel still reads clearly; canvas stays calm */
+  .side .filled .fn{display:block;position:absolute;left:0;right:0;bottom:0;padding:7px 12px;z-index:7;
+    background:linear-gradient(0deg,rgba(20,17,14,.55),rgba(20,17,14,0));
+    font:600 10px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#fff;
+    text-shadow:0 1px 2px rgba(0,0,0,.45);pointer-events:none;text-align:left;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — white embossed pebbles (like the recommendation card); large panels only */
   .change,.pclose{position:absolute;right:14px;width:30px;height:30px;display:none;align-items:center;justify-content:center;line-height:1;color:#4a443c;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.10);border-radius:50%;cursor:pointer;padding:0;box-shadow:0 4px 12px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -2px 3px rgba(0,0,0,.05);transition:transform .15s,box-shadow .18s}
