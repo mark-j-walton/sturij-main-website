@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:104px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--seam:rgba(166,124,60,.8)}
+  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:104px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--seam:rgba(166,124,60,.8);--hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 11V6.2a1.4 1.4 0 0 1 2.8 0V10m0-.5V4.6a1.4 1.4 0 0 1 2.8 0V10m0-.2V5.2a1.4 1.4 0 0 1 2.8 0V11m0-.6a1.4 1.4 0 0 1 2.8 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-5-2.7l-2.4-3.6a1.5 1.5 0 0 1 2.3-1.9L7 13' fill='black'/%3E%3C/svg%3E")}
   *{box-sizing:border-box}html,body{height:100%}
   body{margin:0;font-family:var(--f-sans);color:var(--ink-body);background:var(--navy);overflow:hidden;-webkit-font-smoothing:antialiased}
   .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:7px clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
@@ -92,6 +92,9 @@
   .cband.all{pointer-events:auto;width:auto;height:17px;border-radius:999px;padding:0 8px;font:600 7.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);background:transparent;border:1px solid var(--line)}
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
   .side .filled .fn{display:none}
+  /* persistent identity tag — frosted-clear "plastic" pill, centred on the sample, hand icon + name */
+  .side.chosen .filled .fn{display:inline-flex;align-items:center;gap:7px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:7;padding:9px 15px 9px 13px;max-width:86%;border-radius:999px;font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.4);-webkit-backdrop-filter:blur(8px) saturate(1.15);backdrop-filter:blur(8px) saturate(1.15);box-shadow:0 6px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.45);text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .side.chosen .filled .fn::before{content:"";width:15px;height:16px;flex:none;background:currentColor;-webkit-mask:var(--hand) center/contain no-repeat;mask:var(--hand) center/contain no-repeat}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — white embossed pebbles (like the recommendation card); large panels only */
   .change,.pclose{position:absolute;right:14px;width:30px;height:30px;display:none;align-items:center;justify-content:center;line-height:1;color:#4a443c;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.10);border-radius:50%;cursor:pointer;padding:0;box-shadow:0 4px 12px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -2px 3px rgba(0,0,0,.05);transition:transform .15s,box-shadow .18s}

@@ -50,6 +50,7 @@ try {
     const rotAfter = fb ? fb.style.getPropertyValue('--rot') : null;
     return {
       close: circle('#sideBoard .pclose'),
+      fnTag: (function () { const e = document.querySelector('#sideBoard .filled .fn'); if (!e) return null; const cs = getComputedStyle(e); const r = e.getBoundingClientRect(), pr = e.closest('.filled').getBoundingClientRect(); const cx = r.left + r.width / 2, mid = pr.left + pr.width / 2; return { disp: cs.display, hasText: (e.textContent || '').trim().length > 0, frosted: (cs.backdropFilter || cs.webkitBackdropFilter || '').indexOf('blur') >= 0, centred: Math.abs(cx - mid) <= 6 }; })(),
       boardBlurGone: !document.querySelector('#sideBoard .change'),
       paintBlurGone: !document.querySelector('#sidePaint .change'),
       hdrPresent: hdrIds.map((id) => !!document.getElementById(id)),
@@ -66,6 +67,7 @@ try {
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
   ok('✕ = subtle pebble on large panel', round(chrome.close), JSON.stringify(chrome.close));
+  ok('name tag: frosted, centred, on every sample', chrome.fnTag && chrome.fnTag.disp !== 'none' && chrome.fnTag.hasText && chrome.fnTag.frosted && chrome.fnTag.centred, JSON.stringify(chrome.fnTag));
   ok('☀ blur pebble removed from samples', chrome.boardBlurGone && chrome.paintBlurGone, JSON.stringify({ board: chrome.boardBlurGone, paint: chrome.paintBlurGone }));
   ok('header toolbar present (Tools/Photo/Snip/Talk/Close)', chrome.hdrPresent && chrome.hdrPresent.every(Boolean), JSON.stringify(chrome.hdrPresent));
   ok('header buttons uniform height', chrome.hdrHeights && chrome.hdrHeights.every((h) => h === chrome.hdrHeights[0]), JSON.stringify(chrome.hdrHeights));
