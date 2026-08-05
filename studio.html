@@ -45,7 +45,7 @@
   .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30fr 18fr 20fr 12fr 20fr}
   .side{position:relative;overflow:hidden}
   /* clean seam line between samples — no shadow, no bevel; colour is easy to tune via --seam */
-  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -1px 0 0 var(--seam)}
+  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -1px 0 0 var(--seam),inset 0 -1px 0 var(--seam)}
   /* drag-to-reorder: a grip per panel + a glowing drop-target bar */
   .pgrip{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:16;width:40px;height:17px;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;letter-spacing:1px;color:#8a8172;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.1);border-radius:0 0 9px 9px;border-top:0;cursor:grab;box-shadow:0 3px 8px rgba(0,0,0,.2),inset 0 -1px 2px rgba(0,0,0,.06);touch-action:none;-webkit-user-select:none;user-select:none;opacity:.55;transition:opacity .15s,box-shadow .15s}
   .side:hover .pgrip{opacity:.95}
@@ -93,7 +93,7 @@
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
   .side .filled .fn{display:none}
   /* persistent identity tag — frosted-clear "plastic" pill, centred on the sample, hand icon + name */
-  .side.chosen .filled .fn{display:inline-flex;align-items:center;gap:7px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:7;padding:9px 15px 9px 13px;max-width:86%;border-radius:999px;font:600 11px/1 var(--f-mono);letter-spacing:.05em;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.4);-webkit-backdrop-filter:blur(8px) saturate(1.15);backdrop-filter:blur(8px) saturate(1.15);box-shadow:0 6px 18px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.45);text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .side.chosen .filled .fn{display:inline-flex;align-items:center;gap:8px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:7;padding:10px 16px;max-width:86%;border-radius:12px;font:600 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(0,0,0,.16)),rgba(35,33,32,.34);-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 4px rgba(0,0,0,.4),0 8px 20px rgba(0,0,0,.3)}
   .side.chosen .filled .fn::before{content:"";width:15px;height:16px;flex:none;background:currentColor;-webkit-mask:var(--hand) center/contain no-repeat;mask:var(--hand) center/contain no-repeat}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — white embossed pebbles (like the recommendation card); large panels only */
