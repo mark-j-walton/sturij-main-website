@@ -395,7 +395,7 @@
   <div class="side paint" id="sidePaint">
     <button class="pclose" title="Clear · back to carousel">✕</button>
     <button class="change" data-k="paint" title="Focus blur — drag; tap to reset">☀</button>
-    <div class="colhint" id="colhint">Wall · tap to add · compare colours</div>
+    <div class="colhint" id="colhint">Wall · tap to apply</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
     <div class="filled" id="fillPaint"><span class="fn"></span></div>
@@ -578,11 +578,11 @@ function renderRoom(){
   f.innerHTML='<div class="room">'+ceil+'<div class="rcols'+(paintTarget==='wall'?' rtsel':'')+'" data-surf="wall">'+cols+'</div>'+skirt+fl+'</div>';
   [].forEach.call(f.querySelectorAll('[data-surf]'),function(s){s.addEventListener('click',function(){setTarget(s.getAttribute('data-surf'));});});
 }
-function setTarget(t){paintTarget=t;el('sidePaint').classList.remove('chosen');if(window._openSide)_openSide(el('sidePaint'));var h=el('colhint');if(h)h.textContent=(t==='wall'?'Wall · tap to add · compare colours':'Painting the '+t+' · tap a colour');}
+function setTarget(t){paintTarget=t;el('sidePaint').classList.remove('chosen');if(window._openSide)_openSide(el('sidePaint'));var h=el('colhint');if(h)h.textContent=(t==='wall'?'Wall · tap to apply':'Painting the '+t+' · tap a colour');}
 function addPaint(it){
   if(paintTarget==='ceiling'){ceilCol=it;}
   else if(paintTarget==='skirting'){skirtCol=it;}
-  else{ if(paints.length>=6){toast('Up to 6 colours');return;} if(!paints.some(function(p){return p[0]===it[0];})) paints.push(it); sel.paint=paints[0]; }
+  else{ paints=[it]; sel.paint=it; }
   el('sidePaint').classList.add('chosen');el('sidePaint').classList.remove('idle','active');
   renderRoom();updateBar();
 }
@@ -718,7 +718,7 @@ function clearPanel(side){
   b.addEventListener('pointerdown',function(e){e.stopPropagation();});
   b.addEventListener('click',function(e){e.stopPropagation();clearPanel(side);});
 });
-function updateWallRail(){if(el('railPaint'))el('railPaint').style.display=wallMode==='paint'?'':'none';if(el('railWallpaper'))el('railWallpaper').style.display=wallMode==='wallpaper'?'':'none';if(el('colhint'))el('colhint').textContent=wallMode==='wallpaper'?'Wallpaper · tap to apply':'Wall · tap to add · compare colours';}
+function updateWallRail(){if(el('railPaint'))el('railPaint').style.display=wallMode==='paint'?'':'none';if(el('railWallpaper'))el('railWallpaper').style.display=wallMode==='wallpaper'?'':'none';if(el('colhint'))el('colhint').textContent=wallMode==='wallpaper'?'Wallpaper · tap to apply':'Wall · tap to apply';}
 
 var HANDLES=[
  {n:'Bar handle',svg:'<svg width="360" height="60"><rect x="6" y="24" width="348" height="12" rx="6" fill="#2b2b2b"/><rect x="30" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/><rect x="318" y="6" width="12" height="24" rx="4" fill="#2b2b2b"/></svg>'},
