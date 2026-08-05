@@ -41,34 +41,39 @@ try {
   // Drive a panel to its large (chosen) state and check the chrome buttons
   const chrome = await pg.evaluate(() => {
     try { fillSide('paint', ['Bancha', '#676a49']); fillSide('board', { s: 'alba-walnut', n: 'Alba Walnut' }); } catch (e) { return { err: e.message }; }
-    const g = (sel, prop) => { const e = document.querySelector(sel); return e ? getComputedStyle(e)[prop] : null; };
     const circle = (sel) => { const e = document.querySelector(sel); if (!e) return null; const cs = getComputedStyle(e); return { disp: cs.display, radius: cs.borderTopLeftRadius, shadow: cs.boxShadow !== 'none' }; };
-    const leftOf = (sel) => { const e = document.querySelector(sel); return e ? Math.round(e.getBoundingClientRect().left) : null; };
     const hdrIds = ['cog', 'cam', 'snip', 'talk', 'closex'];
+    const rotBtn = document.getElementById('hrotate');
+    const fb = document.getElementById('fillBoard');
+    const rotBefore = fb ? fb.style.getPropertyValue('--rot') : null;
+    if (rotBtn) rotBtn.click();
+    const rotAfter = fb ? fb.style.getPropertyValue('--rot') : null;
     return {
       close: circle('#sideBoard .pclose'),
-      blur: circle('#sideBoard .change'),
+      boardBlurGone: !document.querySelector('#sideBoard .change'),
+      paintBlurGone: !document.querySelector('#sidePaint .change'),
       hdrPresent: hdrIds.map((id) => !!document.getElementById(id)),
       hdrHeights: hdrIds.map((id) => { const e = document.getElementById(id); return e ? Math.round(e.getBoundingClientRect().height) : null; }),
-      embossed: (function () { const e = document.querySelector('#sideBoard .change'); return e ? getComputedStyle(e).backgroundImage.indexOf('gradient') >= 0 : false; })(),
-      paintBlur: circle('#sidePaint .change'),
+      cogEmbossed: (function () { const e = document.getElementById('cog'); return e ? getComputedStyle(e).backgroundImage.indexOf('gradient') >= 0 : false; })(),
       paintClose: circle('#sidePaint .pclose'),
-      paintBlurLeft: leftOf('#sidePaint .change'),
-      paintCloseLeft: leftOf('#sidePaint .pclose'),
+      hblur: !!document.getElementById('hblurR'),
+      hrotate: !!rotBtn,
+      hctlOn: (function () { const h = document.getElementById('hctl'); return h ? h.classList.contains('on') : false; })(),
+      rotBefore: rotBefore, rotAfter: rotAfter,
       padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })(),
-      horiz: (function () { const c = document.querySelector('#sideBoard .pclose'), bb = document.querySelector('#sideBoard .change'); if (!c || !bb) return null; const cr = c.getBoundingClientRect(), br = bb.getBoundingClientRect(); return { sameTop: Math.abs(cr.top - br.top) <= 2, xOutside: cr.right >= br.right - 1 }; })(),
-      searchClear: (function () { const st = document.getElementById('stab'); if (!st) return true; const sr = st.getBoundingClientRect(); return ['sidePaint', 'sideWorktop', 'sideCarcass', 'sideBoard'].every(function (id) { const s = document.getElementById(id); if (!s || s.style.display === 'none') return true; return ['.pclose', '.change'].every(function (sel) { const e = s.querySelector(sel); if (!e) return true; const r = e.getBoundingClientRect(); const ov = r.right > sr.left && r.left < sr.right && r.bottom > sr.top && r.top < sr.bottom; return !ov; }); }); })()
+      searchClear: (function () { const st = document.getElementById('stab'); if (!st) return true; const sr = st.getBoundingClientRect(); return ['sidePaint', 'sideWorktop', 'sideCarcass', 'sideBoard'].every(function (id) { const s = document.getElementById(id); if (!s || s.style.display === 'none') return true; const e = s.querySelector('.pclose'); if (!e) return true; const r = e.getBoundingClientRect(); const ov = r.right > sr.left && r.left < sr.right && r.bottom > sr.top && r.top < sr.bottom; return !ov; }); })()
     };
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
-  ok('close = embossed pebble, on large panel', round(chrome.close), JSON.stringify(chrome.close));
-  ok('blur = embossed pebble, on large panel', round(chrome.blur), JSON.stringify(chrome.blur));
+  ok('✕ = subtle pebble on large panel', round(chrome.close), JSON.stringify(chrome.close));
+  ok('☀ blur pebble removed from samples', chrome.boardBlurGone && chrome.paintBlurGone, JSON.stringify({ board: chrome.boardBlurGone, paint: chrome.paintBlurGone }));
   ok('header toolbar present (Tools/Photo/Snip/Talk/Close)', chrome.hdrPresent && chrome.hdrPresent.every(Boolean), JSON.stringify(chrome.hdrPresent));
   ok('header buttons uniform height', chrome.hdrHeights && chrome.hdrHeights.every((h) => h === chrome.hdrHeights[0]), JSON.stringify(chrome.hdrHeights));
-  ok('chrome buttons white embossed', chrome.embossed, 'gradient=' + chrome.embossed);
-  ok('paint (left) panel keeps blur + close', round(chrome.paintBlur) && round(chrome.paintClose), 'blur=' + JSON.stringify(chrome.paintBlur) + ' close=' + JSON.stringify(chrome.paintClose));
-  ok('left panel: ✕ outermost-left, blur inside it', chrome.paintCloseLeft !== null && chrome.paintCloseLeft <= 30 && chrome.paintBlurLeft > chrome.paintCloseLeft, 'closeLeft=' + chrome.paintCloseLeft + ' blurLeft=' + chrome.paintBlurLeft);
-  ok('close+blur horizontal, ✕ on the outside', chrome.horiz && chrome.horiz.sameTop && chrome.horiz.xOutside, JSON.stringify(chrome.horiz));
+  ok('header buttons gold-embossed', chrome.cogEmbossed, 'gradient=' + chrome.cogEmbossed);
+  ok('paint panel keeps its ✕', round(chrome.paintClose), JSON.stringify(chrome.paintClose));
+  ok('header shows blur slider on select', chrome.hblur && chrome.hctlOn, JSON.stringify({ hblur: chrome.hblur, on: chrome.hctlOn }));
+  ok('header shows rotate on textured sample', chrome.hrotate, 'rotate=' + chrome.hrotate);
+  ok('rotate turns the grain (--rot → 90deg)', chrome.rotAfter === '90deg' && chrome.rotBefore !== '90deg', 'before=' + chrome.rotBefore + ' after=' + chrome.rotAfter);
   ok('panel buttons clear of the Search tab', chrome.searchClear, 'clear=' + chrome.searchClear);
   ok('post-it pad visible', chrome.padVisible, 'visible=' + chrome.padVisible);
 

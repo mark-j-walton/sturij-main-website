@@ -29,6 +29,19 @@
   .hbtn svg{display:block;width:15px;height:15px;flex:none}
   .hbtn:hover{background:linear-gradient(180deg,#e8cd86,var(--gold));color:var(--navy);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 3px rgba(0,0,0,.14),0 6px 16px rgba(0,0,0,.34)}
   .hbtn:active{transform:translateY(1px)}
+  /* contextual sample controls in the header row — blur slider + rotate, matching the toolbar */
+  .hctl{display:none;align-items:center;gap:10px}
+  .hctl.on{display:inline-flex}
+  .hctl .hblur{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 15px;border-radius:999px;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.02));border:1px solid rgba(214,178,106,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 2px rgba(0,0,0,.28),0 4px 10px rgba(0,0,0,.3)}
+  .hctl .hblur svg{width:15px;height:15px;flex:none;display:block}
+  .hrange{-webkit-appearance:none;appearance:none;width:94px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--gold),rgba(214,178,106,.22));outline:none;cursor:pointer;margin:0}
+  .hrange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(180deg,#fffdf8,#e8cd86);border:1px solid rgba(120,90,40,.55);box-shadow:0 1px 3px rgba(0,0,0,.4);cursor:pointer}
+  .hrange::-moz-range-thumb{width:14px;height:14px;border:1px solid rgba(120,90,40,.55);border-radius:50%;background:#f2dfa6;cursor:pointer}
+  .hctl .hbtn{min-width:auto}
+  /* rotate: the material's grain turns on a texture layer that scales up to keep cover */
+  .filled.rotable::before{content:"";position:absolute;inset:0;background-image:var(--tex,none);background-size:cover;background-position:center;transform:rotate(var(--rot,0deg)) scale(var(--rotsc,1));transform-origin:center center;pointer-events:none;z-index:1}
+  /* ✕ clear stays on the sample but reads subtle (glassy), not a bright pebble */
+  .pclose{background:rgba(22,18,14,.44);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 2px 7px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.16);width:28px;height:28px}
   .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30fr 18fr 20fr 12fr 20fr}
   .side{position:relative;overflow:hidden}
   /* clean seam line between samples — no shadow, no bevel; colour is easy to tune via --seam */
@@ -370,6 +383,7 @@
 <header class="top">
   <div class="toprow">
   <a class="b" href="/"><img src="/brand/sturij-logo-white.png" alt="Sturij"></a>
+  <span class="hctl" id="hctl"></span>
   <span class="tr">
     <button class="hbtn" id="cog" title="Studio tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="1.9" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1.9" fill="currentColor" stroke="none"/></svg><span>Tools</span></button>
     <button class="hbtn" id="cam" title="Take a snapshot of your scheme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h3l1.4-2h7.2L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.1"/></svg><span>Photo</span></button>
@@ -396,7 +410,6 @@
 <div class="wrap">
   <div class="side paint" id="sidePaint">
     <button class="pclose" title="Clear · back to carousel">✕</button>
-    <button class="change" data-k="paint" title="Focus blur — drag; tap to reset">☀</button>
     <div class="colhint" id="colhint">Wall · tap to apply</div>
     <div class="rail" id="railPaint"><div class="track"></div></div>
     <div class="rail" id="railWallpaper" style="display:none"><div class="track"></div></div>
@@ -406,19 +419,19 @@
     <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Worktop · tap</div>
     <div class="rail" id="railWorktop"><div class="track"></div></div>
-    <div class="filled" id="fillWorktop"><span class="fn"></span><button class="change" data-k="worktop">☀</button></div>
+    <div class="filled" id="fillWorktop"><span class="fn"></span></div>
   </div>
   <div class="side board" id="sideCarcass">
     <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Carcass · tap</div>
     <div class="rail" id="railCarcass"><div class="track"></div></div>
-    <div class="filled" id="fillCarcass"><span class="fn"></span><button class="change" data-k="carcass">☀</button></div>
+    <div class="filled" id="fillCarcass"><span class="fn"></span></div>
   </div>
   <div class="side board" id="sideBoard">
     <button class="pclose" title="Clear · back to carousel">✕</button>
     <div class="colhint">Boards · drag · tap to fill</div>
     <div class="rail" id="railBoard"><div class="track"></div></div>
-    <div class="filled" id="fillBoard"><span class="fn"></span><button class="change" data-k="board">☀</button></div>
+    <div class="filled" id="fillBoard"><span class="fn"></span></div>
   </div>
 </div>
 
@@ -593,9 +606,12 @@ function fillSide(kind,it){
   if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); el('sidePaint').classList.remove('idle','active'); renderRoom(); selectedSide=el('sidePaint'); if(typeof renderCbar==='function')renderCbar(); toast('Wallpaper · '+it.n); return; }
   sel[kind]=it;
   var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
-  fillEl.style.backgroundImage="url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
+  var texUrl="url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
+  fillEl.style.backgroundImage=texUrl;
+  fillEl.style.setProperty('--tex',texUrl); fillEl.classList.add('rotable');
+  fillEl.style.setProperty('--rot','0deg'); fillEl.style.setProperty('--rotsc','1');
   fillEl.querySelector('.fn').textContent=label+' · '+it.n;
-  var sd=el('side'+cap(kind)); sd.classList.add('chosen'); sd.classList.remove('idle','active'); selectedSide=sd; if(typeof renderCbar==='function')renderCbar();
+  var sd=el('side'+cap(kind)); sd._rot=0; sd.classList.add('chosen'); sd.classList.remove('idle','active'); selectedSide=sd; if(typeof renderCbar==='function')renderCbar();
   fillEl.setAttribute('data-tag','');fillEl.setAttribute('data-brand',brand);fillEl.setAttribute('data-name',it.n);
   updateBar();
 }
@@ -688,6 +704,7 @@ fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).
 var selectedSide=null;
 var CBAR_ROLE={sidePaint:'Wall',sideWorktop:'Worktop',sideCarcass:'Carcass',sideBoard:'Boards'};
 function renderCbar(){
+  if(typeof renderHeaderCtl==='function')renderHeaderCtl();
   var bar=el('cbar'); if(!bar)return;
   if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
   var role=CBAR_ROLE[selectedSide.id]||'Panel';
@@ -696,6 +713,34 @@ function renderCbar(){
     +'<span class="cbhint">'+(chosen?'selected':'choose a material')+'</span>';
 }
 function selectSide(s){ selectedSide=s; renderCbar(); }
+/* ---- Header sample controls: blur slider + rotate, contextual to the selected sample ---- */
+function applyBlur(side,amt){
+  if(!side)return; side._blur=amt;
+  var pb=side.querySelector('.pblur');
+  if(!pb){pb=document.createElement('div');pb.className='pblur';side.insertBefore(pb,side.firstChild);}
+  var w=side.clientWidth||200, maxB=Math.max(6,w*0.06);
+  if(amt<=0.01){pb.style.opacity='0';pb.style.backdropFilter='none';pb.style.webkitBackdropFilter='none';pb.style.background='none';}
+  else{var bl=(amt*maxB).toFixed(1)+'px';pb.style.opacity='1';pb.style.background='rgba(255,255,255,'+(amt*0.6).toFixed(2)+')';pb.style.backdropFilter='blur('+bl+')';pb.style.webkitBackdropFilter='blur('+bl+')';}
+}
+function rotateSide(side){
+  if(!side)return; var fe=side.querySelector('.filled'); if(!fe||!fe.classList.contains('rotable'))return;
+  var rot=(((side._rot||0)+90)%360); side._rot=rot;
+  var r=fe.getBoundingClientRect(), sc=(rot===90||rot===270)?Math.max(r.width/r.height,r.height/r.width):1;
+  fe.style.setProperty('--rot',rot+'deg'); fe.style.setProperty('--rotsc',sc.toFixed(3));
+}
+function sideRotatable(s){ return !!(s&&/sideWorktop|sideCarcass|sideBoard/.test(s.id)&&s.classList.contains('chosen')); }
+function renderHeaderCtl(){
+  var h=el('hctl'); if(!h)return;
+  var s=selectedSide, chosen=s&&s.classList.contains('chosen');
+  if(!chosen){ h.className='hctl'; h.innerHTML=''; return; }
+  h.className='hctl on';
+  var rot=sideRotatable(s)?'<button class="hbtn" id="hrotate" title="Rotate the grain 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v6h-6"/></svg><span>Rotate</span></button>':'';
+  h.innerHTML='<span class="hblur" title="Fade this sample to focus the others">'
+    +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>'
+    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot;
+  var r=el('hblurR'); if(r)r.addEventListener('input',function(){ applyBlur(selectedSide,parseFloat(this.value)); });
+  var rb=el('hrotate'); if(rb)rb.addEventListener('click',function(){ rotateSide(selectedSide); });
+}
 renderCbar();
 /* ---- Per-panel close: clear this panel back to the carousel (independent of the others) ---- */
 function clearPanel(side){
@@ -709,7 +754,7 @@ function clearPanel(side){
     var kind=id==='sideWorktop'?'worktop':(id==='sideCarcass'?'carcass':'board');
     if(sel)sel[kind]=null;
     var fe=el('fill'+kind.charAt(0).toUpperCase()+kind.slice(1));
-    if(fe){fe.style.backgroundImage=''; fe.removeAttribute('data-tag'); fe.removeAttribute('data-name'); var fn=fe.querySelector('.fn'); if(fn)fn.textContent='';}
+    if(fe){fe.style.backgroundImage=''; fe.style.removeProperty('--tex'); fe.classList.remove('rotable'); fe.style.setProperty('--rot','0deg'); side._rot=0; fe.removeAttribute('data-tag'); fe.removeAttribute('data-name'); var fn=fe.querySelector('.fn'); if(fn)fn.textContent='';}
   }
   side.classList.remove('chosen','idle'); side.classList.add('active');
   selectedSide=side; if(typeof renderCbar==='function')renderCbar();
