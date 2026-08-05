@@ -7,10 +7,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:72px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace}
+  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:104px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace}
   *{box-sizing:border-box}html,body{height:100%}
   body{margin:0;font-family:var(--f-sans);color:var(--ink-body);background:var(--navy);overflow:hidden;-webkit-font-smoothing:antialiased}
-  .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+  .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:7px clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+  .toprow{display:flex;align-items:center;justify-content:space-between;width:100%}
+  /* Canvas Control bar — the header's contextual second row (actions live here, not on the canvas) */
+  .cbar{display:flex;align-items:center;gap:8px;width:100%;min-height:30px;border-top:1px solid rgba(250,247,240,.08);padding-top:6px}
+  .cbhint{font:600 9px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,240,.42)}
+  .cbname{font-family:var(--f-serif);font-size:15px;color:var(--paper);margin-right:auto;display:inline-flex;align-items:center;gap:8px}
+  .cbname .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+  .cbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:28px;min-width:28px;padding:0 11px;font:700 9px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.02));border:1px solid rgba(214,178,106,.5);border-radius:999px;cursor:pointer;transition:background .15s,color .15s,transform .12s}
+  .cbtn:hover{background:linear-gradient(180deg,#e8cd86,var(--gold));color:var(--navy)}
+  .cbtn:active{transform:translateY(1px)}
+  .cbtn .g{font-size:14px;line-height:1}
   .top .b{display:flex;align-items:center;text-decoration:none}
   .top .b img{height:50px;width:auto;display:block}
   /* header toolbar — one uniform button (same height & width), gold-outline pills with icons */
@@ -356,6 +366,7 @@
   </div>
 </div>
 <header class="top">
+  <div class="toprow">
   <a class="b" href="/"><img src="/brand/sturij-logo-white.png" alt="Sturij"></a>
   <span class="tr">
     <button class="hbtn" id="cog" title="Studio tools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="1.9" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.9" fill="currentColor" stroke="none"/><circle cx="8" cy="18" r="1.9" fill="currentColor" stroke="none"/></svg><span>Tools</span></button>
@@ -364,6 +375,8 @@
     <button class="hbtn" id="talk" title="Talk — voice control (coming soon)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3.4"/></svg><span>Talk</span></button>
     <a class="hbtn" id="closex" href="/" title="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Close</span></a>
   </span>
+  </div>
+  <div class="cbar" id="cbar"><span class="cbhint">Tap a material to select it</span></div>
 </header>
 
 <button class="stab" id="stab" title="Describe your scheme">⌕ Search</button>
@@ -575,12 +588,12 @@ function addPaint(it){
 }
 function fillSide(kind,it){
   if(kind==='paint'){ addPaint(it); return; }
-  if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); el('sidePaint').classList.remove('idle','active'); renderRoom(); toast('Wallpaper · '+it.n); return; }
+  if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); el('sidePaint').classList.remove('idle','active'); renderRoom(); selectedSide=el('sidePaint'); if(typeof renderCbar==='function')renderCbar(); toast('Wallpaper · '+it.n); return; }
   sel[kind]=it;
   var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
   fillEl.style.backgroundImage="url('"+(it.img||('/showcase/finishes/'+it.s+'.webp'))+"')";
   fillEl.querySelector('.fn').textContent=label+' · '+it.n;
-  var sd=el('side'+cap(kind)); sd.classList.add('chosen'); sd.classList.remove('idle','active');
+  var sd=el('side'+cap(kind)); sd.classList.add('chosen'); sd.classList.remove('idle','active'); selectedSide=sd; if(typeof renderCbar==='function')renderCbar();
   fillEl.setAttribute('data-tag','');fillEl.setAttribute('data-brand',brand);fillEl.setAttribute('data-name',it.n);
   updateBar();
 }
@@ -663,11 +676,25 @@ fetch('/showcase/wallpaper/wallpaper.json').then(function(r){return r.json();}).
   sides.forEach(function(s){
     if(!s.classList.contains('chosen'))s.classList.add('idle');
     s.addEventListener('click',function(e){
+      selectSide(s);
       if(s.classList.contains('idle')){open(s);return;}
       if(s.classList.contains('active')&&e.target.closest('.colhint')){s.classList.remove('active');s.classList.add('idle');}
     });
   });
 })();
+/* ===== Canvas Control bar — the header's contextual second row; reflects the selected panel ===== */
+var selectedSide=null;
+var CBAR_ROLE={sidePaint:'Wall',sideWorktop:'Worktop',sideCarcass:'Carcass',sideBoard:'Boards'};
+function renderCbar(){
+  var bar=el('cbar'); if(!bar)return;
+  if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
+  var role=CBAR_ROLE[selectedSide.id]||'Panel';
+  var chosen=selectedSide.classList.contains('chosen');
+  bar.innerHTML='<span class="cbname"><span class="dot"></span>'+role+'</span>'
+    +'<span class="cbhint">'+(chosen?'selected':'choose a material')+'</span>';
+}
+function selectSide(s){ selectedSide=s; renderCbar(); }
+renderCbar();
 /* ---- Per-panel close: clear this panel back to the carousel (independent of the others) ---- */
 function clearPanel(side){
   if(!side)return; var id=side.id;
@@ -683,6 +710,7 @@ function clearPanel(side){
     if(fe){fe.style.backgroundImage=''; fe.removeAttribute('data-tag'); fe.removeAttribute('data-name'); var fn=fe.querySelector('.fn'); if(fn)fn.textContent='';}
   }
   side.classList.remove('chosen','idle'); side.classList.add('active');
+  selectedSide=side; if(typeof renderCbar==='function')renderCbar();
   if(typeof updateBar==='function')updateBar();
 }
 [].forEach.call(document.querySelectorAll('.side .pclose'),function(b){
