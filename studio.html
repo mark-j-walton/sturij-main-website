@@ -30,14 +30,19 @@
   .hbtn:hover{background:linear-gradient(180deg,#e8cd86,var(--gold));color:var(--navy);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 3px rgba(0,0,0,.14),0 6px 16px rgba(0,0,0,.34)}
   .hbtn:active{transform:translateY(1px)}
   /* contextual sample controls in the header row — blur slider + rotate, matching the toolbar */
-  .hctl{display:none;align-items:center;gap:10px}
-  .hctl.on{display:inline-flex}
+  .hctl{display:none}
+  /* unified control dock: slider + rotate together, panel name beneath, sans-serif */
+  .hctl.on{display:inline-flex;flex-direction:column;align-items:center;gap:5px;padding:7px 16px 6px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.14)),rgba(20,17,14,.42);border:1px solid rgba(214,178,106,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.32)}
+  .hdock-row{display:inline-flex;align-items:center;gap:10px}
+  .hdock-name{font:600 10px/1 var(--f-sans);letter-spacing:.13em;text-transform:uppercase;color:rgba(250,247,240,.72);display:inline-flex;align-items:center;gap:7px}
+  .hdock-name .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
   .hctl .hblur{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 15px;border-radius:999px;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.02));border:1px solid rgba(214,178,106,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 2px rgba(0,0,0,.28),0 4px 10px rgba(0,0,0,.3)}
   .hctl .hblur svg{width:15px;height:15px;flex:none;display:block}
   .hrange{-webkit-appearance:none;appearance:none;width:94px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--gold),rgba(214,178,106,.22));outline:none;cursor:pointer;margin:0}
   .hrange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(180deg,#fffdf8,#e8cd86);border:1px solid rgba(120,90,40,.55);box-shadow:0 1px 3px rgba(0,0,0,.4);cursor:pointer}
   .hrange::-moz-range-thumb{width:14px;height:14px;border:1px solid rgba(120,90,40,.55);border-radius:50%;background:#f2dfa6;cursor:pointer}
   .hctl .hbtn{min-width:auto}
+  body.hassel .cbar{display:none}
   /* rotate: the material's grain turns on a texture layer that scales up to keep cover */
   .filled.rotable::before{content:"";position:absolute;inset:0;background-image:var(--tex,none);background-size:cover;background-position:center;transform:rotate(var(--rot,0deg)) scale(var(--rotsc,1));transform-origin:center center;pointer-events:none;z-index:1}
   /* ✕ clear stays on the sample but reads subtle (glassy), not a bright pebble */
@@ -45,7 +50,7 @@
   .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30fr 18fr 20fr 12fr 20fr}
   .side{position:relative;overflow:hidden}
   /* clean seam line between samples — no shadow, no bevel; colour is easy to tune via --seam */
-  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -1px 0 0 var(--seam),inset 0 -1px 0 var(--seam)}
+  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -4px 0 0 var(--seam),inset 0 -4px 0 var(--seam)}
   /* drag-to-reorder: a grip per panel + a glowing drop-target bar */
   .pgrip{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:16;width:40px;height:17px;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;letter-spacing:1px;color:#8a8172;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.1);border-radius:0 0 9px 9px;border-top:0;cursor:grab;box-shadow:0 3px 8px rgba(0,0,0,.2),inset 0 -1px 2px rgba(0,0,0,.06);touch-action:none;-webkit-user-select:none;user-select:none;opacity:.55;transition:opacity .15s,box-shadow .15s}
   .side:hover .pgrip{opacity:.95}
@@ -56,7 +61,7 @@
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
   .track{position:absolute;left:0;right:0;top:0;will-change:transform}
-  .strip{height:var(--swh,66px);position:relative;border-bottom:1px solid rgba(0,0,0,.06);background-size:cover;background-position:center}
+  .strip{height:var(--swh,66px);position:relative;border-bottom:4px solid var(--seam);background-size:cover;background-position:center}
   .lab{position:absolute;bottom:9px;max-width:74%;background:rgba(26,23,20,.22);color:#fff;border-radius:9px;overflow:hidden;transition:background .2s,color .2s,opacity .35s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
   .paint .lab{left:14px}.board .lab{right:14px;text-align:right}
   .lab .nm{display:block;padding:6px 13px;font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -216,7 +221,7 @@
   .frail{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none}
   .frail.grabbing{cursor:grabbing}
   .ftrack{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
-  .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.28);position:relative}
+  .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:4px solid var(--seam);position:relative}
   .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(26,23,20,.22);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .fexp{position:absolute;inset:0;display:none;background-size:cover;background-position:center;align-items:center;justify-content:space-between;padding:0 18px}
   .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
@@ -293,6 +298,10 @@
   .note .nm{position:relative;font-size:13px;font-weight:600;color:#34312a;margin-top:5px;line-height:1.25}
   .note .meta{position:relative;margin-top:9px;font-size:8px;letter-spacing:.06em;color:#9a938686;color:#9c948a}
   .note .curl{position:absolute;right:0;bottom:0;width:22px;height:22px;background:linear-gradient(135deg,transparent 46%,rgba(0,0,0,.13) 50%,rgba(255,255,255,.5) 55%);border-bottom-right-radius:2px}
+  /* customer can type into a note — editable body; free notes have no finish name */
+  .note .body{position:relative;margin-top:8px;font:11px/1.4 var(--f-mono);color:#4a453c;min-height:15px;outline:none;white-space:pre-wrap;word-break:break-word;cursor:text}
+  .note .body:empty::before{content:attr(data-ph);color:#b7ac96}
+  .note.free .nm,.note.free .meta{display:none}
   .note.drag{pointer-events:none;opacity:.97;transform:rotate(-6deg) scale(1.02)}
   .note.stuck{cursor:grab;touch-action:none}
   .note.dragging{cursor:grabbing;opacity:.97;box-shadow:0 18px 36px rgba(0,0,0,.4)}
@@ -468,7 +477,7 @@
   <div class="hdfoot">Guided finish — keep to one or two across taps &amp; sockets · drag a tap onto the scene · drag to move · ✕ to remove</div>
 </div>
 
-<div class="pad" id="pad" title="Peel a tag — drop it on a finish"><div class="sheet"></div><div class="sheet"></div><div class="top"><div class="wm"></div><div class="pl">Peel a tag</div></div></div>
+<div class="pad" id="pad" title="Peel a note — drop on a finish to tag it, or anywhere to jot your own"><div class="top"><div class="wm"></div><div class="pl">Peel a note</div></div></div>
 
 
 <div class="handles" id="handles"><button class="hbtn" id="hprev">‹</button><div class="hview" id="hview"></div><button class="hbtn" id="hnext">›</button><div class="hname" id="hname"></div></div>
@@ -712,8 +721,9 @@ function renderCbar(){
   if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
   var role=CBAR_ROLE[selectedSide.id]||'Panel';
   var chosen=selectedSide.classList.contains('chosen');
+  if(chosen){ bar.innerHTML=''; return; }   /* name + controls now live in the header dock */
   bar.innerHTML='<span class="cbname"><span class="dot"></span>'+role+'</span>'
-    +'<span class="cbhint">'+(chosen?'selected':'choose a material')+'</span>';
+    +'<span class="cbhint">choose a material</span>';
 }
 function selectSide(s){ selectedSide=s; renderCbar(); }
 /* ---- Header sample controls: blur slider + rotate, contextual to the selected sample ---- */
@@ -735,12 +745,15 @@ function sideRotatable(s){ return !!(s&&/sideWorktop|sideCarcass|sideBoard/.test
 function renderHeaderCtl(){
   var h=el('hctl'); if(!h)return;
   var s=selectedSide, chosen=s&&s.classList.contains('chosen');
+  document.body.classList.toggle('hassel', !!chosen);
   if(!chosen){ h.className='hctl'; h.innerHTML=''; return; }
   h.className='hctl on';
+  var role=CBAR_ROLE[s.id]||'Panel';
   var rot=sideRotatable(s)?'<button class="hbtn" id="hrotate" title="Rotate the grain 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v6h-6"/></svg><span>Rotate</span></button>':'';
-  h.innerHTML='<span class="hblur" title="Fade this sample to focus the others">'
+  h.innerHTML='<span class="hdock-row"><span class="hblur" title="Fade this sample to focus the others">'
     +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>'
-    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot;
+    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot+'</span>'
+    +'<span class="hdock-name"><span class="dot"></span>'+role+'</span>';
   var r=el('hblurR'); if(r)r.addEventListener('input',function(){ applyBlur(selectedSide,parseFloat(this.value)); });
   var rb=el('hrotate'); if(rb)rb.addEventListener('click',function(){ rotateSide(selectedSide); });
 }
@@ -931,7 +944,7 @@ el('bzip').onclick=function(){
   function tagOf(node){ if(!node) return null; var t=node.closest&&node.closest('[data-tag]'); if(!t) return null; var nm=t.getAttribute('data-name'); if(!nm) return null; return {brand:t.getAttribute('data-brand')||'Sturij',name:nm}; }
   function makeNoteMovable(s){
     var xb=s.querySelector('.nx'); if(xb) xb.onclick=function(e){e.stopPropagation();s.remove();};
-    s.addEventListener('pointerdown',function(e){ if(e.target===xb)return; e.stopPropagation();
+    s.addEventListener('pointerdown',function(e){ if(e.target===xb||e.target.isContentEditable)return; e.stopPropagation();
       s.classList.add('dragging'); var mx=e.clientX,my=e.clientY,l=parseFloat(s.style.left),t=parseFloat(s.style.top); try{s.setPointerCapture(e.pointerId);}catch(_){}
       function mv(ev){s.style.left=(l+ev.clientX-mx)+'px';s.style.top=(t+ev.clientY-my)+'px';}
       function up(){s.classList.remove('dragging');document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);}
@@ -950,13 +963,19 @@ el('bzip').onclick=function(){
       note.style.display='none';
       var under=document.elementFromPoint(ev.clientX,ev.clientY); note.remove();
       var info=tagOf(under);
+      var s=document.createElement('div');
       if(info){
-        var s=document.createElement('div'); s.className='note stuck';
-        s.innerHTML=noteHTML(info.brand,info.name,'Sturij')+'<button class="nx" title="Remove">✕</button>';
-        s.style.left=(ev.clientX-76)+'px'; s.style.top=(ev.clientY-50)+'px';
-        s.style.transform='rotate('+(((ev.clientX%9)-4)).toFixed(0)+'deg)';
-        document.body.appendChild(s); makeNoteMovable(s); toast('Tagged · '+info.name);
-      } else toast('Drop it on a colour, board or floor');
+        s.className='note stuck';
+        s.innerHTML=noteHTML(info.brand,info.name,'Sturij')+'<div class="body" contenteditable="true" data-ph="Add a note…"></div><button class="nx" title="Remove">✕</button>';
+      } else {
+        s.className='note stuck free';
+        s.innerHTML='<div class="wm"></div><span class="tape"></span><div class="brand">Note</div><div class="body" contenteditable="true" data-ph="Type a note…"></div><div class="curl"></div><button class="nx" title="Remove">✕</button>';
+      }
+      s.style.left=(ev.clientX-76)+'px'; s.style.top=(ev.clientY-50)+'px';
+      s.style.transform='rotate('+(((ev.clientX%9)-4)).toFixed(0)+'deg)';
+      document.body.appendChild(s); makeNoteMovable(s);
+      var bd=s.querySelector('.body'); if(bd){ bd.addEventListener('pointerdown',function(ev2){ev2.stopPropagation();}); setTimeout(function(){bd.focus();},0); }
+      toast(info?('Tagged · '+info.name):'Note added — type into it');
     }
     document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);
   });
