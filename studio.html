@@ -30,14 +30,19 @@
   .hbtn:hover{background:linear-gradient(180deg,#e8cd86,var(--gold));color:var(--navy);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -2px 3px rgba(0,0,0,.14),0 6px 16px rgba(0,0,0,.34)}
   .hbtn:active{transform:translateY(1px)}
   /* contextual sample controls in the header row — blur slider + rotate, matching the toolbar */
-  .hctl{display:none;align-items:center;gap:10px}
-  .hctl.on{display:inline-flex}
+  .hctl{display:none}
+  /* unified control dock: slider + rotate together, panel name beneath, sans-serif */
+  .hctl.on{display:inline-flex;flex-direction:column;align-items:center;gap:5px;padding:7px 16px 6px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.14)),rgba(20,17,14,.42);border:1px solid rgba(214,178,106,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.32)}
+  .hdock-row{display:inline-flex;align-items:center;gap:10px}
+  .hdock-name{font:600 10px/1 var(--f-sans);letter-spacing:.13em;text-transform:uppercase;color:rgba(250,247,240,.72);display:inline-flex;align-items:center;gap:7px}
+  .hdock-name .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
   .hctl .hblur{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 15px;border-radius:999px;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.02));border:1px solid rgba(214,178,106,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 2px rgba(0,0,0,.28),0 4px 10px rgba(0,0,0,.3)}
   .hctl .hblur svg{width:15px;height:15px;flex:none;display:block}
   .hrange{-webkit-appearance:none;appearance:none;width:94px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--gold),rgba(214,178,106,.22));outline:none;cursor:pointer;margin:0}
   .hrange::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;border-radius:50%;background:linear-gradient(180deg,#fffdf8,#e8cd86);border:1px solid rgba(120,90,40,.55);box-shadow:0 1px 3px rgba(0,0,0,.4);cursor:pointer}
   .hrange::-moz-range-thumb{width:14px;height:14px;border:1px solid rgba(120,90,40,.55);border-radius:50%;background:#f2dfa6;cursor:pointer}
   .hctl .hbtn{min-width:auto}
+  body.hassel .cbar{display:none}
   /* rotate: the material's grain turns on a texture layer that scales up to keep cover */
   .filled.rotable::before{content:"";position:absolute;inset:0;background-image:var(--tex,none);background-size:cover;background-position:center;transform:rotate(var(--rot,0deg)) scale(var(--rotsc,1));transform-origin:center center;pointer-events:none;z-index:1}
   /* ✕ clear stays on the sample but reads subtle (glassy), not a bright pebble */
@@ -712,8 +717,9 @@ function renderCbar(){
   if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
   var role=CBAR_ROLE[selectedSide.id]||'Panel';
   var chosen=selectedSide.classList.contains('chosen');
+  if(chosen){ bar.innerHTML=''; return; }   /* name + controls now live in the header dock */
   bar.innerHTML='<span class="cbname"><span class="dot"></span>'+role+'</span>'
-    +'<span class="cbhint">'+(chosen?'selected':'choose a material')+'</span>';
+    +'<span class="cbhint">choose a material</span>';
 }
 function selectSide(s){ selectedSide=s; renderCbar(); }
 /* ---- Header sample controls: blur slider + rotate, contextual to the selected sample ---- */
@@ -735,12 +741,15 @@ function sideRotatable(s){ return !!(s&&/sideWorktop|sideCarcass|sideBoard/.test
 function renderHeaderCtl(){
   var h=el('hctl'); if(!h)return;
   var s=selectedSide, chosen=s&&s.classList.contains('chosen');
+  document.body.classList.toggle('hassel', !!chosen);
   if(!chosen){ h.className='hctl'; h.innerHTML=''; return; }
   h.className='hctl on';
+  var role=CBAR_ROLE[s.id]||'Panel';
   var rot=sideRotatable(s)?'<button class="hbtn" id="hrotate" title="Rotate the grain 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v6h-6"/></svg><span>Rotate</span></button>':'';
-  h.innerHTML='<span class="hblur" title="Fade this sample to focus the others">'
+  h.innerHTML='<span class="hdock-row"><span class="hblur" title="Fade this sample to focus the others">'
     +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>'
-    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot;
+    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot+'</span>'
+    +'<span class="hdock-name"><span class="dot"></span>'+role+'</span>';
   var r=el('hblurR'); if(r)r.addEventListener('input',function(){ applyBlur(selectedSide,parseFloat(this.value)); });
   var rb=el('hrotate'); if(rb)rb.addEventListener('click',function(){ rotateSide(selectedSide); });
 }
