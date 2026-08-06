@@ -62,18 +62,20 @@ try {
       hctlOn: (function () { const h = document.getElementById('hctl'); return h ? h.classList.contains('on') : false; })(),
       rotBefore: rotBefore, rotAfter: rotAfter,
       padVisible: (function () { const p = document.getElementById('pad'); return p ? getComputedStyle(p).display !== 'none' : false; })(),
-      searchClear: (function () { const st = document.getElementById('stab'); if (!st) return true; const sr = st.getBoundingClientRect(); return ['sidePaint', 'sideWorktop', 'sideCarcass', 'sideBoard'].every(function (id) { const s = document.getElementById(id); if (!s || s.style.display === 'none') return true; const e = s.querySelector('.pclose'); if (!e) return true; const r = e.getBoundingClientRect(); const ov = r.right > sr.left && r.left < sr.right && r.bottom > sr.top && r.top < sr.bottom; return !ov; }); })()
+      searchClear: (function () { const st = document.getElementById('stab'); if (!st) return true; const sr = st.getBoundingClientRect(); return ['sidePaint', 'sideWorktop', 'sideCarcass', 'sideBoard'].every(function (id) { const s = document.getElementById(id); if (!s || s.style.display === 'none') return true; const e = s.querySelector('.pclose'); if (!e) return true; const r = e.getBoundingClientRect(); const ov = r.right > sr.left && r.left < sr.right && r.bottom > sr.top && r.top < sr.bottom; return !ov; }); })(),
+      dock: (function () { const t = document.querySelector('#hctl .hdock-tile'); const h = document.getElementById('hctl'); const nm = document.querySelector('#hctl .hdock-name'); const ctl = document.getElementById('hblurR'); if (!t || !h || !nm || !ctl) return { ok: false }; const row = getComputedStyle(h).flexDirection === 'row'; const tr = t.getBoundingClientRect(), nr = nm.getBoundingClientRect(), cr = ctl.getBoundingClientRect(); const hasTile = tr.width >= 12 && tr.height >= 12; const order = tr.left <= nr.left + 1 && nr.left <= cr.left + 1; return { ok: hasTile && row && order, tile: hasTile, row: row, order: order }; })()
     };
   });
   const round = (c) => c && c.disp !== 'none' && c.shadow && (c.radius === '15px' || parseFloat(c.radius) >= 14);
   ok('✕ = subtle pebble on large panel', round(chrome.close), JSON.stringify(chrome.close));
-  ok('name tag: frosted, centred, on every sample', chrome.fnTag && chrome.fnTag.disp !== 'none' && chrome.fnTag.hasText && chrome.fnTag.frosted && chrome.fnTag.centred, JSON.stringify(chrome.fnTag));
+  ok('centred name tag removed (identity is the drag tab + dock tile)', chrome.fnTag && chrome.fnTag.disp === 'none', JSON.stringify(chrome.fnTag));
   ok('☀ blur pebble removed from samples', chrome.boardBlurGone && chrome.paintBlurGone, JSON.stringify({ board: chrome.boardBlurGone, paint: chrome.paintBlurGone }));
   ok('header toolbar present (Tools/Photo/Snip/Talk/Close)', chrome.hdrPresent && chrome.hdrPresent.every(Boolean), JSON.stringify(chrome.hdrPresent));
   ok('header buttons uniform height', chrome.hdrHeights && chrome.hdrHeights.every((h) => h === chrome.hdrHeights[0]), JSON.stringify(chrome.hdrHeights));
   ok('header buttons gold-embossed', chrome.cogEmbossed, 'gradient=' + chrome.cogEmbossed);
   ok('paint panel keeps its ✕', round(chrome.paintClose), JSON.stringify(chrome.paintClose));
   ok('header shows blur slider on select', chrome.hblur && chrome.hctlOn, JSON.stringify({ hblur: chrome.hblur, on: chrome.hctlOn }));
+  ok('dock: one horizontal row — live tile · name · controls', chrome.dock && chrome.dock.ok, JSON.stringify(chrome.dock));
   ok('header shows rotate on textured sample', chrome.hrotate, 'rotate=' + chrome.hrotate);
   ok('rotate turns the grain (--rot → 90deg)', chrome.rotAfter === '90deg' && chrome.rotBefore !== '90deg', 'before=' + chrome.rotBefore + ' after=' + chrome.rotAfter);
   ok('panel buttons clear of the Search tab', chrome.searchClear, 'clear=' + chrome.searchClear);
