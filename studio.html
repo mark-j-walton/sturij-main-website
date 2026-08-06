@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:104px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--seam:rgba(166,124,60,.8);--hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 11V6.2a1.4 1.4 0 0 1 2.8 0V10m0-.5V4.6a1.4 1.4 0 0 1 2.8 0V10m0-.2V5.2a1.4 1.4 0 0 1 2.8 0V11m0-.6a1.4 1.4 0 0 1 2.8 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-5-2.7l-2.4-3.6a1.5 1.5 0 0 1 2.3-1.9L7 13' fill='black'/%3E%3C/svg%3E")}
+  :root{--navy:#232120;--gold:#a67c3c;--bronze:#6e2a2e;--paper:#faf7f0;--paper-warm:#f3eee3;--card:#fbf9f3;--ink:#34312a;--ink-body:#34312a;--ink-muted:#66615a;--line:rgba(52,49,42,.14);--nav:104px;--f-serif:'DM Serif Display',Georgia,serif;--f-sans:'DM Sans',system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace;--seam:rgba(166,124,60,.5);--hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 11V6.2a1.4 1.4 0 0 1 2.8 0V10m0-.5V4.6a1.4 1.4 0 0 1 2.8 0V10m0-.2V5.2a1.4 1.4 0 0 1 2.8 0V11m0-.6a1.4 1.4 0 0 1 2.8 0V15a6 6 0 0 1-6 6h-.6a6 6 0 0 1-5-2.7l-2.4-3.6a1.5 1.5 0 0 1 2.3-1.9L7 13' fill='black'/%3E%3C/svg%3E")}
   *{box-sizing:border-box}html,body{height:100%}
   body{margin:0;font-family:var(--f-sans);color:var(--ink-body);background:var(--navy);overflow:hidden;-webkit-font-smoothing:antialiased}
   .top{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:50;background:var(--navy);color:var(--paper);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:7px clamp(14px,3vw,26px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
@@ -31,11 +31,11 @@
   .hbtn:active{transform:translateY(1px)}
   /* contextual sample controls in the header row — blur slider + rotate, matching the toolbar */
   .hctl{display:none}
-  /* unified control dock: slider + rotate together, panel name beneath, sans-serif */
-  .hctl.on{display:inline-flex;flex-direction:column;align-items:center;gap:5px;padding:7px 16px 6px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.14)),rgba(20,17,14,.42);border:1px solid rgba(214,178,106,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.32)}
+  /* unified control dock: one thin horizontal row — live tile · name · controls */
+  .hctl.on{display:inline-flex;flex-direction:row;align-items:center;gap:9px;padding:5px 11px 5px 6px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(0,0,0,.14)),rgba(20,17,14,.42);border:1px solid rgba(214,178,106,.30);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.32)}
+  .hdock-tile{width:28px;height:28px;border-radius:7px;flex:none;background-size:cover;background-position:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2),0 2px 5px rgba(0,0,0,.4)}
   .hdock-row{display:inline-flex;align-items:center;gap:10px}
-  .hdock-name{font:600 10px/1 var(--f-sans);letter-spacing:.13em;text-transform:uppercase;color:rgba(250,247,240,.72);display:inline-flex;align-items:center;gap:7px}
-  .hdock-name .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex:none}
+  .hdock-name{font:600 10px/1 var(--f-sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(250,247,240,.82);white-space:nowrap}
   .hctl .hblur{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 15px;border-radius:999px;color:var(--gold);background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.02));border:1px solid rgba(214,178,106,.55);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 -1px 2px rgba(0,0,0,.28),0 4px 10px rgba(0,0,0,.3)}
   .hctl .hblur svg{width:15px;height:15px;flex:none;display:block}
   .hrange{-webkit-appearance:none;appearance:none;width:94px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--gold),rgba(214,178,106,.22));outline:none;cursor:pointer;margin:0}
@@ -50,18 +50,19 @@
   .wrap{position:fixed;inset:var(--nav) 0 0 0;display:grid;grid-template-columns:30fr 18fr 20fr 12fr 20fr}
   .side{position:relative;overflow:hidden}
   /* clean seam line between samples — no shadow, no bevel; colour is easy to tune via --seam */
-  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -4px 0 0 var(--seam),inset 0 -4px 0 var(--seam)}
-  /* drag-to-reorder: a grip per panel + a glowing drop-target bar */
-  .pgrip{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:16;width:40px;height:17px;display:flex;align-items:center;justify-content:center;font-size:11px;line-height:1;letter-spacing:1px;color:#8a8172;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.1);border-radius:0 0 9px 9px;border-top:0;cursor:grab;box-shadow:0 3px 8px rgba(0,0,0,.2),inset 0 -1px 2px rgba(0,0,0,.06);touch-action:none;-webkit-user-select:none;user-select:none;opacity:.55;transition:opacity .15s,box-shadow .15s}
-  .side:hover .pgrip{opacity:.95}
-  .pgrip:active{cursor:grabbing}
+  .side::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:6;box-shadow:inset -2px 0 0 var(--seam),inset 0 -2px 0 var(--seam)}
+  /* drag-to-reorder: a frosted "clear plastic" side tab per panel (same shape as the Handles/Electrical/Taps side tabs, but frosted) — vertical panel name + hand icon, the drag handle */
+  .pgrip{position:absolute;top:50%;left:0;transform:translateY(-50%);z-index:16;writing-mode:vertical-rl;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:104px;padding:12px 8px;font:600 10px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;color:var(--paper);border:0;border-radius:0 12px 12px 0;cursor:grab;background:linear-gradient(90deg,rgba(0,0,0,.16),rgba(255,255,255,.10)),rgba(35,33,32,.34);-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);box-shadow:inset -1px 0 0 rgba(255,255,255,.16),inset 2px 0 4px rgba(0,0,0,.4),6px 8px 20px rgba(0,0,0,.28);touch-action:none;-webkit-user-select:none;user-select:none;opacity:.9;transition:opacity .15s,box-shadow .15s}
+  .pgrip::before{content:"";width:13px;height:14px;flex:none;background:currentColor;-webkit-mask:var(--hand) center/contain no-repeat;mask:var(--hand) center/contain no-repeat}
+  .side:hover .pgrip{opacity:1}
+  .pgrip:active{cursor:grabbing;box-shadow:inset -1px 0 0 rgba(255,255,255,.2),8px 10px 24px rgba(0,0,0,.4)}
   .side.dragging{opacity:.72;outline:2px dashed rgba(214,178,106,.85);outline-offset:-5px}
   .dropbar{position:fixed;top:var(--nav);bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(180deg,var(--gold),rgba(214,178,106,.35));box-shadow:0 0 14px rgba(214,178,106,.9);z-index:45;display:none;pointer-events:none;border-radius:2px}
   .dropbar.on{display:block}
   .rail{position:absolute;inset:0;touch-action:none;cursor:grab;user-select:none}
   .rail.grabbing{cursor:grabbing}
   .track{position:absolute;left:0;right:0;top:0;will-change:transform}
-  .strip{height:var(--swh,66px);position:relative;border-bottom:4px solid var(--seam);background-size:cover;background-position:center}
+  .strip{height:var(--swh,66px);position:relative;border-bottom:2px solid var(--seam);background-size:cover;background-position:center}
   .lab{position:absolute;bottom:9px;max-width:74%;background:rgba(26,23,20,.22);color:#fff;border-radius:9px;overflow:hidden;transition:background .2s,color .2s,opacity .35s;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
   .paint .lab{left:14px}.board .lab{right:14px;text-align:right}
   .lab .nm{display:block;padding:6px 13px;font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -96,10 +97,8 @@
   .cband.on{box-shadow:0 0 0 2px var(--gold)}
   .cband.all{pointer-events:auto;width:auto;height:17px;border-radius:999px;padding:0 8px;font:600 7.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);background:transparent;border:1px solid var(--line)}
   .cband.all.on{color:var(--navy);background:var(--gold);border-color:var(--gold);box-shadow:none}
+  /* centred identity tag removed per brief — panel identity now lives in the drag side-tab + the dock live tile */
   .side .filled .fn{display:none}
-  /* persistent identity tag — frosted-clear "plastic" pill, centred on the sample, hand icon + name */
-  .side.chosen .filled .fn{display:inline-flex;align-items:center;gap:8px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:7;padding:9px 18px;max-width:86%;border-radius:12px;font:600 10.5px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(0,0,0,.16)),rgba(35,33,32,.34);-webkit-backdrop-filter:blur(8px) saturate(1.1);backdrop-filter:blur(8px) saturate(1.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -2px 4px rgba(0,0,0,.4),0 8px 20px rgba(0,0,0,.3)}
-  .side.chosen .filled .fn::before{content:"";width:15px;height:16px;flex:none;background:currentColor;-webkit-mask:var(--hand) center/contain no-repeat;mask:var(--hand) center/contain no-repeat}
   .pblur{position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0}
   /* panel chrome buttons — white embossed pebbles (like the recommendation card); large panels only */
   .change,.pclose{position:absolute;right:14px;width:30px;height:30px;display:none;align-items:center;justify-content:center;line-height:1;color:#4a443c;background:linear-gradient(180deg,#fffdf8,#efe9dd);border:1px solid rgba(0,0,0,.10);border-radius:50%;cursor:pointer;padding:0;box-shadow:0 4px 12px rgba(0,0,0,.2),0 1px 2px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.95),inset 0 -2px 3px rgba(0,0,0,.05);transition:transform .15s,box-shadow .18s}
@@ -221,7 +220,7 @@
   .frail{position:absolute;inset:0;overflow:hidden;touch-action:none;cursor:grab;user-select:none}
   .frail.grabbing{cursor:grabbing}
   .ftrack{position:absolute;top:0;bottom:0;left:0;display:flex;will-change:transform}
-  .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:4px solid var(--seam);position:relative}
+  .ftile{height:100%;aspect-ratio:1;flex:none;background-size:cover;background-position:center;border-right:2px solid var(--seam);position:relative}
   .ftile .fl{position:absolute;left:8px;bottom:7px;font:600 9px/1.2 var(--f-mono);letter-spacing:.03em;color:#fff;background:rgba(26,23,20,.22);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);padding:4px 8px;border-radius:6px;max-width:86%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .fexp{position:absolute;inset:0;display:none;background-size:cover;background-position:center;align-items:center;justify-content:space-between;padding:0 18px}
   .floorbar.filled .frail,.floorbar.filled .fhint{display:none}.floorbar.filled .fexp{display:flex}
@@ -750,10 +749,16 @@ function renderHeaderCtl(){
   h.className='hctl on';
   var role=CBAR_ROLE[s.id]||'Panel';
   var rot=sideRotatable(s)?'<button class="hbtn" id="hrotate" title="Rotate the grain 90°"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v6h-6"/></svg><span>Rotate</span></button>':'';
-  h.innerHTML='<span class="hdock-row"><span class="hblur" title="Fade this sample to focus the others">'
+  // live tile: mirror the panel's current fill (wood/stone texture via --tex, else the paint colour) so it's obvious which panel these controls drive
+  var fe=s.querySelector('.filled'), tileStyle='';
+  if(fe){ var tex=fe.style.getPropertyValue('--tex'); var cs=getComputedStyle(fe);
+    var img=(tex&&tex!=='none')?tex:cs.backgroundImage;
+    tileStyle='background-image:'+((img&&img!=='none')?img:'none')+';background-color:'+cs.backgroundColor+';'; }
+  h.innerHTML='<span class="hdock-tile" style="'+tileStyle+'"></span>'
+    +'<span class="hdock-name">'+role+'</span>'
+    +'<span class="hdock-row"><span class="hblur" title="Fade this sample to focus the others">'
     +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19"/></svg>'
-    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot+'</span>'
-    +'<span class="hdock-name"><span class="dot"></span>'+role+'</span>';
+    +'<input type="range" class="hrange" id="hblurR" min="0" max="1" step="0.02" value="'+(s._blur||0)+'"></span>'+rot+'</span>';
   var r=el('hblurR'); if(r)r.addEventListener('input',function(){ applyBlur(selectedSide,parseFloat(this.value)); });
   var rb=el('hrotate'); if(rb)rb.addEventListener('click',function(){ rotateSide(selectedSide); });
 }
@@ -1378,7 +1383,8 @@ el('bzip').onclick=function(){
     function visSides(){ return activeKeys().map(function(k){var e=el(SIDEID[k]);return (e&&e.style.display!=='none')?{k:k,el:e}:null;}).filter(Boolean); }
     Object.keys(SIDEID).forEach(function(k){
       var side=el(SIDEID[k]); if(!side)return;
-      var grip=document.createElement('button'); grip.className='pgrip'; grip.type='button'; grip.title='Drag to reorder this panel'; grip.textContent='⠿'; side.appendChild(grip);
+      var _p=PANELS.filter(function(p){return p.k===k;})[0]; var _lbl=_p?_p.label:k;
+      var grip=document.createElement('button'); grip.className='pgrip'; grip.type='button'; grip.title='Drag to reorder · '+_lbl; grip.textContent=_lbl; side.appendChild(grip);
       var dragging=false, curIdx=-1;
       function locate(x){
         var ss=visSides(); curIdx=ss.length;
