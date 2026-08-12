@@ -1578,16 +1578,29 @@ function buildRenderRefs(cb){
     var d=defs.shift(); swatchRef(d[0],d[1],d[2],function(r){if(r)out.push(r);next();}); }
   next();
 }
-if(el('vis'))el('vis').onclick=function(){
+var ROOM_TYPES=['Kitchen','Bedroom','Living room','Home office','Boot room','Utility room','Dressing room','Media room'];
+var visRoom=localStorage.getItem('sturij-vis-room')||'Kitchen';
+(function(){
+  var m=el('vismenu'); if(!m)return;
+  m.innerHTML=ROOM_TYPES.map(function(r){return '<button type="button" role="menuitem" data-room="'+r+'">'+r+'</button>';}).join('');
+  m.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-room]'); if(!b)return;
+    visRoom=b.getAttribute('data-room'); localStorage.setItem('sturij-vis-room',visRoom);
+    m.classList.remove('on'); runVisualise();
+  });
+  document.addEventListener('pointerdown',function(e){ if(!m.contains(e.target)&&!el('vis').contains(e.target)) m.classList.remove('on'); });
+})();
+el('vis').onclick=function(){ var m=el('vismenu'); m?m.classList.toggle('on'):runVisualise(); };
+function runVisualise(){
   var b=el('vis'); if(b.classList.contains('rec'))return;
   if(!paints[0]&&!sel.board){toast('Choose at least a wall colour or a board first');return;}
-  b.classList.add('rec');toast('Rendering your room…');
+  b.classList.add('rec');toast('Rendering a '+visRoom.toLowerCase()+'…');
   buildRenderRefs(function(refs){
     composeScene(function(cv){
       var base=cv.toDataURL('image/jpeg',0.85);
       /* Sectioned, fact-led prompt (Sturij Prompt Studio): facts the model can honour, no prose */
       var prompt='CONTEXT\n'
-        +'Create one photorealistic photograph of a single furnished room. The attached image is a flat material pairing board — the palette record only, not a room.\n\n'
+        +'Create one photorealistic photograph of a single furnished '+visRoom.toLowerCase()+'. The attached image is a flat material pairing board — the palette record only, not a room.\n\n'
         +'MATERIAL FACTS (STRICT)\n'
         +refs.map(function(r){return '- '+r.label;}).join('\n')+'\n'
         +'- Fitted joinery: made by Sturij.\n\n'
@@ -1604,8 +1617,8 @@ if(el('vis'))el('vis').onclick=function(){
         b.classList.remove('rec');
         var img=res.j&&res.j.outputs&&res.j.outputs[0]&&res.j.outputs[0].image;
         if(!res.ok||!img){toast('Render failed'+(res.j&&res.j.error?' — '+res.j.error:res.j&&res.j.failures&&res.j.failures[0]?' — '+res.j.failures[0].error:''));return;}
-        items.push({name:'Room render',file:'room-render-'+Date.now()+'.jpg',sub:'photo',swatchCss:'background:#EFE9DD',png:img});
-        renderTray();toast('Room render added to your scheme');
+        items.push({name:visRoom+' render',file:visRoom.toLowerCase().replace(/\s+/g,'-')+'-render-'+Date.now()+'.jpg',sub:'photo',swatchCss:'background:#EFE9DD',png:img});
+        renderTray();toast(visRoom+' render added to your scheme');
       })
       .catch(function(e){b.classList.remove('rec');toast('Render failed — is this origin whitelisted on the visualiser?');});
     });
