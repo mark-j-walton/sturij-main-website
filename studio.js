@@ -1569,7 +1569,7 @@ function buildRenderRefs(cb){
   else if(paints[0])defs.push(['Walls — Farrow & Ball paint "'+paints[0][0]+'" '+paints[0][1],paints[0][1],true]);
   if(ceilOn&&ceilCol)defs.push(['Ceiling — Farrow & Ball paint "'+ceilCol[0]+'" '+ceilCol[1],ceilCol[1],true]);
   if(skirtOn&&skirtCol)defs.push(['Skirting — Farrow & Ball paint "'+skirtCol[0]+'" '+skirtCol[1],skirtCol[1],true]);
-  if(sel.board)defs.push(['Fitted furniture doors and panels — Egger decor "'+sel.board.n+'"','showcase/finishes/'+sel.board.s+'.webp',false]);
+  if(sel.board)defs.push(['Every furniture door front, drawer front and end panel — Egger decor "'+sel.board.n+'" — reproduce this swatch\'s visible texture, pattern and grain on the fronts, not a plain colour','showcase/finishes/'+sel.board.s+'.webp',false]);
   if(sel.carcass)defs.push(['Furniture carcass interior — Egger decor "'+sel.carcass.n+'"','showcase/finishes/'+sel.carcass.s+'.webp',false]);
   if(sel.worktop)defs.push(['Worktop — Omega Stone "'+sel.worktop.n+'"',sel.worktop.img,false]);
   if(floor&&el('floorbar').classList.contains('filled'))defs.push(['Floor — '+(floor.type==='hard'?'Egger flooring':'Crucial Trading carpet')+' "'+floor.name+'"',floor.url,false]);
@@ -1605,11 +1605,11 @@ function runVisualise(){
         +refs.map(function(r){return '- '+r.label;}).join('\n')+'\n'
         +'- Fitted joinery: made by Sturij.\n\n'
         +'INSTRUCTIONAL LOGIC\n'
-        +'Apply each labelled reference swatch to its named surface, matched exactly.\n\n'
+        +'Apply each labelled reference swatch to its named surface, matched exactly. The furniture fronts are the most important surface: they must visibly carry the listed decor\'s texture, not read as plain painted doors.\n\n'
         +'STYLE & FINISH (VISUAL FIDELITY)\n'
         +'Natural daylight. True material sheen: matt emulsion paint, oiled timber, honed stone.\n\n'
         +'NEGATIVE CONSTRAINTS\n'
-        +'No swatch board or grid in the scene. No text or labels. Only the listed materials.';
+        +'No swatch board or grid in the scene. No text or labels. Only the listed materials. Do not simplify a textured decor into a flat colour.';
       fetch(RENDER_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
         body:JSON.stringify({base:base,prompt:prompt,requestId:'studio-'+Date.now(),swatches:refs,scenario:'pairing-studio'})})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
