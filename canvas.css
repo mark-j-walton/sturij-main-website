@@ -1,0 +1,62 @@
+/* Sturij Canvas — endless composable board. Follows PATTERNS.md: gold-only accent, one frost recipe, mono labels. */
+body.board{overflow:hidden}
+.world{position:fixed;inset:var(--nav) 0 0 0;overflow:hidden;cursor:grab;background:var(--paper);
+  background-image:radial-gradient(rgba(29,29,29,.10) 1px,transparent 1px);background-size:26px 26px}
+.world.panning{cursor:grabbing}
+.plane{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+.citem{position:absolute;touch-action:none;user-select:none;-webkit-user-select:none}
+.citem .inner{width:100%;height:100%;border-radius:11px;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);background:#fff}
+.citem img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.citem.sel .inner{box-shadow:0 0 0 2px var(--gold),0 12px 30px rgba(0,0,0,.2)}
+.citem .cx{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;border:0;background:var(--navy);color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:3}
+.citem .rs{position:absolute;right:-7px;bottom:-7px;width:16px;height:16px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);cursor:nwse-resize;display:none;z-index:3}
+.citem.sel .cx,.citem.sel .rs,.citem:hover .cx{display:flex}
+/* swatch card — same family as the studio favourites chips */
+.citem.swatch .inner{padding:7px;box-sizing:border-box;display:flex;flex-direction:column;gap:5px}
+.citem.swatch .fill{flex:1;border-radius:7px;background-size:cover;background-position:center;box-shadow:inset 0 0 0 1px var(--seam)}
+.citem.swatch .cn{font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* board note — the studio post-it */
+.citem.bnote .inner{background:#F6EEC9;box-shadow:0 12px 24px rgba(0,0,0,.18),0 2px 5px rgba(0,0,0,.10);padding:12px 13px;box-sizing:border-box;border-radius:3px}
+.citem.bnote .body{font-family:var(--f-serif);font-size:14px;line-height:1.45;color:#4A4232;outline:none;min-height:100%;word-break:break-word}
+/* swatch tray */
+.swtray{position:fixed;left:50%;transform:translate(-50%,12px);bottom:14px;z-index:40;max-width:min(820px,94vw);padding:10px 14px 12px;border-radius:14px;background:rgba(250,248,243,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(0,0,0,.22);display:none;opacity:0;transition:opacity .3s,transform .3s cubic-bezier(.22,1,.36,1)}
+.swtray.on{display:block}.swtray.show{opacity:1;transform:translate(-50%,0)}
+.swhd{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-bottom:9px}
+.swrow{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.swrow::-webkit-scrollbar{display:none}
+.swcard{flex:none;width:92px;background:#fff;border-radius:11px;padding:6px;box-shadow:0 8px 20px rgba(0,0,0,.15);cursor:grab}
+.swcard .fill{height:60px;border-radius:7px;background-size:cover;background-position:center;box-shadow:inset 0 0 0 1px var(--seam)}
+.swcard .cn{font:500 10.5px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted);text-align:center;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.swempty{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);padding:12px 20px}
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(14px);bottom:22px;z-index:70;padding:10px 18px;border-radius:999px;background:var(--navy);color:var(--paper);font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.world.dropping{box-shadow:inset 0 0 0 3px var(--gold)}
+@media (prefers-reduced-motion:reduce){.swtray,.toast{transition:none}}
+
+/* ===== walls — colourable planes that sit behind everything ===== */
+.citem.wall .inner{box-shadow:inset 0 0 0 1px var(--seam),0 6px 18px rgba(0,0,0,.08);border-radius:4px}
+.citem.wall .wallface{width:100%;height:100%;position:relative}
+.citem.wall .wn{position:absolute;left:10px;bottom:8px;font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(29,29,29,.45);pointer-events:none}
+.citem.wall.sel .inner{box-shadow:inset 0 0 0 1px var(--seam),0 0 0 2px var(--gold),0 8px 22px rgba(0,0,0,.12)}
+.citem.wall .rs{border-color:var(--gold)}
+
+/* ===== floor-plan draw mode + plan cards ===== */
+.world.drawing{cursor:crosshair}
+.drawlayer{position:absolute;left:0;top:0;pointer-events:none}
+.citem.plan .inner{background:#fff;padding:6px;box-sizing:border-box}
+
+/* plan card: door/window placement bar */
+.pbar{position:absolute;left:50%;transform:translateX(-50%);bottom:-15px;display:none;gap:6px;z-index:4}
+.citem.plan.sel .pbar{display:flex}
+.pbtn{all:unset;cursor:pointer;padding:6px 13px;border-radius:999px;background:rgba(250,248,243,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 6px 14px rgba(0,0,0,.18);font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.pbtn.on{background:var(--gold);color:var(--navy)}
+
+/* opening size editor */
+.oped{position:absolute;top:calc(100% + 8px);width:160px;z-index:6;padding:10px 12px;border-radius:12px;background:rgba(250,248,243,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:7px}
+.oped .oh{font:500 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-align:center}
+.oped label{display:flex;align-items:center;justify-content:space-between;gap:8px;font:500 11px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted)}
+.oped input{width:64px;border:0;border-radius:7px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);padding:5px 7px;font:500 12px var(--f-mono);color:var(--ink);text-align:right}
+.oped .oprow{display:flex;gap:6px;margin-top:2px}
+.oped button{all:unset;cursor:pointer;flex:1;text-align:center;padding:6px 0;border-radius:999px;font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase}
+.oped .orm{color:#8a3b2e;background:rgba(138,59,46,.08)}
+.oped .ook{background:var(--navy);color:var(--paper)}
