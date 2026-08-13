@@ -569,3 +569,8 @@ header.top{position:relative}
 .vismenu.on{display:flex}
 .vismenu button{all:unset;cursor:pointer;padding:9px 12px;border-radius:8px;font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(250,248,243,.85)}
 .vismenu button:hover{background:rgba(250,248,243,.12);color:#FAF8F3}
+
+.zip.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,29,29,.25)}
+.zip.alt:hover{background:rgba(29,29,29,.06)}
+.tray .foot{display:flex;gap:8px}
+.tray .foot .zip{flex:1}

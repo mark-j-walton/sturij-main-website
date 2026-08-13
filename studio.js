@@ -608,12 +608,14 @@ function buildZipExtras(cb){
   next();
 }
 el('bzip').onclick=function(){
+  SturijProgress.open('Building your pack',['Composing panel swatches\u2026','Adding the scheme photo\u2026','Zipping\u2026']);
   buildZipExtras(function(extra){
-  if(!items.length&&!extra.length){toast('Shortlist is empty');return;}
+  if(!items.length&&!extra.length){SturijProgress.fail('Shortlist is empty');return;}
+  SturijProgress.set(.7);
   var files=items.map(function(s){return {name:s.file,data:dataURLtoU8(s.png)};}).concat(extra);
   fetch('sturij-about.pdf').then(function(r){return r.ok?r.arrayBuffer():null;}).catch(function(){return null;}).then(function(buf){
     if(buf) files.push({name:'about-sturij.pdf',data:new Uint8Array(buf)});
-    var blob=new Blob([zip(files)],{type:'application/zip'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sturij-pairings.zip';a.click();toast('Zip downloaded');
+    var blob=new Blob([zip(files)],{type:'application/zip'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='sturij-pairings.zip';a.click();SturijProgress.done('Downloaded');
   });
   });
 };
@@ -1594,7 +1596,7 @@ el('vis').onclick=function(){ var m=el('vismenu'); m?m.classList.toggle('on'):ru
 function runVisualise(){
   var b=el('vis'); if(b.classList.contains('rec'))return;
   if(!paints[0]&&!sel.board){toast('Choose at least a wall colour or a board first');return;}
-  b.classList.add('rec');toast('Rendering a '+visRoom.toLowerCase()+'…');
+  b.classList.add('rec');SturijProgress.open('Rendering a '+visRoom.toLowerCase(),['Reading your pairings\u2026','Sending to the studio\u2026','Composing the room\u2026','Painting light and shadow\u2026','Final grade\u2026']);
   buildRenderRefs(function(refs){
     composeScene(function(cv){
       var base=cv.toDataURL('image/jpeg',0.85);
@@ -1616,12 +1618,22 @@ function runVisualise(){
       .then(function(res){
         b.classList.remove('rec');
         var img=res.j&&res.j.outputs&&res.j.outputs[0]&&res.j.outputs[0].image;
-        if(!res.ok||!img){toast('Render failed'+(res.j&&res.j.error?' — '+res.j.error:res.j&&res.j.failures&&res.j.failures[0]?' — '+res.j.failures[0].error:''));return;}
+        if(!res.ok||!img){SturijProgress.fail('Render failed'+(res.j&&res.j.error?' \u2014 '+res.j.error:res.j&&res.j.failures&&res.j.failures[0]?' \u2014 '+res.j.failures[0].error:''));return;}
         items.push({name:visRoom+' render',file:visRoom.toLowerCase().replace(/\s+/g,'-')+'-render-'+Date.now()+'.jpg',sub:'photo',swatchCss:'background:#EFE9DD',png:img});
-        renderTray();toast(visRoom+' render added to your scheme');
+        renderTray();SturijProgress.done(visRoom+' render added to your scheme');
       })
-      .catch(function(e){b.classList.remove('rec');toast('Render failed — is this origin whitelisted on the visualiser?');});
+      .catch(function(e){b.classList.remove('rec');SturijProgress.fail('Render failed \u2014 is this origin whitelisted on the visualiser?');});
     });
   });
 };
 
+
+/* ===== Sprint 2: shortlist -> canvas board (via sturij.board.inbox) ===== */
+if(el('bboard'))el('bboard').onclick=function(){
+  if(!items.length){toast('Shortlist is empty');return;}
+  var inbox=[];
+  try{inbox=JSON.parse(localStorage.getItem('sturij.board.inbox')||'[]');}catch(e){}
+  items.forEach(function(it){inbox.push({name:it.name,src:it.png,kind:(it.sub==='photo'||it.sub==='snip')?'img':'swatch'});});
+  try{localStorage.setItem('sturij.board.inbox',JSON.stringify(inbox));}catch(e){toast('Too large to send — remove a photo');return;}
+  toast(items.length+' item'+(items.length>1?'s':'')+' sent — open the board');
+};
