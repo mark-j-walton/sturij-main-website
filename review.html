@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Scheme review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="brand/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4A01B;--ink:#1D1D1D;--paper:#F7F4EE;--bronze:#62584F;--f-serif:'Cormorant Garamond',Georgia,serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--f-mono);min-height:100vh}
+a{color:var(--bronze)}a:hover{color:var(--gold)}
+button{all:unset;cursor:pointer}
+.lbl{font:500 9.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.wrap{max-width:960px;margin:0 auto;padding:26px 20px 80px}
+.head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.head img{height:24px}
+.head h1{font:600 26px var(--f-serif);margin:0;flex:1}
+.rolesw{display:flex;gap:4px}
+.rolesw button{padding:5px 12px;border-radius:999px;font:500 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);box-shadow:inset 0 0 0 1px rgba(29,29,29,.16)}
+.rolesw button.on{background:var(--gold);color:var(--ink);box-shadow:none}
+.banner{margin:14px 0;padding:12px 16px;border-radius:12px;background:#fff;box-shadow:0 1px 6px rgba(29,29,29,.08);font:400 12px var(--f-mono)}
+.banner.gold{background:var(--gold);color:var(--ink);font-weight:500}
+.pub{margin:26px 0;background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(29,29,29,.08);overflow:hidden}
+.phd{padding:16px 20px;display:flex;align-items:center;gap:12px}
+.phd b{font:600 19px var(--f-serif);flex:1}
+.phd .lbl b{color:var(--gold)}
+.imgwrap{position:relative;background:#FDFCF8;cursor:crosshair}
+.imgwrap img{width:100%;display:block}
+.pnote{position:absolute;width:150px;padding:10px 12px;background:#F7E9A8;box-shadow:2px 4px 12px rgba(29,29,29,.22);font:400 11px/1.45 var(--f-mono);transform:rotate(-1.2deg);cursor:default}
+.pnote.responded{background:#CFE3D4}
+.pnote .who{font:500 8px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(29,29,29,.5);display:block;margin-bottom:3px}
+.pnote .reply{margin-top:6px;padding-top:6px;border-top:1px solid rgba(29,29,29,.14);font-style:normal}
+.pnote textarea{width:100%;border:0;background:none;outline:none;resize:none;font:400 11px/1.45 var(--f-mono)}
+.pnote .px{position:absolute;top:2px;right:5px;font-size:11px;color:rgba(29,29,29,.4)}
+.mats{padding:18px 20px 22px}
+.mats .lbl{display:block;margin-bottom:12px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.mat{display:flex;align-items:center;gap:12px;padding:8px;border-radius:12px;background:rgba(29,29,29,.03)}
+.mat .sw{width:44px;height:44px;border-radius:9px;background-size:cover;flex:none;box-shadow:inset 0 0 0 1px rgba(29,29,29,.1)}
+.mat .nm{flex:1;font:500 10.5px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;min-width:0}
+.tick{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:var(--bronze);box-shadow:inset 0 0 0 1.5px rgba(29,29,29,.2);flex:none}
+.tick.on{background:var(--gold);color:var(--ink);box-shadow:none}
+.tick svg{width:13px;height:13px}
+.dbar{padding:14px 20px;border-top:1px solid rgba(29,29,29,.08);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dbtn{padding:8px 16px;border-radius:999px;background:var(--ink);color:#fff;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.dbtn:hover{background:#000}
+.empty{text-align:center;padding:100px 20px;color:#9a9284}
+.empty h2{font:600 24px var(--f-serif);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <img src="brand/sturij-logo-black.png" alt="Sturij">
+    <h1>Scheme review</h1>
+    <div class="rolesw" id="rolesw"><button data-r="customer">Customer</button><button data-r="designer">Designer</button></div>
+  </div>
+  <div id="content"></div>
+</div>
+<script>
+/* Sprint 4 prototype — published wall versions, customer post-its, designer responses, approvals.
+   Store: localStorage 'sj-review' (array of publications). Real build: Supabase per PRESENT-REVIEW-SPEC.md. */
+var role=new URLSearchParams(location.search).get('role')||'customer';
+function load(){try{return JSON.parse(localStorage.getItem('sj-review')||'[]');}catch(e){return [];}}
+function save(p){localStorage.setItem('sj-review',JSON.stringify(p));}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function render(){
+  document.querySelectorAll('#rolesw button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-r')===role);});
+  var pubs=load(),c=document.getElementById('content');
+  if(!pubs.length){c.innerHTML='<div class="empty"><h2>Nothing published yet</h2><p>Your designer will publish a wall here when a version is ready for your eyes.</p></div>';return;}
+  var h='';
+  pubs.forEach(function(p,pi){
+    var open=(p.notes||[]).filter(function(n){return !n.reply;}).length;
+    if(role==='customer'&&p.status==='responded')h+='<div class="banner gold">Your designer has responded to your notes on '+esc(p.name)+' \u2014 green notes carry their reply.</div>';
+    h+='<div class="pub" data-pi="'+pi+'"><div class="phd"><b>'+esc(p.name)+'</b><span class="lbl">Version <b>v'+p.ver+'</b> \u00b7 '+new Date(p.published).toLocaleDateString('en-GB')+'</span></div>'
+      +'<div class="imgwrap" data-pi="'+pi+'"><img src="'+p.png+'" alt="'+esc(p.name)+'" draggable="false">';
+    (p.notes||[]).forEach(function(n,ni){
+      h+='<div class="pnote'+(n.reply?' responded':'')+'" style="left:'+(n.x*100)+'%;top:'+(n.y*100)+'%">'
+        +(role==='customer'&&!n.reply?'<button class="px" data-del="'+pi+':'+ni+'">\u00d7</button>':'')
+        +'<span class="who">'+(n.reply?'Answered':'Your note')+'</span>'+esc(n.text)
+        +(n.reply?'<div class="reply"><span class="who">Designer</span>'+esc(n.reply)+'</div>':'')
+        +(role==='designer'&&!n.reply?'<div class="reply"><textarea data-re="'+pi+':'+ni+'" rows="2" placeholder="Reply\u2026"></textarea></div>':'')
+        +'</div>';
+    });
+    h+='</div><div class="mats"><span class="lbl">Materials \u2014 tick to approve</span><div class="mgrid">';
+    (p.mats||[]).forEach(function(m,mi){
+      h+='<div class="mat"><span class="sw" style="'+(m.hex?'background:'+m.hex:'background-image:url('+(m.src||'')+')')+'"></span><span class="nm">'+esc(m.name)+'</span>'
+        +'<button class="tick'+(m.approved?' on':'')+'" data-ap="'+pi+':'+mi+'" title="'+(m.approved?'Approved':'Approve')+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6.5"/></svg></button></div>';
+    });
+    h+='</div></div>';
+    if(role==='designer')h+='<div class="dbar"><span class="lbl">'+open+' open note'+(open===1?'':'s')+'</span><button class="dbtn" data-done="'+pi+'">All responses ready \u2014 notify customer</button></div>';
+    h+='</div>';
+  });
+  c.innerHTML=h;
+  bind();
+}
+function bind(){
+  if(role==='customer')document.querySelectorAll('.imgwrap').forEach(function(w){
+    w.addEventListener('click',function(e){
+      if(e.target!==w.querySelector('img'))return;
+      var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      var text=prompt('Your note for the designer:');
+      if(!text)return;
+      var pubs=load();pubs[+w.getAttribute('data-pi')].notes.push({x:Math.min(x,.82),y:Math.min(y,.86),text:text,t:Date.now()});
+      pubs[+w.getAttribute('data-pi')].status='published';
+      save(pubs);render();
+    });
+  });
+  document.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(e){e.stopPropagation();
+    var a=b.getAttribute('data-del').split(':'),pubs=load();
+    pubs[+a[0]].notes.splice(+a[1],1);save(pubs);render();};});
+  document.querySelectorAll('[data-ap]').forEach(function(b){b.onclick=function(){
+    var a=b.getAttribute('data-ap').split(':'),pubs=load(),m=pubs[+a[0]].mats[+a[1]];
+    m.approved=!m.approved;save(pubs);render();};});
+  document.querySelectorAll('[data-re]').forEach(function(t){t.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||e.shiftKey)return;e.preventDefault();
+    var v=t.value.trim();if(!v)return;
+    var a=t.getAttribute('data-re').split(':'),pubs=load();
+    pubs[+a[0]].notes[+a[1]].reply=v;save(pubs);render();});});
+  document.querySelectorAll('[data-done]').forEach(function(b){b.onclick=function(){
+    var pubs=load();pubs[+b.getAttribute('data-done')].status='responded';save(pubs);render();
+    alert('Customer notified (prototype) \u2014 the real build sends a push/email per the spec.');};});
+}
+document.querySelectorAll('#rolesw button').forEach(function(b){b.onclick=function(){role=b.getAttribute('data-r');render();};});
+window.addEventListener('storage',function(e){if(e.key==='sj-review')render();});
+render();
+</script>
+</body>
+</html>

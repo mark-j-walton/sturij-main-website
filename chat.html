@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Chat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4A01B;--ink:#1D1D1D;--paper:#F7F4EE;--bronze:#62584F;--f-serif:'Cormorant Garamond',Georgia,serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--f-mono);display:flex}
+a{color:var(--bronze)}a:hover{color:var(--gold)}
+button{all:unset;cursor:pointer}
+.lbl{font:500 9.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+/* rail */
+.rail{width:280px;min-width:280px;height:100%;display:flex;flex-direction:column;border-right:1px solid rgba(29,29,29,.08);background:rgba(255,255,255,.5)}
+.rhead{padding:18px 18px 12px;display:flex;align-items:center;justify-content:space-between}
+.rhead img{height:22px}
+.newb{padding:7px 14px;border-radius:999px;background:var(--ink);color:#fff;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.newb:hover{background:#000}
+.slist{flex:1;overflow:auto;padding:6px 10px 20px;scrollbar-width:thin}
+.sitem{display:block;width:100%;padding:10px 12px;border-radius:10px;margin:2px 0}
+.sitem:hover{background:rgba(29,29,29,.05)}
+.sitem.on{background:#fff;box-shadow:0 1px 6px rgba(29,29,29,.08)}
+.sitem b{display:block;font:500 12.5px var(--f-mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sitem span{font:400 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#9a9284}
+.sitem.cust b::before{content:'\25CF  ';color:var(--gold);font-size:8px;vertical-align:2px}
+/* main */
+.main{flex:1;height:100%;display:flex;flex-direction:column;min-width:0}
+.mhead{padding:14px 26px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(29,29,29,.08)}
+.mhead h1{font:600 21px var(--f-serif);margin:0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modes{display:flex;gap:4px;flex-wrap:wrap}
+.mode{padding:5px 11px;border-radius:999px;font:500 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);box-shadow:inset 0 0 0 1px rgba(29,29,29,.16)}
+.mode.on{background:var(--gold);color:var(--ink);box-shadow:none}
+.hact{padding:6px 12px;border-radius:999px;font:500 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--bronze);box-shadow:inset 0 0 0 1px rgba(29,29,29,.16)}
+.hact:hover{background:rgba(29,29,29,.06)}
+.thread{flex:1;overflow:auto;padding:26px;display:flex;flex-direction:column;gap:16px;scrollbar-width:thin}
+.msg{max-width:640px}
+.msg .who{font:500 9px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:#9a9284;margin-bottom:4px}
+.msg .body{padding:12px 16px;border-radius:14px;background:#fff;box-shadow:0 1px 4px rgba(29,29,29,.06);font:400 13.5px/1.6 var(--f-mono)}
+.msg.designer{align-self:flex-end}
+.msg.designer .body{background:var(--ink);color:#F2EEE6;border-bottom-right-radius:4px}
+.msg.assistant .body{border-bottom-left-radius:4px}
+.msg .body img{max-width:100%;border-radius:8px;display:block;margin-top:8px}
+.think{align-self:flex-start;color:#9a9284;font:400 12px var(--f-mono)}
+.think::after{content:'\2026';animation:dots 1.2s steps(4) infinite}
+@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
+/* composer */
+.comp{padding:14px 26px 22px;display:flex;gap:10px;align-items:flex-end}
+.cwrap{flex:1;background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(29,29,29,.08);padding:4px 6px 4px 16px;display:flex;align-items:flex-end}
+.cwrap textarea{flex:1;border:0;outline:none;resize:none;background:none;font:400 13.5px/1.5 var(--f-mono);color:var(--ink);padding:10px 0;max-height:140px}
+.cbtn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--bronze)}
+.cbtn:hover{background:rgba(29,29,29,.06)}
+.cbtn.send{background:var(--gold);color:var(--ink)}
+.cbtn.send:hover{background:#c2920f}
+.cbtn.rec{background:#B4462E;color:#fff}
+.cbtn svg{width:17px;height:17px}
+.empty{flex:1;display:grid;place-items:center;text-align:center;color:#9a9284}
+.empty h2{font:600 26px var(--f-serif);color:var(--ink);margin:0 0 6px}
+.empty p{font:400 12px var(--f-mono);max-width:380px;margin:0 auto}
+@media (max-width:760px){.rail{display:none}}
+</style>
+</head>
+<body>
+<aside class="rail">
+  <div class="rhead"><img src="brand/sturij-logo-black.png" alt="Sturij"><button class="newb" id="newc">New chat</button></div>
+  <div style="padding:0 18px 10px"><span class="lbl">Status</span><div id="stset" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:6px"></div></div>
+  <div class="slist" id="slist"></div>
+</aside>
+<main class="main" id="main"></main>
+<script src="chat-core.js"></script>
+<script>
+var C=window.SturijChat,cur=null,recog=null,speakOn=false;
+var STATI=['Available','With a client','Away \u2014 replies tomorrow','Custom text'];
+function renderStatus(){
+  var st=C.status.get(),n=el('stset'),h2='';
+  STATI.forEach(function(s){h2+='<button class="mode'+(st.status===s?' on':'')+'" data-s="'+s+'">'+(s==='Away \u2014 replies tomorrow'?'Away':s==='Custom text'?'Custom':s)+'</button>';});
+  n.innerHTML=h2;
+  n.querySelectorAll('button').forEach(function(b){b.onclick=function(){
+    var s=b.getAttribute('data-s'),c='';
+    if(s==='Custom text'){c=prompt('Status text customers will see:',C.status.get().custom||'')||'';if(!c)return;}
+    C.status.set(s,c);renderStatus();};});
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function el(i){return document.getElementById(i);}
+function renderRail(){
+  var all=C.sessions(),h='';
+  all.forEach(function(s){
+    var m=(C.MODES.filter(function(q){return q[0]===s.mode;})[0]||[])[1]||s.mode;
+    h+='<button class="sitem'+(cur&&cur.id===s.id?' on':'')+(s.kind==='customer'?' cust':'')+'" data-id="'+s.id+'">'
+      +'<b>'+esc(s.title||'Untitled')+'</b><span>'+(s.kind==='customer'?'Customer':m)+' \u00b7 '+new Date(s.created).toLocaleDateString('en-GB')+(s.project?' \u00b7 '+esc(s.project):'')+'</span></button>';
+  });
+  el('slist').innerHTML=h||'<div style="padding:20px" class="lbl">No chats yet</div>';
+  el('slist').querySelectorAll('.sitem').forEach(function(b){b.onclick=function(){cur=C.get(b.getAttribute('data-id'));renderMain();renderRail();};});
+}
+function renderMain(){
+  var m=el('main');
+  if(!cur){
+    m.innerHTML='<div class="empty"><div><h2>The Sturij assistant</h2><p>Tool help, project questions, feature requests, research, images and plain conversation \u2014 every chat kept, attachable to a project.</p></div></div>';
+    return;
+  }
+  var isCust=cur.kind==='customer';
+  var modes=isCust?'<span class="lbl">Customer chat'+(cur.status==='ended'?' \u00b7 ended':'')+'</span>'
+    :C.MODES.map(function(q){return '<button class="mode'+(cur.mode===q[0]?' on':'')+'" data-m="'+q[0]+'" title="'+q[2]+'">'+q[1]+'</button>';}).join('');
+  m.innerHTML='<div class="mhead"><h1>'+esc(cur.title||'New chat')+'</h1>'
+    +'<div class="modes">'+modes+'</div>'
+    +(cur.mode==='feature'?'<button class="hact" id="pdf">PDF to Sturij</button>':'')
+    +'<button class="hact" id="attach">'+(cur.project?esc(cur.project):'Attach to project')+'</button>'
+    +'<button class="hact" id="spk">'+(speakOn?'Voice on':'Voice off')+'</button>'
+    +'<button class="hact" id="del" title="Delete chat">\u00d7</button></div>'
+    +'<div class="thread" id="thread"></div>'
+    +(cur.summary?'<div style="margin:0 26px;padding:14px 16px;background:#fff;border-radius:14px;box-shadow:0 1px 6px rgba(29,29,29,.08)"><span class="lbl" style="color:var(--gold)">Summary</span><div style="font:400 12.5px/1.6 var(--f-mono);margin:6px 0 8px">'+C.md(cur.summary.text)+'</div><div id="acts"></div></div>':'')
+    +'<div class="comp"><div class="cwrap"><textarea id="inp" rows="1" placeholder="'+(isCust?'Reply to your customer\u2026':'Ask the Sturij assistant\u2026')+'"></textarea>'
+    +'<button class="cbtn" id="mic" title="Dictate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>'
+    +'<button class="cbtn send" id="send" title="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></div></div>';
+  renderThread();
+  m.querySelectorAll('.mode[data-m]').forEach(function(b){b.onclick=function(){cur.mode=b.getAttribute('data-m');C.put(cur);renderMain();};});
+  if(cur.summary&&el('acts')){
+    var ah='';cur.summary.actions.forEach(function(a,i){
+      ah+='<label style="display:flex;gap:8px;align-items:center;font:400 12px var(--f-mono);padding:2px 0;cursor:pointer"><input type="checkbox" '+(a.done?'checked':'')+' data-i="'+i+'" style="accent-color:var(--gold)">'+esc(a.label)+'</label>';});
+    el('acts').innerHTML=ah;
+    el('acts').querySelectorAll('input').forEach(function(cb){cb.onchange=function(){cur.summary.actions[+cb.getAttribute('data-i')].done=cb.checked;C.put(cur);};});
+  }
+  el('send').onclick=send;
+  var inp=el('inp');
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+  inp.addEventListener('input',function(){inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,140)+'px';});
+  el('mic').onclick=function(){
+    if(recog){recog.stop();recog=null;el('mic').classList.remove('rec');return;}
+    recog=C.listen(function(t,fin){inp.value=t;},function(){el('mic').classList.remove('rec');recog=null;});
+    if(recog)el('mic').classList.add('rec');else alert('Speech recognition is not available in this browser');
+  };
+  el('spk').onclick=function(){speakOn=!speakOn;el('spk').textContent=speakOn?'Voice on':'Voice off';};
+  el('del').onclick=function(){C.remove(cur.id);cur=null;renderMain();renderRail();};
+  el('attach').onclick=function(){
+    var p=prompt('Attach to project (name):',cur.project||'');
+    if(p!=null){C.attachToProject(cur,p.trim());renderMain();renderRail();}
+  };
+  var pdf=el('pdf');
+  if(pdf)pdf.onclick=function(){C.featurePdf(cur);};
+}
+function renderThread(){
+  var t=el('thread');if(!t)return;
+  var h='';
+  cur.msgs.forEach(function(m){
+    h+='<div class="msg '+(m.role==='customer'?'assistant':m.role)+'"><div class="who">'+(m.role==='assistant'?'Assistant':m.role==='customer'?'Customer':'You')+'</div><div class="body">'+(m.file?'<b>'+esc(m.file)+'</b><br>':'')+C.md(m.body)+(m.img?'<img src="'+m.img+'" alt="">':'')+'</div></div>';
+  });
+  t.innerHTML=h;
+  t.scrollTop=t.scrollHeight;
+}
+function send(){
+  var inp=el('inp'),v=inp.value.trim();
+  if(!v||!cur)return;
+  inp.value='';inp.style.height='auto';
+  if(cur.kind==='customer'){C.send(cur,v,{role:'designer',noReply:true},function(){renderMain();renderRail();});return;}
+  renderPending(v);
+  C.send(cur,v,null,function(reply){
+    renderMain();renderRail();
+    if(speakOn&&reply)C.speak(reply);
+    if(cur.mode==='image'&&reply)renderImage(reply);
+  },function(e){
+    cur.msgs.push({role:'assistant',body:'I could not reach a completion backend. '+(e&&e.message||''),t:Date.now()});
+    C.put(cur);renderMain();
+  });
+}
+function renderPending(v){
+  var t=el('thread');
+  t.insertAdjacentHTML('beforeend','<div class="msg designer"><div class="who">You</div><div class="body">'+esc(v)+'</div></div><div class="think" id="think">Thinking</div>');
+  t.scrollTop=t.scrollHeight;
+}
+function renderImage(promptText){
+  /* image mode: forward the composed paragraph to the visualiser render endpoint */
+  var t=el('thread');
+  t.insertAdjacentHTML('beforeend','<div class="think" id="imgth">Rendering</div>');
+  fetch('https://sturij.vercel.app/api/render',{method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({prompt:promptText,requestId:'chat-'+Date.now(),scenario:'pairing-studio'})})
+  .then(function(r){return r.json();}).then(function(j){
+    var img=j&&j.outputs&&j.outputs[0]&&j.outputs[0].image;
+    var th=el('imgth');if(th)th.remove();
+    if(img){cur.msgs.push({role:'assistant',body:'Here is the render.',img:img,t:Date.now()});C.put(cur);renderThread();}
+  }).catch(function(){var th=el('imgth');if(th)th.remove();});
+}
+el('newc').onclick=function(){cur=C.create('agent','help');renderMain();renderRail();};
+renderStatus();renderRail();renderMain();
+window.addEventListener('storage',function(e){if(e.key==='sj-chat-sessions'){if(cur)cur=C.get(cur.id);renderRail();if(cur)renderMain();}});
+</script>
+</body>
+</html>

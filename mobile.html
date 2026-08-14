@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en" class="theme-sturij">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Designer companion</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="brand/favicon-32.png">
+<style>
+@import url("https://use.typekit.net/tkw4xgg.css");
+:root{
+  --shell-bg:#1a1f1b;--shell-surface-1:#222a24;--shell-surface-2:#2a332c;--shell-surface-3:#333d35;
+  --shell-accent:#d4a574;--shell-accent-soft:rgba(212,165,116,.55);--shell-accent-dim:rgba(212,165,116,.18);--shell-accent-glow:rgba(212,165,116,.08);
+  --shell-text:#faf8f3;--shell-text-muted:#a8b2a3;--shell-text-dim:#6d7769;
+  --shell-radius-card:12px;--shell-ease:cubic-bezier(.22,1,.36,1);--shell-dur-fast:160ms;--shell-dur-med:240ms;
+  --font-ui:'helvetica-neue-lt-pro','Helvetica Neue',system-ui,sans-serif;
+  --font-display:'degular-display','helvetica-neue-lt-pro','Helvetica Neue',sans-serif;
+  --tr-ui:.06em;--tr-body:.07em;--tr-caps:.14em;--tr-display:.05em;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--shell-bg);color:var(--shell-text);font:300 15px/1.55 var(--font-ui);letter-spacing:var(--tr-body)}
+a{color:var(--shell-accent)}a:hover{color:var(--shell-text)}
+button{border:0;outline:0;background:none;padding:0;margin:0;cursor:pointer;color:inherit;font-family:inherit;letter-spacing:inherit;-webkit-appearance:none;appearance:none}
+input,textarea,select{font-family:inherit;letter-spacing:inherit}
+.caps{font-size:12px;font-weight:400;letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--shell-text-muted)}
+/* ---- app frame ---- */
+#app{width:100%;height:100%;display:flex;flex-direction:column;background:var(--shell-surface-1);position:relative;overflow:hidden}
+#app::before{content:"";position:absolute;inset:0;background:url('brand/shell-icon-white.png') center/200px no-repeat;opacity:.035;pointer-events:none}
+#app>*{position:relative;z-index:1}
+/* desktop: iPhone skin */
+@media (min-width:700px){
+  body{display:grid;place-items:center}
+  #frame{width:400px;height:min(852px,94vh);background:#0c0f0d;border-radius:54px;padding:10px;box-shadow:0 24px 80px rgba(0,0,0,.55),0 0 0 2px #2a2f2b;position:relative}
+  #frame::after{content:"";position:absolute;top:22px;left:50%;transform:translateX(-50%);width:110px;height:28px;background:#0c0f0d;border-radius:16px;z-index:5}
+  #app{border-radius:44px;height:100%}
+  .head{padding-top:56px !important}
+}
+.head{padding:18px 20px 12px;display:flex;align-items:center;gap:12px}
+.head img{height:20px}
+.head h1{font:300 24px var(--font-display);letter-spacing:var(--tr-display);margin:0;flex:1}
+.head .caps{margin-left:auto}
+#views{flex:1;overflow:auto;padding:4px 16px 16px;scrollbar-width:none}
+#views::-webkit-scrollbar{display:none}
+/* ---- tab bar ---- */
+#tabs{display:flex;padding:6px 10px calc(10px + env(safe-area-inset-bottom));position:relative}
+#tabs::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--shell-accent-soft) 50%,transparent)}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0 6px;border-radius:var(--shell-radius-card);color:var(--shell-text-muted);font-size:10px;font-weight:400;letter-spacing:var(--tr-caps);text-transform:uppercase;transition:background var(--shell-dur-fast) var(--shell-ease),color var(--shell-dur-fast) var(--shell-ease)}
+.tab svg{width:20px;height:20px}
+.tab.on{background:var(--shell-accent-dim);color:var(--shell-accent)}
+/* ---- shared bits ---- */
+.card{background:var(--shell-surface-2);border-radius:var(--shell-radius-card);padding:16px;margin:0 0 10px}
+.card.edge{box-shadow:inset 2px 0 0 var(--shell-accent)}
+.card h3{font:400 18px var(--font-display);letter-spacing:var(--tr-display);margin:0 0 4px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--shell-radius-card);background:var(--shell-surface-3);color:var(--shell-text);font-size:13px;font-weight:400;letter-spacing:var(--tr-ui);transition:background var(--shell-dur-fast) var(--shell-ease)}
+.btn:hover{background:var(--shell-accent-dim);color:var(--shell-accent)}
+.btn.acc{background:var(--shell-accent-dim);color:var(--shell-accent)}
+.btn svg{width:16px;height:16px}
+.sect{margin:18px 0 8px}
+select.sel{background:var(--shell-surface-2);color:var(--shell-text);border:0;border-radius:var(--shell-radius-card);padding:10px 12px;font-size:13px;letter-spacing:var(--tr-ui);outline:0;width:100%}
+/* capture */
+#drop{border-radius:var(--shell-radius-card);background:var(--shell-surface-2);padding:36px 20px;text-align:center;color:var(--shell-text-muted);transition:background var(--shell-dur-fast) var(--shell-ease)}
+#drop.over{background:var(--shell-accent-dim);color:var(--shell-accent)}
+#drop svg{width:28px;height:28px;margin-bottom:8px}
+/* inbox grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cell{position:relative;aspect-ratio:1;border-radius:var(--shell-radius-card);overflow:hidden;background:var(--shell-surface-2)}
+.cell img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
+.cell .fdoc{display:grid;place-items:center;height:100%;padding:8px;text-align:center;font-size:11px;color:var(--shell-text-muted);word-break:break-word}
+.cell .st{position:absolute;left:6px;top:6px;padding:2px 7px;border-radius:999px;background:rgba(12,15,13,.72);font-size:9px;font-weight:400;letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--shell-accent)}
+.cellact{display:flex;gap:6px;position:absolute;right:6px;bottom:6px}
+.cellact button{width:26px;height:26px;border-radius:8px;background:rgba(12,15,13,.72);display:grid;place-items:center;color:var(--shell-text)}
+.cellact button:hover{color:var(--shell-accent)}
+.cellact svg{width:13px;height:13px}
+/* viewer */
+#viewer{position:fixed;inset:0;z-index:50;background:rgba(12,15,13,.94);display:none;flex-direction:column}
+#viewer.open{display:flex}
+#viewer img{flex:1;object-fit:contain;min-height:0;margin:20px}
+#viewer .vh{display:flex;align-items:center;padding:18px 20px 0;gap:12px}
+#viewer .vh span{flex:1;font-size:12px;letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--shell-text-muted)}
+/* recorder */
+.reclight{width:10px;height:10px;border-radius:50%;background:var(--shell-text-dim)}
+.rec .reclight{background:#c96a4a;box-shadow:0 0 10px rgba(201,106,74,.6);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.transcript{font-size:13px;color:var(--shell-text-muted);max-height:120px;overflow:auto;margin-top:10px}
+.sumtxt{font-size:14px;line-height:1.6;white-space:pre-wrap}
+/* today lists */
+.li{display:flex;gap:10px;align-items:flex-start;padding:9px 0}
+.li+.li{position:relative}
+.li+.li::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 50%,transparent)}
+.li .t{font-size:11px;letter-spacing:var(--tr-caps);text-transform:uppercase;color:var(--shell-accent);min-width:52px;font-weight:400}
+.li p{margin:0;font-size:14px}
+.li small{display:block;font-size:12px;color:var(--shell-text-dim);letter-spacing:var(--tr-ui);text-transform:none}
+.chk{width:20px;height:20px;border-radius:6px;background:var(--shell-surface-3);display:grid;place-items:center;color:transparent;flex:none;margin-top:1px}
+.chk.on{background:var(--shell-accent-dim);color:var(--shell-accent)}
+.chk svg{width:12px;height:12px}
+.done p{text-decoration:line-through;color:var(--shell-text-dim)}
+.empty{padding:30px 10px;text-align:center;color:var(--shell-text-dim);font-size:13px}
+</style>
+</head>
+<body>
+<div id="frame"><div id="app">
+  <div class="head"><img src="brand/shell-logo-white.png" alt="Sturij"><span class="caps" id="hdate"></span></div>
+  <div id="views"></div>
+  <nav id="tabs"></nav>
+</div></div>
+<div id="viewer"><div class="vh"><span id="vname"></span><button class="btn" id="vclose">Close</button></div><img id="vimg" alt=""></div>
+<input type="file" id="upf" accept="image/*,.pdf,.dwg,.skp" multiple capture="environment" hidden>
+<script src="chat-core.js"></script>
+<script>
+/* Sturij designer companion — prototype. Store: localStorage sj-mobile.
+   Real build: Supabase storage + project_inbox table; this file is the UI contract. */
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function el(i){return document.getElementById(i);}
+var DB={
+  load:function(){try{return JSON.parse(localStorage.getItem('sj-mobile')||'null')||DB.seed();}catch(e){return DB.seed();}},
+  save:function(d){try{localStorage.setItem('sj-mobile',JSON.stringify(d));}catch(e){alert('Storage full — accept or delete some inbox items');}},
+  seed:function(){return {projects:[{id:'p1',name:'Harrogate kitchen'},{id:'p2',name:'Chelsea wardrobes'}],inbox:[],meetings:[],tasks:[
+    {text:'Send Harrogate quote revision',done:false},{text:'Order Payne\u2019s Grey sample tin',done:false},{text:'Book site survey \u2014 Chelsea',done:false}],
+    diary:[{t:'09:30',what:'Site visit \u2014 Harrogate kitchen',sub:'Measure for worktop templating'},{t:'13:00',what:'Supplier call \u2014 Omega Stone',sub:'Lead times on Fenix'},{t:'16:00',what:'Client review \u2014 Chelsea wardrobes',sub:'Publish wall v2 before the call'}]};}
+};
+var db=DB.load(),tab='today',curProj=db.projects[0].id;
+var TABS=[
+ ['today','Today','<path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/>'],
+ ['capture','Capture','<path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/>'],
+ ['projects','Projects','<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'],
+ ['record','Record','<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>'],
+ ['chat','Chat','<path d="M21 12a8 8 0 0 1-8 8H4l2.2-2.6A8 8 0 1 1 21 12z"/>']];
+function ic(p){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';}
+function renderTabs(){
+  el('tabs').innerHTML=TABS.map(function(t){return '<button class="tab'+(tab===t[0]?' on':'')+'" data-t="'+t[0]+'">'+ic(t[2])+t[1]+'</button>';}).join('');
+  el('tabs').querySelectorAll('.tab').forEach(function(b){b.onclick=function(){tab=b.getAttribute('data-t');render();};});
+}
+function projSel(id){
+  return '<select class="sel" id="'+id+'">'+db.projects.map(function(p){return '<option value="'+p.id+'"'+(p.id===curProj?' selected':'')+'>'+esc(p.name)+'</option>';}).join('')+'</select>';
+}
+/* ---- views ---- */
+function vToday(){
+  var open=db.tasks.filter(function(t){return !t.done;}).length;
+  var h='<div class="sect caps">Diary \u2014 today</div><div class="card edge">';
+  db.diary.forEach(function(d){h+='<div class="li"><span class="t">'+d.t+'</span><div><p>'+esc(d.what)+'</p><small>'+esc(d.sub)+'</small></div></div>';});
+  h+='</div><div class="sect caps">Tasks \u00b7 '+open+' open</div><div class="card">';
+  db.tasks.forEach(function(t,i){h+='<div class="li'+(t.done?' done':'')+'"><button class="chk'+(t.done?' on':'')+'" data-tk="'+i+'">'+ic('<path d="M4 12.5l5 5L20 6.5"/>')+'</button><p>'+esc(t.text)+'</p></div>';});
+  h+='<div class="row" style="margin-top:8px"><input id="ntask" placeholder="Add a task\u2026" style="flex:1;background:var(--shell-surface-3);border:0;border-radius:8px;padding:9px 12px;color:var(--shell-text);font-size:13px;outline:0"><button class="btn acc" id="addtask">Add</button></div></div>';
+  h+='<div class="sect caps">News</div><div class="card">'
+    +'<div class="li"><div><p>Egger adds 12 decors to the 24/25 collection</p><small>Materials \u00b7 this week</small></div></div>'
+    +'<div class="li"><div><p>Farrow &amp; Ball archive colours return for autumn</p><small>Paint \u00b7 this week</small></div></div>'
+    +'<div class="li"><div><p>KBB Birmingham \u2014 early registration open</p><small>Events</small></div></div></div>';
+  return h;
+}
+function vCapture(){
+  return '<div class="sect caps">Upload to project</div>'+projSel('capproj')
+    +'<div class="sect"></div><div id="drop">'+ic('<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>')
+    +'<div>Tap to photograph or choose files<br><small style="letter-spacing:var(--tr-ui)">Images, PDFs and drawings \u2014 they land in the project inbox</small></div></div>'
+    +'<div class="sect caps">Just captured</div><div class="grid" id="capgrid"></div>';
+}
+function vProjects(){
+  var items=db.inbox.filter(function(q){return q.proj===curProj;});
+  var pending=items.filter(function(q){return q.status==='inbox';});
+  var lib=items.filter(function(q){return q.status==='accepted';});
+  function cells(list,acts){
+    if(!list.length)return '<div class="empty">Nothing here yet</div>';
+    return '<div class="grid">'+list.map(function(q){
+      var body=q.img?'<img src="'+q.img+'" data-view="'+q.id+'" alt="">':'<div class="fdoc">'+esc(q.name)+'</div>';
+      return '<div class="cell">'+body+(q.status==='inbox'?'<span class="st">Inbox</span>':'')
+        +'<div class="cellact">'+(acts?'<button data-acc="'+q.id+'" title="Accept into library">'+ic('<path d="M4 12.5l5 5L20 6.5"/>')+'</button>':'')
+        +'<button data-del="'+q.id+'" title="Delete">'+ic('<path d="M5 5l14 14M19 5L5 19"/>')+'</button></div></div>';
+    }).join('')+'</div>';
+  }
+  return '<div class="sect caps">Project</div>'+projSel('projsel')
+    +'<div class="sect caps">Inbox \u00b7 '+pending.length+'</div>'+cells(pending,true)
+    +'<div class="sect caps">Library \u00b7 '+lib.length+'</div>'+cells(lib,false);
+}
+var recog=null,recTxt='',recOn=false,recKind='meeting';
+function vRecord(){
+  var h='<div class="sect caps">Meeting recorder</div>'+projSel('recproj')
+    +'<div class="card" style="margin-top:10px"><div class="row"><span class="reclight"></span>'
+    +'<button class="btn'+(recOn?' acc':'')+'" id="rectg">'+(recOn?'Stop &amp; summarise':'Start recording')+'</button>'
+    +'<select class="sel" id="reckind" style="flex:1">'
+    +'<option value="meeting"'+(recKind==='meeting'?' selected':'')+'>Meeting</option>'
+    +'<option value="follow"'+(recKind==='follow'?' selected':'')+'>Follow-up meeting</option></select></div>'
+    +'<div class="transcript" id="rtx">'+(recTxt?esc(recTxt):'<span style="color:var(--shell-text-dim)">Transcript appears here as you speak.</span>')+'</div></div>'
+    +'<div class="sect caps">Past meetings</div>';
+  if(!db.meetings.length)h+='<div class="empty">No meetings recorded yet</div>';
+  db.meetings.forEach(function(m,i){
+    var p=db.projects.filter(function(q){return q.id===m.proj;})[0];
+    h+='<div class="card edge"><h3>'+(m.kind==='follow'?'Follow-up':'Meeting')+' \u00b7 '+esc(p?p.name:'')+'</h3>'
+      +'<span class="caps">'+new Date(m.t).toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+'</span>'
+      +'<div class="sumtxt" style="margin-top:8px">'+esc(m.summary||m.txt)+'</div>'
+      +'<div class="row" style="margin-top:10px"><button class="btn" data-mdel="'+i+'">Delete</button></div></div>';
+  });
+  return h;
+}
+function vChat(){
+  var C=window.SturijChat,all=C?C.sessions():[];
+  var h='<div class="sect caps">Chats</div>';
+  if(!all.length)h+='<div class="empty">No chats yet \u2014 they sync with the studio</div>';
+  all.slice(0,12).forEach(function(s){
+    var last=s.msgs[s.msgs.length-1];
+    h+='<div class="card'+(s.kind==='customer'?' edge':'')+'" data-chat="'+s.id+'" style="cursor:pointer"><h3>'+esc(s.title||'Untitled')+'</h3>'
+      +'<span class="caps">'+(s.kind==='customer'?'Customer':'Assistant')+(s.project?' \u00b7 '+esc(s.project):'')+'</span>'
+      +(last?'<p style="margin:6px 0 0;font-size:13px;color:var(--shell-text-muted)">'+esc(String(last.body||'').slice(0,90))+'</p>':'')+'</div>';
+  });
+  h+='<a class="btn acc" href="chat.html" style="text-decoration:none">Open full chat</a>';
+  return h;
+}
+/* ---- render + wire ---- */
+function render(){
+  renderTabs();
+  el('hdate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+  el('views').innerHTML=tab==='today'?vToday():tab==='capture'?vCapture():tab==='projects'?vProjects():tab==='record'?vRecord():vChat();
+  var v=el('views');
+  v.querySelectorAll('[data-tk]').forEach(function(b){b.onclick=function(){var t=db.tasks[+b.getAttribute('data-tk')];t.done=!t.done;DB.save(db);render();};});
+  var at=el('addtask');
+  if(at)at.onclick=function(){var n=el('ntask').value.trim();if(!n)return;db.tasks.push({text:n,done:false});DB.save(db);render();};
+  ['capproj','projsel','recproj'].forEach(function(id){var s=el(id);if(s)s.onchange=function(){curProj=s.value;render();};});
+  var dr=el('drop');
+  if(dr){
+    dr.onclick=function(){el('upf').click();};
+    dr.ondragover=function(e){e.preventDefault();dr.classList.add('over');};
+    dr.ondragleave=function(){dr.classList.remove('over');};
+    dr.ondrop=function(e){e.preventDefault();dr.classList.remove('over');ingest(e.dataTransfer.files);};
+    renderCapGrid();
+  }
+  v.querySelectorAll('[data-view]').forEach(function(im){im.onclick=function(){
+    var q=db.inbox.filter(function(x){return x.id===im.getAttribute('data-view');})[0];
+    if(!q)return;el('vimg').src=q.img;el('vname').textContent=q.name||'Image';el('viewer').classList.add('open');};});
+  v.querySelectorAll('[data-acc]').forEach(function(b){b.onclick=function(){
+    var q=db.inbox.filter(function(x){return x.id===b.getAttribute('data-acc');})[0];
+    if(q){q.status='accepted';DB.save(db);render();}};});
+  v.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(){
+    db.inbox=db.inbox.filter(function(x){return x.id!==b.getAttribute('data-del');});DB.save(db);render();};});
+  v.querySelectorAll('[data-mdel]').forEach(function(b){b.onclick=function(){db.meetings.splice(+b.getAttribute('data-mdel'),1);DB.save(db);render();};});
+  v.querySelectorAll('[data-chat]').forEach(function(c){c.onclick=function(){location.href='chat.html';};});
+  var rk=el('reckind');if(rk)rk.onchange=function(){recKind=rk.value;};
+  var rt=el('rectg');if(rt)rt.onclick=toggleRec;
+  document.querySelectorAll('.card .row .reclight').forEach(function(l){l.parentNode.parentNode.classList.toggle('rec',recOn);});
+}
+function renderCapGrid(){
+  var g=el('capgrid');if(!g)return;
+  var mine=db.inbox.filter(function(q){return q.proj===curProj;}).slice(0,6);
+  g.innerHTML=mine.map(function(q){
+    return '<div class="cell">'+(q.img?'<img src="'+q.img+'" data-view="'+q.id+'">':'<div class="fdoc">'+esc(q.name)+'</div>')+'<span class="st">'+(q.status==='inbox'?'Inbox':'Library')+'</span></div>';
+  }).join('')||'<div class="empty" style="grid-column:1/-1">Captures land here, then in the project inbox</div>';
+}
+function ingest(files){
+  Array.prototype.forEach.call(files,function(f){
+    var id='i'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+    if(f.type.indexOf('image/')===0){
+      var rd=new FileReader();
+      rd.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var s=Math.min(1,720/Math.max(im.width,im.height));
+          var c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+          c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+          db.inbox.unshift({id:id,proj:curProj,name:f.name,img:c.toDataURL('image/jpeg',.72),status:'inbox',t:Date.now()});
+          DB.save(db);render();
+        };
+        im.src=rd.result;
+      };
+      rd.readAsDataURL(f);
+    } else {
+      db.inbox.unshift({id:id,proj:curProj,name:f.name,status:'inbox',t:Date.now()});
+      DB.save(db);render();
+    }
+  });
+}
+function toggleRec(){
+  if(recOn){
+    if(recog)recog.stop();recog=null;recOn=false;
+    var txt=recTxt.trim();
+    if(!txt){render();return;}
+    el('rectg').textContent='Summarising\u2026';
+    var skill=recKind==='follow'
+      ?'This is a FOLLOW-UP meeting: lead with what changed since last time and which previous actions are now closed, then new decisions and new actions.'
+      :'This is an initial meeting: lead with the client\u2019s brief and constraints, then decisions, then actions.';
+    var p='Summarise this interior-design meeting transcript for the designer\u2019s records. British English, no emoji. '+skill
+      +' Format: two short paragraphs, then up to 5 lines each starting "ACTION:".\n\nTRANSCRIPT:\n'+txt;
+    function done(sum){
+      db.meetings.unshift({proj:curProj,kind:recKind,txt:txt,summary:sum,t:Date.now()});
+      /* actions flow into the task list */
+      String(sum||'').split('\n').forEach(function(l){if(l.indexOf('ACTION:')===0)db.tasks.push({text:l.slice(7).trim(),done:false});});
+      DB.save(db);recTxt='';render();
+    }
+    if(window.claude&&window.claude.complete)window.claude.complete(p).then(done).catch(function(){done(null);});
+    else done(null);
+    return;
+  }
+  var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert('Speech recognition is not available in this browser \u2014 the real app records audio too.');return;}
+  recTxt='';recog=new SR();recog.lang='en-GB';recog.continuous=true;recog.interimResults=true;
+  recog.onresult=function(e){
+    var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;
+    recTxt=t;var n=el('rtx');if(n)n.textContent=t;
+  };
+  recog.onend=function(){if(recOn&&recog)recog.start();};
+  recog.start();recOn=true;render();
+}
+el('upf').addEventListener('change',function(){ingest(this.files);this.value='';});
+el('vclose').onclick=function(){el('viewer').classList.remove('open');};
+el('viewer').onclick=function(e){if(e.target===this)this.classList.remove('open');};
+render();
+</script>
+</body>
+</html>
