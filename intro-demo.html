@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Sturij — 3D Intro Visualisation (demo)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://use.typekit.net" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/iwm1gcu.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* standalone page — just the brand tokens the intro layer needs */
+  :root{--navy:#1D1D1D;--gold:#D4A01B;--paper:#FAF8F3;--ink:#1D1D1D;--line:rgba(29,29,29,.14);--f-serif:'degular-display',Georgia,serif;--f-sans:'helvetica-neue-lt-pro','Helvetica Neue',Inter,system-ui,sans-serif;--f-mono:'IBM Plex Mono',monospace}
+  *{box-sizing:border-box}html,body{height:100%}
+  body{margin:0;font-family:var(--f-sans);background:var(--navy);overflow:hidden;-webkit-font-smoothing:antialiased}
+</style>
+<link rel="stylesheet" href="studio-intro.css">
+</head>
+<body>
+<div class="intro3d" id="intro3d" role="dialog" aria-label="Welcome — a 3D introduction to the Pairing Studio">
+  <div class="i3vignette"></div><div class="i3grain"></div>
+  <a class="i3logo" href="/" title="Sturij home"><img src="brand/sturij-logo-white.png" alt="Sturij"></a>
+  <div class="i3ui">
+    <p class="i3eyebrow">Sturij · Pairing Studio</p>
+    <h1>Step inside your next room.</h1>
+    <p class="i3sub">Pair real paints, boards, worktops and finishes — drawn from the makers themselves — and watch a full interior scheme take shape, swatch by swatch.</p>
+    <div class="i3cta">
+      <button class="i3go" id="i3go">Enter the Studio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button class="i3skip" id="i3skip">Skip intro</button>
+    </div>
+  </div>
+  <div class="i3hint">Move your cursor to look around</div>
+</div>
+<script>
+/* on phones a wide layout viewport can cut the overlay — pin it to the visible one */
+(function(){var L=document.getElementById('intro3d'),vv=window.visualViewport;if(!L||!vv)return;
+  function fit(){if(Math.abs(vv.width-L.clientWidth)>2||Math.abs(vv.height-L.clientHeight)>2){L.style.width=vv.width+'px';L.style.height=vv.height+'px';}}
+  fit();vv.addEventListener('resize',fit);window.addEventListener('resize',fit);
+  document.addEventListener('DOMContentLoaded',fit);window.addEventListener('load',fit);})();
+/* demo behaviour: both buttons open the studio after the fade-out */
+['i3go','i3skip'].forEach(function(id){var b=document.getElementById(id);if(!b)return;
+  b.addEventListener('click',function(){
+    var i=document.getElementById('intro3d');i.classList.add('leaving');
+    setTimeout(function(){location.href='studio.html';},950);});});
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"}}</script>
+<script type="module" src="studio-intro.js"></script>
+</body>
+</html>
