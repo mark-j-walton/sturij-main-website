@@ -680,7 +680,9 @@
 
 <script>
 const SITE_FN="https://oqduxjquzbvetkcllymd.supabase.co/functions/v1/site";
-const ENQ_FN="https://oqduxjquzbvetkcllymd.supabase.co/functions/v1/enquiry";
+/* Enquiries land in the CRM (sturij-web), not the brain. SITE_FN above stays on
+   marks-brain — site content is a different concern, deliberately unchanged. */
+const ENQ_FN="https://bcpmgpktmuaicjessseg.supabase.co/functions/v1/enquiry";
 let PASS=null, imgTarget=null;
 
 /* ---- reveal on scroll ---- */
