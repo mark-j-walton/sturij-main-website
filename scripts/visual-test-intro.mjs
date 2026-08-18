@@ -93,6 +93,8 @@ async function newPage(viewport,opts={}){
   await page.screenshot({path:join(outDir,'desktop-t4s.png')});
   check('desktop: 3D canvas mounted',await page.evaluate(()=>!!document.querySelector('#intro3d canvas')));
   check('desktop: no page errors',page.errors.length===0||(console.log('   errors:',page.errors),false));
+  const realTex=await page.evaluate(()=>window.__i3realTextures||0);
+  check(`desktop: real renders + swatch panels loaded (${realTex}/32)`,realTex>=20);
   /* the fade itself is evidenced by this screenshot; under software WebGL the
      main thread lags too much for a reliable mid-fade class assertion */
   await page.click('#i3go');

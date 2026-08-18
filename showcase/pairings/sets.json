@@ -1,0 +1,58 @@
+[
+ {
+  "dir": "showcase/pairings/set-1",
+  "panels": [
+   "panel-boards.jpg",
+   "panel-carcass.jpg",
+   "panel-ceiling.jpg",
+   "panel-floor.jpg",
+   "panel-skirting.jpg",
+   "panel-walls.jpg",
+   "panel-worktop.jpg"
+  ],
+  "render": "render.jpg",
+  "aspect": 1.0
+ },
+ {
+  "dir": "showcase/pairings/set-2",
+  "panels": [
+   "panel-boards.jpg",
+   "panel-carcass.jpg",
+   "panel-ceiling.jpg",
+   "panel-floor.jpg",
+   "panel-skirting.jpg",
+   "panel-walls.jpg",
+   "panel-worktop.jpg"
+  ],
+  "render": "render.jpg",
+  "aspect": 1.0
+ },
+ {
+  "dir": "showcase/pairings/set-3",
+  "panels": [
+   "panel-boards.jpg",
+   "panel-carcass.jpg",
+   "panel-ceiling.jpg",
+   "panel-floor.jpg",
+   "panel-skirting.jpg",
+   "panel-walls.jpg",
+   "panel-worktop.jpg"
+  ],
+  "render": "render.jpg",
+  "aspect": 1.0
+ },
+ {
+  "dir": "showcase/pairings/set-4",
+  "panels": [
+   "panel-boards.jpg",
+   "panel-carcass.jpg",
+   "panel-ceiling.jpg",
+   "panel-floor.jpg",
+   "panel-skirting.jpg",
+   "panel-walls.jpg",
+   "panel-worktop.jpg"
+  ],
+  "render": "render.jpg",
+  "aspect": 1.0
+ }
+]
