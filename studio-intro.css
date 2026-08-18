@@ -33,3 +33,6 @@
     .i3sub{font-size:13px;max-width:40ch}
     .i3logo img{height:36px}
   }
+
+  /* pre-launch note under the CTA — removed at launch with the button label */
+  .i3note{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(2.4vh + env(safe-area-inset-bottom,0px));margin:0;pointer-events:none;font:400 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.42);opacity:0;animation:i3upc 1s ease 1.25s forwards}
