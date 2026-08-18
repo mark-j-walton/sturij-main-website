@@ -19,18 +19,22 @@
 </head>
 <body>
 <div class="intro3d" id="intro3d" role="dialog" aria-label="Welcome — a 3D introduction to the Pairing Studio">
+  <div class="i3fallback" aria-hidden="true">
+    <img src="showcase/pairings/set-1/render.jpg" alt="" onerror="this.remove()">
+    <img src="showcase/pairings/set-2/render.jpg" alt="" onerror="this.remove()">
+    <img src="showcase/pairings/set-3/render.jpg" alt="" onerror="this.remove()">
+    <img src="showcase/pairings/set-4/render.jpg" alt="" onerror="this.remove()">
+  </div>
   <div class="i3vignette"></div><div class="i3grain"></div>
   <a class="i3logo" href="/" title="Sturij home"><img src="brand/sturij-logo-white.png" alt="Sturij"></a>
   <div class="i3ui">
     <p class="i3eyebrow">Sturij · Pairing Studio</p>
     <h1>Step inside your next room.</h1>
-    <p class="i3sub">Pair real paints, boards, worktops and finishes — drawn from the makers themselves — and watch a full interior scheme take shape, swatch by swatch.</p>
-    <div class="i3cta">
-      <button class="i3go" id="i3go">Enter the Studio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-      <button class="i3skip" id="i3skip">Skip intro</button>
-    </div>
+    <p class="i3sub">Real schemes, real makers — pair paints, boards, worktops and finishes, and watch a full interior take shape, swatch by swatch.</p>
   </div>
-  <div class="i3hint">Move your cursor to look around</div>
+  <div class="i3cta">
+    <button class="i3go" id="i3go">Enter the Studio<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
 </div>
 <script>
 /* on phones a wide layout viewport can cut the overlay — pin it to the visible one */
@@ -38,11 +42,10 @@
   function fit(){if(Math.abs(vv.width-L.clientWidth)>2||Math.abs(vv.height-L.clientHeight)>2){L.style.width=vv.width+'px';L.style.height=vv.height+'px';}}
   fit();vv.addEventListener('resize',fit);window.addEventListener('resize',fit);
   document.addEventListener('DOMContentLoaded',fit);window.addEventListener('load',fit);})();
-/* demo behaviour: both buttons open the studio after the fade-out */
-['i3go','i3skip'].forEach(function(id){var b=document.getElementById(id);if(!b)return;
-  b.addEventListener('click',function(){
-    var i=document.getElementById('intro3d');i.classList.add('leaving');
-    setTimeout(function(){location.href='studio.html';},950);});});
+/* demo behaviour: enter opens the studio after the fade-out (works even if the 3D module fails) */
+document.getElementById('i3go').addEventListener('click',function(){
+  var i=document.getElementById('intro3d');i.classList.add('leaving');
+  setTimeout(function(){location.href='studio.html';},950);});
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"}}</script>
 <script type="module" src="studio-intro.js"></script>
