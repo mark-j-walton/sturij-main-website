@@ -51,6 +51,9 @@
     "enquiry.submit": "Request the visit",
     "enquiry.note": "Your enquiry goes straight to the Sturij team. We'll be in touch within a working day.",
     "footer.tagline": "Fitted furniture · Made in Yorkshire",
-    "footer.copyright": "© Sturij · Harrogate"
+    "footer.copyright": "© Sturij · Harrogate",
+    "calculator.kicker": "A guide price",
+    "calculator.title": "What might it cost? <span class=\"em\">An honest band.</span>",
+    "calculator.body": "Choose what we're making, its width and its specification. You'll see a from–to guide based on recent projects — never a single figure. The exact price comes from your measurements at the design visit, priced from the cutting list."
   }
 }

@@ -1,0 +1,30 @@
+{
+  "page": "calculator",
+  "slug": "/calculator",
+  "design": "sturij-public",
+  "sizes": ["1440", "1024", "390"],
+  "grid": { "unit": 8, "columns": 12 },
+  "note": "The calculator on its own page (Mark may rename the route): the nav, the range (the configurator, whose picks the calculator reads), the calculator, the enquiry band, the footer. Copy slots are shared with the home page's calculator section.",
+  "regions": [
+    { "id": "nav", "artifact": "nav-bar", "slots": [{ "id": "nav.logo", "type": "brand-mark", "consumer": "nav-bar", "asset": "brand.logo-white" }] },
+    { "id": "range", "artifact": "finish-configurator", "slots": [
+      { "id": "range.kicker", "type": "copy", "consumer": "finish-configurator" }, { "id": "range.title", "type": "copy", "consumer": "finish-configurator" }, { "id": "range.body", "type": "copy", "consumer": "finish-configurator" },
+      { "id": "range.galleries", "type": "material", "consumer": "finish-configurator", "data": "data/galleries.json" }, { "id": "range.handles", "type": "handle", "consumer": "finish-configurator", "data": "data/galleries.json" }, { "id": "range.rooms", "type": "room", "consumer": "finish-configurator", "data": "data/rooms.json" }
+    ] },
+    { "id": "calculator", "artifact": "calculator", "slots": [
+      { "id": "calculator.kicker", "type": "copy", "consumer": "calculator" }, { "id": "calculator.title", "type": "copy", "consumer": "calculator" }, { "id": "calculator.body", "type": "copy", "consumer": "calculator" },
+      { "id": "calculator.configurations", "type": "configuration", "consumer": "calculator", "data": "data/band-table.json" }, { "id": "calculator.tiers", "type": "tier", "consumer": "calculator", "data": "data/band-table.json" }, { "id": "calculator.band", "type": "band", "consumer": "calculator", "door": "/api/band" }
+    ] },
+    { "id": "enquire", "artifact": "enquiry-form", "slots": [
+      { "id": "enquiry.kicker", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.title", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.body", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.submit", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.note", "type": "copy", "consumer": "enquiry-form" },
+      { "id": "enquiry.post", "type": "enquiry", "consumer": "enquiry-form", "door": "/api/enquiry -> sturij-web enquiry function" }
+    ] },
+    { "id": "footer", "artifact": "site-footer", "slots": [{ "id": "footer.logo", "type": "brand-mark", "consumer": "site-footer", "asset": "brand.logo-white" }, { "id": "footer.tagline", "type": "copy", "consumer": "site-footer" }, { "id": "footer.copyright", "type": "copy", "consumer": "site-footer" }, { "id": "footer.admin", "type": "copy", "consumer": "admin-editing", "note": "the control, not content" }] }
+  ],
+  "locks": [],
+  "artifacts": [{ "artifact": "swatch-rail" }, { "artifact": "admin-editing" }],
+  "variations": {
+    "1024": { "calculator.grid": "2col" },
+    "390": { "nav.links": "phone", "calculator.grid": "1col", "calculator.tiers": "stack", "galleries.minis": "1col", "form.grid": "1col" }
+  }
+}

@@ -10,7 +10,7 @@ import { fullSpec, useConfigurator } from './configurator/ConfiguratorProvider'
 export type EnquiryReply = { ok: true; id: string; notified?: unknown } | { ok: false; error: string; fallback?: { phone: string; email: string } }
 
 export function EnquiryBand({ kicker, title, body, submit, note }: { kicker: Slot; title: Slot; body: Slot; submit: Slot; note: Slot }) {
-  const { latestSwatch, visuals } = useConfigurator()
+  const { latestSwatch, visuals, guide } = useConfigurator()
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle')
   const [detail, setDetail] = useState<string>('')
   const spec = latestSwatch ? fullSpec(latestSwatch) : null
@@ -30,6 +30,7 @@ export function EnquiryBand({ kicker, title, body, submit, note }: { kicker: Slo
       website: String(data.get('website') ?? ''),
       finishes: spec,
       visualisedRoom: lastRoom,
+      guide: guide?.line ?? null,
       page: typeof location !== 'undefined' ? location.href : undefined,
     }
     setState('sending')
@@ -61,6 +62,7 @@ export function EnquiryBand({ kicker, title, body, submit, note }: { kicker: Slo
           <div className="field full"><label htmlFor="f-notes">Anything else</label><textarea id="f-notes" name="notes" placeholder="Rough sizes, finishes you like, photos to follow…" maxLength={4000} /></div>
           <div className="hp" aria-hidden="true"><label htmlFor="f-website">Leave this blank</label><input id="f-website" name="website" tabIndex={-1} autoComplete="off" /></div>
           {spec && <div className="enq-spec" data-enquiry-spec>Your swatch travels with this: {spec}{lastRoom ? ` · visualised as a ${lastRoom.toLowerCase()}` : ''}</div>}
+          {guide && <div className="enq-spec" data-enquiry-guide>Your guide travels with this: {guide.line}</div>}
           <button className="submit" type="submit" disabled={state === 'sending' || state === 'sent'}>
             {state === 'sending' ? 'Sending…' : state === 'sent' ? 'Sent ✓' : <Copy slot={submit} />}
           </button>

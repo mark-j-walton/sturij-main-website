@@ -1,0 +1,52 @@
+{
+  "id": "calculator",
+  "kind": "block",
+  "description": "The customer calculator: configuration · tier · band. Inputs as the SPA has them (the configuration and its width or run in millimetres, the layout, the tier with its materials and hardware in one line); the finishes are the configurator's picks — one selection on the site, never a second materials UI; the preview a drawn elevation at real proportions with the chosen board applied under a shading layer; the band a from–to guide from the versioned band table (data/band-table.json, computed server-side at /api/band), shown with its derivation and its watermark, never a single figure; 'take this further' hands the band to the enquiry; 'see it in a room' hands the materials to the one render path, labelled a visualisation. States: idle, active (priced), locked (sent).",
+  "tags": ["calculator", "price", "band", "guide", "studio"],
+  "contentTypes": ["configuration", "tier", "band", "material", "handle", "render"],
+  "consumers": ["calculator-page", "sturij-public", "sturij-studio (when the Studio lands on the core)"],
+  "properties": [
+    { "name": "configuration", "values": ["fitted-wardrobe", "bedside", "tallboy", "bench", "console"], "default": "fitted-wardrobe", "description": "The SPA's set: the fitted run and the four pieces" },
+    { "name": "tier", "values": ["standard", "signature", "atelier"], "default": "standard", "description": "Three tiers as built — Mark has not said two" },
+    { "name": "preview", "values": ["drawing", "visualisation"], "default": "drawing", "description": "The elevation by default; the photoreal render only on 'see it in a room'" },
+    { "name": "mount", "values": ["section", "page"], "default": "section", "description": "A section on the home page, or its own page at /calculator (Mark may rename)" }
+  ],
+  "disabled": [
+    { "property": "materials-picker", "reason": "the calculator adds no materials UI of its own — the configurator's galleries and roundel are the one selection (c290e215)" },
+    { "property": "single-price", "reason": "never a single figure presented as a price — a band with its derivation (F13), watermarked" }
+  ],
+  "states": ["idle", "hover", "active", "loading", "locked"],
+  "recipes": ["reveal-on-scroll", "swap", "blur-reveal"],
+  "behaviours": [{ "recipe": "reveal-on-scroll", "trigger": "enter" }, { "recipe": "swap", "trigger": "state" }, { "recipe": "blur-reveal", "trigger": "state" }],
+  "capabilities": ["band:read (/api/band — the table's figure, never the table)", "enquiry:prefill", "render:server (through the configurator's target)"],
+  "tokens": {
+    "ground": "ground",
+    "surface": "surface",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "accent": "accent",
+    "line": "line",
+    "kicker": "type.label",
+    "title": "type.title",
+    "body": "type.body",
+    "mono": "type.mono",
+    "figure": "type.display",
+    "radius": "radius.card",
+    "chipRadius": "radius.pill",
+    "shadow": "shadow.card",
+    "wall": "tint-linen",
+    "drawingLine": "ink-faint"
+  },
+  "size": { "w": 12, "h": 10 },
+  "reference": {
+    "surface": "sturij-visualiser",
+    "where": "#/design (DesignYours.tsx: the wardrobe guide, priceGuide) and the shop pieces (site/data.ts: shopProducts, tiers, itemPriceFor)",
+    "delta": [
+      "the two formulas moved out of the components into data/band-table.json v0 with a review date; the artifact computes from the table only, server-side",
+      "a band at both mounts, rounded to £5 (the brief), with the SPA's own spread ×0.92–×1.10",
+      "the finishes read from the configurator instead of the SPA's six-finish list; the elevation applies the chosen board",
+      "the enquiry prefilled with the band as data (the SPA wrote a summary string)",
+      "every value a token of the sturij-public instance"
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "id": "band-table",
+  "version": 0,
+  "dated": "2026-09-10",
+  "reviewDate": "2026-12-10",
+  "status": "v0 — the SPA's guide-price formulas carried over as data, to be replaced by ranges derived from issued quotes when the pricing manifest and the quote form type exist (d79f28e2; mail-gate §4; form-surface F13). No constant lives in a component: the artifact computes from this file only, server-side.",
+  "source": "sturij-visualiser src/site/data.ts (shopProducts, tiers, itemPriceFor) and src/site/DesignYours.tsx (priceGuide), read 10 Sep 2026",
+  "currency": "GBP",
+  "roundTo": 5,
+  "spread": {
+    "below": 0.92,
+    "above": 1.1,
+    "note": "the SPA's own band around its wardrobe guide (lo ×0.92, hi ×1.10, DesignYours.priceGuide); v0 applies the same spread to the piece formulas, which the SPA showed as a single figure"
+  },
+  "watermark": "guide price, fitted · exact quote at the design visit",
+  "basis": "based on recent projects",
+  "tiers": [
+    { "id": "standard", "name": "Standard", "line": "Egger matt boards · steel runners · 10-yr board guarantee", "mult": 1 },
+    { "id": "signature", "name": "Signature", "line": "Feelwood textured decors · Blum Tandem soft-close · brass or black hardware", "mult": 1.35 },
+    { "id": "atelier", "name": "Atelier", "line": "Veneer & painted finishes · Häfele solid-metal fittings · hand-finished edges", "mult": 1.9 }
+  ],
+  "finishUplift": {
+    "factor": 1.15,
+    "appliesTo": "a painted (uni) decor on the doors — the SPA's rule for its painted finish (DesignYours: painted ? 1.15 : 1); the configurator's Colours gallery is the painted set",
+    "scope": "fitted configurations only, as the SPA applied it; the pieces carried no finish uplift"
+  },
+  "configurations": [
+    {
+      "id": "fitted-wardrobe",
+      "group": "Fitted",
+      "name": "Fitted wardrobe run",
+      "blurb": "Wall to wall, floor to ceiling — scribed to your walls, bays planned around what you own.",
+      "kind": "run",
+      "minW": 1200,
+      "maxW": 5200,
+      "defW": 3200,
+      "defH": 2400,
+      "formula": { "type": "bays", "base": 980, "perBay": 420, "bayMm": 500, "offsetMm": 200, "minBays": 2, "maxBays": 10 },
+      "note": "DesignYours: n = clamp(2..10, round((width − 200) / 500)); base = 980 + n × 420",
+      "options": [
+        { "id": "classic", "name": "Everyday wardrobe", "desc": "Long hanging at the ends, double hang through the middle." },
+        { "id": "hishers", "name": "His & Hers", "desc": "Mirrored halves with shared shelves in the middle." },
+        { "id": "drawers", "name": "Drawers in the middle", "desc": "A drawer tower centre stage, hanging either side." },
+        { "id": "dressing", "name": "Dressing wall", "desc": "Shoes by the door, then shelves and double hang." }
+      ],
+      "optionsNote": "the SPA's four layouts (its 'How you'll use it' step); the brief said three — Mark to name if these labels or the count are wrong; the layout changes the drawing, not the v0 figure, as in the SPA"
+    },
+    {
+      "id": "bedside",
+      "group": "The Nidd collection",
+      "name": "Bedside pair",
+      "blurb": "Two drawer units, grain-matched as a pair, sized to your bed and skirting.",
+      "kind": "piece",
+      "minW": 400,
+      "maxW": 700,
+      "defW": 500,
+      "formula": { "type": "linear", "base": 165, "perMm": 0.18, "pair": true },
+      "drawing": { "drawers": 2, "units": 2, "heightMm": 560 }
+    },
+    {
+      "id": "tallboy",
+      "group": "The Nidd collection",
+      "name": "Tall boy",
+      "blurb": "Five soft-close drawers, one calm column of storage.",
+      "kind": "piece",
+      "minW": 450,
+      "maxW": 900,
+      "defW": 600,
+      "formula": { "type": "linear", "base": 320, "perMm": 0.32 },
+      "drawing": { "drawers": 5, "units": 1, "heightMm": 1200 }
+    },
+    {
+      "id": "bench",
+      "group": "The Nidd collection",
+      "name": "Window bench",
+      "blurb": "A sitting-height run with drawers below — built into the bay or free against the wall.",
+      "kind": "piece",
+      "minW": 900,
+      "maxW": 2400,
+      "defW": 1400,
+      "formula": { "type": "linear", "base": 380, "perMm": 0.24 },
+      "drawing": { "drawers": 1, "units": 3, "heightMm": 460 }
+    },
+    {
+      "id": "console",
+      "group": "The Wharfe collection",
+      "name": "Hall console",
+      "blurb": "Slim-depth console with a shelf and a drawer for the everything-drawer things.",
+      "kind": "piece",
+      "minW": 700,
+      "maxW": 1600,
+      "defW": 1100,
+      "formula": { "type": "linear", "base": 290, "perMm": 0.22 },
+      "drawing": { "drawers": 1, "units": 1, "heightMm": 820, "shelf": true }
+    }
+  ]
+}

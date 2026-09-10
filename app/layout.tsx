@@ -3,6 +3,7 @@ import { Fraunces, IBM_Plex_Mono, Inter } from 'next/font/google'
 import type { ReactNode } from 'react'
 import './tokens.css'
 import './site.css'
+import './calculator.css'
 
 // The three faces the sturij-public instance names, self-hosted at build by next/font (no runtime request
 // to a font service, no key). Each is exposed as the CSS variable app/tokens.css maps its family to.

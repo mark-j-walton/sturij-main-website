@@ -9,7 +9,7 @@ const SERVER_DIR = '.next/server'
 if (!existsSync(CLIENT_DIR)) { console.error('bundle check: no .next/static — run next build first'); process.exit(1) }
 
 const FORBIDDEN_ANYWHERE = ['<x-dc', 'ds-base.js', 'support.js', 'data-om-id', 'sturij_gemini_key', 'sturij_img_slot', 'aistudio.google.com']
-const FORBIDDEN_IN_CLIENT = ['generativelanguage.googleapis.com', 'GEMINI_API_KEY', 'x-goog-api-key']
+const FORBIDDEN_IN_CLIENT = ['generativelanguage.googleapis.com', 'GEMINI_API_KEY', 'x-goog-api-key', 'perMm', 'perBay', '"mult":', 'finishUplift']
 const KEY_SHAPES = [/AIza[0-9A-Za-z_-]{30,}/, /sk-[A-Za-z0-9]{20,}/, /sbp_[a-f0-9]{30,}/, /eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}/, /-----BEGIN [A-Z ]*PRIVATE KEY/, /gh[pousr]_[A-Za-z0-9]{30,}/]
 
 const walk = (dir, out = []) => { for (const e of readdirSync(dir)) { const p = join(dir, e); if (statSync(p).isDirectory()) walk(p, out); else if (/\.(js|css|html|json|txt|rsc)$/.test(e)) out.push(p) } return out }

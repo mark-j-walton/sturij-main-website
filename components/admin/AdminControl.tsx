@@ -19,6 +19,7 @@ export function AdminControl() {
   const [code, setCode] = useState('')
   const [message, setMessage] = useState<{ text: string; err?: boolean } | null>(null)
   const [editing, setEditing] = useState(false)
+  const [bandMeta, setBandMeta] = useState<{ version: number; dated: string; reviewDate: string; sha256: string } | null>(null)
   const chips = useRef<HTMLElement[]>([])
   const publishTimer = useRef<number | null>(null)
   const say = (text: string, err = false) => setMessage({ text, err })
@@ -31,6 +32,7 @@ export function AdminControl() {
     const r = await fetch('/api/revalidate').then((x) => x.json()).catch(() => null) as { admin?: boolean; email?: string } | null
     setEmail(r?.email ?? data.session.user.email ?? '')
     setStatus(r?.admin ? 'admin' : 'signed-in')
+    if (r?.admin) fetch('/api/band').then((x) => x.json()).then((m) => setBandMeta(m)).catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -191,6 +193,7 @@ export function AdminControl() {
                 <button className="mbtn" type="button" onClick={() => setEditing((v) => !v)} data-admin-editing={editing ? 'on' : 'off'}>{editing ? 'Stop editing' : 'Start editing'}</button>
                 <button className="mbtn ghost" type="button" onClick={signOut}>Sign out</button>
               </div>
+              {bandMeta && <p className="status" data-band-table>Band table v{bandMeta.version} · dated {bandMeta.dated} · review due {bandMeta.reviewDate} · {bandMeta.sha256.slice(0, 12)}</p>}
               {editing && <p>Click any photo to replace it (jpg, webp, png or avif, up to {Math.round(IMAGE_LIMIT_BYTES / 1024)} KB). Click any text to edit it; Enter saves, Escape cancels. Every save is versioned and audited.</p>}
             </>
           )}
