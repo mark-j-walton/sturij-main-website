@@ -146,6 +146,21 @@ async function drive() {
     check('/api/render answers with a declared outcome', [200, 429, 503].includes(r1.status), `${r1.status} ${j1.code ?? (j1.ok ? 'image ' + j1.label : '')}`)
     const r2 = await fetch(BASE + '/api/render', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' })
     check('/api/render refuses a cross-origin or empty call', [400, 403].includes(r2.status), String(r2.status))
+    // 9 · the calculator page and the band door
+    const cp = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+    await cp.goto(BASE + '/calculator', { waitUntil: 'load' })
+    const bandTxt = await cp.waitForSelector('.calc-band[data-band*="-"]', { timeout: 8000 }).then((e) => e.getAttribute('data-band')).catch(() => null)
+    check('/calculator prices a band from the table', !!bandTxt, bandTxt ?? 'no band')
+    const el = await cp.$eval('svg.elevation', (e) => e.getAttribute('aria-label')).catch(() => null)
+    check('/calculator draws the elevation, declared a drawing', !!el && el.includes('not a photograph'), el?.slice(0, 80) ?? 'no elevation')
+    await cp.setViewportSize({ width: 390, height: 844 })
+    await sleep(400)
+    const cOverflow = await cp.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)
+    check('/calculator has no horizontal overflow at 390', cOverflow <= 1, `${cOverflow} px`)
+    await cp.close()
+    const bm = await fetch(BASE + '/api/band').then((r) => r.json()).catch(() => null)
+    check('/api/band reads the table (version, review date, checksum)', !!bm?.ok && typeof bm.sha256 === 'string', bm ? `v${bm.version} review ${bm.reviewDate} ${String(bm.sha256).slice(0, 12)}` : 'no answer')
+    report.bandTable = bm
     for (const p of ['/studio', '/canvas', '/privacy']) {
       const r = await fetch(BASE + p)
       check(`legacy page ${p} still answers`, r.status === 200, String(r.status))
@@ -160,20 +175,22 @@ async function lighthouse() {
   if (!LIGHTHOUSE) return
   mkdirSync('reports', { recursive: true })
   const chrome = process.env.CHROME_PATH || ['C:/Program Files/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find((p) => existsSync(p))
-  for (const form of ['mobile', 'desktop']) {
-    const out = `reports/lighthouse-${form}-${stamp}.json`
-    const argv = ['--yes', 'lighthouse@12', BASE + '/', '--quiet', '--output=json', `--output-path=${out}`, '--only-categories=performance,accessibility,best-practices,seo', '--chrome-flags=--headless=new --no-sandbox']
+  const PATHS = (opt('--paths', '/,/calculator')).split(',').map((p) => p.trim()).filter(Boolean)
+  for (const path of PATHS) for (const form of ['mobile', 'desktop']) {
+    const slug = path === '/' ? 'home' : path.replace(/\W+/g, '-').replace(/^-|-$/g, '')
+    const out = `reports/lighthouse-${slug}-${form}-${stamp}.json`
+    const argv = ['--yes', 'lighthouse@12', BASE + path, '--quiet', '--output=json', `--output-path=${out}`, '--only-categories=performance,accessibility,best-practices,seo', '--chrome-flags=--headless=new --no-sandbox']
     if (form === 'desktop') argv.push('--preset=desktop')
     try {
       execFileSync(npx, argv, { stdio: ['ignore', 'inherit', 'inherit'], shell: process.platform === 'win32', env: { ...process.env, CHROME_PATH: chrome ?? process.env.CHROME_PATH ?? '' }, timeout: 300_000 })
       const lh = JSON.parse(readFileSync(out, 'utf8'))
       const cats = Object.fromEntries(Object.entries(lh.categories).map(([k, v]) => [k, Math.round(v.score * 100)]))
       const audits = lh.audits
-      report.lighthouse[form] = { ...cats, lcp_ms: Math.round(audits['largest-contentful-paint']?.numericValue ?? 0), cls: Number((audits['cumulative-layout-shift']?.numericValue ?? 0).toFixed(3)), tbt_ms: Math.round(audits['total-blocking-time']?.numericValue ?? 0), file: out }
-      console.log(`LIGHTHOUSE ${form}: ${JSON.stringify(report.lighthouse[form])}`)
+      report.lighthouse[`${slug}:${form}`] = { ...cats, lcp_ms: Math.round(audits['largest-contentful-paint']?.numericValue ?? 0), cls: Number((audits['cumulative-layout-shift']?.numericValue ?? 0).toFixed(3)), tbt_ms: Math.round(audits['total-blocking-time']?.numericValue ?? 0), file: out }
+      console.log(`LIGHTHOUSE ${path} ${form}: ${JSON.stringify(report.lighthouse[`${slug}:${form}`])}`)
     } catch (e) {
-      report.lighthouse[form] = { error: String(e.message ?? e).slice(0, 200) }
-      console.log(`LIGHTHOUSE ${form}: failed — ${report.lighthouse[form].error}`)
+      report.lighthouse[`${slug}:${form}`] = { error: String(e.message ?? e).slice(0, 200) }
+      console.log(`LIGHTHOUSE ${path} ${form}: failed — ${report.lighthouse[`${slug}:${form}`].error}`)
     }
   }
 }

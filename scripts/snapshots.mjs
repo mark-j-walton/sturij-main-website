@@ -25,6 +25,7 @@ try {
   await shot('.stackx', '07-stack', 300)
   await shot('.montage', '08-montage', 900)
   await shot('#make', '09-manifesto')
+  await shot('#calculator', '09b-calculator')
   await shot('#enquire', '10-enquiry')
   await shot('.foot', '11-footer')
   await p.click('[data-admin-toggle]'); await sleep(400); await p.screenshot({ path: `${OUT}/12-admin.png` })
@@ -32,6 +33,8 @@ try {
   const m = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
   const mp = await m.newPage(); await mp.goto(BASE + '/', { waitUntil: 'networkidle' }); await sleep(1000)
   await mp.screenshot({ path: `${OUT}/13-mobile-hero.png` })
+  const cpg = await m.newPage(); await cpg.goto(BASE + '/calculator', { waitUntil: 'networkidle' }); await sleep(900); const ce = await cpg.$('#calculator'); await ce?.scrollIntoViewIfNeeded(); await sleep(600); await cpg.screenshot({ path: `${OUT}/15-mobile-calculator.png` }); await cpg.close()
+  const dctx = await b.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 }); const dp = await dctx.newPage(); await dp.goto(BASE + '/calculator', { waitUntil: 'networkidle' }); await sleep(1200); const de = await dp.$('#calculator'); await de?.scrollIntoViewIfNeeded(); await sleep(700); await dp.screenshot({ path: `${OUT}/16-calculator-page.png` }); await dctx.close()
   const el = await mp.$('#range'); await el.scrollIntoViewIfNeeded(); await sleep(800); await mp.screenshot({ path: `${OUT}/14-mobile-range.png` })
   await m.close()
 } finally {

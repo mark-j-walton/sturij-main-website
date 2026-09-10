@@ -18,6 +18,8 @@ export interface EnquiryInput {
   website?: string | null
   finishes?: string | null
   visualisedRoom?: string | null
+  /** The calculator's guide line — configuration, width, tier and the band (never a single figure). */
+  guide?: string | null
   page?: string | null
 }
 
@@ -46,6 +48,7 @@ export function validateEnquiry(body: unknown): Validated {
       website: clean(b.website, 200),
       finishes: clean(b.finishes, 400),
       visualisedRoom: clean(b.visualisedRoom, 60),
+      guide: clean(b.guide, 300),
       page: clean(b.page, 500),
     },
   }
@@ -57,6 +60,7 @@ export function composeMessage(v: EnquiryValue): string {
   if (v.notes) lines.push(v.notes)
   if (v.finishes) lines.push(`Finishes composed on ${ENQUIRY_SOURCE}: ${v.finishes}`)
   if (v.visualisedRoom) lines.push(`Visualised as: ${v.visualisedRoom} (a generated visualisation, not a photograph)`)
+  if (v.guide) lines.push(`Guide from the calculator: ${v.guide} — a guide, not a quote`)
   return lines.join('\n\n').slice(0, 5000)
 }
 

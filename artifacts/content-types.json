@@ -1,10 +1,184 @@
 {
   "note": "The content types this surface's artifacts take, beside the core's (image, swatch, render, brand-mark — sturij-core-editor src/assets/content-types.json). Declared here so the configurator's types — material, handle, room — exist as data before the Studio lands on the core (2dd904c6).",
   "types": [
-    { "id": "copy", "description": "A text slot on the page — free text is content here, not a property; edited in place by an admin and versioned in site_content_slots.", "required": [{ "name": "text", "kind": "string" }], "composable": [], "approver": "owner" },
-    { "id": "material", "description": "A decor for doors or carcass — a registry product by code where one exists (Egger, sturij-assets), else the handoff's name with its misfit.", "required": [{ "name": "name", "kind": "string" }], "composable": [{ "name": "code", "kind": "ref", "resolves": "materials-registry" }, { "name": "swatch", "kind": "ref", "resolves": "asset" }, { "name": "gradient", "kind": "list" }] },
-    { "id": "handle", "description": "A handle finish — the handoff's procedural metals today; a Häfele product by code when the registry names a finish family.", "required": [{ "name": "name", "kind": "string" }], "composable": [{ "name": "swatch", "kind": "ref", "resolves": "asset" }] },
-    { "id": "room", "description": "A room finish (ceiling, walls, skirting, flooring) — the prototype's colour data until paints are registry records; and the room a visual renders into (bedroom, living room, kitchen, hallway).", "required": [{ "name": "name", "kind": "string" }], "composable": [{ "name": "category", "kind": "enum", "values": ["ceiling", "walls", "skirting", "flooring"] }] },
-    { "id": "enquiry", "description": "The enquiry the form posts — the customer table's front door on sturij-web (mail-gate G5; form-surface §5.1); the visitor's swatch travels with it as data.", "required": [{ "name": "name", "kind": "string" }, { "name": "email", "kind": "string" }], "composable": [{ "name": "phone", "kind": "string" }, { "name": "postcode", "kind": "string" }, { "name": "room", "kind": "string" }, { "name": "notes", "kind": "string" }, { "name": "finishes", "kind": "string" }] }
+    {
+      "id": "copy",
+      "description": "A text slot on the page — free text is content here, not a property; edited in place by an admin and versioned in site_content_slots.",
+      "required": [
+        {
+          "name": "text",
+          "kind": "string"
+        }
+      ],
+      "composable": [],
+      "approver": "owner"
+    },
+    {
+      "id": "material",
+      "description": "A decor for doors or carcass — a registry product by code where one exists (Egger, sturij-assets), else the handoff's name with its misfit.",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "code",
+          "kind": "ref",
+          "resolves": "materials-registry"
+        },
+        {
+          "name": "swatch",
+          "kind": "ref",
+          "resolves": "asset"
+        },
+        {
+          "name": "gradient",
+          "kind": "list"
+        }
+      ]
+    },
+    {
+      "id": "handle",
+      "description": "A handle finish — the handoff's procedural metals today; a Häfele product by code when the registry names a finish family.",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "swatch",
+          "kind": "ref",
+          "resolves": "asset"
+        }
+      ]
+    },
+    {
+      "id": "room",
+      "description": "A room finish (ceiling, walls, skirting, flooring) — the prototype's colour data until paints are registry records; and the room a visual renders into (bedroom, living room, kitchen, hallway).",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "category",
+          "kind": "enum",
+          "values": [
+            "ceiling",
+            "walls",
+            "skirting",
+            "flooring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enquiry",
+      "description": "The enquiry the form posts — the customer table's front door on sturij-web (mail-gate G5; form-surface §5.1); the visitor's swatch travels with it as data.",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        },
+        {
+          "name": "email",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "phone",
+          "kind": "string"
+        },
+        {
+          "name": "postcode",
+          "kind": "string"
+        },
+        {
+          "name": "room",
+          "kind": "string"
+        },
+        {
+          "name": "notes",
+          "kind": "string"
+        },
+        {
+          "name": "finishes",
+          "kind": "string"
+        }
+      ]
+    },
+    {
+      "id": "configuration",
+      "description": "What is being made — the SPA's set: the fitted run and the four pieces — with its width range, its options and its drawing (data/band-table.json).",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        },
+        {
+          "name": "widthMm",
+          "kind": "measure",
+          "unit": "mm"
+        }
+      ],
+      "composable": [
+        {
+          "name": "option",
+          "kind": "enum",
+          "values": [
+            "classic",
+            "hishers",
+            "drawers",
+            "dressing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tier",
+      "description": "A specification tier — Standard, Signature, Atelier — each a rule on materials and hardware stated in one line (the SPA's tiers; a registry rule later).",
+      "required": [
+        {
+          "name": "name",
+          "kind": "string"
+        },
+        {
+          "name": "line",
+          "kind": "string"
+        }
+      ],
+      "composable": []
+    },
+    {
+      "id": "band",
+      "description": "A from–to guide computed from the versioned band table, rounded to £5 at both ends, watermarked; a derived value shown with its derivation (form-surface F13); never a single figure presented as a price.",
+      "required": [
+        {
+          "name": "from",
+          "kind": "number"
+        },
+        {
+          "name": "to",
+          "kind": "number"
+        },
+        {
+          "name": "tableVersion",
+          "kind": "number"
+        }
+      ],
+      "composable": [
+        {
+          "name": "derivation",
+          "kind": "list"
+        }
+      ]
+    }
   ]
 }

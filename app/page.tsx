@@ -15,6 +15,8 @@ import { RevealObserver } from '@/components/RevealObserver'
 import { SiteFooter } from '@/components/SiteFooter'
 import { StackCards } from '@/components/StackCards'
 import { StatementBand } from '@/components/StatementBand'
+import { Calculator } from '@/components/calculator/Calculator'
+import { CALCULATOR_VIEW } from '@/lib/calculator-data'
 import { FinishConfigurator } from '@/components/configurator/FinishConfigurator'
 import { ConfiguratorProvider } from '@/components/configurator/ConfiguratorProvider'
 import { Lightbox } from '@/components/configurator/Lightbox'
@@ -59,6 +61,8 @@ export default async function Page() {
         <Montage label={c('montage.label')} image={img('montage.image')} imageSlot="montage.image" />
 
         <Manifesto kicker={c('manifesto.kicker')} title={c('manifesto.title')} steps={[1, 2, 3].map((n) => ({ no: `0${n}`, title: c(`manifesto.${n}.title`), body: c(`manifesto.${n}.body`) }))} />
+
+        <Calculator kicker={c('calculator.kicker')} title={c('calculator.title')} body={c('calculator.body')} finishesHref="#range" view={CALCULATOR_VIEW} />
 
         <EnquiryBand kicker={c('enquiry.kicker')} title={c('enquiry.title')} body={c('enquiry.body')} submit={c('enquiry.submit')} note={c('enquiry.note')} />
       </main>

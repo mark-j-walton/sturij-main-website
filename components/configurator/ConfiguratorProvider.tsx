@@ -15,6 +15,9 @@ export interface Swatch { n: number; picks: CompletePicks; thumb: string; room: 
 export interface Visual { swatch: Swatch; room: Room; src: string; spec: string; at: number }
 
 export type TargetState = 'idle' | 'loading' | 'ready' | 'done'
+
+/** The calculator's guide, as data, for the enquiry to carry (the band, never a single figure). */
+export interface Guide { configuration: string; option: string | null; widthMm: number; bays: number | null; tier: string; band: { from: number; to: number; currency: string }; tableVersion: number; line: string }
 export interface Target {
   key: string
   /** The room this target renders (a stacking card); null for the feature image, which asks. */
@@ -49,6 +52,10 @@ interface Ctx {
   recordVisual: (v: Visual) => void
   visuals: Visual[]
   latestSwatch: Swatch | null
+  guide: Guide | null
+  setGuide: (g: Guide | null) => void
+  /** Ask a room on a named target (the calculator's own preview) — the one render path. */
+  askRoomOn: (key: string, s: Swatch) => void
 }
 
 const ConfiguratorContext = createContext<Ctx | null>(null)
@@ -66,6 +73,7 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
   const [builderFor, setBuilderFor] = useState<Swatch | null>(null)
   const [lightbox, setLightbox] = useState<Visual | null>(null)
   const [visuals, setVisuals] = useState<Visual[]>([])
+  const [guide, setGuide] = useState<Guide | null>(null)
   const targets = useRef(new Map<string, Target>())
   const finishing = useRef(false)
 
@@ -128,6 +136,8 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     if (room && target) void target.run(s, room)
   }, [])
 
+  const askRoomOn = useCallback((key: string, s: Swatch) => { targets.current.get(key)?.askRoom(s) }, [])
+
   const recordVisual = useCallback((v: Visual) => {
     setVisuals((prev) => [...prev, v])
     try {
@@ -142,7 +152,8 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     builderFor, openBuilder: setBuilderFor, setRoomPick, registerTarget,
     visualiseFeature, visualiseCurrentCard, lightbox, openLightbox: setLightbox, recordVisual, visuals,
     latestSwatch: swatches[swatches.length - 1] ?? null,
-  }), [picks, swatches, activeGallery, pick, newSwatch, builderFor, setRoomPick, registerTarget, visualiseFeature, visualiseCurrentCard, lightbox, recordVisual, visuals])
+    guide, setGuide, askRoomOn,
+  }), [picks, swatches, activeGallery, pick, newSwatch, builderFor, setRoomPick, registerTarget, visualiseFeature, visualiseCurrentCard, lightbox, recordVisual, visuals, guide, askRoomOn])
 
   return <ConfiguratorContext.Provider value={value}>{children}</ConfiguratorContext.Provider>
 }
