@@ -1,0 +1,15 @@
+{
+  "id": "site-footer",
+  "kind": "shell",
+  "description": "The footer: the wordmark at 50px, the mono link row, the © line — and the admin control that signs an admin in and turns editing on.",
+  "tags": ["footer", "shell", "signpost", "admin"],
+  "contentTypes": ["brand-mark", "copy"],
+  "consumers": ["sturij-public"],
+  "properties": [],
+  "disabled": [{ "property": "image-upload-toggle", "reason": "the handoff's dev toggle wrote images to the visitor's localStorage; replaced by admin-editing (a signed-in admin, the bucket, the slot tables, the audit)" }],
+  "states": ["idle", "hover"],
+  "recipes": [],
+  "capabilities": ["admin:login"],
+  "tokens": { "background": "structure", "ink": "custom.ink.on-dark-60", "link": "custom.ink.on-dark-72", "accent": "accent", "toggleLine": "custom.glass.foot-line", "mono": "type.mono" },
+  "size": { "w": 12, "h": 2 }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "stack-cards",
+  "kind": "block",
+  "description": "\"One workshop. Every room.\": the section header is the sticky element; four cards pin below it, stepped 18px per card with heights reduced so every bottom edge aligns; the pile releases together; captions hand over. The stacking swatch rail generates into the pinned card's room.",
+  "tags": ["cards", "stack", "rooms", "scroll"],
+  "contentTypes": ["image", "copy", "render"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "cards", "values": ["4"], "default": "4", "description": "Wardrobes, living rooms, kitchens, hallways" }],
+  "disabled": [],
+  "states": ["idle", "loading", "active", "locked"],
+  "recipes": ["pile-release", "handover", "reveal-on-scroll", "blur-reveal"],
+  "behaviours": [
+    { "recipe": "pile-release", "trigger": "scroll" },
+    { "recipe": "handover", "trigger": "scroll" },
+    { "recipe": "reveal-on-scroll", "trigger": "enter" },
+    { "recipe": "blur-reveal", "trigger": "state" }
+  ],
+  "capabilities": [],
+  "tokens": { "ground": "ground", "scrim": "custom.scrim.card", "radius": "radius.card-lg", "shadow": "shadow.card-deep", "hairline": "shadow.card-top-hairline", "kicker": "accent", "title": "type.title", "textShadow": "shadow.card-text" },
+  "size": { "w": 12, "h": 12 }
+}

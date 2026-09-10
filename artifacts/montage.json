@@ -1,0 +1,16 @@
+{
+  "id": "montage",
+  "kind": "block",
+  "description": "The scroll-built montage: a 9×6 mosaic on sand whose tiles reveal their slice of the photograph in a random order proportional to progress through a 240vh track; empty tiles carry random charcoal tints and a faint roundel emboss.",
+  "tags": ["montage", "mosaic", "scroll"],
+  "contentTypes": ["image", "copy"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "grid", "values": ["9x6"], "default": "9x6", "description": "Columns × rows" }],
+  "disabled": [],
+  "states": ["idle", "active"],
+  "recipes": ["montage-reveal", "reveal-on-scroll"],
+  "behaviours": [{ "recipe": "montage-reveal", "trigger": "scroll" }, { "recipe": "reveal-on-scroll", "trigger": "enter" }],
+  "capabilities": [],
+  "tokens": { "background": "tint-sand", "surface": "surface", "tint": "custom.tint.mosaic", "radius": "radius.mosaic", "shadow": "shadow.card-deep", "label": "claret", "labelFace": "type.label" },
+  "size": { "w": 12, "h": 12 }
+}

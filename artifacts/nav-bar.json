@@ -1,0 +1,16 @@
+{
+  "id": "nav-bar",
+  "kind": "shell",
+  "description": "The fixed header: the wordmark at 50px and the section links in mono caps with the gold pill to the enquiry band.",
+  "tags": ["nav", "header", "signpost"],
+  "contentTypes": ["brand-mark"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "links", "values": ["all", "phone"], "default": "all", "description": "Under 640px the two middle links fold away (a licensed variation for the phone)" }],
+  "disabled": [],
+  "states": ["idle", "hover"],
+  "recipes": [],
+  "capabilities": [],
+  "tokens": { "background": "structure", "ink": "custom.ink.on-dark-74", "accent": "accent", "label": "type.label", "hairline": "shadow.nav-hairline", "pill": "radius.pill" },
+  "size": { "w": 12, "h": 1 },
+  "reference": { "surface": "design_handoff_sturij_public_site", "where": "PublicPage.dc.html header.nav", "delta": ["the logo asset by id from the brand pack", "a phone variation added: two links hidden under 640px"] }
+}

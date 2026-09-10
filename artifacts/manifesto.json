@@ -1,0 +1,16 @@
+{
+  "id": "manifesto",
+  "kind": "block",
+  "description": "The manifesto band: centred kicker and lead with the gold em, three left-aligned columns with gold top rules.",
+  "tags": ["manifesto", "band", "way"],
+  "contentTypes": ["copy"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "columns", "values": ["3"], "default": "3", "description": "The three steps" }],
+  "disabled": [],
+  "states": ["idle"],
+  "recipes": ["reveal-on-scroll"],
+  "behaviours": [{ "recipe": "reveal-on-scroll", "trigger": "enter" }],
+  "capabilities": [],
+  "tokens": { "ground": "ground", "rule": "accent", "em": "accent", "no": "claret", "title": "type.title", "body": "type.body", "muted": "ink-muted" },
+  "size": { "w": 12, "h": 6 }
+}

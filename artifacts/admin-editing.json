@@ -1,0 +1,16 @@
+{
+  "id": "admin-editing",
+  "kind": "control",
+  "description": "The admin login on the footer and the editing mode it turns on for a signed-in admin only: every content photo outlined with its chip (native size · displayed size · the limit), a click opens a picker, a valid file goes to the site-images bucket and a site_image_slots row; every content text is a slot edited in place into site_content_slots; every save versioned and audited by the database as a publish content act at the login class.",
+  "tags": ["admin", "editing", "login", "content"],
+  "contentTypes": ["image", "copy"],
+  "consumers": ["site-footer"],
+  "properties": [{ "name": "mode", "values": ["off", "on"], "default": "off", "description": "Editing on or off; on is possible only for a session whose email is in site_admin" }],
+  "disabled": [],
+  "states": ["idle", "active", "loading", "disabled-with-reason"],
+  "recipes": [],
+  "capabilities": ["auth:session (Supabase Auth on sturij-web — an email link or code)", "storage:upload (site-images, admin insert only)", "slots:write (site_content_slots, site_image_slots — insert only, versioned)", "revalidate (/api/revalidate — the page re-reads its slots)"],
+  "tokens": { "outline": "accent", "chip": "custom.veil.chip", "chipInk": "accent", "panel": "structure-hi", "panelEnd": "structure-lo", "panelLine": "custom.line.gold-30", "editFill": "custom.fill.gold-15", "label": "type.label" },
+  "size": { "w": 4, "h": 4 },
+  "reference": { "surface": "design_handoff_sturij_public_site", "where": "PublicPage.dc.html §12 footer 'Image upload' toggle", "delta": ["a login gate (Supabase Auth, the site_admin list) in place of a free toggle", "the bucket and the versioned slot tables in place of localStorage", "copy editing added (the addendum)", "the refusals: type, size, minimum width — with the reason", "the audit row written by the database on every save"] }
+}

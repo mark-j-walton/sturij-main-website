@@ -1,0 +1,16 @@
+{
+  "id": "page-veil",
+  "kind": "shell",
+  "description": "The load veil: charcoal over the page with the white logo and the gold ring; scroll locked until the hero image decodes, capped at 2.5 s; a 0.5 s fade.",
+  "tags": ["veil", "load", "shell"],
+  "contentTypes": ["brand-mark"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "cap", "values": ["2500ms"], "default": "2500ms", "description": "The hard cap on the lock (README §1)" }],
+  "disabled": [],
+  "states": ["idle", "loading"],
+  "recipes": ["swap"],
+  "behaviours": [{ "recipe": "swap", "trigger": "state" }],
+  "capabilities": [],
+  "tokens": { "background": "structure", "ring": "accent", "ringTrack": "custom.line.gold-30" },
+  "size": { "w": 12, "h": 12 }
+}

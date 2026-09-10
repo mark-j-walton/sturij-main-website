@@ -1,0 +1,34 @@
+{
+  "id": "panel-stack",
+  "kind": "block",
+  "description": "The sticky hero panel stack: four full-viewport panels (hero, wardrobes, media walls, finishes), each a photograph, the caption-anchored scrim and a caption; the current panel darkens and zooms as the next travels up; captions hand over.",
+  "tags": ["hero", "panel", "scroll", "story"],
+  "contentTypes": ["image", "copy"],
+  "consumers": ["sturij-public"],
+  "properties": [
+    { "name": "panels", "values": ["4"], "default": "4", "description": "The handoff's four panels" },
+    { "name": "scrub", "values": ["lerp", "instant"], "default": "lerp", "description": "The scroll effect's smoothing; instant under reduced motion" }
+  ],
+  "disabled": [],
+  "states": ["idle", "active"],
+  "recipes": ["scrub-darken", "handover", "reveal-on-scroll"],
+  "behaviours": [
+    { "recipe": "scrub-darken", "trigger": "scroll" },
+    { "recipe": "handover", "trigger": "scroll" },
+    { "recipe": "reveal-on-scroll", "trigger": "enter" }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "ink": "ink-on-dark",
+    "body": "custom.ink.on-dark-90",
+    "kicker": "accent",
+    "scrim": "custom.scrim.caption",
+    "darken": "custom.scrim.darken",
+    "display": "type.display",
+    "bodyFace": "type.body",
+    "label": "type.label",
+    "textShadow": "shadow.hero-text"
+  },
+  "size": { "w": 12, "h": 12 },
+  "reference": { "surface": "design_handoff_sturij_public_site", "where": "PublicPage.dc.html §2 sticky hero panel stack", "delta": ["images by slot id through next/image renditions, never the master", "copy by slot id, editable by an admin", "the lerp factor and travel read from the instance's motion tokens"] }
+}
