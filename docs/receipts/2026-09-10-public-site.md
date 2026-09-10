@@ -60,6 +60,8 @@ Mobile LCP is the hero photograph; 89 % of it is render delay on the throttled C
 
 - 10 Sep, Mark's word: the hero image (`hero.image`) now reads `render.kitchen-sage-island` (2000×1500, 487 KB), supplied by Mark and declared `generated` in the manifest — a visualisation, not a photograph of an install; kitchen-bright stays on the kitchen card and the montage.
 
+- 10 Sep, Mark's word ("replace images like we did on the home page … crop in a little … no duplication"): five more renders declared `generated` and every image slot given its own image — hero: sage kitchen render; wardrobes panel: dark marble-effect bedroom render; media panel: walnut media wall render; finishes panel: green office render; wardrobes feature: the cream wardrobe photograph; media feature: linen living-room render; cards: walk-in photograph, LED media wall photograph, bright kitchen photograph, navy utility render (the card's caption now reads "Utility & boot rooms"); montage: the kitchen-with-island photograph. The smaller frames (two features, four cards) crop in by a per-slot zoom held as data (`IMAGE_SLOT_CROPS`), which applies to uploads too. PR #34 merged 16:36 UTC; the set is PR #35.
+
 ## Findings for the record
 
 - The enquiry function requires an email; the handoff's form had none — added. The function has no column for the composed swatch; it travels in the message text, labelled. The function is unchanged.

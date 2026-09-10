@@ -24,7 +24,7 @@ describe('the asset manifest', () => {
   })
   it('classifies every asset — proof photography carries the claim; a generated image is declared as such', () => {
     for (const a of allAssets()) expect(['proof', 'generated', 'swatch', 'metal', 'brand']).toContain(a.kind)
-    expect(allAssets().filter((a) => a.kind === 'proof').length).toBe(5)
+    expect(allAssets().filter((a) => a.kind === 'proof').length).toBe(7)
   })
   it('the masters the page seeds from are all under 800 KB on disk, but the page still serves renditions (next/image), never the master', () => {
     for (const id of Object.values(IMAGE_SLOTS)) expect(allAssets().find((a) => a.id === id)!.bytes).toBeLessThanOrEqual(800 * 1024)
@@ -32,6 +32,10 @@ describe('the asset manifest', () => {
 })
 
 describe('the slots', () => {
+  it('gives every image slot its own image — no repeats', () => {
+    const used = Object.values(IMAGE_SLOTS)
+    expect(new Set(used).size).toBe(used.length)
+  })
   it('seed without the project names: every declared image slot resolves and the source is the seed', async () => {
     delete process.env.NEXT_PUBLIC_SUPABASE_URL
     const c = await loadContent()

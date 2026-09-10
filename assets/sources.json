@@ -29,6 +29,16 @@
           "id": "photo.mudroom",
           "path": "/showcase/mudroom.jpg",
           "alt": "Fitted boot room with coat hooks and bench"
+        },
+        {
+          "id": "photo.walkin",
+          "path": "/showcase/walkin.jpg",
+          "alt": "White walk-in dressing room with open shelving and hanging rails"
+        },
+        {
+          "id": "photo.kitchen-media2",
+          "path": "/showcase/kitchen-media2.jpg",
+          "alt": "Fitted kitchen with an island and integrated media wall"
         }
       ]
     },
@@ -192,12 +202,37 @@
     },
     {
       "kind": "generated",
-      "source": "supplied by Mark, 10 Sep 2026 — a rendered kitchen (sage fronts, marble waterfall island); a visualisation, not a photograph of an install",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)",
       "items": [
         {
           "id": "render.kitchen-sage-island",
           "path": "/showcase/kitchen-sage-island.jpg",
           "alt": "Sage green handleless kitchen with a marble waterfall island and oak-lined drawers — a visualisation"
+        },
+        {
+          "id": "render.utility-navy-shaker",
+          "path": "/showcase/utility-navy-shaker.jpg",
+          "alt": "Navy shaker utility room with a quartz worktop, brass handles, and a washer and dryer under the counter — a visualisation"
+        },
+        {
+          "id": "render.bedroom-dark-marble-wardrobe",
+          "path": "/showcase/bedroom-dark-marble-wardrobe.jpg",
+          "alt": "Bedroom with a black marble-effect fitted wardrobe, dressing table and marble splashback against sage walls — a visualisation"
+        },
+        {
+          "id": "render.media-wall-walnut",
+          "path": "/showcase/media-wall-walnut.jpg",
+          "alt": "Dark walnut fitted media wall with a floating base, concealed storage and a recessed television — a visualisation"
+        },
+        {
+          "id": "render.office-green-walnut",
+          "path": "/showcase/office-green-walnut.jpg",
+          "alt": "Sage green fitted home office with walnut shelving and a white desk — a visualisation"
+        },
+        {
+          "id": "render.living-room-linen-media-wall",
+          "path": "/showcase/living-room-linen-media-wall.jpg",
+          "alt": "Linen-finish fitted media wall in a pale living room with open oak shelving — a visualisation"
         }
       ]
     }

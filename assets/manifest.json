@@ -62,6 +62,30 @@
       "source": "showcase/ — Mark's project photography (the folder registered 14 Aug 2026)"
     },
     {
+      "id": "photo.walkin",
+      "path": "/showcase/walkin.jpg",
+      "alt": "White walk-in dressing room with open shelving and hanging rails",
+      "kind": "proof",
+      "width": 1506,
+      "height": 2000,
+      "format": "jpeg",
+      "bytes": 284489,
+      "sha256": "042a0db6282401ceee689bc49f191dc232743e78bdfb254fac34e2464c04d105",
+      "source": "showcase/ — Mark's project photography (the folder registered 14 Aug 2026)"
+    },
+    {
+      "id": "photo.kitchen-media2",
+      "path": "/showcase/kitchen-media2.jpg",
+      "alt": "Fitted kitchen with an island and integrated media wall",
+      "kind": "proof",
+      "width": 2000,
+      "height": 1506,
+      "format": "jpeg",
+      "bytes": 273812,
+      "sha256": "806ede50b9ebdda20f4ed24f40ebd6f8c5a3330dbee4b4c7deb24cc1faa266c1",
+      "source": "showcase/ — Mark's project photography (the folder registered 14 Aug 2026)"
+    },
+    {
       "id": "swatch.bookmatch-oak",
       "path": "/showcase/finishes/bookmatch-oak.webp",
       "alt": "Bookmatch Oak decor",
@@ -407,7 +431,67 @@
       "format": "jpeg",
       "bytes": 498933,
       "sha256": "6f70618fc5b7489b140aadbebaa29ab7c0ffc4465418184d0018b02f0d2dc699",
-      "source": "supplied by Mark, 10 Sep 2026 — a rendered kitchen (sage fronts, marble waterfall island); a visualisation, not a photograph of an install"
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
+    },
+    {
+      "id": "render.utility-navy-shaker",
+      "path": "/showcase/utility-navy-shaker.jpg",
+      "alt": "Navy shaker utility room with a quartz worktop, brass handles, and a washer and dryer under the counter — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 448374,
+      "sha256": "3e24b05fd0b8a2f8c31d9c85debc3ca72dadc042a669d8aec3e8e0dde3498b3f",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
+    },
+    {
+      "id": "render.bedroom-dark-marble-wardrobe",
+      "path": "/showcase/bedroom-dark-marble-wardrobe.jpg",
+      "alt": "Bedroom with a black marble-effect fitted wardrobe, dressing table and marble splashback against sage walls — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 456985,
+      "sha256": "aaea084800035eca0909c1c34d4e013d8927e6f56c8f5b6fa89112ee50cdfaa6",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
+    },
+    {
+      "id": "render.media-wall-walnut",
+      "path": "/showcase/media-wall-walnut.jpg",
+      "alt": "Dark walnut fitted media wall with a floating base, concealed storage and a recessed television — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 290690,
+      "sha256": "748fc22f654a9b30f9321c776cfe188e975819399ad622d751130aed77193bcb",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
+    },
+    {
+      "id": "render.office-green-walnut",
+      "path": "/showcase/office-green-walnut.jpg",
+      "alt": "Sage green fitted home office with walnut shelving and a white desk — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 372566,
+      "sha256": "fbafd439afb1f965ba5bd78cf4a3bfc916f2945be76c9641bcfc710947718130",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
+    },
+    {
+      "id": "render.living-room-linen-media-wall",
+      "path": "/showcase/living-room-linen-media-wall.jpg",
+      "alt": "Linen-finish fitted media wall in a pale living room with open oak shelving — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 353037,
+      "sha256": "69981a8b17b378966296d7774e4f6bb425007f80c38f94d6687b65ff0705cc63",
+      "source": "supplied by Mark, 10 Sep 2026 — rendered rooms (visualisations, not photographs of installs)"
     }
   ]
 }
