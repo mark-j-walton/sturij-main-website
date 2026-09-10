@@ -396,6 +396,18 @@
       "bytes": 2639,
       "sha256": "d415a18aba571a04300861f3e8bbc66217264775cecf682719e0e8be8e691023",
       "source": "brand/ — the Sturij brand pack (the faceted hexagon mark and the wordmark; brand-library ids sturij.mark.hexagon and sturij.mark.wordmark)"
+    },
+    {
+      "id": "render.kitchen-sage-island",
+      "path": "/showcase/kitchen-sage-island.jpg",
+      "alt": "Sage green handleless kitchen with a marble waterfall island and oak-lined drawers — a visualisation",
+      "kind": "generated",
+      "width": 2000,
+      "height": 1500,
+      "format": "jpeg",
+      "bytes": 498933,
+      "sha256": "6f70618fc5b7489b140aadbebaa29ab7c0ffc4465418184d0018b02f0d2dc699",
+      "source": "supplied by Mark, 10 Sep 2026 — a rendered kitchen (sage fronts, marble waterfall island); a visualisation, not a photograph of an install"
     }
   ]
 }

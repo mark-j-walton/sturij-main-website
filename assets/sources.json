@@ -5,57 +5,200 @@
       "kind": "proof",
       "source": "showcase/ — Mark's project photography (the folder registered 14 Aug 2026)",
       "items": [
-        { "id": "photo.kitchen-bright", "path": "/showcase/kitchen-bright.jpg", "alt": "Bright handleless fitted kitchen with island" },
-        { "id": "photo.wardrobe-cream-straight", "path": "/showcase/wardrobe-cream-straight.jpg", "alt": "Fitted three-door wardrobe, straight elevation" },
-        { "id": "photo.media-wall-led", "path": "/showcase/media-wall-led.jpg", "alt": "LED-backlit fitted media wall with display shelving" },
-        { "id": "photo.wardrobe-open-shelves", "path": "/showcase/wardrobe-open-shelves.jpg", "alt": "Oak-lined wardrobe interior — rails and shelving" },
-        { "id": "photo.mudroom", "path": "/showcase/mudroom.jpg", "alt": "Fitted boot room with coat hooks and bench" }
+        {
+          "id": "photo.kitchen-bright",
+          "path": "/showcase/kitchen-bright.jpg",
+          "alt": "Bright handleless fitted kitchen with island"
+        },
+        {
+          "id": "photo.wardrobe-cream-straight",
+          "path": "/showcase/wardrobe-cream-straight.jpg",
+          "alt": "Fitted three-door wardrobe, straight elevation"
+        },
+        {
+          "id": "photo.media-wall-led",
+          "path": "/showcase/media-wall-led.jpg",
+          "alt": "LED-backlit fitted media wall with display shelving"
+        },
+        {
+          "id": "photo.wardrobe-open-shelves",
+          "path": "/showcase/wardrobe-open-shelves.jpg",
+          "alt": "Oak-lined wardrobe interior — rails and shelving"
+        },
+        {
+          "id": "photo.mudroom",
+          "path": "/showcase/mudroom.jpg",
+          "alt": "Fitted boot room with coat hooks and bench"
+        }
       ]
     },
     {
       "kind": "swatch",
       "source": "showcase/finishes — Egger decor swatches (the Studio's boards.json set)",
       "items": [
-        { "id": "swatch.bookmatch-oak", "path": "/showcase/finishes/bookmatch-oak.webp", "alt": "Bookmatch Oak decor" },
-        { "id": "swatch.natural-dimaro-walnut", "path": "/showcase/finishes/natural-dimaro-walnut.webp", "alt": "Natural Dimaro Walnut decor" },
-        { "id": "swatch.sand-casella-oak", "path": "/showcase/finishes/sand-casella-oak.webp", "alt": "Sand Casella Oak decor" },
-        { "id": "swatch.taormina-travertine", "path": "/showcase/finishes/taormina-travertine.webp", "alt": "Taormina Travertine decor" },
-        { "id": "swatch.champagne-crossed-metal", "path": "/showcase/finishes/champagne-crossed-metal.webp", "alt": "Champagne Crossed Metal decor" },
-        { "id": "swatch.pebble-grey-calcit-stone", "path": "/showcase/finishes/pebble-grey-calcit-stone.webp", "alt": "Pebble Grey Calcit Stone decor" },
-        { "id": "swatch.sand-beige-calcit-stone", "path": "/showcase/finishes/sand-beige-calcit-stone.webp", "alt": "Sand Beige Calcit Stone decor" },
-        { "id": "swatch.reed-green", "path": "/showcase/finishes/reed-green.webp", "alt": "Reed Green decor" },
-        { "id": "swatch.cassis", "path": "/showcase/finishes/cassis.webp", "alt": "Cassis decor" },
-        { "id": "swatch.caramel-beige", "path": "/showcase/finishes/caramel-beige.webp", "alt": "Caramel Beige decor" },
-        { "id": "swatch.soft-beige", "path": "/showcase/finishes/soft-beige.webp", "alt": "Soft Beige decor" }
+        {
+          "id": "swatch.bookmatch-oak",
+          "path": "/showcase/finishes/bookmatch-oak.webp",
+          "alt": "Bookmatch Oak decor"
+        },
+        {
+          "id": "swatch.natural-dimaro-walnut",
+          "path": "/showcase/finishes/natural-dimaro-walnut.webp",
+          "alt": "Natural Dimaro Walnut decor"
+        },
+        {
+          "id": "swatch.sand-casella-oak",
+          "path": "/showcase/finishes/sand-casella-oak.webp",
+          "alt": "Sand Casella Oak decor"
+        },
+        {
+          "id": "swatch.taormina-travertine",
+          "path": "/showcase/finishes/taormina-travertine.webp",
+          "alt": "Taormina Travertine decor"
+        },
+        {
+          "id": "swatch.champagne-crossed-metal",
+          "path": "/showcase/finishes/champagne-crossed-metal.webp",
+          "alt": "Champagne Crossed Metal decor"
+        },
+        {
+          "id": "swatch.pebble-grey-calcit-stone",
+          "path": "/showcase/finishes/pebble-grey-calcit-stone.webp",
+          "alt": "Pebble Grey Calcit Stone decor"
+        },
+        {
+          "id": "swatch.sand-beige-calcit-stone",
+          "path": "/showcase/finishes/sand-beige-calcit-stone.webp",
+          "alt": "Sand Beige Calcit Stone decor"
+        },
+        {
+          "id": "swatch.reed-green",
+          "path": "/showcase/finishes/reed-green.webp",
+          "alt": "Reed Green decor"
+        },
+        {
+          "id": "swatch.cassis",
+          "path": "/showcase/finishes/cassis.webp",
+          "alt": "Cassis decor"
+        },
+        {
+          "id": "swatch.caramel-beige",
+          "path": "/showcase/finishes/caramel-beige.webp",
+          "alt": "Caramel Beige decor"
+        },
+        {
+          "id": "swatch.soft-beige",
+          "path": "/showcase/finishes/soft-beige.webp",
+          "alt": "Soft Beige decor"
+        }
       ]
     },
     {
       "kind": "metal",
       "source": "showcase/metals — the handoff's fifteen procedural handle-finish swatches (design_handoff_sturij_public_site/assets/handles)",
       "items": [
-        { "id": "metal.antique-brass", "path": "/showcase/metals/antique-brass.jpg", "alt": "Antique brass finish" },
-        { "id": "metal.antique-pewter", "path": "/showcase/metals/antique-pewter.jpg", "alt": "Antique pewter finish" },
-        { "id": "metal.bronze", "path": "/showcase/metals/bronze.jpg", "alt": "Bronze finish" },
-        { "id": "metal.brushed-anodised", "path": "/showcase/metals/brushed-anodised.jpg", "alt": "Brushed anodised finish" },
-        { "id": "metal.brushed-nickel", "path": "/showcase/metals/brushed-nickel.jpg", "alt": "Brushed nickel finish" },
-        { "id": "metal.brushed-satin-brass", "path": "/showcase/metals/brushed-satin-brass.jpg", "alt": "Brushed satin brass finish" },
-        { "id": "metal.burnished-brass", "path": "/showcase/metals/burnished-brass.jpg", "alt": "Burnished brass finish" },
-        { "id": "metal.chrome-plated", "path": "/showcase/metals/chrome-plated.jpg", "alt": "Chrome plated finish" },
-        { "id": "metal.dark-brushed-brass", "path": "/showcase/metals/dark-brushed-brass.jpg", "alt": "Dark brushed brass finish" },
-        { "id": "metal.dull-nickel", "path": "/showcase/metals/dull-nickel.jpg", "alt": "Dull nickel finish" },
-        { "id": "metal.matt-black", "path": "/showcase/metals/matt-black.jpg", "alt": "Matt black finish" },
-        { "id": "metal.oil-rubbed-bronze", "path": "/showcase/metals/oil-rubbed-bronze.jpg", "alt": "Oil rubbed bronze finish" },
-        { "id": "metal.polished-brass", "path": "/showcase/metals/polished-brass.jpg", "alt": "Polished brass finish" },
-        { "id": "metal.polished-nickel", "path": "/showcase/metals/polished-nickel.jpg", "alt": "Polished nickel finish" },
-        { "id": "metal.satin-brass", "path": "/showcase/metals/satin-brass.jpg", "alt": "Satin brass finish" }
+        {
+          "id": "metal.antique-brass",
+          "path": "/showcase/metals/antique-brass.jpg",
+          "alt": "Antique brass finish"
+        },
+        {
+          "id": "metal.antique-pewter",
+          "path": "/showcase/metals/antique-pewter.jpg",
+          "alt": "Antique pewter finish"
+        },
+        {
+          "id": "metal.bronze",
+          "path": "/showcase/metals/bronze.jpg",
+          "alt": "Bronze finish"
+        },
+        {
+          "id": "metal.brushed-anodised",
+          "path": "/showcase/metals/brushed-anodised.jpg",
+          "alt": "Brushed anodised finish"
+        },
+        {
+          "id": "metal.brushed-nickel",
+          "path": "/showcase/metals/brushed-nickel.jpg",
+          "alt": "Brushed nickel finish"
+        },
+        {
+          "id": "metal.brushed-satin-brass",
+          "path": "/showcase/metals/brushed-satin-brass.jpg",
+          "alt": "Brushed satin brass finish"
+        },
+        {
+          "id": "metal.burnished-brass",
+          "path": "/showcase/metals/burnished-brass.jpg",
+          "alt": "Burnished brass finish"
+        },
+        {
+          "id": "metal.chrome-plated",
+          "path": "/showcase/metals/chrome-plated.jpg",
+          "alt": "Chrome plated finish"
+        },
+        {
+          "id": "metal.dark-brushed-brass",
+          "path": "/showcase/metals/dark-brushed-brass.jpg",
+          "alt": "Dark brushed brass finish"
+        },
+        {
+          "id": "metal.dull-nickel",
+          "path": "/showcase/metals/dull-nickel.jpg",
+          "alt": "Dull nickel finish"
+        },
+        {
+          "id": "metal.matt-black",
+          "path": "/showcase/metals/matt-black.jpg",
+          "alt": "Matt black finish"
+        },
+        {
+          "id": "metal.oil-rubbed-bronze",
+          "path": "/showcase/metals/oil-rubbed-bronze.jpg",
+          "alt": "Oil rubbed bronze finish"
+        },
+        {
+          "id": "metal.polished-brass",
+          "path": "/showcase/metals/polished-brass.jpg",
+          "alt": "Polished brass finish"
+        },
+        {
+          "id": "metal.polished-nickel",
+          "path": "/showcase/metals/polished-nickel.jpg",
+          "alt": "Polished nickel finish"
+        },
+        {
+          "id": "metal.satin-brass",
+          "path": "/showcase/metals/satin-brass.jpg",
+          "alt": "Satin brass finish"
+        }
       ]
     },
     {
       "kind": "brand",
       "source": "brand/ — the Sturij brand pack (the faceted hexagon mark and the wordmark; brand-library ids sturij.mark.hexagon and sturij.mark.wordmark)",
       "items": [
-        { "id": "brand.mark-white", "path": "/brand/sturij-mark-white.png", "alt": "Sturij mark" },
-        { "id": "brand.logo-white", "path": "/brand/sturij-logo-white.png", "alt": "Sturij" }
+        {
+          "id": "brand.mark-white",
+          "path": "/brand/sturij-mark-white.png",
+          "alt": "Sturij mark"
+        },
+        {
+          "id": "brand.logo-white",
+          "path": "/brand/sturij-logo-white.png",
+          "alt": "Sturij"
+        }
+      ]
+    },
+    {
+      "kind": "generated",
+      "source": "supplied by Mark, 10 Sep 2026 — a rendered kitchen (sage fronts, marble waterfall island); a visualisation, not a photograph of an install",
+      "items": [
+        {
+          "id": "render.kitchen-sage-island",
+          "path": "/showcase/kitchen-sage-island.jpg",
+          "alt": "Sage green handleless kitchen with a marble waterfall island and oak-lined drawers — a visualisation"
+        }
       ]
     }
   ]

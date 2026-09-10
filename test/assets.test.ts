@@ -22,8 +22,8 @@ describe('the asset manifest', () => {
       expect({ w: meta.width, h: meta.height, bytes: bytes.length, sha: createHash('sha256').update(bytes).digest('hex') }).toEqual({ w: a.width, h: a.height, bytes: a.bytes, sha: a.sha256 })
     }
   })
-  it('classifies every asset — proof photography carries the claim, generated never appears here', () => {
-    for (const a of allAssets()) expect(['proof', 'swatch', 'metal', 'brand']).toContain(a.kind)
+  it('classifies every asset — proof photography carries the claim; a generated image is declared as such', () => {
+    for (const a of allAssets()) expect(['proof', 'generated', 'swatch', 'metal', 'brand']).toContain(a.kind)
     expect(allAssets().filter((a) => a.kind === 'proof').length).toBe(5)
   })
   it('the masters the page seeds from are all under 800 KB on disk, but the page still serves renditions (next/image), never the master', () => {
