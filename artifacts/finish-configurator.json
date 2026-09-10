@@ -1,0 +1,78 @@
+{
+  "id": "finish-configurator",
+  "kind": "block",
+  "description": "The finish configurator: doors + carcass + handle onto the brand roundel, then the room finishes and the room picker, then a visualisation generated server-side and labelled — one component (components/configurator/*) with one state (ConfiguratorProvider), no second implementation anywhere on the site; the Studio's future pairing artifact (c290e215, 2dd904c6).",
+  "tags": ["configurator", "finishes", "swatch", "visualise", "studio", "range"],
+  "contentTypes": ["material", "handle", "room", "render", "swatch"],
+  "consumers": ["sturij-public", "feature-split", "stack-cards", "enquiry-form", "sturij-studio (when the Studio lands on the core)"],
+  "properties": [
+    { "name": "gallery", "values": ["woods", "materials", "colours", "handles"], "default": "woods", "description": "The active gallery — the full marquee; the other three are minis" },
+    { "name": "facet", "values": ["doors", "carcass", "handle"], "default": "doors", "description": "The roundel facet a tile is set for" },
+    { "name": "limit", "values": ["4"], "default": "4", "description": "Swatches per session (README §5)" },
+    { "name": "visualise", "values": ["server", "off"], "default": "server", "description": "Where the render happens: the site's /api/render with the vault's key; never a visitor's key" }
+  ],
+  "disabled": [
+    { "property": "visitor-key", "reason": "the handoff asked the visitor for a Gemini key held in localStorage; removed — the render is server-side with the key from the vault by name" }
+  ],
+  "states": ["idle", "hover", "active", "loading", "locked"],
+  "recipes": ["marquee", "tab-slide", "swap", "lift", "blur-reveal", "reveal-on-scroll"],
+  "behaviours": [
+    { "recipe": "marquee", "trigger": "enter" },
+    { "recipe": "tab-slide", "trigger": "state" },
+    { "recipe": "swap", "trigger": "state" },
+    { "recipe": "lift", "trigger": "hover" },
+    { "recipe": "blur-reveal", "trigger": "state" },
+    { "recipe": "reveal-on-scroll", "trigger": "enter" }
+  ],
+  "capabilities": ["render:server", "download:zip", "download:png", "storage:local(sturij_visuals — the visitor's own visuals, no personal data)"],
+  "tokens": {
+    "background": "band-hi",
+    "backgroundEnd": "band-mid",
+    "ink": "ink-on-dark",
+    "intro": "custom.ink.on-dark-72",
+    "kicker": "accent",
+    "claret": "claret-on-dark",
+    "roundelEmpty": "custom.glass.pill",
+    "tabGlass": "custom.glass.pill",
+    "tabLine": "custom.glass.pill-line",
+    "tabInk": "custom.ink.on-dark-58",
+    "thumb": "accent-hi",
+    "thumbEnd": "accent-lo",
+    "thumbInk": "label-ink",
+    "thumbShadow": "shadow.thumb",
+    "tileRadius": "radius.tile",
+    "tileShadow": "shadow.tile",
+    "tileLabel": "custom.veil.label",
+    "tileInk": "tile-ink",
+    "miniRadius": "radius.mini",
+    "miniLine": "custom.glass.mini-line",
+    "modalVeil": "custom.veil.modal",
+    "modalSurface": "ground",
+    "modalRadius": "radius.modal",
+    "modalShadow": "shadow.modal",
+    "option": "surface",
+    "optionLine": "custom.line.ink-20",
+    "button": "structure-hi",
+    "buttonEnd": "structure-lo",
+    "buttonLine": "custom.line.gold-40",
+    "buttonRadius": "radius.button",
+    "stage": "stage-hi",
+    "stageEnd": "stage-lo",
+    "sheen": "custom.sheen.grain",
+    "label": "type.label",
+    "title": "type.title",
+    "visBadge": "custom.veil.chip"
+  },
+  "size": { "w": 12, "h": 10 },
+  "reference": {
+    "surface": "design_handoff_sturij_public_site",
+    "where": "PublicPage.dc.html §3 Egger band, §4 swatch modal, §5 swatch lifecycle, §6 visualise flow",
+    "delta": [
+      "one component and one state: the galleries, the roundel, the modal, the 3D viewer, the rails, the room builder, the room picker, the generation and the lightbox read one context",
+      "gallery tiles keyed by registry decor code where sturij-assets holds one; the rest carry a misfit line (data/galleries.json)",
+      "the render moved server-side (/api/render): the visitor's key prompt and localStorage key removed; the vault's GEMINI_API_KEY by name; rate limits; one retry; distinct errors",
+      "every generated image labelled VISUALISATION in place, in the lightbox and on the download strip",
+      "every value a token of the sturij-public instance"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "statement-band",
+  "kind": "block",
+  "description": "The statement block: a gold mono kicker and the quoted statement in the statement face at its lightest weight, translucent on the warm-grey band.",
+  "tags": ["statement", "band", "manifesto"],
+  "contentTypes": ["copy"],
+  "consumers": ["sturij-public"],
+  "properties": [],
+  "disabled": [],
+  "states": ["idle"],
+  "recipes": ["reveal-on-scroll"],
+  "behaviours": [{ "recipe": "reveal-on-scroll", "trigger": "enter" }],
+  "capabilities": [],
+  "tokens": { "background": "band-mid", "backgroundEnd": "band-lo", "ink": "custom.ink.on-dark-55", "face": "type.statement", "kicker": "accent" },
+  "size": { "w": 12, "h": 3 }
+}

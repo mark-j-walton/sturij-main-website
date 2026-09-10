@@ -1,0 +1,59 @@
+{
+  "note": "The finish configurator's four galleries (handoff README §3) as data. A tile is keyed by its registry decor code where sturij-assets holds one (read 10 Sep 2026: materials.decor_code, supplier Egger); otherwise by the handoff's name, with a misfit line for the registry — never a guess. Swatch images resolve by asset id in assets/manifest.json (the repository's showcase folder, 745e6fe7); a tile with no image carries the handoff's gradient as its own colour data.",
+  "galleries": [
+    {
+      "id": "woods",
+      "label": "Woods",
+      "tiles": [
+        { "id": "H1316", "name": "Bookmatch Oak", "asset": "swatch.bookmatch-oak", "registry": { "supplier": "Egger", "code": "H1316" } },
+        { "id": "natural-dimaro-walnut", "name": "Natural Dimaro Walnut", "asset": "swatch.natural-dimaro-walnut", "registry": { "supplier": "Egger", "code": null, "misfit": "in the registry (Egger, published) without a decor code" } },
+        { "id": "H1388", "name": "Sand Casella Oak", "asset": "swatch.sand-casella-oak", "registry": { "supplier": "Egger", "code": "H1388" } }
+      ]
+    },
+    {
+      "id": "materials",
+      "label": "Materials",
+      "tiles": [
+        { "id": "F037", "name": "Taormina Travertine", "asset": "swatch.taormina-travertine", "registry": { "supplier": "Egger", "code": "F037" } },
+        { "id": "F579", "name": "Champagne Crossed Metal", "asset": "swatch.champagne-crossed-metal", "registry": { "supplier": "Egger", "code": "F579" } },
+        { "id": "F662", "name": "Pebble Grey Calcit Stone", "asset": "swatch.pebble-grey-calcit-stone", "registry": { "supplier": "Egger", "code": "F662" }, "handoff": "drawn as a gradient in the prototype; the repository holds the swatch image, so the image is used" },
+        { "id": "F661", "name": "Sand Beige Calcit Stone", "asset": "swatch.sand-beige-calcit-stone", "registry": { "supplier": "Egger", "code": "F661" }, "handoff": "drawn as a gradient in the prototype; the repository holds the swatch image, so the image is used" }
+      ]
+    },
+    {
+      "id": "colours",
+      "label": "Colours",
+      "tiles": [
+        { "id": "U604", "name": "Reed Green", "asset": "swatch.reed-green", "registry": { "supplier": "Egger", "code": "U604" } },
+        { "id": "cassis", "name": "Cassis", "asset": "swatch.cassis", "registry": { "supplier": "Egger", "code": null, "misfit": "in the registry (Egger, published) without a decor code" }, "handoff": "drawn as a gradient in the prototype; the repository holds the swatch image, so the image is used" },
+        { "id": "caramel-beige", "name": "Caramel Beige", "asset": "swatch.caramel-beige", "registry": { "supplier": "Egger", "code": null, "misfit": "in the registry (Egger, published) without a decor code" }, "handoff": "drawn as a gradient in the prototype; the repository holds the swatch image, so the image is used" },
+        { "id": "soft-beige", "name": "Soft Beige", "asset": "swatch.soft-beige", "registry": { "supplier": "Egger", "code": null, "misfit": "in the registry (Egger, published) without a decor code" }, "handoff": "drawn as a gradient in the prototype; the repository holds the swatch image, so the image is used" },
+        { "id": "alpine-white", "name": "Alpine White", "gradient": ["#f2f0ea", "#e2ded4"], "registry": { "supplier": null, "code": null, "misfit": "not in the registry; the handoff's gradient stands until a registry record and swatch exist" } },
+        { "id": "graphite-grey", "name": "Graphite Grey", "gradient": ["#45474b", "#313338"], "registry": { "supplier": null, "code": null, "misfit": "not in the registry; the handoff's gradient stands until a registry record and swatch exist" } }
+      ]
+    },
+    {
+      "id": "handles",
+      "label": "Handles",
+      "kind": "handle",
+      "tiles": [
+        { "id": "antique-brass", "name": "Antique Brass", "asset": "metal.antique-brass" },
+        { "id": "antique-pewter", "name": "Antique Pewter", "asset": "metal.antique-pewter" },
+        { "id": "bronze", "name": "Bronze", "asset": "metal.bronze" },
+        { "id": "brushed-anodised", "name": "Brushed Anodised", "asset": "metal.brushed-anodised" },
+        { "id": "brushed-nickel", "name": "Brushed Nickel", "asset": "metal.brushed-nickel" },
+        { "id": "brushed-satin-brass", "name": "Brushed Satin Brass", "asset": "metal.brushed-satin-brass" },
+        { "id": "burnished-brass", "name": "Burnished Brass", "asset": "metal.burnished-brass" },
+        { "id": "chrome-plated", "name": "Chrome Plated", "asset": "metal.chrome-plated" },
+        { "id": "dark-brushed-brass", "name": "Dark Brushed Brass", "asset": "metal.dark-brushed-brass" },
+        { "id": "dull-nickel", "name": "Dull Nickel", "asset": "metal.dull-nickel" },
+        { "id": "matt-black", "name": "Matt Black", "asset": "metal.matt-black" },
+        { "id": "oil-rubbed-bronze", "name": "Oil Rubbed Bronze", "asset": "metal.oil-rubbed-bronze" },
+        { "id": "polished-brass", "name": "Polished Brass", "asset": "metal.polished-brass" },
+        { "id": "polished-nickel", "name": "Polished Nickel", "asset": "metal.polished-nickel" },
+        { "id": "satin-brass", "name": "Satin Brass", "asset": "metal.satin-brass" }
+      ],
+      "misfit": "the fifteen handle finishes are the handoff's procedural metal swatches, not registry products; the registry holds Häfele handles by product and the site's showcase/handles folder holds their images — the handle picker takes those by code when the registry names a finish family per product"
+    }
+  ]
+}

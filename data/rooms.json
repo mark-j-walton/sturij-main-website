@@ -1,0 +1,39 @@
+{
+  "note": "The visualise flow's rooms and room finishes (handoff README §6). A room maps to the image slot it renders into and to a stacking card; the finish categories are the prototype's colour data — paints are not registry records yet (misfit: the Studio's Farrow & Ball list is the source when the registry names paints).",
+  "rooms": [
+    { "id": "bedroom", "label": "Bedroom", "card": 0, "imageSlot": "stack.1.image" },
+    { "id": "living-room", "label": "Living room", "card": 1, "imageSlot": "stack.2.image" },
+    { "id": "kitchen", "label": "Kitchen", "card": 2, "imageSlot": "stack.3.image" },
+    { "id": "hallway", "label": "Hallway", "card": 3, "imageSlot": "stack.4.image" }
+  ],
+  "categories": {
+    "ceiling": [
+      { "id": "pure-white", "name": "Pure White", "gradient": ["#f7f6f2", "#ecebe5"] },
+      { "id": "warm-white", "name": "Warm White", "gradient": ["#f3efe6", "#e7e2d5"] },
+      { "id": "soft-ivory", "name": "Soft Ivory", "gradient": ["#efe9da", "#e2dbc9"] },
+      { "id": "pale-grey", "name": "Pale Grey", "gradient": ["#dcdad4", "#cfccc4"] }
+    ],
+    "walls": [
+      { "id": "warm-white", "name": "Warm White", "gradient": ["#f3efe6", "#e7e2d5"] },
+      { "id": "sage-green", "name": "Sage Green", "gradient": ["#8a9484", "#747f6e"] },
+      { "id": "dusty-blue", "name": "Dusty Blue", "gradient": ["#7d8fa0", "#68798a"] },
+      { "id": "clay", "name": "Clay", "gradient": ["#b3907a", "#9c7a64"] },
+      { "id": "blush", "name": "Blush", "gradient": ["#d9bcb0", "#c6a698"] },
+      { "id": "charcoal", "name": "Charcoal", "gradient": ["#3c3b39", "#2b2a28"] }
+    ],
+    "skirting": [
+      { "id": "white-satin", "name": "White Satin", "gradient": ["#f2f0ea", "#e2ded4"] },
+      { "id": "oak", "name": "Oak", "asset": "swatch.bookmatch-oak" },
+      { "id": "walnut", "name": "Walnut", "asset": "swatch.natural-dimaro-walnut" },
+      { "id": "charcoal", "name": "Charcoal", "gradient": ["#45474b", "#313338"] }
+    ],
+    "flooring": [
+      { "id": "oak-plank", "name": "Oak Plank", "asset": "swatch.bookmatch-oak" },
+      { "id": "walnut-plank", "name": "Walnut Plank", "asset": "swatch.natural-dimaro-walnut" },
+      { "id": "casella-oak", "name": "Casella Oak", "asset": "swatch.sand-casella-oak" },
+      { "id": "travertine", "name": "Travertine", "asset": "swatch.taormina-travertine" },
+      { "id": "wool-carpet", "name": "Wool Carpet", "gradient": ["#b9b2a4", "#a29b8d"] }
+    ]
+  },
+  "misfit": "ceiling, wall and skirting colours are the prototype's own gradients, not registry paints; the Studio holds the Farrow & Ball range with codes and is the source when the registry carries paints"
+}

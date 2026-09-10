@@ -1,0 +1,19 @@
+{
+  "id": "feature-split",
+  "kind": "block",
+  "description": "Two alternating image/text features on linen (wardrobes, media walls); the wardrobes feature carries the swatch rail and is the visualise target with the room picker.",
+  "tags": ["feature", "image-text", "wardrobes", "media"],
+  "contentTypes": ["image", "copy", "render"],
+  "consumers": ["sturij-public"],
+  "properties": [
+    { "name": "order", "values": ["image-first", "text-first"], "default": "image-first", "description": "Which side the image sits" },
+    { "name": "rail", "values": ["on", "off"], "default": "off", "description": "Whether the swatch rail and the visualise flow attach" }
+  ],
+  "disabled": [],
+  "states": ["idle", "loading", "active"],
+  "recipes": ["slide-from-rail", "blur-reveal"],
+  "behaviours": [{ "recipe": "slide-from-rail", "trigger": "enter" }, { "recipe": "blur-reveal", "trigger": "state" }],
+  "capabilities": [],
+  "tokens": { "background": "tint-linen", "title": "type.title", "body": "type.body", "muted": "ink-muted", "link": "claret", "radius": "radius.card", "shadow": "shadow.card", "well": "custom.feat.imgwell", "kicker": "type.label" },
+  "size": { "w": 12, "h": 6 }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "enquiry-form",
+  "kind": "block",
+  "description": "\"Book a design visit\": the 2-col form on the warm-grey band — posts through /api/enquiry to sturij-web's enquiry function (the customer table); the visitor's swatch and visualised room travel as data; a failed post shows the phone and the mailbox, never a silent loss.",
+  "tags": ["enquiry", "form", "door", "contact"],
+  "contentTypes": ["copy", "enquiry"],
+  "consumers": ["sturij-public"],
+  "properties": [{ "name": "fields", "values": ["name", "email", "postcode", "phone", "room", "notes"], "default": "name", "description": "The fields the function's contract takes; email is required by the function and was added to the handoff's form" }],
+  "disabled": [],
+  "states": ["idle", "active", "loading", "disabled-with-reason"],
+  "recipes": ["reveal-on-scroll"],
+  "behaviours": [{ "recipe": "reveal-on-scroll", "trigger": "enter" }],
+  "capabilities": ["enquiry:post"],
+  "tokens": { "background": "band-mid", "backgroundEnd": "band-lo", "input": "input", "inputLine": "input-line", "label": "accent", "ink": "ink-on-dark", "placeholder": "custom.ink.on-dark-40", "submit": "structure-hi", "submitEnd": "structure-lo", "submitLine": "custom.line.gold-50", "radius": "radius.input", "buttonRadius": "radius.button" },
+  "size": { "w": 12, "h": 8 }
+}

@@ -1,0 +1,52 @@
+{
+  "page": "home",
+  "slug": "/",
+  "design": "sturij-public",
+  "sizes": ["1440", "1024", "390"],
+  "grid": { "unit": 8, "columns": 12 },
+  "note": "The public page's declaration (page-platform S5): a scroll page, so its regions are the sections in order and its slots are the content each takes — copy slots by id (content/copy.seed.json) and image slots by id (lib/slots.ts IMAGE_SLOTS). It holds no design value and no content. A test checks the components render exactly these slots.",
+  "regions": [
+    { "id": "veil", "artifact": "page-veil", "slots": [{ "id": "veil.logo", "type": "brand-mark", "consumer": "page-veil", "asset": "brand.logo-white" }] },
+    { "id": "nav", "artifact": "nav-bar", "slots": [{ "id": "nav.logo", "type": "brand-mark", "consumer": "nav-bar", "asset": "brand.logo-white" }] },
+    { "id": "hero", "artifact": "panel-stack", "slots": [
+      { "id": "hero.image", "type": "image", "consumer": "panel-stack" }, { "id": "hero.kicker", "type": "copy", "consumer": "panel-stack" }, { "id": "hero.title", "type": "copy", "consumer": "panel-stack" }, { "id": "hero.body", "type": "copy", "consumer": "panel-stack" },
+      { "id": "panel.wardrobes.image", "type": "image", "consumer": "panel-stack" }, { "id": "panel.wardrobes.kicker", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.wardrobes.title", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.wardrobes.body", "type": "copy", "consumer": "panel-stack" },
+      { "id": "panel.media.image", "type": "image", "consumer": "panel-stack" }, { "id": "panel.media.kicker", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.media.title", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.media.body", "type": "copy", "consumer": "panel-stack" },
+      { "id": "panel.finishes.image", "type": "image", "consumer": "panel-stack" }, { "id": "panel.finishes.kicker", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.finishes.title", "type": "copy", "consumer": "panel-stack" }, { "id": "panel.finishes.body", "type": "copy", "consumer": "panel-stack" }
+    ] },
+    { "id": "range", "artifact": "finish-configurator", "slots": [
+      { "id": "range.kicker", "type": "copy", "consumer": "finish-configurator" }, { "id": "range.title", "type": "copy", "consumer": "finish-configurator" }, { "id": "range.body", "type": "copy", "consumer": "finish-configurator" },
+      { "id": "range.galleries", "type": "material", "consumer": "finish-configurator", "data": "data/galleries.json" }, { "id": "range.handles", "type": "handle", "consumer": "finish-configurator", "data": "data/galleries.json" }, { "id": "range.rooms", "type": "room", "consumer": "finish-configurator", "data": "data/rooms.json" }
+    ] },
+    { "id": "features", "artifact": "feature-split", "slots": [
+      { "id": "feature.wardrobes.image", "type": "image", "consumer": "feature-split" }, { "id": "feature.wardrobes.kicker", "type": "copy", "consumer": "feature-split" }, { "id": "feature.wardrobes.title", "type": "copy", "consumer": "feature-split" }, { "id": "feature.wardrobes.body", "type": "copy", "consumer": "feature-split" }, { "id": "feature.wardrobes.cta", "type": "copy", "consumer": "feature-split" },
+      { "id": "feature.media.image", "type": "image", "consumer": "feature-split" }, { "id": "feature.media.kicker", "type": "copy", "consumer": "feature-split" }, { "id": "feature.media.title", "type": "copy", "consumer": "feature-split" }, { "id": "feature.media.body", "type": "copy", "consumer": "feature-split" }, { "id": "feature.media.cta", "type": "copy", "consumer": "feature-split" }
+    ] },
+    { "id": "statement", "artifact": "statement-band", "slots": [{ "id": "statement.kicker", "type": "copy", "consumer": "statement-band" }, { "id": "statement.text", "type": "copy", "consumer": "statement-band" }] },
+    { "id": "stack", "artifact": "stack-cards", "slots": [
+      { "id": "stack.kicker", "type": "copy", "consumer": "stack-cards" }, { "id": "stack.title", "type": "copy", "consumer": "stack-cards" },
+      { "id": "stack.1.image", "type": "image", "consumer": "stack-cards" }, { "id": "stack.1.kicker", "type": "copy", "consumer": "stack-cards" }, { "id": "stack.1.title", "type": "copy", "consumer": "stack-cards" },
+      { "id": "stack.2.image", "type": "image", "consumer": "stack-cards" }, { "id": "stack.2.kicker", "type": "copy", "consumer": "stack-cards" }, { "id": "stack.2.title", "type": "copy", "consumer": "stack-cards" },
+      { "id": "stack.3.image", "type": "image", "consumer": "stack-cards" }, { "id": "stack.3.kicker", "type": "copy", "consumer": "stack-cards" }, { "id": "stack.3.title", "type": "copy", "consumer": "stack-cards" },
+      { "id": "stack.4.image", "type": "image", "consumer": "stack-cards" }, { "id": "stack.4.kicker", "type": "copy", "consumer": "stack-cards" }, { "id": "stack.4.title", "type": "copy", "consumer": "stack-cards" }
+    ] },
+    { "id": "montage", "artifact": "montage", "slots": [{ "id": "montage.image", "type": "image", "consumer": "montage" }, { "id": "montage.label", "type": "copy", "consumer": "montage" }] },
+    { "id": "make", "artifact": "manifesto", "slots": [
+      { "id": "manifesto.kicker", "type": "copy", "consumer": "manifesto" }, { "id": "manifesto.title", "type": "copy", "consumer": "manifesto" },
+      { "id": "manifesto.1.title", "type": "copy", "consumer": "manifesto" }, { "id": "manifesto.1.body", "type": "copy", "consumer": "manifesto" },
+      { "id": "manifesto.2.title", "type": "copy", "consumer": "manifesto" }, { "id": "manifesto.2.body", "type": "copy", "consumer": "manifesto" },
+      { "id": "manifesto.3.title", "type": "copy", "consumer": "manifesto" }, { "id": "manifesto.3.body", "type": "copy", "consumer": "manifesto" }
+    ] },
+    { "id": "enquire", "artifact": "enquiry-form", "slots": [
+      { "id": "enquiry.kicker", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.title", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.body", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.submit", "type": "copy", "consumer": "enquiry-form" }, { "id": "enquiry.note", "type": "copy", "consumer": "enquiry-form" },
+      { "id": "enquiry.post", "type": "enquiry", "consumer": "enquiry-form", "door": "/api/enquiry -> sturij-web enquiry function" }
+    ] },
+    { "id": "footer", "artifact": "site-footer", "slots": [{ "id": "footer.logo", "type": "brand-mark", "consumer": "site-footer", "asset": "brand.logo-white" }, { "id": "footer.tagline", "type": "copy", "consumer": "site-footer" }, { "id": "footer.copyright", "type": "copy", "consumer": "site-footer" }, { "id": "footer.admin", "type": "copy", "consumer": "admin-editing", "note": "the control, not content" }] }
+  ],
+  "locks": [],
+  "artifacts": [{ "artifact": "swatch-rail" }, { "artifact": "admin-editing" }],
+  "variations": {
+    "1024": { "nav.links": "all", "features.grid": "2col", "stack.rail": "column" },
+    "390": { "nav.links": "phone", "features.grid": "1col", "stack.rail": "row", "galleries.minis": "1col", "form.grid": "1col" }
+  }
+}

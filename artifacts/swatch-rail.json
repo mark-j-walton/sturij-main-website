@@ -1,0 +1,16 @@
+{
+  "id": "swatch-rail",
+  "kind": "control",
+  "description": "A rail of the session's completed swatches as 72px hexagon thumbnails; hidden until a swatch exists. The feature rail opens the room builder; the stacking rail generates into the pinned card.",
+  "tags": ["swatch", "rail", "visualise"],
+  "contentTypes": ["swatch"],
+  "consumers": ["feature-split", "stack-cards"],
+  "properties": [{ "name": "variant", "values": ["feature", "stack"], "default": "feature", "description": "Which flow a click starts" }, { "name": "direction", "values": ["column", "row"], "default": "column", "description": "Vertical beside the image; horizontal on the phone" }],
+  "disabled": [],
+  "states": ["idle", "hover"],
+  "recipes": ["lift"],
+  "behaviours": [{ "recipe": "lift", "trigger": "hover" }],
+  "capabilities": [],
+  "tokens": { "shadow": "shadow.rail-thumb" },
+  "size": { "w": 1, "h": 4 }
+}

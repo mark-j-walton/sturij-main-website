@@ -1,0 +1,38 @@
+{
+  "name": "sturij-public-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "sturij.com — the public site, rebuilt on the page platform's rules (sturij-public DESIGN.md instance). Studio and Canvas pages are served unchanged from public/.",
+  "engines": {
+    "node": "22.x || 24.x"
+  },
+  "scripts": {
+    "dev": "node scripts/build-tokens.mjs && next dev",
+    "build": "node scripts/build-tokens.mjs && next build",
+    "start": "next start",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "check:keys": "node scripts/check-keys.mjs",
+    "check:tokens": "node scripts/check-tokens.mjs",
+    "check:bundle": "node scripts/check-bundle.mjs",
+    "quality": "node scripts/quality.mjs",
+    "verify": "npm run check:keys && npm run typecheck && npm test && npm run check:tokens",
+    "build:tokens": "node scripts/build-tokens.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.116.0",
+    "next": "^16.3.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "playwright": "^1.52.0",
+    "sharp": "^0.35.4",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.0"
+  }
+}
