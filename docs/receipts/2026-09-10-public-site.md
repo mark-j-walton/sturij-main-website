@@ -1,10 +1,12 @@
 # Receipts — the public site rebuilt · 10 September 2026
 
 Session `claude-code-session-2026-09-10-public-site` · Claude Code, model claude-fable-5-1 · the brief run as written.
-Draft PR: https://github.com/mark-j-walton/sturij-main-website/pull/33 · branch `claude/public-site-2026-09-10` · nothing merged, nothing on production.
+PR #33 https://github.com/mark-j-walton/sturij-main-website/pull/33 — **MERGED by Mark 2026-09-10 15:15:55 UTC (merge 1b92340) and DEPLOYED to production** (dpl_3HDHgDkoEocfyVZP7D9n8HzVnSaK, READY; studio.sturij.com and sturij-main-website.vercel.app serve the new site). The follow-up hero-image commit is PR #34 https://github.com/mark-j-walton/sturij-main-website/pull/34 (draft).
 Preview (the branch alias Vercel assigns): https://sturij-main-website-git-claude-public-s-e97e69-sturij-team-2026.vercel.app — the project's Vercel Authentication is ON for every non-custom domain, so the preview opens for Mark signed in to Vercel and refuses an anonymous probe; a Protection Bypass for Automation secret in the vault is what lets a session run Lighthouse against it.
 
 MERGED ≠ DEPLOYED ≠ EXERCISED — each line below says which.
+
+**Production as probed after the merge (10 Sep, ~16:30 UTC):** studio.sturij.com 200 with the new page (74 copy-slot markers, 13 image-slot markers, content source `seed`); /studio and /canvas 200; the project still carries only `MOTION_PLUS_API`, so the admin sign-in reports itself not switched on and `/api/render` cannot render until the four names arrive. Lighthouse on the live domain: mobile 76 · 100 · 100 · 100 (LCP 3.2 s, CLS 0, TBT 500 ms); desktop 98 · 100 · 100 · 100 (LCP 0.8 s). The scripted quality run against the live domain was refused by the session's permission classifier; the read-only audit above is what ran. The apex sturij.com is unchanged (still not answering over TLS); the cutover remains a separate act.
 
 ## What shipped (on the branch)
 
@@ -57,6 +59,8 @@ Mobile LCP is the hero photograph; 89 % of it is render delay on the throttled C
 ## Content changes after the run
 
 - 10 Sep, Mark's word: the hero image (`hero.image`) now reads `render.kitchen-sage-island` (2000×1500, 487 KB), supplied by Mark and declared `generated` in the manifest — a visualisation, not a photograph of an install; kitchen-bright stays on the kitchen card and the montage.
+
+- 10 Sep, Mark's word ("replace images like we did on the home page … crop in a little … no duplication"): five more renders declared `generated` and every image slot given its own image — hero: sage kitchen render; wardrobes panel: dark marble-effect bedroom render; media panel: walnut media wall render; finishes panel: green office render; wardrobes feature: the cream wardrobe photograph; media feature: linen living-room render; cards: walk-in photograph, LED media wall photograph, bright kitchen photograph, navy utility render (the card's caption now reads "Utility & boot rooms"); montage: the kitchen-with-island photograph. The smaller frames (two features, four cards) crop in by a per-slot zoom held as data (`IMAGE_SLOT_CROPS`), which applies to uploads too. PR #34 merged 16:36 UTC; the set is PR #35.
 
 ## Findings for the record
 

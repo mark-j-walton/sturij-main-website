@@ -17,6 +17,8 @@ export interface ImageRef {
   /** True when the value comes from site_image_slots rather than the seed. */
   override?: boolean
   version?: number
+  /** The slot's declared crop (IMAGE_SLOT_CROPS), when it has one. */
+  crop?: SlotCrop
 }
 
 export interface SiteContent {
@@ -29,16 +31,27 @@ export interface SiteContent {
 /** Every image slot on the page and the asset it seeds from (the page's declaration; a test checks the components use exactly these). */
 export const IMAGE_SLOTS: Record<string, string> = {
   'hero.image': 'render.kitchen-sage-island',
-  'panel.wardrobes.image': 'photo.wardrobe-cream-straight',
-  'panel.media.image': 'photo.media-wall-led',
-  'panel.finishes.image': 'photo.wardrobe-open-shelves',
+  'panel.wardrobes.image': 'render.bedroom-dark-marble-wardrobe',
+  'panel.media.image': 'render.media-wall-walnut',
+  'panel.finishes.image': 'render.office-green-walnut',
   'feature.wardrobes.image': 'photo.wardrobe-cream-straight',
-  'feature.media.image': 'photo.media-wall-led',
-  'stack.1.image': 'photo.wardrobe-cream-straight',
+  'feature.media.image': 'render.living-room-linen-media-wall',
+  'stack.1.image': 'photo.walkin',
   'stack.2.image': 'photo.media-wall-led',
   'stack.3.image': 'photo.kitchen-bright',
-  'stack.4.image': 'photo.mudroom',
-  'montage.image': 'photo.kitchen-bright',
+  'stack.4.image': 'render.utility-navy-shaker',
+  'montage.image': 'photo.kitchen-media2',
+}
+
+/** A crop per slot, as data: the smaller frames (the feature images, the four cards) crop in so a whole-room image does not read small. Applied to whatever image the slot holds, an upload included. */
+export interface SlotCrop { zoom: number; x: string; y: string }
+export const IMAGE_SLOT_CROPS: Record<string, SlotCrop> = {
+  'feature.wardrobes.image': { zoom: 1.15, x: '50%', y: '45%' },
+  'feature.media.image': { zoom: 1.12, x: '50%', y: '55%' },
+  'stack.1.image': { zoom: 1.18, x: '50%', y: '55%' },
+  'stack.2.image': { zoom: 1.18, x: '50%', y: '50%' },
+  'stack.3.image': { zoom: 1.18, x: '50%', y: '55%' },
+  'stack.4.image': { zoom: 1.2, x: '50%', y: '58%' },
 }
 
 export const COPY_SLOT_IDS: string[] = Object.keys(seed.slots)
@@ -63,7 +76,7 @@ function seedContent(): SiteContent {
   const images: Record<string, ImageRef> = {}
   for (const [slot, assetId] of Object.entries(IMAGE_SLOTS)) {
     const a = asset(assetId)
-    images[slot] = { src: a.path, width: a.width, height: a.height, alt: a.alt, asset: a.id }
+    images[slot] = { src: a.path, width: a.width, height: a.height, alt: a.alt, asset: a.id, ...(IMAGE_SLOT_CROPS[slot] ? { crop: IMAGE_SLOT_CROPS[slot] } : {}) }
   }
   return { copy, images, copyVersions: {}, source: 'seed' }
 }
@@ -102,7 +115,7 @@ export const loadContent = cache(async (): Promise<SiteContent> => {
   for (const row of imageRows ?? []) {
     const seeded = content.images[row.slot_id]
     if (!seeded) continue
-    content.images[row.slot_id] = { src: bucketPublicUrl(cfg.url, row.asset_path), width: row.width, height: row.height, alt: row.alt ?? seeded.alt, override: true, version: row.version }
+    content.images[row.slot_id] = { src: bucketPublicUrl(cfg.url, row.asset_path), width: row.width, height: row.height, alt: row.alt ?? seeded.alt, override: true, version: row.version, ...(seeded.crop ? { crop: seeded.crop } : {}) }
   }
   content.source = 'seed+db'
   return content

@@ -17,6 +17,7 @@ export function SlotImage({ id, image, priority, sizes, className, fill }: { id:
     'data-image-slot': id,
     'data-native': `${image.width}×${image.height}`,
     ...(image.override ? { 'data-override': image.version ?? 'db' } : {}),
+    ...(image.crop ? { style: { objectPosition: `${image.crop.x} ${image.crop.y}`, transform: `scale(${image.crop.zoom})`, transformOrigin: `${image.crop.x} ${image.crop.y}` }, 'data-crop': `${image.crop.zoom}@${image.crop.x},${image.crop.y}` } : {}),
   }
   if (fill) return <Image {...common} fill />
   return <Image {...common} width={image.width} height={image.height} />
