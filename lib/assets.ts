@@ -2,7 +2,7 @@
 // scripts/measure-assets.mjs and committed; a reference to an id the manifest lacks is A_UNDECLARED.
 import manifest from '@/assets/manifest.json'
 
-export type AssetKind = 'proof' | 'swatch' | 'metal' | 'brand'
+export type AssetKind = 'proof' | 'generated' | 'swatch' | 'metal' | 'brand'
 
 export interface Asset {
   id: string

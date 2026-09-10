@@ -54,6 +54,10 @@ Mobile LCP is the hero photograph; 89 % of it is render delay on the throttled C
 - A stale local server on the quality port served an old build once (Windows `kill()` leaves the child alive); the quality script now refuses a busy port and kills the process tree.
 - The nav CTA's gold read 4.25:1 on charcoal; it now uses accent-hi (5.4:1). Gallery tiles had `role=button` on `<figure>`; they now carry a real button. The swatch rails carry `role=group`.
 
+## Content changes after the run
+
+- 10 Sep, Mark's word: the hero image (`hero.image`) now reads `render.kitchen-sage-island` (2000×1500, 487 KB), supplied by Mark and declared `generated` in the manifest — a visualisation, not a photograph of an install; kitchen-bright stays on the kitchen card and the montage.
+
 ## Findings for the record
 
 - The enquiry function requires an email; the handoff's form had none — added. The function has no column for the composed swatch; it travels in the message text, labelled. The function is unchanged.

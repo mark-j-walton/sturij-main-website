@@ -28,7 +28,7 @@ export interface SiteContent {
 
 /** Every image slot on the page and the asset it seeds from (the page's declaration; a test checks the components use exactly these). */
 export const IMAGE_SLOTS: Record<string, string> = {
-  'hero.image': 'photo.kitchen-bright',
+  'hero.image': 'render.kitchen-sage-island',
   'panel.wardrobes.image': 'photo.wardrobe-cream-straight',
   'panel.media.image': 'photo.media-wall-led',
   'panel.finishes.image': 'photo.wardrobe-open-shelves',
