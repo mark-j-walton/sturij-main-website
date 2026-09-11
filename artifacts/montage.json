@@ -1,16 +1,70 @@
 {
   "id": "montage",
   "kind": "block",
-  "description": "The scroll-built montage: a 9×6 mosaic on sand whose tiles reveal their slice of the photograph in a random order proportional to progress through a 240vh track; empty tiles carry random charcoal tints and a faint roundel emboss.",
-  "tags": ["montage", "mosaic", "scroll"],
-  "contentTypes": ["image", "copy"],
-  "consumers": ["sturij-public"],
-  "properties": [{ "name": "grid", "values": ["9x6"], "default": "9x6", "description": "Columns × rows" }],
+  "description": "The scroll-built montage: a mosaic on sand whose tiles reveal their slice of the image underneath in a random order proportional to progress through a 240vh track; empty tiles carry random charcoal tints and a faint roundel emboss. Underneath is one of the montage's three image slots — the suppliers' montages — chosen at random per visit; when the visitor scrolls back above the montage and every tile has closed, the next takes its place unseen, so the next reveal shows a different image (Mark, 11 Sep 2026). Six rows; the columns follow the image's aspect so the tiles stay square.",
+  "tags": [
+    "montage",
+    "mosaic",
+    "scroll"
+  ],
+  "contentTypes": [
+    "image",
+    "copy"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [
+    {
+      "name": "grid",
+      "values": [
+        "12x6",
+        "8x6"
+      ],
+      "default": "12x6",
+      "description": "Six rows; columns follow the image aspect so the tiles stay square (a 2:1 montage → 12×6; a 7:5 photograph → 8×6)"
+    },
+    {
+      "name": "images",
+      "values": [
+        "1",
+        "3"
+      ],
+      "default": "3",
+      "description": "The image slots underneath: a random one per visit, the next when the visitor returns to the top with the tiles closed"
+    }
+  ],
   "disabled": [],
-  "states": ["idle", "active"],
-  "recipes": ["montage-reveal", "reveal-on-scroll"],
-  "behaviours": [{ "recipe": "montage-reveal", "trigger": "scroll" }, { "recipe": "reveal-on-scroll", "trigger": "enter" }],
+  "states": [
+    "idle",
+    "active"
+  ],
+  "recipes": [
+    "montage-reveal",
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "montage-reveal",
+      "trigger": "scroll"
+    },
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
   "capabilities": [],
-  "tokens": { "background": "tint-sand", "surface": "surface", "tint": "custom.tint.mosaic", "radius": "radius.mosaic", "shadow": "shadow.card-deep", "label": "claret", "labelFace": "type.label" },
-  "size": { "w": 12, "h": 12 }
+  "tokens": {
+    "background": "tint-sand",
+    "surface": "surface",
+    "tint": "custom.tint.mosaic",
+    "radius": "radius.mosaic",
+    "shadow": "shadow.card-deep",
+    "label": "claret",
+    "labelFace": "type.label"
+  },
+  "size": {
+    "w": 12,
+    "h": 12
+  }
 }

@@ -13,7 +13,7 @@ const COLOUR = /(#[0-9a-fA-F]{3,8}\b|\brgba?\((?!var\()|\bhsla?\(|\boklch\(|\bco
 const FONT = /font-family\s*:(?!\s*var\()/
 const VAR = /var\((--[a-z0-9-]+)/g
 // Variables the page sets at runtime (per element), not tokens.
-const RUNTIME_VARS = new Set(['--nav', '--ov', '--sc', '--i', '--sh', '--bh', '--tint', '--pos', '--cols', '--rows', '--img', '--font-fraunces', '--font-inter', '--font-plex-mono'])
+const RUNTIME_VARS = new Set(['--nav', '--ov', '--sc', '--i', '--sh', '--bh', '--tint', '--pos', '--cols', '--rows', '--img', '--ar', '--font-fraunces', '--font-inter', '--font-plex-mono'])
 
 const files = []
 const walk = (dir) => {

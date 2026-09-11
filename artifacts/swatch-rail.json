@@ -1,7 +1,7 @@
 {
   "id": "swatch-rail",
   "kind": "control",
-  "description": "Four slots beside every remixable image block, always shown: an empty slot is the example roundel, very transparent, marking where the visitor's swatch (made in the range, max four) will land; a made swatch replaces its placeholder in position. Tapping a swatch remixes the block's own image into the block's own room type — the wardrobes feature a bedroom, the media feature a living room, each card its room — true to the scheme, the rest of the room complementing it (the render route's remix mode). One dismissible call-out per block; dismissing one dismisses all and shows the reminder toast.",
+  "description": "Four slots, always shown: an empty slot is the example roundel, very transparent, marking where the visitor's swatch (made in the range, max four) will land; a made swatch replaces its placeholder in position. Beside every remixable image block, tapping a swatch remixes the block's own image into the block's own room type — the wardrobes feature a bedroom, the media feature a living room, each card its room — true to the scheme, the rest of the room complementing it (the render route's remix mode). Beside the roundel in the range, the rail is where the session's swatches collect; tapping one there goes to the first image that can be remixed. One dismissible call-out per block; dismissing one dismisses all and shows the reminder toast.",
   "tags": [
     "swatch",
     "rail",
@@ -12,6 +12,7 @@
     "brand-mark"
   ],
   "consumers": [
+    "finish-configurator",
     "feature-split",
     "stack-cards"
   ],
@@ -20,10 +21,11 @@
       "name": "variant",
       "values": [
         "block",
-        "stack"
+        "stack",
+        "range"
       ],
       "default": "block",
-      "description": "block: remix the named target in its fixed room; stack: remix the card currently pinned"
+      "description": "block: remix the named target in its fixed room; stack: remix the card currently pinned; range: the roundel's own rail, where the swatches collect"
     },
     {
       "name": "slots",
@@ -32,7 +34,7 @@
         "2"
       ],
       "default": "4",
-      "description": "Four slots in a column beside a feature image; two and two flanking the stacking cards"
+      "description": "Four slots in a column beside a feature image and beside the roundel; two and two flanking the stacking cards"
     },
     {
       "name": "direction",
@@ -74,20 +76,22 @@
     "tipShadow": "shadow.card",
     "toast": "structure-hi",
     "toastLine": "custom.line.gold-40",
-    "label": "type.label"
+    "label": "type.label",
+    "placeholderOnDark": "custom.placeholder.opacity-on-dark"
   },
   "size": {
     "w": 1,
     "h": 4
   },
   "reference": {
-    "surface": "Mark's mocks, 11 Sep 2026 (two screenshots: the stacking card with hexagons flanking it; the features with four hexagons beside each image) and his example roundel PNG",
+    "surface": "Mark's mocks, 11 Sep 2026 (three screenshots: the stacking card with hexagons flanking it; the features with four hexagons beside each image; the range with four hexagons beside the roundel) and his example roundel PNG",
     "where": "the swatch rails of PR #33",
     "delta": [
       "rails always visible with four faint placeholders instead of hidden until a swatch exists",
       "each rail bound to its block's room; the feature rail no longer asks a room",
       "the remix mode: the block's own image travels as the base, the furniture re-finished, the rest complementing",
-      "the call-out and the toast"
+      "the call-out and the toast",
+      "the range rail beside the roundel: the same four placeholders, the call-out under the last"
     ]
   }
 }

@@ -40,7 +40,9 @@ export const IMAGE_SLOTS: Record<string, string> = {
   'stack.2.image': 'photo.media-wall-led',
   'stack.3.image': 'photo.kitchen-bright',
   'stack.4.image': 'render.utility-navy-shaker',
-  'montage.image': 'photo.kitchen-media2',
+  'montage.image': 'partner.handles',
+  'montage.image-2': 'partner.boards',
+  'montage.image-3': 'partner.hardware',
 }
 
 /** A crop per slot, as data: the smaller frames (the feature images, the four cards) crop in so a whole-room image does not read small. Applied to whatever image the slot holds, an upload included. */

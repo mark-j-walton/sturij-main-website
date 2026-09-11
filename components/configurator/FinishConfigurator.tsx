@@ -1,5 +1,5 @@
 'use client'
-// §3–§5 The finish configurator: the roundel with its three facets, the sliding tab, the four galleries
+// §3–§5 The finish configurator: the roundel with its three facets and the rail where the session's swatches collect, the sliding tab, the four galleries
 // (one full marquee, three minis), the swatch modal with the CSS-3D viewer, the swatch lifecycle
 // (four per session, the download pack built in-browser). One artifact — artifacts/finish-configurator.json.
 import Image, { getImageProps } from 'next/image'
@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, 
 import { GALLERIES, HANDLE_GALLERY_INDEX, type Tile } from '@/lib/galleries'
 import { blobBytes, drawRoundel, makeZip, saveBlob, slug, tileBackground, type Picks } from './canvas'
 import { MAX_SWATCHES, useConfigurator } from './ConfiguratorProvider'
+import { SwatchRail } from './SwatchRail'
 import { Viewer3D } from './Viewer3D'
 
 type FacetSlot = keyof Picks
@@ -141,12 +142,16 @@ export function FinishConfigurator({ lead }: { lead: ReactNode }) {
       <div className="eb-lead">
         <div className="eb-txt">{lead}</div>
         <div className="eb-side reveal">
-          <div className="roundel" id="roundel" role="img" aria-label={complete ? `Your swatch: ${picks.doors!.name} doors, ${picks.carcass!.name} carcass, ${picks.handle!.name} handles` : 'Your finish selection — empty'}>
-            <div className="hex">
-              <div className="fc f-doors" style={facetStyle(picks.doors)} />
-              <div className="fc f-carcass" style={facetStyle(picks.carcass)} />
-              <div className="fc f-handle" style={facetStyle(picks.handle)} />
+          <div className="eb-round">
+            <div className="roundel" id="roundel" role="img" aria-label={complete ? `Your swatch: ${picks.doors!.name} doors, ${picks.carcass!.name} carcass, ${picks.handle!.name} handles` : 'Your finish selection — empty'}>
+              <div className="hex">
+                <div className="fc f-doors" style={facetStyle(picks.doors)} />
+                <div className="fc f-carcass" style={facetStyle(picks.carcass)} />
+                <div className="fc f-handle" style={facetStyle(picks.handle)} />
+              </div>
             </div>
+            {/* the session's four swatches collect beside the roundel — placeholders until made (Mark's mock, 11 Sep 2026) */}
+            <SwatchRail variant="range" roomLabel="room" className="eb-rail" id="swrail-range" tip tipAt="last" />
           </div>
           {complete && (
             <div className="dlwrap">
