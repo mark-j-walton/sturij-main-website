@@ -6,6 +6,7 @@ import sharp from 'sharp'
 import { describe, expect, it } from 'vitest'
 import { allAssets } from '@/lib/assets'
 import { IMAGE_SLOTS, loadContent } from '@/lib/slots'
+import { MONTAGE_ROWS, montageCols } from '@/components/Montage'
 import { GALLERIES, ROOMS, registryMisfits } from '@/lib/galleries'
 import { LEGACY_PAGES } from '@/next.config'
 
@@ -23,7 +24,7 @@ describe('the asset manifest', () => {
     }
   })
   it('classifies every asset — proof photography carries the claim; a generated image is declared as such', () => {
-    for (const a of allAssets()) expect(['proof', 'generated', 'swatch', 'metal', 'brand']).toContain(a.kind)
+    for (const a of allAssets()) expect(['proof', 'generated', 'swatch', 'metal', 'brand', 'partner']).toContain(a.kind)
     expect(allAssets().filter((a) => a.kind === 'proof').length).toBe(7)
   })
   it('the masters the page seeds from are all under 800 KB on disk, but the page still serves renditions (next/image), never the master', () => {
@@ -68,5 +69,23 @@ describe('the legacy pages the Studio and Canvas depend on', () => {
     expect(JSON.parse(readFileSync('vercel.json', 'utf8')).framework).toBe('nextjs')
     expect(existsSync('public/index.html')).toBe(false)
     expect(existsSync('legacy/index-2026-08-18.html')).toBe(true)
+  })
+})
+
+describe('the montage underneath the tiles', () => {
+  it("rotates three of the suppliers' montages — each its own asset, 2:1, under the size limit", () => {
+    const ids = ['montage.image', 'montage.image-2', 'montage.image-3'].map((s) => IMAGE_SLOTS[s]!)
+    expect(new Set(ids).size).toBe(3)
+    for (const id of ids) {
+      const a = allAssets().find((x) => x.id === id)!
+      expect(a.kind).toBe('partner')
+      expect(a.width / a.height).toBeCloseTo(2, 2)
+      expect(a.bytes).toBeLessThanOrEqual(800 * 1024)
+    }
+  })
+  it('keeps the tiles square: six rows, the columns from the image aspect', () => {
+    expect(MONTAGE_ROWS).toBe(6)
+    expect(montageCols({ width: 2400, height: 1200 })).toBe(12)
+    expect(montageCols({ width: 2000, height: 1500 })).toBe(8)
   })
 })

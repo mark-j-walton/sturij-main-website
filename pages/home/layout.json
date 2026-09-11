@@ -320,6 +320,16 @@
           "consumer": "montage"
         },
         {
+          "id": "montage.image-2",
+          "type": "image",
+          "consumer": "montage"
+        },
+        {
+          "id": "montage.image-3",
+          "type": "image",
+          "consumer": "montage"
+        },
+        {
           "id": "montage.label",
           "type": "copy",
           "consumer": "montage"

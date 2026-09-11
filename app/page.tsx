@@ -59,7 +59,7 @@ export default async function Page() {
           <StackCards kicker={c('stack.kicker')} title={c('stack.title')} cards={[1, 2, 3, 4].map((n) => ({ kicker: c(`stack.${n}.kicker`), title: c(`stack.${n}.title`), imageSlot: `stack.${n}.image`, image: img(`stack.${n}.image`) }))} />
         </div>
 
-        <Montage label={c('montage.label')} image={img('montage.image')} imageSlot="montage.image" />
+        <Montage label={c('montage.label')} images={['montage.image', 'montage.image-2', 'montage.image-3'].map((id) => ({ slot: id, image: img(id) }))} />
 
         <Manifesto kicker={c('manifesto.kicker')} title={c('manifesto.title')} steps={[1, 2, 3].map((n) => ({ no: `0${n}`, title: c(`manifesto.${n}.title`), body: c(`manifesto.${n}.body`) }))} />
 

@@ -1,5 +1,5 @@
 {
-  "note": "The assets the page references, by id (page-platform S1). The files live in this repository's public folder — the showcase directory the record names as the image store (745e6fe7); nothing is embedded in a page. scripts/measure-assets.mjs reads each file and writes assets/manifest.json with its dimensions, bytes and sha256; the test recomputes them. kind: proof = a photograph of a real install (carries the claim); swatch = a decor swatch; metal = a procedural handle-finish swatch; brand = a brand element.",
+  "note": "The assets the page references, by id (page-platform S1). The files live in this repository's public folder — the showcase directory the record names as the image store (745e6fe7); nothing is embedded in a page. scripts/measure-assets.mjs reads each file and writes assets/manifest.json with its dimensions, bytes and sha256; the test recomputes them. kind: proof = a photograph of a real install (carries the claim); swatch = a decor swatch; metal = a procedural handle-finish swatch; brand = a brand element; partner = a supplier's own imagery (the brands the furniture is built with).",
   "groups": [
     {
       "kind": "proof",
@@ -39,6 +39,27 @@
           "id": "photo.kitchen-media2",
           "path": "/showcase/kitchen-media2.jpg",
           "alt": "Fitted kitchen with an island and integrated media wall"
+        }
+      ]
+    },
+    {
+      "kind": "partner",
+      "source": "showcase/ — the suppliers' own montages, from Mark's blum.zip (11 Sep 2026), resized to 2400 wide for the montage underneath the tiles",
+      "items": [
+        {
+          "id": "partner.handles",
+          "path": "/showcase/montage-handles.jpg",
+          "alt": "Hendel & Hendel handles — bars, knobs, cup pulls and edge pulls in brass, bronze, black and nickel"
+        },
+        {
+          "id": "partner.boards",
+          "path": "/showcase/montage-boards.jpg",
+          "alt": "Egger and Cleaf decors — stone, oak, walnut, linen and textured boards"
+        },
+        {
+          "id": "partner.hardware",
+          "path": "/showcase/montage-hardware.jpg",
+          "alt": "Blum hinges, lift systems and drawer runners"
         }
       ]
     },

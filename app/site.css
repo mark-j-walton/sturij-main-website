@@ -71,6 +71,15 @@ button { font: inherit; }
 .dlnote { font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--custom-ink-on-dark-55); }
 .newsw { min-height: 40px; padding: 0 18px; font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); background: none; border: 1px solid var(--custom-line-gold-50); border-radius: var(--radius-pill); cursor: pointer; }
 .newsw:hover { background: var(--custom-fill-gold-15); }
+/* the range's own rail: the four placeholders beside the roundel, where the session's swatches collect */
+.eb-round { display: flex; align-items: center; gap: clamp(14px, 2vw, 26px); }
+.eb-rail { display: flex; flex-direction: column; gap: 12px; }
+.eb-rail .swslot-wrap, .eb-rail .swslot.empty, .eb-rail .swthumb { width: 64px; height: 64px; }
+.eb-rail .swslot.empty { opacity: var(--custom-placeholder-opacity-on-dark); }
+.eb-rail .swslot.empty:hover, .eb-rail .swslot.empty:focus-visible { opacity: var(--custom-placeholder-opacity-hover); }
+.eb-rail .swtip { left: auto; right: 0; top: calc(100% + 12px); transform: none; width: 340px; } /* under the rail, clear of the tabs */
+.eb-rail .swtip::before { left: auto; right: 27px; top: -6px; transform: rotate(135deg); }
+@media (max-width: 760px) { .eb-rail .swtip { width: 280px; right: -8px; } .eb-rail .swtip::before { right: 35px; } }
 @media (max-width: 860px) { .eb-lead { grid-template-columns: 1fr; } .eb-side { margin-top: 10px; } }
 
 /* the sliding tab (recipe tab-slide) */
@@ -94,13 +103,15 @@ button { font: inherit; }
 .ribbon .tilehit:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .galmain .ribbon:hover { animation-play-state: paused; }
 @keyframes ribbonscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-.galmain { overflow: hidden; transition: opacity var(--motion-normal) var(--motion-ease-enter); }
+.galmain { overflow: hidden; max-width: 1180px; margin: 0 auto; -webkit-mask-image: var(--custom-mask-fade-x); mask-image: var(--custom-mask-fade-x); transition: opacity var(--motion-normal) var(--motion-ease-enter); } /* inside the page width; the edges fade, no hard cut */
 .galmain .ribbon { margin-top: clamp(20px, 3vw, 32px); }
 .galmain .ribbon figure { width: clamp(210px, 25vw, 310px); }
 .galminis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1180px; margin: 20px auto 0; padding: 0 clamp(18px, 5vw, 40px); }
 .gmini { position: relative; overflow: hidden; border-radius: var(--radius-mini); cursor: pointer; border: 1px solid var(--custom-glass-mini-line); background: var(--custom-glass-dark-25); padding: 0; text-align: left; }
-.gmini .ribbon { margin-top: 0; gap: 6px; opacity: .32; filter: saturate(.55) brightness(.75); transition: opacity .3s var(--motion-ease-enter), filter .3s var(--motion-ease-enter); }
-.gmini:hover .ribbon { opacity: .6; filter: saturate(.85) brightness(.95); }
+.gmini .ribbon { margin-top: 0; gap: 6px; opacity: .62; filter: saturate(.85) brightness(.94); transition: opacity .3s var(--motion-ease-enter), filter .3s var(--motion-ease-enter); } /* the swatch colours stay readable under a light frost */
+.gmini:hover .ribbon { opacity: .9; filter: none; }
+.gmini::before { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--custom-glass-mini-frost); backdrop-filter: blur(1px); -webkit-backdrop-filter: blur(1px); pointer-events: none; transition: opacity .3s var(--motion-ease-enter); }
+.gmini:hover::before { opacity: 0; }
 .gmini .ribbon figure { width: 104px; border-radius: 0; box-shadow: none; aspect-ratio: 16/11; }
 .gmini .ribbon figcaption { display: none; }
 .gmini .ml { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-on-dark); text-shadow: var(--shadow-mini-text); pointer-events: none; }
@@ -255,7 +266,7 @@ button { font: inherit; }
 .montage .track { height: 240vh; }
 .montage .stage { position: sticky; top: var(--nav); height: calc(100svh - var(--nav)); display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; padding: clamp(16px, 3vw, 30px) clamp(16px, 3vw, 30px) 64px; }
 .montage .mlabel { font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--claret); margin-bottom: 16px; }
-.montage .mosaic { position: relative; background: var(--surface); width: min(94vw, calc((100svh - var(--nav) - 150px) * 1.4)); aspect-ratio: 7/5; display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: repeat(var(--rows), 1fr); border-radius: var(--radius-mosaic); overflow: hidden; box-shadow: var(--shadow-card), var(--shadow-card-deep); }
+.montage .mosaic { position: relative; background: var(--surface); width: min(94vw, calc((100svh - var(--nav) - 150px) * var(--ar, 1.4))); aspect-ratio: var(--ar, 1.4); display: grid; grid-template-columns: repeat(var(--cols), 1fr); grid-template-rows: repeat(var(--rows), 1fr); border-radius: var(--radius-mosaic); overflow: hidden; box-shadow: var(--shadow-card), var(--shadow-card-deep); }
 .montage .mt { position: relative; overflow: hidden; background: rgba(var(--custom-tint-mosaic), var(--tint, .06)); transition: background .4s; }
 .montage .mt::after { content: ""; position: absolute; inset: 0; background-image: var(--img); background-size: calc(var(--cols) * 100%) calc(var(--rows) * 100%); background-position: var(--pos); opacity: 0; transform: scale(1.14); transition: opacity .55s var(--motion-ease-enter), transform .55s var(--motion-ease-enter); }
 .montage .mt.on::after { opacity: 1; transform: none; }

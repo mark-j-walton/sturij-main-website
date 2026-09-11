@@ -86,6 +86,42 @@
       "source": "showcase/ — Mark's project photography (the folder registered 14 Aug 2026)"
     },
     {
+      "id": "partner.handles",
+      "path": "/showcase/montage-handles.jpg",
+      "alt": "Hendel & Hendel handles — bars, knobs, cup pulls and edge pulls in brass, bronze, black and nickel",
+      "kind": "partner",
+      "width": 2400,
+      "height": 1200,
+      "format": "jpeg",
+      "bytes": 216773,
+      "sha256": "45fb4f35a0041d54568adfed1f06ec12fd8845308f55c6a9e9c982d1b9a0b224",
+      "source": "showcase/ — the suppliers' own montages, from Mark's blum.zip (11 Sep 2026), resized to 2400 wide for the montage underneath the tiles"
+    },
+    {
+      "id": "partner.boards",
+      "path": "/showcase/montage-boards.jpg",
+      "alt": "Egger and Cleaf decors — stone, oak, walnut, linen and textured boards",
+      "kind": "partner",
+      "width": 2400,
+      "height": 1200,
+      "format": "jpeg",
+      "bytes": 567106,
+      "sha256": "f7d5afaf4ca4dddedebef6c92821cae5ba86edb7cf67180dc425cf0ed451e02d",
+      "source": "showcase/ — the suppliers' own montages, from Mark's blum.zip (11 Sep 2026), resized to 2400 wide for the montage underneath the tiles"
+    },
+    {
+      "id": "partner.hardware",
+      "path": "/showcase/montage-hardware.jpg",
+      "alt": "Blum hinges, lift systems and drawer runners",
+      "kind": "partner",
+      "width": 2400,
+      "height": 1200,
+      "format": "jpeg",
+      "bytes": 226993,
+      "sha256": "5a1842dd6e6cb1a3f77f756f9f7ea70f19d23d6911fe68b9330ff0192fd96dd7",
+      "source": "showcase/ — the suppliers' own montages, from Mark's blum.zip (11 Sep 2026), resized to 2400 wide for the montage underneath the tiles"
+    },
+    {
       "id": "swatch.bookmatch-oak",
       "path": "/showcase/finishes/bookmatch-oak.webp",
       "alt": "Bookmatch Oak decor",
