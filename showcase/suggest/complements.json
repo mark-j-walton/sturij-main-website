@@ -1,0 +1,325 @@
+{
+ "_meta": {
+  "note": "Provisional pairings in the shape of Egger decor recommendations and Farrow & Ball colour schemes. Replace entries with scraped supplier feeds as they land; keys are decor slugs / paint names.",
+  "version": 1
+ },
+ "bands": {
+  "Brown": [
+   "Beige",
+   "Green",
+   "White"
+  ],
+  "Beige": [
+   "Brown",
+   "Green",
+   "Grey"
+  ],
+  "Grey": [
+   "White",
+   "Black",
+   "Blue"
+  ],
+  "Black": [
+   "Grey",
+   "Beige",
+   "White"
+  ],
+  "White": [
+   "Grey",
+   "Brown",
+   "Black"
+  ],
+  "Blue": [
+   "Grey",
+   "White",
+   "Beige"
+  ],
+  "Green": [
+   "Brown",
+   "Beige",
+   "White"
+  ],
+  "Red": [
+   "Beige",
+   "Grey"
+  ],
+  "Not defined": [
+   "Beige",
+   "Grey",
+   "Brown"
+  ]
+ },
+ "boards": {
+  "alba-walnut": {
+   "unis": [
+    "soft-beige",
+    "reed-green"
+   ],
+   "woods": [
+    "sand-casella-oak"
+   ],
+   "paints": [
+    "Shaded White",
+    "Studio Green",
+    "Setting Plaster"
+   ]
+  },
+  "bookmatch-oak": {
+   "unis": [
+    "soft-beige"
+   ],
+   "woods": [
+    "brighton-chestnut"
+   ],
+   "paints": [
+    "School House White",
+    "De Nimes"
+   ]
+  },
+  "brighton-chestnut": {
+   "unis": [
+    "sand-beige-calcit-stone",
+    "soft-beige"
+   ],
+   "woods": [
+    "bookmatch-oak"
+   ],
+   "paints": [
+    "Slipper Satin",
+    "Green Smoke"
+   ]
+  },
+  "reed-green": {
+   "unis": [
+    "soft-beige"
+   ],
+   "woods": [
+    "sand-casella-oak",
+    "bookmatch-oak"
+   ],
+   "paints": [
+    "Lichen",
+    "James White",
+    "Off-Black"
+   ]
+  },
+  "soft-beige": {
+   "unis": [
+    "reed-green"
+   ],
+   "woods": [
+    "alba-walnut",
+    "sand-casella-oak"
+   ],
+   "paints": [
+    "Bone",
+    "Cornforth White",
+    "Railings"
+   ]
+  },
+  "sand-casella-oak": {
+   "unis": [
+    "soft-beige",
+    "reed-green"
+   ],
+   "woods": [
+    "alba-walnut"
+   ],
+   "paints": [
+    "Ammonite",
+    "Pigeon"
+   ]
+  },
+  "taormina-travertine": {
+   "unis": [
+    "sand-beige-calcit-stone"
+   ],
+   "woods": [
+    "sand-casella-oak"
+   ],
+   "paints": [
+    "Joa's White",
+    "Mouse's Back"
+   ]
+  },
+  "pebble-grey-calcit-stone": {
+   "unis": [
+    "black-ambiance-granite"
+   ],
+   "woods": [
+    "bookmatch-oak"
+   ],
+   "paints": [
+    "Purbeck Stone",
+    "Down Pipe"
+   ]
+  },
+  "sand-beige-calcit-stone": {
+   "unis": [
+    "taormina-travertine"
+   ],
+   "woods": [
+    "brighton-chestnut"
+   ],
+   "paints": [
+    "Stony Ground",
+    "Broccoli Brown"
+   ]
+  },
+  "black-ambiance-granite": {
+   "unis": [
+    "pebble-grey-calcit-stone"
+   ],
+   "woods": [
+    "alba-walnut"
+   ],
+   "paints": [
+    "Off-Black",
+    "Ammonite"
+   ]
+  },
+  "black-ambiance-marble": {
+   "unis": [
+    "pebble-grey-calcit-stone"
+   ],
+   "woods": [
+    "bookmatch-oak"
+   ],
+   "paints": [
+    "Railings",
+    "Wevet"
+   ]
+  },
+  "beige-ambiance-granite": {
+   "unis": [
+    "soft-beige"
+   ],
+   "woods": [
+    "sand-casella-oak"
+   ],
+   "paints": [
+    "Old White",
+    "Card Room Green"
+   ]
+  },
+  "brown-bolivar-wood": {
+   "unis": [
+    "soft-beige"
+   ],
+   "woods": [
+    "bookmatch-oak"
+   ],
+   "paints": [
+    "Clunch",
+    "Bancha"
+   ]
+  }
+ },
+ "paints": {
+  "De Nimes": {
+   "white": "Shaded White",
+   "trim": "Pigeon",
+   "accents": [
+    "Light Blue"
+   ]
+  },
+  "Green Smoke": {
+   "white": "Shaded White",
+   "trim": "Lichen",
+   "accents": [
+    "Stone Blue"
+   ]
+  },
+  "Railings": {
+   "white": "Blackened",
+   "trim": "Down Pipe",
+   "accents": [
+    "Hague Blue"
+   ]
+  },
+  "Down Pipe": {
+   "white": "Blackened",
+   "trim": "Plummett",
+   "accents": [
+    "Brassica"
+   ]
+  },
+  "Setting Plaster": {
+   "white": "Wimborne White",
+   "trim": "Dead Salmon",
+   "accents": [
+    "Sulking Room Pink"
+   ]
+  },
+  "Studio Green": {
+   "white": "Shadow White",
+   "trim": "Bancha",
+   "accents": [
+    "Breakfast Room Green"
+   ]
+  },
+  "Bancha": {
+   "white": "Shadow White",
+   "trim": "Studio Green",
+   "accents": [
+    "Yeabridge Green"
+   ]
+  },
+  "Cornforth White": {
+   "white": "Wevet",
+   "trim": "Purbeck Stone",
+   "accents": [
+    "Ammonite"
+   ]
+  },
+  "Ammonite": {
+   "white": "Wevet",
+   "trim": "Cornforth White",
+   "accents": [
+    "Purbeck Stone"
+   ]
+  },
+  "Pigeon": {
+   "white": "Shaded White",
+   "trim": "Blue Gray",
+   "accents": [
+    "De Nimes"
+   ]
+  },
+  "Lichen": {
+   "white": "Off-White",
+   "trim": "Card Room Green",
+   "accents": [
+    "Green Smoke"
+   ]
+  },
+  "Hague Blue": {
+   "white": "Blackened",
+   "trim": "Railings",
+   "accents": [
+    "De Nimes"
+   ]
+  },
+  "Stiffkey Blue": {
+   "white": "Ammonite",
+   "trim": "Down Pipe",
+   "accents": [
+    "De Nimes"
+   ]
+  },
+  "Sulking Room Pink": {
+   "white": "Wimborne White",
+   "trim": "Setting Plaster",
+   "accents": [
+    "Preference Red"
+   ]
+  },
+  "Mouse's Back": {
+   "white": "Off-White",
+   "trim": "Stony Ground",
+   "accents": [
+    "Broccoli Brown"
+   ]
+  }
+ }
+}

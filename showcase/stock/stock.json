@@ -1,0 +1,45 @@
+{
+  "note": "Reusable stock imagery for the studio — add entries here (name, code optional, img).",
+  "items": [
+    {
+      "code": "RM1",
+      "name": "Sturij Room One",
+      "img": "brand/saver-room-1.jpg"
+    },
+    {
+      "code": "RM2",
+      "name": "Sturij Room Two",
+      "img": "brand/saver-room-2.jpg"
+    },
+    {
+      "code": "RM3",
+      "name": "Sturij Room Three",
+      "img": "brand/saver-room-3.jpg"
+    },
+    {
+      "code": "WP1",
+      "name": "Feather Grass",
+      "img": "showcase/wallpaper/feather-grass.jpg"
+    },
+    {
+      "code": "WP2",
+      "name": "Bumble Bee",
+      "img": "showcase/wallpaper/bumble-bee.jpg"
+    },
+    {
+      "code": "WT1",
+      "name": "Taj Mahal Pearl",
+      "img": "showcase/worktops/Taj-Mahal-Pearl-close.jpg"
+    },
+    {
+      "code": "BD1",
+      "name": "Bookmatch Oak",
+      "img": "showcase/finishes/bookmatch-oak.webp"
+    },
+    {
+      "code": "BD2",
+      "name": "Estate Green",
+      "img": "showcase/finishes/estate-green.webp"
+    }
+  ]
+}

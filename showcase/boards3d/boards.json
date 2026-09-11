@@ -1,0 +1,1196 @@
+{
+  "note": "Temporary board registry — admin adds code, name, tone and range here until the database lands. Images live anywhere under showcase/. Add \"new\": true to flag a recent arrival: it gets a gold NEW badge wherever it is listed and is grouped under New in the 3D viewer. IDENTITY: `id` (texture-code) is the unique key — `code` alone collides across textures (B073 exists in six). Always resolve on id; treat a bare code as ambiguous.",
+  "boards": [
+    {
+      "code": "H1344",
+      "name": "Alba Walnut",
+      "range": "Egger",
+      "tone": "#6b4c33",
+      "img": "showcase/finishes/alba-walnut.webp",
+      "id": "alba-walnut"
+    },
+    {
+      "code": "B073",
+      "name": "Cheope B073",
+      "range": "Cleaf Espresso",
+      "tone": "#E4E4E2",
+      "img": "showcase/finishes/cleaf/cheope-b073-tile.webp",
+      "master": "showcase/finishes/cleaf/cheope-b073.jpg",
+      "id": "cheope-b073"
+    },
+    {
+      "code": "FB45",
+      "name": "Cheope FB45",
+      "range": "Cleaf",
+      "tone": "#D8D2C8",
+      "img": "showcase/finishes/cleaf/cheope-fb45-tile.webp",
+      "master": "showcase/finishes/cleaf/cheope-fb45.jpg",
+      "id": "cheope-fb45"
+    },
+    {
+      "code": "FB82",
+      "name": "Cheope FB82",
+      "range": "Cleaf",
+      "tone": "#8C8C8C",
+      "img": "showcase/finishes/cleaf/cheope-fb82-tile.webp",
+      "master": "showcase/finishes/cleaf/cheope-fb82.jpg",
+      "id": "cheope-fb82"
+    },
+    {
+      "code": "T236",
+      "name": "Fusion Blue Weave",
+      "range": "Cleaf Fusion",
+      "tone": "#9AA4AC",
+      "img": "showcase/finishes/cleaf/fusion-fa44-tile.webp",
+      "master": "showcase/finishes/cleaf/fusion-fa44.jpg",
+      "id": "fusion-blue-weave"
+    },
+    {
+      "code": "FD60",
+      "name": "Alpaca Linen",
+      "range": "Cleaf",
+      "tone": "#DDD6CE",
+      "new": true,
+      "img": "showcase/finishes/cleaf/alpaca-fd60-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fd60.jpg",
+      "id": "alpaca-linen"
+    },
+    {
+      "code": "UB25",
+      "name": "Primofiore Sage",
+      "range": "Cleaf",
+      "tone": "#8A9389",
+      "img": "showcase/finishes/cleaf/primofiore-ub25-tile.webp",
+      "master": "showcase/finishes/cleaf/primofiore-ub25.jpg",
+      "id": "primofiore-sage"
+    },
+    {
+      "code": "FB60",
+      "name": "Mosaico Tan",
+      "range": "Cleaf",
+      "tone": "#B0714A",
+      "img": "showcase/finishes/cleaf/mosaico-fb60-tile.webp",
+      "master": "showcase/finishes/cleaf/mosaico-fb60.jpg",
+      "id": "mosaico-tan"
+    },
+    {
+      "code": "U129",
+      "name": "Mosaico Black",
+      "range": "Cleaf",
+      "tone": "#141414",
+      "new": true,
+      "img": "showcase/finishes/cleaf/mosaico-u129-tile.webp",
+      "master": "showcase/finishes/cleaf/mosaico-u129.jpg",
+      "id": "mosaico-black"
+    },
+    {
+      "code": "FC43",
+      "name": "Alpaca FC43",
+      "range": "Cleaf Alpaca",
+      "tone": "#788888",
+      "img": "showcase/finishes/cleaf/alpaca-fc43-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fc43-master.jpg",
+      "id": "alpaca-fc43"
+    },
+    {
+      "code": "FC44",
+      "name": "Alpaca FC44",
+      "range": "Cleaf Alpaca",
+      "tone": "#B8B8A8",
+      "img": "showcase/finishes/cleaf/alpaca-fc44-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fc44-master.jpg",
+      "id": "alpaca-fc44"
+    },
+    {
+      "code": "FD30",
+      "name": "Alpaca FD30",
+      "range": "Cleaf Alpaca",
+      "tone": "#C8C8B8",
+      "img": "showcase/finishes/cleaf/alpaca-fd30-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fd30-master.jpg",
+      "id": "alpaca-fd30"
+    },
+    {
+      "code": "FD32",
+      "name": "Alpaca FD32",
+      "range": "Cleaf Alpaca",
+      "tone": "#A89888",
+      "img": "showcase/finishes/cleaf/alpaca-fd32-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fd32-master.jpg",
+      "id": "alpaca-fd32"
+    },
+    {
+      "code": "FD47",
+      "name": "Alpaca FD47",
+      "range": "Cleaf Alpaca",
+      "tone": "#C8B8A8",
+      "img": "showcase/finishes/cleaf/alpaca-fd47-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fd47-master.jpg",
+      "id": "alpaca-fd47"
+    },
+    {
+      "code": "FD48",
+      "name": "Alpaca FD48",
+      "range": "Cleaf Alpaca",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/alpaca-fd48-tile.webp",
+      "master": "showcase/finishes/cleaf/alpaca-fd48-master.jpg",
+      "id": "alpaca-fd48"
+    },
+    {
+      "code": "FB02",
+      "name": "Ares FB02",
+      "range": "Cleaf Ares",
+      "tone": "#A8B8A8",
+      "img": "showcase/finishes/cleaf/ares-fb02-tile.webp",
+      "master": "showcase/finishes/cleaf/ares-fb02-master.jpg",
+      "id": "ares-fb02"
+    },
+    {
+      "code": "FB11",
+      "name": "Ares FB11",
+      "range": "Cleaf Ares",
+      "tone": "#586868",
+      "img": "showcase/finishes/cleaf/ares-fb11-tile.webp",
+      "master": "showcase/finishes/cleaf/ares-fb11-master.jpg",
+      "id": "ares-fb11"
+    },
+    {
+      "code": "FB48",
+      "name": "Ares FB48",
+      "range": "Cleaf Ares",
+      "tone": "#484838",
+      "img": "showcase/finishes/cleaf/ares-fb48-tile.webp",
+      "master": "showcase/finishes/cleaf/ares-fb48-master.jpg",
+      "id": "ares-fb48"
+    },
+    {
+      "code": "FB49",
+      "name": "Ares FB49",
+      "range": "Cleaf Ares",
+      "tone": "#282818",
+      "img": "showcase/finishes/cleaf/ares-fb49-tile.webp",
+      "master": "showcase/finishes/cleaf/ares-fb49-master.jpg",
+      "id": "ares-fb49"
+    },
+    {
+      "code": "FB51",
+      "name": "Ares FB51",
+      "range": "Cleaf Ares",
+      "tone": "#888878",
+      "img": "showcase/finishes/cleaf/ares-fb51-tile.webp",
+      "master": "showcase/finishes/cleaf/ares-fb51-master.jpg",
+      "id": "ares-fb51"
+    },
+    {
+      "code": "S171",
+      "name": "Bruciato S171",
+      "range": "Cleaf Bruciato",
+      "tone": "#282828",
+      "img": "showcase/finishes/cleaf/bruciato-s171-tile.webp",
+      "master": "showcase/finishes/cleaf/bruciato-s171-master.jpg",
+      "id": "bruciato-s171"
+    },
+    {
+      "code": "FD36",
+      "name": "Cheope FD36",
+      "range": "Cleaf Cheope",
+      "tone": "#382828",
+      "img": "showcase/finishes/cleaf/cheope-fd36-tile.webp",
+      "master": "showcase/finishes/cleaf/cheope-fd36-master.jpg",
+      "id": "cheope-fd36"
+    },
+    {
+      "code": "LR29",
+      "name": "Cheope LR29",
+      "range": "Cleaf Cheope",
+      "tone": "#484848",
+      "img": "showcase/finishes/cleaf/cheope-lr29-tile.webp",
+      "master": "showcase/finishes/cleaf/cheope-lr29-master.jpg",
+      "id": "cheope-lr29"
+    },
+    {
+      "code": "FC37",
+      "name": "Concreta FC37",
+      "range": "Cleaf Concreta",
+      "tone": "#787878",
+      "img": "showcase/finishes/cleaf/concreta-fc37-tile.webp",
+      "master": "showcase/finishes/cleaf/concreta-fc37-master.jpg",
+      "id": "concreta-fc37"
+    },
+    {
+      "code": "FC38",
+      "name": "Concreta FC38",
+      "range": "Cleaf Concreta",
+      "tone": "#B8B8A8",
+      "img": "showcase/finishes/cleaf/concreta-fc38-tile.webp",
+      "master": "showcase/finishes/cleaf/concreta-fc38-master.jpg",
+      "id": "concreta-fc38"
+    },
+    {
+      "code": "FC88",
+      "name": "Concreta FC88",
+      "range": "Cleaf Concreta",
+      "tone": "#989888",
+      "img": "showcase/finishes/cleaf/concreta-fc88-tile.webp",
+      "master": "showcase/finishes/cleaf/concreta-fc88-master.jpg",
+      "id": "concreta-fc88"
+    },
+    {
+      "code": "FC90",
+      "name": "Concreta FC90",
+      "range": "Cleaf Concreta",
+      "tone": "#585858",
+      "img": "showcase/finishes/cleaf/concreta-fc90-tile.webp",
+      "master": "showcase/finishes/cleaf/concreta-fc90-master.jpg",
+      "id": "concreta-fc90"
+    },
+    {
+      "code": "FC91",
+      "name": "Concreta FC91",
+      "range": "Cleaf Concreta",
+      "tone": "#384848",
+      "img": "showcase/finishes/cleaf/concreta-fc91-tile.webp",
+      "master": "showcase/finishes/cleaf/concreta-fc91-master.jpg",
+      "id": "concreta-fc91"
+    },
+    {
+      "code": "S173",
+      "name": "Corteccia S173",
+      "range": "Cleaf Corteccia",
+      "tone": "#C8B898",
+      "img": "showcase/finishes/cleaf/corteccia-s173-tile.webp",
+      "master": "showcase/finishes/cleaf/corteccia-s173-master.jpg",
+      "id": "corteccia-s173"
+    },
+    {
+      "code": "S176",
+      "name": "Corteccia S176",
+      "range": "Cleaf Corteccia",
+      "tone": "#181818",
+      "img": "showcase/finishes/cleaf/corteccia-s176-tile.webp",
+      "master": "showcase/finishes/cleaf/corteccia-s176-master.jpg",
+      "id": "corteccia-s176"
+    },
+    {
+      "code": "S215",
+      "name": "Corteccia S215",
+      "range": "Cleaf Corteccia",
+      "tone": "#887868",
+      "img": "showcase/finishes/cleaf/corteccia-s215-tile.webp",
+      "master": "showcase/finishes/cleaf/corteccia-s215-master.jpg",
+      "id": "corteccia-s215"
+    },
+    {
+      "code": "S060",
+      "name": "Engadina S060",
+      "range": "Cleaf Engadina",
+      "tone": "#887858",
+      "img": "showcase/finishes/cleaf/engadina-s060-tile.webp",
+      "master": "showcase/finishes/cleaf/engadina-s060-master.jpg",
+      "id": "engadina-s060"
+    },
+    {
+      "code": "S061",
+      "name": "Engadina S061",
+      "range": "Cleaf Engadina",
+      "tone": "#787868",
+      "img": "showcase/finishes/cleaf/engadina-s061-tile.webp",
+      "master": "showcase/finishes/cleaf/engadina-s061-master.jpg",
+      "id": "engadina-s061"
+    },
+    {
+      "code": "S063",
+      "name": "Engadina S063",
+      "range": "Cleaf Engadina",
+      "tone": "#785828",
+      "img": "showcase/finishes/cleaf/engadina-s063-tile.webp",
+      "master": "showcase/finishes/cleaf/engadina-s063-master.jpg",
+      "id": "engadina-s063"
+    },
+    {
+      "code": "S133",
+      "name": "Esperia S133",
+      "range": "Cleaf Esperia",
+      "tone": "#483838",
+      "img": "showcase/finishes/cleaf/esperia-s133-tile.webp",
+      "master": "showcase/finishes/cleaf/esperia-s133-master.jpg",
+      "id": "esperia-s133"
+    },
+    {
+      "code": "S136",
+      "name": "Esperia S136",
+      "range": "Cleaf Esperia",
+      "tone": "#988878",
+      "img": "showcase/finishes/cleaf/esperia-s136-tile.webp",
+      "master": "showcase/finishes/cleaf/esperia-s136-master.jpg",
+      "id": "esperia-s136"
+    },
+    {
+      "code": "S138",
+      "name": "Esperia S138",
+      "range": "Cleaf Esperia",
+      "tone": "#D8D8C8",
+      "img": "showcase/finishes/cleaf/esperia-s138-tile.webp",
+      "master": "showcase/finishes/cleaf/esperia-s138-master.jpg",
+      "id": "esperia-s138"
+    },
+    {
+      "code": "S156",
+      "name": "Fronda S156",
+      "range": "Cleaf Fronda",
+      "tone": "#685858",
+      "img": "showcase/finishes/cleaf/fronda-s156-tile.webp",
+      "master": "showcase/finishes/cleaf/fronda-s156-master.jpg",
+      "id": "fronda-s156"
+    },
+    {
+      "code": "S164",
+      "name": "Fronda S164",
+      "range": "Cleaf Fronda",
+      "tone": "#C8B898",
+      "img": "showcase/finishes/cleaf/fronda-s164-tile.webp",
+      "master": "showcase/finishes/cleaf/fronda-s164-master.jpg",
+      "id": "fronda-s164"
+    },
+    {
+      "code": "S165",
+      "name": "Fronda S165",
+      "range": "Cleaf Fronda",
+      "tone": "#A89888",
+      "img": "showcase/finishes/cleaf/fronda-s165-tile.webp",
+      "master": "showcase/finishes/cleaf/fronda-s165-master.jpg",
+      "id": "fronda-s165"
+    },
+    {
+      "code": "FB80",
+      "name": "Idea FB80",
+      "range": "Cleaf Idea",
+      "tone": "#A8A898",
+      "img": "showcase/finishes/cleaf/idea-fb80-tile.webp",
+      "master": "showcase/finishes/cleaf/idea-fb80-master.jpg",
+      "id": "idea-fb80"
+    },
+    {
+      "code": "FB86",
+      "name": "Idea FB86",
+      "range": "Cleaf Idea",
+      "tone": "#484838",
+      "img": "showcase/finishes/cleaf/idea-fb86-tile.webp",
+      "master": "showcase/finishes/cleaf/idea-fb86-master.jpg",
+      "id": "idea-fb86"
+    },
+    {
+      "code": "S191",
+      "name": "Jiometori S191",
+      "range": "Cleaf Jiometori",
+      "tone": "#B89878",
+      "img": "showcase/finishes/cleaf/jiometori-s191-tile.webp",
+      "master": "showcase/finishes/cleaf/jiometori-s191-master.jpg",
+      "id": "jiometori-s191"
+    },
+    {
+      "code": "S195",
+      "name": "Jiometori S195",
+      "range": "Cleaf Jiometori",
+      "tone": "#483828",
+      "img": "showcase/finishes/cleaf/jiometori-s195-tile.webp",
+      "master": "showcase/finishes/cleaf/jiometori-s195-master.jpg",
+      "id": "jiometori-s195"
+    },
+    {
+      "code": "S083",
+      "name": "Millennium S083",
+      "range": "Cleaf Millennium",
+      "tone": "#E8D8A8",
+      "img": "showcase/finishes/cleaf/millennium-s083-tile.webp",
+      "master": "showcase/finishes/cleaf/millennium-s083-master.jpg",
+      "id": "millennium-s083"
+    },
+    {
+      "code": "FB35",
+      "name": "Mosaico FB35",
+      "range": "Cleaf Mosaico",
+      "tone": "#585858",
+      "img": "showcase/finishes/cleaf/mosaico-fb35-tile.webp",
+      "master": "showcase/finishes/cleaf/mosaico-fb35-master.jpg",
+      "id": "mosaico-fb35"
+    },
+    {
+      "code": "S158",
+      "name": "Okobo S158",
+      "range": "Cleaf Okobo",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/okobo-s158-tile.webp",
+      "master": "showcase/finishes/cleaf/okobo-s158-master.jpg",
+      "id": "okobo-s158"
+    },
+    {
+      "code": "S160",
+      "name": "Okobo S160",
+      "range": "Cleaf Okobo",
+      "tone": "#987858",
+      "img": "showcase/finishes/cleaf/okobo-s160-tile.webp",
+      "master": "showcase/finishes/cleaf/okobo-s160-master.jpg",
+      "id": "okobo-s160"
+    },
+    {
+      "code": "S162",
+      "name": "Okobo S162",
+      "range": "Cleaf Okobo",
+      "tone": "#D8C8A8",
+      "img": "showcase/finishes/cleaf/okobo-s162-tile.webp",
+      "master": "showcase/finishes/cleaf/okobo-s162-master.jpg",
+      "id": "okobo-s162"
+    },
+    {
+      "code": "FC92",
+      "name": "Paglia FC92",
+      "range": "Cleaf Paglia",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/paglia-fc92-tile.webp",
+      "master": "showcase/finishes/cleaf/paglia-fc92-master.jpg",
+      "id": "paglia-fc92"
+    },
+    {
+      "code": "FC95",
+      "name": "Paglia FC95",
+      "range": "Cleaf Paglia",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/paglia-fc95-tile.webp",
+      "master": "showcase/finishes/cleaf/paglia-fc95-master.jpg",
+      "id": "paglia-fc95"
+    },
+    {
+      "code": "FC97",
+      "name": "Paglia FC97",
+      "range": "Cleaf Paglia",
+      "tone": "#585858",
+      "img": "showcase/finishes/cleaf/paglia-fc97-tile.webp",
+      "master": "showcase/finishes/cleaf/paglia-fc97-master.jpg",
+      "id": "paglia-fc97"
+    },
+    {
+      "code": "FD02",
+      "name": "Paglia FD02",
+      "range": "Cleaf Paglia",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/paglia-fd02-tile.webp",
+      "master": "showcase/finishes/cleaf/paglia-fd02-master.jpg",
+      "id": "paglia-fd02"
+    },
+    {
+      "code": "S119",
+      "name": "Pembroke S119",
+      "range": "Cleaf Pembroke",
+      "tone": "#583828",
+      "img": "showcase/finishes/cleaf/pembroke-s119-tile.webp",
+      "master": "showcase/finishes/cleaf/pembroke-s119-master.jpg",
+      "id": "pembroke-s119"
+    },
+    {
+      "code": "S120",
+      "name": "Pembroke S120",
+      "range": "Cleaf Pembroke",
+      "tone": "#886848",
+      "img": "showcase/finishes/cleaf/pembroke-s120-tile.webp",
+      "master": "showcase/finishes/cleaf/pembroke-s120-master.jpg",
+      "id": "pembroke-s120"
+    },
+    {
+      "code": "S122",
+      "name": "Pembroke S122",
+      "range": "Cleaf Pembroke",
+      "tone": "#988878",
+      "img": "showcase/finishes/cleaf/pembroke-s122-tile.webp",
+      "master": "showcase/finishes/cleaf/pembroke-s122-master.jpg",
+      "id": "pembroke-s122"
+    },
+    {
+      "code": "S126",
+      "name": "Pembroke S126",
+      "range": "Cleaf Pembroke",
+      "tone": "#D8C8C8",
+      "img": "showcase/finishes/cleaf/pembroke-s126-tile.webp",
+      "master": "showcase/finishes/cleaf/pembroke-s126-master.jpg",
+      "id": "pembroke-s126"
+    },
+    {
+      "code": "S128",
+      "name": "Pembroke S128",
+      "range": "Cleaf Pembroke",
+      "tone": "#A88868",
+      "img": "showcase/finishes/cleaf/pembroke-s128-tile.webp",
+      "master": "showcase/finishes/cleaf/pembroke-s128-master.jpg",
+      "id": "pembroke-s128"
+    },
+    {
+      "code": "B026",
+      "name": "Penelope B026",
+      "range": "Cleaf Penelope",
+      "tone": "#E8E8E8",
+      "img": "showcase/finishes/cleaf/penelope-b026-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-b026-master.jpg",
+      "id": "penelope-b026"
+    },
+    {
+      "code": "FA33",
+      "name": "Penelope FA33",
+      "range": "Cleaf Penelope",
+      "tone": "#484838",
+      "img": "showcase/finishes/cleaf/penelope-fa33-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-fa33-master.jpg",
+      "id": "penelope-fa33"
+    },
+    {
+      "code": "FA41",
+      "name": "Penelope FA41",
+      "range": "Cleaf Penelope",
+      "tone": "#D8D8D8",
+      "img": "showcase/finishes/cleaf/penelope-fa41-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-fa41-master.jpg",
+      "id": "penelope-fa41"
+    },
+    {
+      "code": "FA42",
+      "name": "Penelope FA42",
+      "range": "Cleaf Penelope",
+      "tone": "#887878",
+      "img": "showcase/finishes/cleaf/penelope-fa42-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-fa42-master.jpg",
+      "id": "penelope-fa42"
+    },
+    {
+      "code": "FA44",
+      "name": "Penelope FA44",
+      "range": "Cleaf Penelope",
+      "tone": "#B8A898",
+      "img": "showcase/finishes/cleaf/penelope-fa44-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-fa44-master.jpg",
+      "id": "penelope-fa44"
+    },
+    {
+      "code": "FA46",
+      "name": "Penelope FA46",
+      "range": "Cleaf Penelope",
+      "tone": "#484848",
+      "img": "showcase/finishes/cleaf/penelope-fa46-tile.webp",
+      "master": "showcase/finishes/cleaf/penelope-fa46-master.jpg",
+      "id": "penelope-fa46"
+    },
+    {
+      "code": "HM00",
+      "name": "Piombo HM00",
+      "range": "Cleaf Piombo",
+      "tone": "#F8F8F8",
+      "img": "showcase/finishes/cleaf/piombo-hm00-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm00-master.jpg",
+      "id": "piombo-hm00"
+    },
+    {
+      "code": "HM01",
+      "name": "Piombo HM01",
+      "range": "Cleaf Piombo",
+      "tone": "#A89898",
+      "img": "showcase/finishes/cleaf/piombo-hm01-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm01-master.jpg",
+      "id": "piombo-hm01"
+    },
+    {
+      "code": "HM02",
+      "name": "Piombo HM02",
+      "range": "Cleaf Piombo",
+      "tone": "#A8A898",
+      "img": "showcase/finishes/cleaf/piombo-hm02-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm02-master.jpg",
+      "id": "piombo-hm02"
+    },
+    {
+      "code": "HM03",
+      "name": "Piombo HM03",
+      "range": "Cleaf Piombo",
+      "tone": "#888878",
+      "img": "showcase/finishes/cleaf/piombo-hm03-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm03-master.jpg",
+      "id": "piombo-hm03"
+    },
+    {
+      "code": "HM04",
+      "name": "Piombo HM04",
+      "range": "Cleaf Piombo",
+      "tone": "#686858",
+      "img": "showcase/finishes/cleaf/piombo-hm04-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm04-master.jpg",
+      "id": "piombo-hm04"
+    },
+    {
+      "code": "HM05",
+      "name": "Piombo HM05",
+      "range": "Cleaf Piombo",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/piombo-hm05-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm05-master.jpg",
+      "id": "piombo-hm05"
+    },
+    {
+      "code": "HM06",
+      "name": "Piombo HM06",
+      "range": "Cleaf Piombo",
+      "tone": "#282828",
+      "img": "showcase/finishes/cleaf/piombo-hm06-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm06-master.jpg",
+      "id": "piombo-hm06"
+    },
+    {
+      "code": "HM07",
+      "name": "Piombo HM07",
+      "range": "Cleaf Piombo",
+      "tone": "#181808",
+      "img": "showcase/finishes/cleaf/piombo-hm07-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm07-master.jpg",
+      "id": "piombo-hm07"
+    },
+    {
+      "code": "HM08",
+      "name": "Piombo HM08",
+      "range": "Cleaf Piombo",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/piombo-hm08-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm08-master.jpg",
+      "id": "piombo-hm08"
+    },
+    {
+      "code": "HM10",
+      "name": "Piombo HM10",
+      "range": "Cleaf Piombo",
+      "tone": "#485858",
+      "img": "showcase/finishes/cleaf/piombo-hm10-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm10-master.jpg",
+      "id": "piombo-hm10"
+    },
+    {
+      "code": "HM11",
+      "name": "Piombo HM11",
+      "range": "Cleaf Piombo",
+      "tone": "#B89888",
+      "img": "showcase/finishes/cleaf/piombo-hm11-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm11-master.jpg",
+      "id": "piombo-hm11"
+    },
+    {
+      "code": "HM12",
+      "name": "Piombo HM12",
+      "range": "Cleaf Piombo",
+      "tone": "#485848",
+      "img": "showcase/finishes/cleaf/piombo-hm12-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm12-master.jpg",
+      "id": "piombo-hm12"
+    },
+    {
+      "code": "HM13",
+      "name": "Piombo HM13",
+      "range": "Cleaf Piombo",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/piombo-hm13-tile.webp",
+      "master": "showcase/finishes/cleaf/piombo-hm13-master.jpg",
+      "id": "piombo-hm13"
+    },
+    {
+      "code": "FA33",
+      "name": "Primofiore FA33",
+      "range": "Cleaf Primofiore",
+      "tone": "#383828",
+      "img": "showcase/finishes/cleaf/primofiore-fa33-tile.webp",
+      "master": "showcase/finishes/cleaf/primofiore-fa33-master.jpg",
+      "id": "primofiore-fa33"
+    },
+    {
+      "code": "UA80",
+      "name": "Primofiore UA80",
+      "range": "Cleaf Primofiore",
+      "tone": "#A89888",
+      "img": "showcase/finishes/cleaf/primofiore-ua80-tile.webp",
+      "master": "showcase/finishes/cleaf/primofiore-ua80-master.jpg",
+      "id": "primofiore-ua80"
+    },
+    {
+      "code": "UB07",
+      "name": "Primofiore UB07",
+      "range": "Cleaf Primofiore",
+      "tone": "#888878",
+      "img": "showcase/finishes/cleaf/primofiore-ub07-tile.webp",
+      "master": "showcase/finishes/cleaf/primofiore-ub07-master.jpg",
+      "id": "primofiore-ub07"
+    },
+    {
+      "code": "UB19",
+      "name": "Primofiore UB19",
+      "range": "Cleaf Primofiore",
+      "tone": "#B8B8A8",
+      "img": "showcase/finishes/cleaf/primofiore-ub19-tile.webp",
+      "master": "showcase/finishes/cleaf/primofiore-ub19-master.jpg",
+      "id": "primofiore-ub19"
+    },
+    {
+      "code": "S181",
+      "name": "Quercia S181",
+      "range": "Cleaf Quercia",
+      "tone": "#282828",
+      "img": "showcase/finishes/cleaf/quercia-s181-tile.webp",
+      "master": "showcase/finishes/cleaf/quercia-s181-master.jpg",
+      "id": "quercia-s181"
+    },
+    {
+      "code": "S182",
+      "name": "Quercia S182",
+      "range": "Cleaf Quercia",
+      "tone": "#181818",
+      "img": "showcase/finishes/cleaf/quercia-s182-tile.webp",
+      "master": "showcase/finishes/cleaf/quercia-s182-master.jpg",
+      "id": "quercia-s182"
+    },
+    {
+      "code": "S185",
+      "name": "Quercia S185",
+      "range": "Cleaf Quercia",
+      "tone": "#684838",
+      "img": "showcase/finishes/cleaf/quercia-s185-tile.webp",
+      "master": "showcase/finishes/cleaf/quercia-s185-master.jpg",
+      "id": "quercia-s185"
+    },
+    {
+      "code": "S203",
+      "name": "Quercia S203",
+      "range": "Cleaf Quercia",
+      "tone": "#A88848",
+      "img": "showcase/finishes/cleaf/quercia-s203-tile.webp",
+      "master": "showcase/finishes/cleaf/quercia-s203-master.jpg",
+      "id": "quercia-s203"
+    },
+    {
+      "code": "S206",
+      "name": "Quercia S206",
+      "range": "Cleaf Quercia",
+      "tone": "#D8A878",
+      "img": "showcase/finishes/cleaf/quercia-s206-tile.webp",
+      "master": "showcase/finishes/cleaf/quercia-s206-master.jpg",
+      "id": "quercia-s206"
+    },
+    {
+      "code": "FA84",
+      "name": "Reflex FA84",
+      "range": "Cleaf Reflex",
+      "tone": "#584838",
+      "img": "showcase/finishes/cleaf/reflex-fa84-tile.webp",
+      "master": "showcase/finishes/cleaf/reflex-fa84-master.jpg",
+      "id": "reflex-fa84"
+    },
+    {
+      "code": "FC84",
+      "name": "Reflex FC84",
+      "range": "Cleaf Reflex",
+      "tone": "#787878",
+      "img": "showcase/finishes/cleaf/reflex-fc84-tile.webp",
+      "master": "showcase/finishes/cleaf/reflex-fc84-master.jpg",
+      "id": "reflex-fc84"
+    },
+    {
+      "code": "FC85",
+      "name": "Reflex FC85",
+      "range": "Cleaf Reflex",
+      "tone": "#98B8A8",
+      "img": "showcase/finishes/cleaf/reflex-fc85-tile.webp",
+      "master": "showcase/finishes/cleaf/reflex-fc85-master.jpg",
+      "id": "reflex-fc85"
+    },
+    {
+      "code": "FB79",
+      "name": "Riga FB79",
+      "range": "Cleaf Riga",
+      "tone": "#E8E8D8",
+      "img": "showcase/finishes/cleaf/riga-fb79-tile.webp",
+      "master": "showcase/finishes/cleaf/riga-fb79-master.jpg",
+      "id": "riga-fb79"
+    },
+    {
+      "code": "FC18",
+      "name": "Riga FC18",
+      "range": "Cleaf Riga",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/riga-fc18-tile.webp",
+      "master": "showcase/finishes/cleaf/riga-fc18-master.jpg",
+      "id": "riga-fc18"
+    },
+    {
+      "code": "LS47",
+      "name": "Riga LS47",
+      "range": "Cleaf Riga",
+      "tone": "#684828",
+      "img": "showcase/finishes/cleaf/riga-ls47-tile.webp",
+      "master": "showcase/finishes/cleaf/riga-ls47-master.jpg",
+      "id": "riga-ls47"
+    },
+    {
+      "code": "LS53",
+      "name": "Riga LS53",
+      "range": "Cleaf Riga",
+      "tone": "#383828",
+      "img": "showcase/finishes/cleaf/riga-ls53-tile.webp",
+      "master": "showcase/finishes/cleaf/riga-ls53-master.jpg",
+      "id": "riga-ls53"
+    },
+    {
+      "code": "LS54",
+      "name": "Riga LS54",
+      "range": "Cleaf Riga",
+      "tone": "#786848",
+      "img": "showcase/finishes/cleaf/riga-ls54-tile.webp",
+      "master": "showcase/finishes/cleaf/riga-ls54-master.jpg",
+      "id": "riga-ls54"
+    },
+    {
+      "code": "LR22",
+      "name": "Sable LR22",
+      "range": "Cleaf Sable",
+      "tone": "#A88868",
+      "img": "showcase/finishes/cleaf/sable-lr22-tile.webp",
+      "master": "showcase/finishes/cleaf/sable-lr22-master.jpg",
+      "id": "sable-lr22"
+    },
+    {
+      "code": "LR26",
+      "name": "Sable LR26",
+      "range": "Cleaf Sable",
+      "tone": "#987868",
+      "img": "showcase/finishes/cleaf/sable-lr26-tile.webp",
+      "master": "showcase/finishes/cleaf/sable-lr26-master.jpg",
+      "id": "sable-lr26"
+    },
+    {
+      "code": "LR28",
+      "name": "Sable LR28",
+      "range": "Cleaf Sable",
+      "tone": "#483838",
+      "img": "showcase/finishes/cleaf/sable-lr28-tile.webp",
+      "master": "showcase/finishes/cleaf/sable-lr28-master.jpg",
+      "id": "sable-lr28"
+    },
+    {
+      "code": "LR29",
+      "name": "Sable LR29",
+      "range": "Cleaf Sable",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/sable-lr29-tile.webp",
+      "master": "showcase/finishes/cleaf/sable-lr29-master.jpg",
+      "id": "sable-lr29"
+    },
+    {
+      "code": "LS69",
+      "name": "Sbalzo LS69",
+      "range": "Cleaf Sbalzo",
+      "tone": "#483828",
+      "img": "showcase/finishes/cleaf/sbalzo-ls69-tile.webp",
+      "master": "showcase/finishes/cleaf/sbalzo-ls69-master.jpg",
+      "id": "sbalzo-ls69"
+    },
+    {
+      "code": "LS70",
+      "name": "Sbalzo LS70",
+      "range": "Cleaf Sbalzo",
+      "tone": "#382818",
+      "img": "showcase/finishes/cleaf/sbalzo-ls70-tile.webp",
+      "master": "showcase/finishes/cleaf/sbalzo-ls70-master.jpg",
+      "id": "sbalzo-ls70"
+    },
+    {
+      "code": "S071",
+      "name": "Sherwood S071",
+      "range": "Cleaf Sherwood",
+      "tone": "#383828",
+      "img": "showcase/finishes/cleaf/sherwood-s071-tile.webp",
+      "master": "showcase/finishes/cleaf/sherwood-s071-master.jpg",
+      "id": "sherwood-s071"
+    },
+    {
+      "code": "S072",
+      "name": "Sherwood S072",
+      "range": "Cleaf Sherwood",
+      "tone": "#988868",
+      "img": "showcase/finishes/cleaf/sherwood-s072-tile.webp",
+      "master": "showcase/finishes/cleaf/sherwood-s072-master.jpg",
+      "id": "sherwood-s072"
+    },
+    {
+      "code": "S073",
+      "name": "Sherwood S073",
+      "range": "Cleaf Sherwood",
+      "tone": "#886848",
+      "img": "showcase/finishes/cleaf/sherwood-s073-tile.webp",
+      "master": "showcase/finishes/cleaf/sherwood-s073-master.jpg",
+      "id": "sherwood-s073"
+    },
+    {
+      "code": "FC13",
+      "name": "Talco FC13",
+      "range": "Cleaf Talco",
+      "tone": "#F8F8E8",
+      "img": "showcase/finishes/cleaf/talco-fc13-tile.webp",
+      "master": "showcase/finishes/cleaf/talco-fc13-master.jpg",
+      "id": "talco-fc13"
+    },
+    {
+      "code": "FC18",
+      "name": "Talco FC18",
+      "range": "Cleaf Talco",
+      "tone": "#383838",
+      "img": "showcase/finishes/cleaf/talco-fc18-tile.webp",
+      "master": "showcase/finishes/cleaf/talco-fc18-master.jpg",
+      "id": "talco-fc18"
+    },
+    {
+      "code": "UA32",
+      "name": "Talco UA32",
+      "range": "Cleaf Talco",
+      "tone": "#888888",
+      "img": "showcase/finishes/cleaf/talco-ua32-tile.webp",
+      "master": "showcase/finishes/cleaf/talco-ua32-master.jpg",
+      "id": "talco-ua32"
+    },
+    {
+      "code": "UA94",
+      "name": "Talco UA94",
+      "range": "Cleaf Talco",
+      "tone": "#787868",
+      "img": "showcase/finishes/cleaf/talco-ua94-tile.webp",
+      "master": "showcase/finishes/cleaf/talco-ua94-master.jpg",
+      "id": "talco-ua94"
+    },
+    {
+      "code": "UB19",
+      "name": "Talco UB19",
+      "range": "Cleaf Talco",
+      "tone": "#C8C8B8",
+      "img": "showcase/finishes/cleaf/talco-ub19-tile.webp",
+      "master": "showcase/finishes/cleaf/talco-ub19-master.jpg",
+      "id": "talco-ub19"
+    },
+    {
+      "code": "FD10",
+      "name": "Taranta FD10",
+      "range": "Cleaf Taranta",
+      "tone": "#D8C8A8",
+      "img": "showcase/finishes/cleaf/taranta-fd10-tile.webp",
+      "master": "showcase/finishes/cleaf/taranta-fd10-master.jpg",
+      "id": "taranta-fd10"
+    },
+    {
+      "code": "FD16",
+      "name": "Taranta FD16",
+      "range": "Cleaf Taranta",
+      "tone": "#888878",
+      "img": "showcase/finishes/cleaf/taranta-fd16-tile.webp",
+      "master": "showcase/finishes/cleaf/taranta-fd16-master.jpg",
+      "id": "taranta-fd16"
+    },
+    {
+      "code": "FD28",
+      "name": "Taranta FD28",
+      "range": "Cleaf Taranta",
+      "tone": "#B8B8A8",
+      "img": "showcase/finishes/cleaf/taranta-fd28-tile.webp",
+      "master": "showcase/finishes/cleaf/taranta-fd28-master.jpg",
+      "id": "taranta-fd28"
+    },
+    {
+      "code": "FD29",
+      "name": "Taranta FD29",
+      "range": "Cleaf Taranta",
+      "tone": "#A89878",
+      "img": "showcase/finishes/cleaf/taranta-fd29-tile.webp",
+      "master": "showcase/finishes/cleaf/taranta-fd29-master.jpg",
+      "id": "taranta-fd29"
+    },
+    {
+      "code": "FD36",
+      "name": "Traccia FD36",
+      "range": "Cleaf Traccia",
+      "tone": "#383828",
+      "img": "showcase/finishes/cleaf/traccia-fd36-tile.webp",
+      "master": "showcase/finishes/cleaf/traccia-fd36-master.jpg",
+      "id": "traccia-fd36"
+    },
+    {
+      "code": "FD37",
+      "name": "Traccia FD37",
+      "range": "Cleaf Traccia",
+      "tone": "#584838",
+      "img": "showcase/finishes/cleaf/traccia-fd37-tile.webp",
+      "master": "showcase/finishes/cleaf/traccia-fd37-master.jpg",
+      "id": "traccia-fd37"
+    },
+    {
+      "code": "FD38",
+      "name": "Traccia FD38",
+      "range": "Cleaf Traccia",
+      "tone": "#585848",
+      "img": "showcase/finishes/cleaf/traccia-fd38-tile.webp",
+      "master": "showcase/finishes/cleaf/traccia-fd38-master.jpg",
+      "id": "traccia-fd38"
+    },
+    {
+      "code": "FD49",
+      "name": "Traccia FD49",
+      "range": "Cleaf Traccia",
+      "tone": "#785848",
+      "img": "showcase/finishes/cleaf/traccia-fd49-tile.webp",
+      "master": "showcase/finishes/cleaf/traccia-fd49-master.jpg",
+      "id": "traccia-fd49"
+    },
+    {
+      "code": "S010",
+      "name": "Yosemite S010",
+      "range": "Cleaf Yosemite",
+      "tone": "#B8A898",
+      "img": "showcase/finishes/cleaf/yosemite-s010-tile.webp",
+      "master": "showcase/finishes/cleaf/yosemite-s010-master.jpg",
+      "id": "yosemite-s010"
+    },
+    {
+      "code": "S012",
+      "name": "Yosemite S012",
+      "range": "Cleaf Yosemite",
+      "tone": "#282828",
+      "img": "showcase/finishes/cleaf/yosemite-s012-tile.webp",
+      "master": "showcase/finishes/cleaf/yosemite-s012-master.jpg",
+      "id": "yosemite-s012"
+    },
+    {
+      "code": "S013",
+      "name": "Yosemite S013",
+      "range": "Cleaf Yosemite",
+      "tone": "#483828",
+      "img": "showcase/finishes/cleaf/yosemite-s013-tile.webp",
+      "master": "showcase/finishes/cleaf/yosemite-s013-master.jpg",
+      "id": "yosemite-s013"
+    },
+    {
+      "code": "S016",
+      "name": "Yosemite S016",
+      "range": "Cleaf Yosemite",
+      "tone": "#785838",
+      "img": "showcase/finishes/cleaf/yosemite-s016-tile.webp",
+      "master": "showcase/finishes/cleaf/yosemite-s016-master.jpg",
+      "id": "yosemite-s016"
+    },
+    {
+      "id": "ares-b073",
+      "code": "B073",
+      "name": "Ares B073",
+      "range": "Cleaf Ares",
+      "tone": "#D8E8D8",
+      "img": "showcase/finishes/cleaf/ares-b073-tile.webp",
+      "rail": "showcase/finishes/cleaf/ares-b073-rail.webp",
+      "master": "showcase/finishes/cleaf/ares-b073-master.jpg"
+    },
+    {
+      "id": "bruciato-u129",
+      "code": "U129",
+      "name": "Bruciato U129",
+      "range": "Cleaf Bruciato",
+      "tone": "#282828",
+      "img": "showcase/finishes/cleaf/bruciato-u129-tile.webp",
+      "rail": "showcase/finishes/cleaf/bruciato-u129-rail.webp",
+      "master": "showcase/finishes/cleaf/bruciato-u129-master.jpg"
+    },
+    {
+      "id": "cheope-u129",
+      "code": "U129",
+      "name": "Cheope U129",
+      "range": "Cleaf Cheope",
+      "tone": "#080808",
+      "img": "showcase/finishes/cleaf/cheope-u129-tile.webp",
+      "rail": "showcase/finishes/cleaf/cheope-u129-rail.webp",
+      "master": "showcase/finishes/cleaf/cheope-u129-master.jpg"
+    },
+    {
+      "id": "corteccia-b073",
+      "code": "B073",
+      "name": "Corteccia B073",
+      "range": "Cleaf Corteccia",
+      "tone": "#F8F8E8",
+      "img": "showcase/finishes/cleaf/corteccia-b073-tile.webp",
+      "rail": "showcase/finishes/cleaf/corteccia-b073-rail.webp",
+      "master": "showcase/finishes/cleaf/corteccia-b073-master.jpg"
+    },
+    {
+      "id": "idea-fb82",
+      "code": "FB82",
+      "name": "Idea FB82",
+      "range": "Cleaf Idea",
+      "tone": "#686868",
+      "img": "showcase/finishes/cleaf/idea-fb82-tile.webp",
+      "rail": "showcase/finishes/cleaf/idea-fb82-rail.webp",
+      "master": "showcase/finishes/cleaf/idea-fb82-master.jpg"
+    },
+    {
+      "id": "millennium-b073",
+      "code": "B073",
+      "name": "Millennium B073",
+      "range": "Cleaf Millennium",
+      "tone": "#F8F8E8",
+      "img": "showcase/finishes/cleaf/millennium-b073-tile.webp",
+      "rail": "showcase/finishes/cleaf/millennium-b073-rail.webp",
+      "master": "showcase/finishes/cleaf/millennium-b073-master.jpg"
+    },
+    {
+      "id": "millennium-u129",
+      "code": "U129",
+      "name": "Millennium U129",
+      "range": "Cleaf Millennium",
+      "tone": "#181818",
+      "img": "showcase/finishes/cleaf/millennium-u129-tile.webp",
+      "rail": "showcase/finishes/cleaf/millennium-u129-rail.webp",
+      "master": "showcase/finishes/cleaf/millennium-u129-master.jpg"
+    },
+    {
+      "id": "mosaico-fb45",
+      "code": "FB45",
+      "name": "Mosaico FB45",
+      "range": "Cleaf Mosaico",
+      "tone": "#D8D8C8",
+      "img": "showcase/finishes/cleaf/mosaico-fb45-tile.webp",
+      "rail": "showcase/finishes/cleaf/mosaico-fb45-rail.webp",
+      "master": "showcase/finishes/cleaf/mosaico-fb45-master.jpg"
+    },
+    {
+      "id": "sherwood-b073",
+      "code": "B073",
+      "name": "Sherwood B073",
+      "range": "Cleaf Sherwood",
+      "tone": "#F8F8E8",
+      "img": "showcase/finishes/cleaf/sherwood-b073-tile.webp",
+      "rail": "showcase/finishes/cleaf/sherwood-b073-rail.webp",
+      "master": "showcase/finishes/cleaf/sherwood-b073-master.jpg"
+    },
+    {
+      "id": "sherwood-u129",
+      "code": "U129",
+      "name": "Sherwood U129",
+      "range": "Cleaf Sherwood",
+      "tone": "#181818",
+      "img": "showcase/finishes/cleaf/sherwood-u129-tile.webp",
+      "rail": "showcase/finishes/cleaf/sherwood-u129-rail.webp",
+      "master": "showcase/finishes/cleaf/sherwood-u129-master.jpg"
+    },
+    {
+      "id": "talco-b073",
+      "code": "B073",
+      "name": "Talco B073",
+      "range": "Cleaf Talco",
+      "tone": "#F8F8E8",
+      "img": "showcase/finishes/cleaf/talco-b073-tile.webp",
+      "rail": "showcase/finishes/cleaf/talco-b073-rail.webp",
+      "master": "showcase/finishes/cleaf/talco-b073-master.jpg"
+    }
+  ]
+}

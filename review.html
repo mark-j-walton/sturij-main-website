@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Scheme review</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="brand/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4A01B;--ink:#1D1D1D;--paper:#F7F4EE;--bronze:#62584F;--f-serif:'Cormorant Garamond',Georgia,serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--f-mono);min-height:100vh}
+a{color:var(--bronze)}a:hover{color:var(--gold)}
+button{all:unset;cursor:pointer}
+.lbl{font:500 9.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bronze)}
+.wrap{max-width:960px;margin:0 auto;padding:26px 20px 80px}
+.head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.head img{height:24px}
+.head h1{font:600 26px var(--f-serif);margin:0;flex:1}
+.banner{margin:14px 0;padding:12px 16px;border-radius:12px;background:#fff;box-shadow:0 1px 6px rgba(29,29,29,.08);font:400 12px var(--f-mono)}
+.banner.gold{background:var(--gold);color:var(--ink);font-weight:500}
+.pub{margin:26px 0;background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(29,29,29,.08);overflow:hidden}
+.phd{padding:16px 20px;display:flex;align-items:center;gap:12px}
+.phd b{font:600 19px var(--f-serif);flex:1}
+.phd .lbl b{color:var(--gold)}
+.imgwrap{position:relative;background:#FDFCF8;cursor:crosshair}
+.imgwrap img{width:100%;display:block}
+.pnote{position:absolute;width:150px;padding:10px 12px;background:#F7E9A8;box-shadow:2px 4px 12px rgba(29,29,29,.22);font:400 11px/1.45 var(--f-mono);transform:rotate(-1.2deg);cursor:default}
+.pnote.responded{background:#CFE3D4}
+.pnote .who{font:500 8px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(29,29,29,.5);display:block;margin-bottom:3px}
+.pnote .reply{margin-top:6px;padding-top:6px;border-top:1px solid rgba(29,29,29,.14);font-style:normal}
+.pnote textarea{width:100%;border:0;background:none;outline:none;resize:none;font:400 11px/1.45 var(--f-mono)}
+.pnote .px{position:absolute;top:2px;right:5px;font-size:11px;color:rgba(29,29,29,.4)}
+.mats{padding:18px 20px 22px}
+.mats .lbl{display:block;margin-bottom:12px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.mat{display:flex;align-items:center;gap:12px;padding:8px;border-radius:12px;background:rgba(29,29,29,.03)}
+.mat .sw{width:44px;height:44px;border-radius:9px;background-size:cover;flex:none;box-shadow:inset 0 0 0 1px rgba(29,29,29,.1)}
+.mat .nm{flex:1;font:500 10.5px var(--f-mono);letter-spacing:.05em;text-transform:uppercase;min-width:0}
+.tick{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:var(--bronze);box-shadow:inset 0 0 0 1.5px rgba(29,29,29,.2);flex:none}
+.tick.on{background:var(--gold);color:var(--ink);box-shadow:none}
+.tick svg{width:13px;height:13px}
+.dbar{padding:14px 20px;border-top:1px solid rgba(29,29,29,.08);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.dbtn{padding:8px 16px;border-radius:999px;background:var(--ink);color:#fff;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.dbtn:hover{background:#000}
+.empty{text-align:center;padding:100px 20px;color:#9a9284}
+.empty h2{font:600 24px var(--f-serif);color:var(--ink)}
+.auth{max-width:380px;margin:110px auto;background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(29,29,29,.08);padding:28px 26px;text-align:center}
+.auth h2{font:600 24px var(--f-serif);margin:0 0 6px}
+.auth p{font:400 12px var(--f-mono);color:var(--bronze);margin:0 0 18px}
+.auth input{width:100%;border:0;outline:none;background:rgba(29,29,29,.04);border-radius:10px;padding:11px 14px;font:400 13px var(--f-mono);margin-bottom:10px}
+.auth .dbtn{display:block;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <img src="brand/sturij-logo-black.png" alt="Sturij">
+    <h1>Scheme review</h1>
+    <span class="lbl" id="rolelbl"></span>
+  </div>
+  <div id="content"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* Production review page — Sprint 4 boards schema.
+   Client mode: ?t=<share_token> — anonymous, everything through /api/review/client (polling).
+   Designer mode: no token — magic-link sign-in, direct Supabase (owner RLS) + Realtime. */
+var CFG={
+  supabaseUrl:'https://oqduxjquzbvetkcllymd.supabase.co',
+  supabaseAnonKey:'PASTE_ANON_KEY_HERE' /* publishable; RLS enforces access */
+};
+var TOKEN=new URLSearchParams(location.search).get('t');
+var role=TOKEN?'client':'designer';
+document.getElementById('rolelbl').textContent=role==='client'?'':'Designer';
+var C=document.getElementById('content');
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function pubUrl(p){return p?CFG.supabaseUrl+'/storage/v1/object/public/'+p:'';}
+
+/* state: array of publication view-models {boardId,versionId,name,ver,published,responded,png,notes[],mats[],open} */
+var pubs=[];
+
+function render(){
+  if(!pubs.length){C.innerHTML='<div class="empty"><h2>Nothing published yet</h2><p>'+(role==='client'?'Your designer will publish a wall here when a version is ready for your eyes.':'Publish a wall from the canvas board to start a review.')+'</p></div>';return;}
+  var h='';
+  pubs.forEach(function(p,pi){
+    var open=(p.notes||[]).filter(function(n){return !n.reply;}).length;
+    if(role==='client'&&p.responded)h+='<div class="banner gold">Your designer has responded to your notes on '+esc(p.name)+' \u2014 green notes carry their reply.</div>';
+    h+='<div class="pub" data-pi="'+pi+'"><div class="phd"><b>'+esc(p.name)+'</b><span class="lbl">Version <b>v'+p.ver+'</b> \u00b7 '+new Date(p.published).toLocaleDateString('en-GB')+'</span></div>'
+      +'<div class="imgwrap" data-pi="'+pi+'"><img src="'+p.png+'" alt="'+esc(p.name)+'" draggable="false">';
+    (p.notes||[]).forEach(function(n,ni){
+      h+='<div class="pnote'+(n.reply?' responded':'')+'" style="left:'+(Math.min(n.x,.82)*100)+'%;top:'+(Math.min(n.y,.86)*100)+'%">'
+        +(role==='client'&&!n.reply&&n.author==='client'?'<button class="px" data-del="'+pi+':'+ni+'">\u00d7</button>':'')
+        +'<span class="who">'+(n.reply?'Answered':(n.author==='client'?(role==='client'?'Your note':'Client note'):'Designer note'))+'</span>'+esc(n.body)
+        +(n.reply?'<div class="reply"><span class="who">Designer</span>'+esc(n.reply)+'</div>':'')
+        +(role==='designer'&&!n.reply?'<div class="reply"><textarea data-re="'+pi+':'+ni+'" rows="2" placeholder="Reply\u2026"></textarea></div>':'')
+        +'</div>';
+    });
+    h+='</div><div class="mats"><span class="lbl">Materials \u2014 tick to approve</span><div class="mgrid">';
+    (p.mats||[]).forEach(function(m,mi){
+      h+='<div class="mat"><span class="sw" style="'+(m.hex?'background:'+m.hex:'background-image:url('+(m.src||'')+')')+'"></span><span class="nm">'+esc(m.name)+'</span>'
+        +'<button class="tick'+(m.approved?' on':'')+'" data-ap="'+pi+':'+mi+'" title="'+(m.approved?'Approved':'Approve')+'"'+(role==='designer'?' style="pointer-events:none;opacity:.7"':'')+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12.5l5 5L20 6.5"/></svg></button></div>';
+    });
+    h+='</div></div>';
+    if(role==='designer')h+='<div class="dbar"><span class="lbl">'+open+' open note'+(open===1?'':'s')+'</span><button class="dbtn" data-done="'+pi+'">All responses ready \u2014 notify customer</button></div>';
+    h+='</div>';
+  });
+  C.innerHTML=h;
+  bind();
+}
+
+/* ══ CLIENT MODE — token + polling ══ */
+function clientLoad(){
+  return fetch('/api/review/client?t='+encodeURIComponent(TOKEN)).then(function(r){
+    if(!r.ok){C.innerHTML='<div class="empty"><h2>Link not recognised</h2><p>Ask your designer for a fresh review link.</p></div>';throw new Error('bad token');}
+    return r.json();
+  }).then(function(d){
+    pubs=d.publication?[{
+      name:d.publication.name,ver:d.publication.ver,published:d.publication.published,
+      responded:d.board.responded,png:d.publication.png,notes:d.publication.notes,
+      mats:d.publication.materials.map(function(m){return {id:m.itemId,name:m.name,hex:m.hex,src:m.src,approved:d.approved.indexOf(m.itemId)>=0};})
+    }]:[];
+    render();
+  });
+}
+function clientPost(body){
+  body.t=TOKEN;
+  return fetch('/api/review/client',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){if(!r.ok)return r.json().then(function(j){alert(j.error||'Failed');return clientLoad();});return r.json();});
+}
+
+/* ══ DESIGNER MODE — magic link + direct Supabase + Realtime ══ */
+var sb=null,user=null;
+function renderAuth(sent){
+  C.innerHTML='<div class="auth"><h2>'+(sent?'Check your email':'Sign in')+'</h2>'
+    +'<p>'+(sent?'We\u2019ve sent a sign-in link to '+esc(sent)+'.':'Designer sign-in \u2014 clients use their review link instead.')+'</p>'
+    +(sent?'':'<input id="email" type="email" placeholder="you@sturij.com"><button class="dbtn" id="golink">Email me a sign-in link</button>')
+    +'</div>';
+  var b=document.getElementById('golink');
+  if(b)b.onclick=function(){
+    var em=document.getElementById('email').value.trim();if(!em)return;
+    sb.auth.signInWithOtp({email:em,options:{emailRedirectTo:location.href}}).then(function(r){
+      if(r.error)alert(r.error.message);else renderAuth(em);});};
+}
+function designerLoad(){
+  return sb.from('boards').select('id,title,responded_at,published_version,board_versions!boards_published_version_fkey(id,ver,items,created_at)')
+    .eq('owner',user.id).not('published_version','is',null)
+    .then(function(r){
+      var boards=r.data||[];
+      if(!boards.length){pubs=[];render();return;}
+      var ids=boards.map(function(b){return b.published_version;});
+      return Promise.all([
+        sb.from('board_notes').select('*').in('version_id',ids).order('created_at'),
+        sb.from('approvals').select('board_id,swatch_key').in('board_id',boards.map(function(b){return b.id;}))
+      ]).then(function(rr){
+        var notes=rr[0].data||[],aps=rr[1].data||[];
+        pubs=boards.map(function(b){
+          var v=b.board_versions,it=(v&&v.items)||{};
+          return {boardId:b.id,versionId:v&&v.id,
+            name:it.wall?it.wall.name:b.title,ver:v?v.ver:1,published:v?v.created_at:null,
+            responded:!!b.responded_at,png:pubUrl(it.image_path),
+            notes:notes.filter(function(n){return n.version_id===(v&&v.id);}),
+            mats:(it.materials||[]).map(function(m){return {id:m.itemId,name:m.name,hex:m.hex,src:pubUrl(m.image_path),
+              approved:aps.some(function(a){return a.board_id===b.id&&a.swatch_key===m.itemId;})};})};
+        });
+        render();
+      });
+    });
+}
+function designerSubscribe(){
+  sb.channel('review-live')
+    .on('postgres_changes',{event:'*',schema:'public',table:'board_notes'},designerLoad)
+    .on('postgres_changes',{event:'*',schema:'public',table:'approvals'},designerLoad)
+    .on('postgres_changes',{event:'*',schema:'public',table:'boards'},designerLoad)
+    .subscribe();
+}
+
+/* ══ interactions (optimistic) ══ */
+function bind(){
+  if(role==='client')document.querySelectorAll('.imgwrap').forEach(function(w){
+    w.addEventListener('click',function(e){
+      if(e.target!==w.querySelector('img'))return;
+      var r=w.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      var text=prompt('Your note for the designer:');
+      if(!text)return;
+      var p=pubs[+w.getAttribute('data-pi')];
+      p.notes.push({x:x,y:y,author:'client',body:text});render();
+      clientPost({action:'note',x:x,y:y,body:text}).then(clientLoad);
+    });
+  });
+  document.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(e){e.stopPropagation();
+    var a=b.getAttribute('data-del').split(':'),p=pubs[+a[0]],n=p.notes[+a[1]];
+    p.notes.splice(+a[1],1);render();
+    if(n.id)clientPost({action:'delNote',id:n.id});};});
+  if(role==='client')document.querySelectorAll('[data-ap]').forEach(function(b){b.onclick=function(){
+    var a=b.getAttribute('data-ap').split(':'),m=pubs[+a[0]].mats[+a[1]];
+    m.approved=!m.approved;render();
+    clientPost({action:'approve',swatchKey:m.id,swatch:{name:m.name,hex:m.hex},approved:m.approved});};});
+  document.querySelectorAll('[data-re]').forEach(function(t){t.addEventListener('keydown',function(e){
+    if(e.key!=='Enter'||e.shiftKey)return;e.preventDefault();
+    var v=t.value.trim();if(!v)return;
+    var a=t.getAttribute('data-re').split(':'),n=pubs[+a[0]].notes[+a[1]];
+    n.reply=v;render();
+    sb.from('board_notes').update({reply:v,replied_at:new Date().toISOString()}).eq('id',n.id)
+      .then(function(r){if(r.error){alert(r.error.message);designerLoad();}});});});
+  document.querySelectorAll('[data-done]').forEach(function(b){b.onclick=function(){
+    var p=pubs[+b.getAttribute('data-done')];
+    p.responded=true;render();
+    sb.auth.getSession().then(function(s){
+      return fetch('/api/review/respond-done',{method:'POST',
+        headers:{'content-type':'application/json',authorization:'Bearer '+s.data.session.access_token},
+        body:JSON.stringify({boardId:p.boardId})});
+    }).then(function(r){if(!r.ok)return r.json().then(function(j){alert(j.error||'Notify failed');designerLoad();});});};});
+}
+
+/* ══ boot ══ */
+if(role==='client'){
+  clientLoad();
+  setInterval(function(){clientLoad().catch(function(){});},8000);
+}else{
+  sb=window.supabase.createClient(CFG.supabaseUrl,CFG.supabaseAnonKey);
+  sb.auth.onAuthStateChange(function(_e,session){
+    user=session&&session.user;
+    if(!user){renderAuth();return;}
+    designerLoad().then(designerSubscribe);
+  });
+}
+</script>
+</body>
+</html>

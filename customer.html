@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Your designer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4A01B;--ink:#1D1D1D;--paper:#F7F4EE;--bronze:#62584F;--f-serif:'Cormorant Garamond',Georgia,serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--f-mono);display:flex;justify-content:center}
+a{color:var(--bronze)}a:hover{color:var(--gold)}
+button{all:unset;cursor:pointer}
+.phone{width:100%;max-width:430px;height:100%;display:flex;flex-direction:column;background:var(--paper)}
+.head{padding:16px 18px 12px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(29,29,29,.08);background:rgba(255,255,255,.6);backdrop-filter:blur(12px)}
+.ava{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:600 15px var(--f-serif)}
+.head .who{flex:1;min-width:0}
+.head .who b{display:block;font:600 17px var(--f-serif)}
+.status{font:500 9px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--bronze)}
+.status::before{content:'\25CF ';font-size:8px}
+.status.on::before{color:#4A7C59}
+.status.away::before{color:#B4462E}
+.endb{padding:6px 12px;border-radius:999px;font:500 9px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);box-shadow:inset 0 0 0 1px rgba(29,29,29,.16)}
+.thread{flex:1;overflow:auto;padding:18px 16px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
+.note{align-self:center;text-align:center;font:400 10px var(--f-mono);letter-spacing:.08em;color:#9a9284;max-width:280px}
+.msg{max-width:82%}
+.msg .body{padding:11px 14px;border-radius:14px;background:#fff;box-shadow:0 1px 4px rgba(29,29,29,.06);font:400 13.5px/1.55 var(--f-mono)}
+.msg.customer{align-self:flex-end}
+.msg.customer .body{background:var(--ink);color:#F2EEE6;border-bottom-right-radius:4px}
+.msg.designer .body{border-bottom-left-radius:4px}
+.msg .t{font:400 8.5px var(--f-mono);letter-spacing:.1em;color:#9a9284;margin-top:3px}
+.msg.customer .t{text-align:right}
+.msg .body img{max-width:100%;border-radius:8px;display:block}
+.msg .file{display:flex;align-items:center;gap:8px;font:500 11px var(--f-mono)}
+.msg .file svg{width:16px;height:16px;flex:none}
+.comp{padding:10px 12px calc(14px + env(safe-area-inset-bottom));display:flex;gap:8px;align-items:flex-end;border-top:1px solid rgba(29,29,29,.08);background:rgba(255,255,255,.6);backdrop-filter:blur(12px)}
+.cwrap{flex:1;background:#fff;border-radius:16px;box-shadow:0 1px 6px rgba(29,29,29,.08);padding:2px 4px 2px 14px;display:flex;align-items:flex-end}
+.cwrap textarea{flex:1;border:0;outline:none;resize:none;background:none;font:400 13.5px/1.5 var(--f-mono);color:var(--ink);padding:9px 0;max-height:110px}
+.cbtn{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--bronze);flex:none}
+.cbtn:hover{background:rgba(29,29,29,.06)}
+.cbtn.send{background:var(--gold);color:var(--ink)}
+.cbtn svg{width:16px;height:16px}
+.ended{padding:16px;text-align:center}
+.ended button{padding:9px 18px;border-radius:999px;background:var(--ink);color:#fff;font:500 10px var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="head">
+    <div class="ava">S</div>
+    <div class="who"><b>Your Sturij designer</b><span class="status" id="dstat"></span></div>
+    <button class="endb" id="endc">End chat</button>
+  </div>
+  <div class="thread" id="thread"></div>
+  <div class="comp" id="comp">
+    <button class="cbtn" id="up" title="Send a photo or file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.5l-8.2 8.2a5.5 5.5 0 0 1-7.8-7.8L13.5 4.4a3.7 3.7 0 0 1 5.2 5.2L10.6 17.7a1.9 1.9 0 0 1-2.7-2.7L15.5 7.4"/></svg></button>
+    <input type="file" id="upf" accept="image/*,.pdf" multiple hidden>
+    <div class="cwrap"><textarea id="inp" rows="1" placeholder="Message your designer\u2026"></textarea>
+    <button class="cbtn send" id="send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button></div>
+  </div>
+</div>
+<script src="chat-core.js"></script>
+<script>
+/* Customer side of one project chat. Prototype: shares localStorage with the designer pages;
+   real build swaps to Supabase realtime per CHAT-SPEC.md. */
+var C=window.SturijChat;
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function el(i){return document.getElementById(i);}
+var sess=(function(){
+  var all=C.sessions().filter(function(s){return s.kind==='customer'&&s.status==='open';});
+  if(all.length)return all[0];
+  var s=C.create('customer',null);s.title='Customer chat';C.put(s);return s;
+})();
+function stat(){
+  var st=C.status.get(),n=el('dstat');
+  var label=st.status==='Custom text'?(st.custom||'Away'):st.status;
+  n.textContent=label;
+  n.className='status '+(st.status==='Available'?'on':st.status.indexOf('Away')===0?'away':'');
+  return st;
+}
+function render(){
+  var t=el('thread'),st=stat(),h='';
+  if(st.status!=='Available')h+='<div class="note">Your designer is '+esc(st.status==='Custom text'?st.custom:st.status.toLowerCase())+' \u2014 messages you send now are saved and summarised for them.</div>';
+  sess.msgs.forEach(function(m){
+    var body=C.md(m.body);
+    if(m.img)body+='<img src="'+m.img+'" alt="">';
+    if(m.file)body='<span class="file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>'+esc(m.file)+'</span>'+ (m.body?('<br>'+C.md(m.body)):'');
+    h+='<div class="msg '+m.role+'"><div class="body">'+body+'</div><div class="t">'+new Date(m.t).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})+'</div></div>';
+  });
+  if(sess.status==='ended')h+='<div class="note">Chat ended \u2014 your designer has a summary and will pick up your actions.</div>';
+  t.innerHTML=h;t.scrollTop=t.scrollHeight;
+  el('comp').style.display=sess.status==='ended'?'none':'';
+}
+el('send').onclick=send;
+el('inp').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+function send(){
+  var v=el('inp').value.trim();if(!v)return;
+  el('inp').value='';
+  C.send(sess,v,{role:'customer',noReply:true},function(){render();});
+}
+el('up').onclick=function(){el('upf').click();};
+el('upf').addEventListener('change',function(){
+  Array.prototype.forEach.call(this.files,function(f){
+    if(f.type.indexOf('image/')===0){
+      var rd=new FileReader();
+      rd.onload=function(){
+        /* downscale so localStorage survives; real build uploads to chat-uploads/ + project library */
+        var im=new Image();
+        im.onload=function(){
+          var s=Math.min(1,900/Math.max(im.width,im.height));
+          var c=document.createElement('canvas');c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+          c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+          C.send(sess,'',{role:'customer',noReply:true,img:c.toDataURL('image/jpeg',.72)},function(){render();});
+        };
+        im.src=rd.result;
+      };
+      rd.readAsDataURL(f);
+    } else {
+      C.send(sess,'',{role:'customer',noReply:true,file:f.name},function(){render();});
+    }
+  });
+  this.value='';
+});
+el('endc').onclick=function(){
+  if(!sess.msgs.length){return;}
+  el('endc').textContent='Summarising\u2026';
+  C.summarise(sess,function(){render();el('endc').textContent='Ended';},function(){render();el('endc').textContent='Ended';});
+};
+window.addEventListener('storage',function(e){if(e.key==='sj-chat-sessions'){var f=C.get(sess.id);if(f){sess=f;render();}}});
+render();
+</script>
+</body>
+</html>

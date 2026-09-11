@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — News</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="brand/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4A01B;--ink:#1D1D1D;--paper:#F7F4EE;--bronze:#62584F;--f-serif:'Cormorant Garamond',Georgia,serif;--f-mono:'IBM Plex Mono',ui-monospace,monospace}
+body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 var(--f-mono);background-image:radial-gradient(rgba(29,29,29,.09) 1px,transparent 1px);background-size:26px 26px}
+a{color:var(--bronze)}a:hover{color:var(--gold)}
+.top{height:52px;background:var(--ink);display:flex;align-items:center;gap:16px;padding:0 20px}
+.top img{height:20px}
+.top .tt{flex:1;text-align:center;font:500 10.5px var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(250,248,243,.85)}
+.wrap{max-width:560px;margin:0 auto;padding:70px 20px 120px;display:flex;flex-direction:column;gap:40px;align-items:center}
+header{text-align:center}
+header h1{font:600 44px var(--f-serif);margin:0 0 6px}
+header p{font:400 11px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--bronze);margin:0}
+.feed{width:100%;display:flex;flex-direction:column}
+.nitem{border-bottom:1px dashed rgba(98,88,79,.35);padding:20px 0;display:flex;flex-direction:column;gap:8px;opacity:0}
+.nitem .tag{font:500 8.5px var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.nitem h3{font:600 19px var(--f-serif);margin:0;text-wrap:balance}
+.nitem p{font:400 11.5px/1.6 var(--f-mono);color:var(--bronze);margin:0}
+.spin{width:50px;height:50px;position:relative;will-change:transform;animation:sp 1.5s linear infinite}
+.spin::before{content:"";position:absolute;inset:0;border-radius:50%;border:4px solid rgba(98,88,79,.2);border-top-color:var(--gold)}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="top"><img src="brand/sturij-logo-white.png" alt="Sturij"><div class="tt">News</div></div>
+<div class="wrap">
+  <header><h1>News</h1><p>From the bench &middot; product &amp; trade</p></header>
+  <main class="feed" id="feed"></main>
+  <div class="spin" id="spin"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.13.5/dist/motion.js" defer></script>
+<script defer>
+addEventListener('DOMContentLoaded',function(){
+var DATA=[
+ ['Product','Shelf docks arrive on the canvas','Gather a scheme onto a named shelf, park it as a pill, reopen it anywhere \u2014 system pairings use the same furniture.'],
+ ['Materials','Cleaf collection lands in the library','Cheope, Alpaca, Primofiore, Mosaico and Fusion boards now carry full codes, tones and ranges \u2014 158 products catalogued.'],
+ ['Product','3D board viewer on every work area','Type a product code and the board stands up in full grain \u2014 tilt it, pull it closer, rake the light across it.'],
+ ['Trade','Client review round-trip goes live','Publish a wall, clients note and approve from one link \u2014 no accounts, replies land back on your board.'],
+ ['Product','Research library spec published','Ask for research in a sentence; a cited PDF lands on your shelf with a taster in chat. Portable if you ever leave.'],
+ ['Studio','Motion becomes the single animation engine','Every placement, drawer and settle now runs one spring \u2014 smaller CSS, identical feel across the platform.'],
+ ['Trade','Estimator logic moves toward quick quotes','Sections, ends conditions and scribe baked in \u2014 boards, edging and hardware counted from the real carcass engine.'],
+ ['Product','Command palette everywhere','\u2318K on any page: tools, work areas, settings \u2014 registries grow as features land.'],
+ ['Studio','Stock image surf gallery','Reusable studio imagery browsed as a 3D wave \u2014 scroll to surf, hover for the reference.']
+];
+var feed=document.getElementById('feed'),spin=document.getElementById('spin');
+var idx=0,busy=false;
+function batch(){
+  if(busy)return;busy=true;
+  setTimeout(function(){
+    for(var i=0;i<3;i++){
+      var d=DATA[(idx+i)%DATA.length];
+      var a=document.createElement('article');a.className='nitem';
+      a.innerHTML='<span class="tag">'+d[0]+'</span><h3>'+d[1]+'</h3><p>'+d[2]+'</p>';
+      feed.appendChild(a);
+      if(window.Motion){try{Motion.animate(a,{opacity:[0,1],y:[20,0]},{duration:.4,ease:'easeOut',delay:i*.2});}catch(_){a.style.opacity=1;}}
+      else a.style.opacity=1;
+    }
+    idx=(idx+3)%DATA.length;busy=false;
+  },1000);
+}
+new IntersectionObserver(function(en){if(en[0].isIntersecting)batch();}).observe(spin);
+batch();
+});
+</script>
+<script src="workarea-nav.js" defer></script>
+<script src="command-palette.js" defer></script>
+</body>
+</html>

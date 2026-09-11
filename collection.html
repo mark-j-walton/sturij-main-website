@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sturij — Collection</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="brand/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;overflow:hidden;background:#1D1D1D;font-family:'IBM Plex Mono',monospace}
+.hdr{position:absolute;z-index:50;top:max(70px,3vw);left:3vw;color:#FDFCF8}
+.hdr .t1{font:600 clamp(32px,5vw,64px)/0.95 'Cormorant Garamond',serif;margin-left:4vw}
+.hdr .t2{font:600 clamp(32px,5vw,64px)/0.95 'Cormorant Garamond',serif}
+.hdr sup{font:500 11px 'IBM Plex Mono',monospace;vertical-align:top;position:relative;top:.7em;margin-left:6px;color:#D4A01B}
+.hint{position:absolute;z-index:50;bottom:3vw;right:3vw;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,243,.6)}
+.back{position:absolute;z-index:50;top:22px;right:22px;font:500 10px 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,248,243,.7);text-decoration:none}
+.back:hover{color:#D4A01B}
+.viewport{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center;perspective:2000px;perspective-origin:10% 10%;touch-action:none}
+.planes{position:relative;display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;transform:translateY(90px)}
+.plane{width:300px;height:370px;position:absolute;transform-style:preserve-3d;box-shadow:0 25px 50px -12px rgba(0,0,0,.4);transition:filter .2s}
+.plane img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;-webkit-user-drag:none;user-select:none}
+.pidx{position:absolute;top:-22px;left:0;font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:rgba(250,248,243,.7)}
+.plabel{position:absolute;left:100%;top:50%;margin-left:12px;display:flex;align-items:center;pointer-events:none;opacity:0}
+.pline{width:110px;height:1px;background:#FDFCF8;transform-origin:left;transform:scaleX(0);transition:transform .3s ease-out}
+.ptext{padding:4px 8px;font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:#FDFCF8;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="hdr"><div class="t1">STUDIO STOCK</div><div class="t2">IMAGES<sup id="cnt"></sup></div></div>
+<a class="back" href="studio.html">← Materials</a>
+<div class="hint">scroll to surf · click to send to project assets</div>
+<div class="viewport" id="vp"><div class="planes" id="pl"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.13.5/dist/motion.js" defer></script>
+<script defer>
+addEventListener('DOMContentLoaded',function(){
+fetch('showcase/stock/stock.json').then(function(r){return r.json();}).then(function(j){
+var boards=j.items||j.boards||[];if(!boards.length)return;
+document.getElementById('cnt').textContent='('+boards.length+')';
+var PW=280,GAP=-60,N=Math.min(12,Math.max(5,boards.length));
+var planeW=PW+GAP,total=planeW*N;
+var pl=document.getElementById('pl'),vp=document.getElementById('vp');
+var raw=0,x=0,vel=0,lastX=0;
+var CH='!@#$%^&*░▒▓█▀▄■□▪▫●○◆◇';
+var planes=[];
+function wrapv(min,max,v){var r=max-min;return ((v-min)%r+r)%r+min;}
+for(var i=0;i<N;i++){
+  var b=boards[i%boards.length];
+  var d=document.createElement('div');d.className='plane';
+  d.innerHTML='<img src="'+b.img+'" draggable="false"><div class="pidx">'+String(i+1).padStart(2,'0')+'</div>'
+    +'<div class="plabel"><div class="pline"></div><div class="ptext"></div></div>';
+  d._start=i*planeW;d._b=b;d._wave=0;d._hover=0;
+  (function(d){
+    d.addEventListener('pointerenter',function(){d._hoverT=-30;scramble(d);d.style.filter='brightness(1.15)';d.style.zIndex=100;
+      d.querySelector('.plabel').style.opacity=1;d.querySelector('.pline').style.transform='scaleX(1)';});
+    d.addEventListener('pointerleave',function(){d._hoverT=0;d.style.filter='';d.style.zIndex=1;
+      d.querySelector('.plabel').style.opacity=0;d.querySelector('.pline').style.transform='scaleX(0)';});
+  })(d);
+  pl.appendChild(d);planes.push(d);
+}
+function scramble(d){
+  var el=d.querySelector('.ptext'),target=d._b.name+' \u00b7 '+d._b.code,step=0;
+  clearInterval(el._iv);
+  el._iv=setInterval(function(){
+    step++;
+    el.textContent=target.split('').map(function(c,i){
+      if(c===' ')return ' ';
+      return i<step?c:CH[Math.floor(Math.random()*CH.length)];
+    }).join('');
+    if(step>=target.length)clearInterval(el._iv);
+  },34);
+}
+vp.addEventListener('wheel',function(e){e.preventDefault();raw-=(e.deltaX!==0?e.deltaX:e.deltaY);},{passive:false});
+var px=null;
+vp.addEventListener('pointerdown',function(e){px=e.clientX;vp._sx=e.clientX;vp._sy=e.clientY;});
+addEventListener('pointermove',function(e){if(px===null)return;raw+=(e.clientX-px)*2.5;px=e.clientX;});
+addEventListener('pointerup',function(e){
+  var wasClick=vp._sx!=null&&Math.hypot(e.clientX-vp._sx,e.clientY-vp._sy)<6;
+  px=null;vp._sx=null;
+  if(!wasClick)return;
+  var t=e.target.closest?e.target.closest('.plane'):null;
+  if(!t||!t._b)return;
+  var b=t._b;
+  var assets;try{assets=JSON.parse(localStorage.getItem('sturij.projectAssets'))||[];}catch(_){assets=[];}
+  if(!assets.some(function(a){return a.img===b.img;})){assets.push({code:b.code||null,name:b.name,img:b.img,added:Date.now()});localStorage.setItem('sturij.projectAssets',JSON.stringify(assets));}
+  var tt=document.createElement('div');
+  tt.style.cssText='position:fixed;left:50%;bottom:40px;transform:translateX(-50%);padding:9px 18px;border-radius:999px;background:#FDFCF8;font:400 11px "IBM Plex Mono",monospace;color:#1D1D1D;z-index:600;box-shadow:0 14px 30px rgba(0,0,0,.4)';
+  tt.textContent=b.name+' \u2014 sent to project assets (stays in the gallery)';
+  document.body.appendChild(tt);setTimeout(function(){tt.remove();},2200);
+  if(window.Motion){try{Motion.animate(t,{scale:[1,.94,1]},{duration:.35});}catch(_){/**/}}
+});
+(function tick(){
+  x+=(raw-x)*.08;
+  vel=x-lastX;lastX=x;
+  planes.forEach(function(d){
+    d._hover=d._hover+(((d._hoverT||0))-d._hover)*.18;
+    var pos=d._start+x;
+    var c=wrapv(-total/2,total/2,pos);
+    var norm=c/(total/2);
+    var wave=(vel/8)*Math.sin(norm*Math.PI*2)*5;
+    d._wave=d._wave+(wave-d._wave)*.2;
+    var y=c*-.35+d._wave+d._hover, z=c*-1.2;
+    d.style.transform='translate3d('+c.toFixed(1)+'px,'+y.toFixed(1)+'px,'+z.toFixed(1)+'px) rotateY(-50deg)';
+  });
+  requestAnimationFrame(tick);
+})();
+});
+});
+</script>
+</body>
+</html>
