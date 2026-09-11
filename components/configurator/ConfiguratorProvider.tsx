@@ -3,12 +3,14 @@
 // session's swatches (max 4), each swatch's room finishes, the visuals generated into the page's images,
 // and the modals. Every consumer — the Egger band, the two swatch rails, the feature image, the four
 // stacking cards, the enquiry band — reads this context; there is no second implementation.
-import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { ROOMS, type Room, type RoomCategory, type Tile } from '@/lib/galleries'
 import { drawRoundel, type CompletePicks, type Picks } from './canvas'
 
 export const MAX_SWATCHES = 4
 export const VISUALS_KEY = 'sturij_visuals'
+export const TIPS_KEY = 'sturij_swatch_tips'
+export const TIPS_TOAST = 'Remember: if you see a swatch, you can remix the image and the room type with your created swatches.'
 
 export type RoomPicks = Record<RoomCategory, Tile | null>
 export interface Swatch { n: number; picks: CompletePicks; thumb: string; room: RoomPicks }
@@ -56,6 +58,12 @@ interface Ctx {
   setGuide: (g: Guide | null) => void
   /** Ask a room on a named target (the calculator's own preview) — the one render path. */
   askRoomOn: (key: string, s: Swatch) => void
+  /** Remix a block's own image in its own room with a swatch — the target's fixed room, its base image. */
+  remixInto: (key: string, s: Swatch) => void
+  /** The swatch call-outs: one dismissal dismisses them all and shows the reminder toast. */
+  tipsDismissed: boolean
+  dismissTips: () => void
+  toast: string | null
 }
 
 const ConfiguratorContext = createContext<Ctx | null>(null)
@@ -74,6 +82,15 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
   const [lightbox, setLightbox] = useState<Visual | null>(null)
   const [visuals, setVisuals] = useState<Visual[]>([])
   const [guide, setGuide] = useState<Guide | null>(null)
+  const [tipsDismissed, setTipsDismissed] = useState(false)
+  const [toast, setToast] = useState<string | null>(null)
+  useEffect(() => { try { if (localStorage.getItem(TIPS_KEY) === '1') setTipsDismissed(true) } catch { /* a convenience only */ } }, [])
+  const dismissTips = useCallback(() => {
+    setTipsDismissed(true)
+    try { localStorage.setItem(TIPS_KEY, '1') } catch { /* a convenience only */ }
+    setToast(TIPS_TOAST)
+    setTimeout(() => setToast(null), 7000)
+  }, [])
   const targets = useRef(new Map<string, Target>())
   const finishing = useRef(false)
 
@@ -138,6 +155,13 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
 
   const askRoomOn = useCallback((key: string, s: Swatch) => { targets.current.get(key)?.askRoom(s) }, [])
 
+  const remixInto = useCallback((key: string, s: Swatch) => {
+    const t = targets.current.get(key)
+    if (!t) return
+    if (t.room) void t.run(s, t.room)
+    else t.askRoom(s)
+  }, [])
+
   const recordVisual = useCallback((v: Visual) => {
     setVisuals((prev) => [...prev, v])
     try {
@@ -152,8 +176,8 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
     builderFor, openBuilder: setBuilderFor, setRoomPick, registerTarget,
     visualiseFeature, visualiseCurrentCard, lightbox, openLightbox: setLightbox, recordVisual, visuals,
     latestSwatch: swatches[swatches.length - 1] ?? null,
-    guide, setGuide, askRoomOn,
-  }), [picks, swatches, activeGallery, pick, newSwatch, builderFor, setRoomPick, registerTarget, visualiseFeature, visualiseCurrentCard, lightbox, recordVisual, visuals, guide, askRoomOn])
+    guide, setGuide, askRoomOn, remixInto, tipsDismissed, dismissTips, toast,
+  }), [picks, swatches, activeGallery, pick, newSwatch, builderFor, setRoomPick, registerTarget, visualiseFeature, visualiseCurrentCard, lightbox, recordVisual, visuals, guide, askRoomOn, remixInto, tipsDismissed, dismissTips, toast])
 
   return <ConfiguratorContext.Provider value={value}>{children}</ConfiguratorContext.Provider>
 }

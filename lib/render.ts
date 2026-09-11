@@ -17,6 +17,10 @@ export interface RenderRequest {
   codes?: { doors?: string | null; carcass?: string | null }
   roomFinishes?: Partial<Record<'ceiling' | 'walls' | 'skirting' | 'flooring', string | null>>
   textures: [string, string, string]
+  /** The remix: the block's own image — a path under /showcase or a public object in the site-images bucket. */
+  base?: string | null
+  /** The base image as base64 JPEG, loaded by the route from the path above; never sent by the client. */
+  baseImage?: string | null
 }
 
 export type RenderError = { ok: false; code: 'E_BAD_REQUEST' | 'E_NOT_CONFIGURED' | 'E_RATE_LIMIT' | 'E_NO_IMAGE' | 'E_UPSTREAM' | 'E_FORBIDDEN'; message: string }
@@ -24,6 +28,14 @@ export type RenderOk = { ok: true; image: string; label: typeof VISUALISATION; m
 
 const name = (v: unknown, max = 80) => (typeof v === 'string' && v.trim() ? v.trim().slice(0, max) : null)
 const b64 = /^[A-Za-z0-9+/]+={0,2}$/
+/** A base the server may load: the site's own showcase folder, or a public object in the site-images bucket. */
+export const BASE_LOCAL = /^\/showcase\/[a-z0-9][a-z0-9\-\/]*\.(jpe?g|png|webp)$/i
+export const BASE_BUCKET = /^https:\/\/[a-z0-9-]+\.supabase\.co\/storage\/v1\/object\/public\/site-images\/[A-Za-z0-9._\/-]+$/
+export function validateBase(v: unknown): string | null | 'invalid' {
+  if (v === undefined || v === null || v === '') return null
+  if (typeof v !== 'string' || v.includes('..')) return 'invalid'
+  return BASE_LOCAL.test(v) || BASE_BUCKET.test(v) ? v : 'invalid'
+}
 
 export function validateRenderRequest(body: unknown): { ok: true; value: RenderRequest } | RenderError {
   if (!body || typeof body !== 'object') return { ok: false, code: 'E_BAD_REQUEST', message: 'The request was not readable' }
@@ -39,6 +51,8 @@ export function validateRenderRequest(body: unknown): { ok: true; value: RenderR
   }
   const codes = (b.codes ?? {}) as Record<string, unknown>
   const rf = (b.roomFinishes ?? {}) as Record<string, unknown>
+  const base = validateBase(b.base)
+  if (base === 'invalid') return { ok: false, code: 'E_BAD_REQUEST', message: 'The base image must be one of the site\'s own images' }
   return {
     ok: true,
     value: {
@@ -47,22 +61,30 @@ export function validateRenderRequest(body: unknown): { ok: true; value: RenderR
       codes: { doors: name(codes.doors, 20), carcass: name(codes.carcass, 20) },
       roomFinishes: { ceiling: name(rf.ceiling), walls: name(rf.walls), skirting: name(rf.skirting), flooring: name(rf.flooring) },
       textures: textures as [string, string, string],
+      base,
     },
   }
 }
 
-/** The prompt as the handoff composes it (README §6), with the code beside a decor where the registry has one. */
+/** The prompt as the handoff composes it (README §6), with the code beside a decor where the registry has one — and the REMIX form when a base image travels: the block's own room kept, the fitted furniture re-finished, the rest of the room made to complement the scheme. */
 export function composePrompt(r: RenderRequest): string {
   const withCode = (n: string, c?: string | null) => (c ? `${n} (Egger ${c})` : n)
   const spec = `doors: ${withCode(r.picks.doors, r.codes?.doors)}, carcass and interior: ${withCode(r.picks.carcass, r.codes?.carcass)}, handles: ${r.picks.handle}`
   const f = r.roomFinishes ?? {}
   const roomSpec = f.flooring ? `; room finishes — ceiling: ${f.ceiling ?? 'white'}, walls: ${f.walls ?? 'warm white'}, skirting: ${f.skirting ?? 'white'}, flooring: ${f.flooring}` : ''
+  if (r.base) {
+    const complement = f.flooring ? `Use the stated room finishes${roomSpec}.` : 'Choose wall colour, flooring, soft furnishings and accessories that complement the new scheme — quiet, tonal, of a piece with it — and change nothing else.'
+    return `The first attached image is a photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Remix it true to a new scheme: keep the room, the camera, the layout, the furniture and the light exactly as they are; re-finish only the fitted furniture in these materials — ${spec}. The three textures that follow are the door finish, the carcass finish and the handle metal finish; apply them faithfully, with their grain and texture, to the fitted furniture. ${complement} Photorealistic, no people, no text or watermarks, the same framing as the original.`
+  }
   return `Photorealistic interior photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Materials — ${spec}${roomSpec}. The first attached texture is the door finish, the second the carcass finish, the third the handle metal finish; apply them faithfully to the fitted furniture. Warm natural light, realistic proportions, no people, no text or watermarks. Landscape 4:3.`
 }
 
-export function geminiBody(prompt: string, textures: [string, string, string]) {
+export function geminiBody(prompt: string, textures: [string, string, string], baseImage?: string | null) {
+  const parts: Array<Record<string, unknown>> = [{ text: prompt }]
+  if (baseImage) parts.push({ inline_data: { mime_type: 'image/jpeg', data: baseImage } })
+  parts.push(...textures.map((data) => ({ inline_data: { mime_type: 'image/jpeg', data } })))
   return {
-    contents: [{ parts: [{ text: prompt }, ...textures.map((data) => ({ inline_data: { mime_type: 'image/jpeg', data } }))] }],
+    contents: [{ parts }],
     generationConfig: { responseModalities: ['IMAGE'] },
   }
 }
@@ -100,7 +122,7 @@ export async function generate(r: RenderRequest, env: RenderEnv, fetchFn: typeof
   const key = env.get('GEMINI_API_KEY')
   if (!key) return { ok: false, code: 'E_NOT_CONFIGURED', message: 'The render key is not present on this deployment (GEMINI_API_KEY from the vault)' }
   const model = env.get('GEMINI_IMAGE_MODEL') || DEFAULT_MODEL
-  const body = JSON.stringify(geminiBody(composePrompt(r), r.textures))
+  const body = JSON.stringify(geminiBody(composePrompt(r), r.textures, r.baseImage ?? null))
   const started = Date.now()
   let last: RenderError = { ok: false, code: 'E_UPSTREAM', message: 'Generation failed' }
   for (let attempt = 0; attempt < 2; attempt++) {

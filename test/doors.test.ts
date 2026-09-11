@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it, vi } from 'vitest'
 import { composeMessage, DEFAULT_ENQUIRY_FUNCTION_URL, postEnquiry, toFunctionPayload, validateEnquiry } from '@/lib/enquiry'
 import { POST as enquiryRoute } from '@/app/api/enquiry/route'
-import { composePrompt, extractImage, generate, RateLimiter, validateRenderRequest, VISUALISATION } from '@/lib/render'
+import { composePrompt, extractImage, geminiBody, generate, RateLimiter, validateRenderRequest, VISUALISATION } from '@/lib/render'
 import { copyText, sanitizeCopy } from '@/lib/copy'
 import { checkImageMeta, IMAGE_LIMIT_BYTES } from '@/components/admin/validate'
 
@@ -63,6 +63,21 @@ describe('the render — server-side, labelled, limited', () => {
     expect(validateRenderRequest({ ...req, room: 'Garage' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
     expect(validateRenderRequest({ ...req, textures: [b64, b64] })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
     expect(validateRenderRequest({ ...req, textures: ['not base64!!', b64, b64] })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
+  })
+  it('the remix: the block\'s own image as the base, the room kept, the rest complementing; only the site\'s own images may be a base', () => {
+    const v = validateRenderRequest({ ...req, base: '/showcase/bedroom-dark-marble-wardrobe.jpg', roomFinishes: {} })
+    if (!v.ok) throw new Error(v.message)
+    const p = composePrompt({ ...v.value, baseImage: 'AAAA' })
+    expect(p).toContain('The first attached image is a photograph of a bedroom')
+    expect(p).toContain('keep the room, the camera, the layout, the furniture and the light exactly as they are')
+    expect(p).toContain('complement the new scheme')
+    const body = geminiBody(p, textures, 'AAAA')
+    expect(body.contents[0]!.parts).toHaveLength(5)
+    expect(body.contents[0]!.parts[1]).toEqual({ inline_data: { mime_type: 'image/jpeg', data: 'AAAA' } })
+    expect(validateRenderRequest({ ...req, base: '/showcase/../../etc/passwd' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
+    expect(validateRenderRequest({ ...req, base: 'https://evil.example/x.jpg' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
+    expect(validateRenderRequest({ ...req, base: 'https://bcpmgpktmuaicjessseg.supabase.co/storage/v1/object/public/site-images/slots/hero.image/1.jpg' })).toMatchObject({ ok: true })
+    expect(validateRenderRequest({ ...req, base: null })).toMatchObject({ ok: true })
   })
   it('composes the prompt as the handoff does, with the registry code beside a decor and no-text rule', () => {
     const v = validateRenderRequest(req)

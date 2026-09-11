@@ -21,6 +21,7 @@ import { FinishConfigurator } from '@/components/configurator/FinishConfigurator
 import { ConfiguratorProvider } from '@/components/configurator/ConfiguratorProvider'
 import { Lightbox } from '@/components/configurator/Lightbox'
 import { RoomBuilder } from '@/components/configurator/RoomBuilder'
+import { Toast } from '@/components/configurator/Toast'
 
 export const revalidate = 60
 
@@ -49,8 +50,8 @@ export default async function Page() {
         </>} />
 
         <Features features={[
-          { id: 'wardrobes', rail: true, kicker: c('feature.wardrobes.kicker'), title: c('feature.wardrobes.title'), body: c('feature.wardrobes.body'), cta: c('feature.wardrobes.cta'), imageSlot: 'feature.wardrobes.image', image: img('feature.wardrobes.image') },
-          { id: 'media', reverse: true, kicker: c('feature.media.kicker'), title: c('feature.media.title'), body: c('feature.media.body'), cta: c('feature.media.cta'), imageSlot: 'feature.media.image', image: img('feature.media.image') },
+          { id: 'wardrobes', room: 'bedroom', kicker: c('feature.wardrobes.kicker'), title: c('feature.wardrobes.title'), body: c('feature.wardrobes.body'), cta: c('feature.wardrobes.cta'), imageSlot: 'feature.wardrobes.image', image: img('feature.wardrobes.image') },
+          { id: 'media', room: 'living-room', reverse: true, kicker: c('feature.media.kicker'), title: c('feature.media.title'), body: c('feature.media.body'), cta: c('feature.media.cta'), imageSlot: 'feature.media.image', image: img('feature.media.image') },
         ]} />
 
         <div className="stksec">
@@ -71,6 +72,7 @@ export default async function Page() {
 
       <RoomBuilder />
       <Lightbox />
+      <Toast />
       <RevealObserver />
     </ConfiguratorProvider>
   )

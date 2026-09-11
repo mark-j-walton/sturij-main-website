@@ -202,6 +202,8 @@ The public site's instance: the handoff's palette (design_handoff_sturij_public_
   "ink.on-dark-40": { "value": "rgba(250,248,242,.4)", "reason": "input placeholders on dark", "by": "claude-code (from the handoff)", "at": "2026-09-10T15:00:00Z" },
   "tint.mosaic": { "value": "35,33,32", "reason": "the RGB the montage tiles tint at 3–23% and the roundel emboss at 3% (README §9)", "by": "claude-code (from the handoff)", "at": "2026-09-10T15:00:00Z" },
   "sheen.grain": { "value": "linear-gradient(115deg, rgba(255,255,255,.34) 0%, rgba(255,255,255,.1) 28%, rgba(255,255,255,0) 55%, rgba(255,255,255,.14) 82%, rgba(255,255,255,0) 100%)", "reason": "the 3D viewer's diagonal grain sheen (README §4)", "by": "claude-code (from the handoff)", "at": "2026-09-10T15:00:00Z" },
-  "feat.imgwell": { "value": "linear-gradient(150deg, rgba(35,33,32,.88), rgba(35,33,32,1))", "reason": "the feature image well before the image decodes", "by": "claude-code (from the handoff)", "at": "2026-09-10T15:00:00Z" }
+  "feat.imgwell": { "value": "linear-gradient(150deg, rgba(35,33,32,.88), rgba(35,33,32,1))", "reason": "the feature image well before the image decodes", "by": "claude-code (from the handoff)", "at": "2026-09-10T15:00:00Z" },
+  "placeholder.opacity": { "value": "0.14", "reason": "the swatch placeholder — the example roundel Mark supplied, very transparent, where a swatch will land (his mock, 11 Sep 2026)", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T08:00:00Z" },
+  "placeholder.opacity-hover": { "value": "0.3", "reason": "the placeholder under the pointer", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T08:00:00Z" }
 }
 ```

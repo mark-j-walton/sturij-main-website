@@ -422,6 +422,18 @@
       "source": "brand/ — the Sturij brand pack (the faceted hexagon mark and the wordmark; brand-library ids sturij.mark.hexagon and sturij.mark.wordmark)"
     },
     {
+      "id": "brand.roundel-sample",
+      "path": "/brand/sturij-roundel-sample.png",
+      "alt": "An example Sturij swatch: walnut doors, dark teal carcass, brass handle",
+      "kind": "brand",
+      "width": 1000,
+      "height": 1000,
+      "format": "png",
+      "bytes": 541466,
+      "sha256": "e6d92f624e2c20b53f939b2523a803fdd1531047064181f153e4118f9a0b435c",
+      "source": "brand/ — the Sturij brand pack (the faceted hexagon mark and the wordmark; brand-library ids sturij.mark.hexagon and sturij.mark.wordmark)"
+    },
+    {
       "id": "render.kitchen-sage-island",
       "path": "/showcase/kitchen-sage-island.jpg",
       "alt": "Sage green handleless kitchen with a marble waterfall island and oak-lined drawers — a visualisation",

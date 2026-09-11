@@ -69,10 +69,10 @@ export function StackCards({ kicker, title, cards }: { kicker: Slot; title: Slot
         <Copy slot={title} as="h2" />
       </div>
       <div className="sbody">
-        <SwatchRail variant="stack" className="srail" id="swrail2" />
+        <SwatchRail variant="stack" roomLabel="room" className="srail" id="swrail-stack-left" slots={[0, 2]} tip />
         <div className="cards">
           {cards.map((c, i) => (
-            <VisualTarget key={c.imageSlot} targetKey={`card:${i}`} room={ROOMS.find((r) => r.card === i) ?? null} className="card" style={{ ['--i' as string]: i }}>
+            <VisualTarget key={c.imageSlot} targetKey={`card:${i}`} room={ROOMS.find((r) => r.card === i) ?? null} base={c.image.src} className="card" style={{ ['--i' as string]: i }}>
               <SlotImage id={c.imageSlot} image={c.image} fill sizes="(max-width: 1120px) 100vw, 1040px" />
               <div className="cc">
                 <Copy slot={c.kicker} as="div" className="k" />
@@ -81,6 +81,7 @@ export function StackCards({ kicker, title, cards }: { kicker: Slot; title: Slot
             </VisualTarget>
           ))}
         </div>
+        <SwatchRail variant="stack" roomLabel="room" className="srail right" id="swrail-stack-right" slots={[2, 4]} />
       </div>
     </section>
   )

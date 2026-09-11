@@ -197,6 +197,11 @@
           "id": "brand.logo-white",
           "path": "/brand/sturij-logo-white.png",
           "alt": "Sturij"
+        },
+        {
+          "id": "brand.roundel-sample",
+          "path": "/brand/sturij-roundel-sample.png",
+          "alt": "An example Sturij swatch: walnut doors, dark teal carcass, brass handle"
         }
       ]
     },

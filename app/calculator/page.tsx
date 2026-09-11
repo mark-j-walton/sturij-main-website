@@ -14,6 +14,7 @@ import { ConfiguratorProvider } from '@/components/configurator/ConfiguratorProv
 import { FinishConfigurator } from '@/components/configurator/FinishConfigurator'
 import { Lightbox } from '@/components/configurator/Lightbox'
 import { RoomBuilder } from '@/components/configurator/RoomBuilder'
+import { Toast } from '@/components/configurator/Toast'
 
 export const revalidate = 60
 
@@ -42,6 +43,7 @@ export default async function CalculatorPage() {
       <SiteFooter logo={logo} tagline={c('footer.tagline')} copyright={c('footer.copyright')} />
       <RoomBuilder />
       <Lightbox />
+      <Toast />
       <RevealObserver />
     </ConfiguratorProvider>
   )
