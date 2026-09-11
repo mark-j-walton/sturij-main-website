@@ -19,7 +19,7 @@ export const RENDER_MESSAGES: Record<string, string> = {
 
 export type RenderReply = { ok: true; image: string; label: string; model: string } | { ok: false; code: string; message?: string }
 
-export async function requestRender(swatch: Swatch, room: Room, fetchFn: typeof fetch = fetch): Promise<RenderReply> {
+export async function requestRender(swatch: Swatch, room: Room, base: string | null = null, fetchFn: typeof fetch = fetch): Promise<RenderReply> {
   const textures = await Promise.all([swatch.picks.doors, swatch.picks.carcass, swatch.picks.handle].map(tileTexture))
   const body = {
     room: room.label,
@@ -27,6 +27,8 @@ export async function requestRender(swatch: Swatch, room: Room, fetchFn: typeof 
     codes: { doors: swatch.picks.doors.code ?? null, carcass: swatch.picks.carcass.code ?? null },
     roomFinishes: Object.fromEntries(Object.entries(swatch.room).map(([k, t]) => [k, t?.name ?? null])),
     textures,
+    // the remix: the block's own image is the base — the room, camera and layout kept, the furniture re-finished
+    base: base ?? null,
   }
   const res = await fetchFn('/api/render', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
   const json = (await res.json().catch(() => null)) as RenderReply | null
@@ -34,7 +36,7 @@ export async function requestRender(swatch: Swatch, room: Room, fetchFn: typeof 
   return json
 }
 
-export function VisualTarget({ targetKey, room, as, className, style, children, roomPickerIn }: { targetKey: string; room: Room | null; as?: ElementType; className?: string; style?: CSSProperties; children: ReactNode; roomPickerIn?: boolean }) {
+export function VisualTarget({ targetKey, room, as, className, style, children, roomPickerIn, base }: { targetKey: string; room: Room | null; as?: ElementType; className?: string; style?: CSSProperties; children: ReactNode; roomPickerIn?: boolean; /** The block's own image, for the remix. */ base?: string | null }) {
   const Tag = (as ?? 'div') as ElementType
   const { registerTarget, openLightbox, recordVisual } = useConfigurator()
   const el = useRef<HTMLElement>(null)
@@ -48,7 +50,7 @@ export function VisualTarget({ targetKey, room, as, className, style, children, 
     if (state === 'loading') return
     setMessage(null)
     setState('loading')
-    const reply = await requestRender(swatch, r)
+    const reply = await requestRender(swatch, r, base ?? null)
     if (!reply.ok) {
       setState(visual ? 'done' : 'idle')
       setMessage(RENDER_MESSAGES[reply.code] ?? RENDER_MESSAGES.E_UPSTREAM!)
@@ -60,7 +62,7 @@ export function VisualTarget({ targetKey, room, as, className, style, children, 
     setVisual(v)
     recordVisual(v)
     setState('ready')
-  }, [state, visual, recordVisual])
+  }, [state, visual, recordVisual, base])
 
   const askRoom = useCallback((swatch: Swatch) => { if (state !== 'loading') { setAsking(swatch); setPickedRoom(-1) } }, [state])
 

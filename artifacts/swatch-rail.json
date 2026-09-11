@@ -1,16 +1,93 @@
 {
   "id": "swatch-rail",
   "kind": "control",
-  "description": "A rail of the session's completed swatches as 72px hexagon thumbnails; hidden until a swatch exists. The feature rail opens the room builder; the stacking rail generates into the pinned card.",
-  "tags": ["swatch", "rail", "visualise"],
-  "contentTypes": ["swatch"],
-  "consumers": ["feature-split", "stack-cards"],
-  "properties": [{ "name": "variant", "values": ["feature", "stack"], "default": "feature", "description": "Which flow a click starts" }, { "name": "direction", "values": ["column", "row"], "default": "column", "description": "Vertical beside the image; horizontal on the phone" }],
+  "description": "Four slots beside every remixable image block, always shown: an empty slot is the example roundel, very transparent, marking where the visitor's swatch (made in the range, max four) will land; a made swatch replaces its placeholder in position. Tapping a swatch remixes the block's own image into the block's own room type — the wardrobes feature a bedroom, the media feature a living room, each card its room — true to the scheme, the rest of the room complementing it (the render route's remix mode). One dismissible call-out per block; dismissing one dismisses all and shows the reminder toast.",
+  "tags": [
+    "swatch",
+    "rail",
+    "visualise"
+  ],
+  "contentTypes": [
+    "swatch",
+    "brand-mark"
+  ],
+  "consumers": [
+    "feature-split",
+    "stack-cards"
+  ],
+  "properties": [
+    {
+      "name": "variant",
+      "values": [
+        "block",
+        "stack"
+      ],
+      "default": "block",
+      "description": "block: remix the named target in its fixed room; stack: remix the card currently pinned"
+    },
+    {
+      "name": "slots",
+      "values": [
+        "4",
+        "2"
+      ],
+      "default": "4",
+      "description": "Four slots in a column beside a feature image; two and two flanking the stacking cards"
+    },
+    {
+      "name": "direction",
+      "values": [
+        "column",
+        "row"
+      ],
+      "default": "column",
+      "description": "Vertical beside the image; horizontal on the phone"
+    }
+  ],
   "disabled": [],
-  "states": ["idle", "hover"],
-  "recipes": ["lift"],
-  "behaviours": [{ "recipe": "lift", "trigger": "hover" }],
-  "capabilities": [],
-  "tokens": { "shadow": "shadow.rail-thumb" },
-  "size": { "w": 1, "h": 4 }
+  "states": [
+    "idle",
+    "hover",
+    "active"
+  ],
+  "recipes": [
+    "lift"
+  ],
+  "behaviours": [
+    {
+      "recipe": "lift",
+      "trigger": "hover"
+    }
+  ],
+  "capabilities": [
+    "remix:server (the block's own image + the swatch, through the block's target — the one render path)",
+    "storage:local(sturij_swatch_tips — the visitor's dismissal of the call-outs)"
+  ],
+  "tokens": {
+    "shadow": "shadow.rail-thumb",
+    "placeholder": "custom.placeholder.opacity",
+    "placeholderHover": "custom.placeholder.opacity-hover",
+    "tipSurface": "surface",
+    "tipLine": "line",
+    "tipInk": "ink",
+    "tipKicker": "claret",
+    "tipShadow": "shadow.card",
+    "toast": "structure-hi",
+    "toastLine": "custom.line.gold-40",
+    "label": "type.label"
+  },
+  "size": {
+    "w": 1,
+    "h": 4
+  },
+  "reference": {
+    "surface": "Mark's mocks, 11 Sep 2026 (two screenshots: the stacking card with hexagons flanking it; the features with four hexagons beside each image) and his example roundel PNG",
+    "where": "the swatch rails of PR #33",
+    "delta": [
+      "rails always visible with four faint placeholders instead of hidden until a swatch exists",
+      "each rail bound to its block's room; the feature rail no longer asks a room",
+      "the remix mode: the block's own image travels as the base, the furniture re-finished, the rest complementing",
+      "the call-out and the toast"
+    ]
+  }
 }

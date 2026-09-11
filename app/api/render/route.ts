@@ -1,5 +1,18 @@
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import { NextResponse } from 'next/server'
+import sharp from 'sharp'
 import { generate, RateLimiter, validateRenderRequest } from '@/lib/render'
+
+/** The remix base: one of the site's own images, read by the server from public/ or the site-images bucket, resized to 1024 and sent as JPEG. The client never sends image bytes for the base. */
+async function loadBase(base: string | null | undefined): Promise<string | null> {
+  if (!base) return null
+  const bytes = base.startsWith('/')
+    ? await readFile(join(process.cwd(), 'public', base))
+    : Buffer.from(await (await fetch(base)).arrayBuffer())
+  const out = await sharp(bytes).resize({ width: 1024, height: 1024, fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 82 }).toBuffer()
+  return out.toString('base64')
+}
 
 export const runtime = 'nodejs'
 export const maxDuration = 60
@@ -35,8 +48,10 @@ export async function POST(req: Request) {
   const lim = limiter.check(key)
   const headers: Record<string, string> = setCookie ? { 'set-cookie': setCookie } : {}
   if (!lim.ok) return NextResponse.json(lim, { status: 429, headers })
-  const out = await generate(v.value, { get: (n) => process.env[n] })
+  let baseImage: string | null = null
+  try { baseImage = await loadBase(v.value.base) } catch { return NextResponse.json({ ok: false, code: 'E_BAD_REQUEST', message: 'The base image could not be read' }, { status: 400, headers }) }
+  const out = await generate({ ...v.value, baseImage }, { get: (n) => process.env[n] })
   const status = out.ok ? 200 : out.code === 'E_NOT_CONFIGURED' ? 503 : out.code === 'E_RATE_LIMIT' ? 429 : 502
-  console.log(JSON.stringify({ route: 'render', ok: out.ok, code: out.ok ? undefined : out.code, room: v.value.room, model: out.ok ? out.model : undefined }))
+  console.log(JSON.stringify({ route: 'render', ok: out.ok, code: out.ok ? undefined : out.code, room: v.value.room, remix: !!baseImage, model: out.ok ? out.model : undefined }))
   return NextResponse.json(out, { status, headers })
 }
