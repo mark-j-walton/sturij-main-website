@@ -61,7 +61,10 @@
     "sheen": "custom.sheen.grain",
     "label": "type.label",
     "title": "type.title",
-    "visBadge": "custom.veil.chip"
+    "visBadge": "custom.veil.chip",
+    "carouselMask": "custom.mask.fade-x",
+    "miniFrost": "custom.glass.mini-frost",
+    "railPlaceholder": "custom.placeholder.opacity-on-dark"
   },
   "size": { "w": 12, "h": 10 },
   "reference": {
@@ -72,7 +75,8 @@
       "gallery tiles keyed by registry decor code where sturij-assets holds one; the rest carry a misfit line (data/galleries.json)",
       "the render moved server-side (/api/render): the visitor's key prompt and localStorage key removed; the vault's GEMINI_API_KEY by name; rate limits; one retry; distinct errors",
       "every generated image labelled VISUALISATION in place, in the lightbox and on the download strip",
-      "every value a token of the sturij-public instance"
+      "every value a token of the sturij-public instance",
+      "the main carousel inside the page width with faded edges, the three minis under a light frost, the swatch rail beside the roundel with its call-out (Mark's mock, 11 Sep 2026)"
     ]
   }
 }

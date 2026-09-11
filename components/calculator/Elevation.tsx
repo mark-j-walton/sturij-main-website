@@ -3,6 +3,7 @@
 // proportions, the chosen board applied under a shading layer (the door styler's mechanism — one
 // drawing per configuration serving every finish at any size; deterministic, instant, nothing invented).
 // Fills are the configurator's tiles: a swatch image as an SVG pattern, or a gradient tile's colours.
+import { useId } from 'react'
 import type { Tile } from '@/lib/galleries'
 import type { CalculatorConfiguration, CalculatorOption } from '@/lib/calculator-data'
 
@@ -27,10 +28,8 @@ export interface ElevationProps {
   open?: boolean
 }
 
-let uid = 0
-
 export function Elevation({ configuration, widthMm, heightMm, bays, option, doors, carcass, handle, open }: ElevationProps) {
-  const id = `el${(uid = (uid + 1) % 1000)}`
+  const id = 'el' + useId().replace(/[^a-zA-Z0-9_-]/g, '') // stable across server and client
   const W = 520
   const ratio = configuration.kind === 'run' ? heightMm / widthMm : (configuration.drawing?.heightMm ?? 800) / widthMm
   const H = Math.max(120, Math.min(420, W * ratio))
