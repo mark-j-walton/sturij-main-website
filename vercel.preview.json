@@ -10,7 +10,7 @@
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.sturij.com" }], "destination": "https://sturij.com/$1", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/", "destination": "/studio" },
+    { "source": "/", "destination": "/studio-preview" },
     { "source": "/p/:id", "destination": "/api/p/[id]" },
     { "source": "/:path*", "destination": "/public/:path*" }
   ],
