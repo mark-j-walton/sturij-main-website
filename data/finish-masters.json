@@ -1,0 +1,4 @@
+{
+  "note": "The handle-finish masters on record — one row per finish that has a master in the store, written by scripts/render-finishes.mjs (a system render under the rig in data/finish-rig.json) or, when the maker's set lands, by hand from the rights register. The feed reads this: a finish with a row at the floor shows its image as a system render with the caveat; a finish without one stays held. Empty until the render key reaches the environment.",
+  "masters": []
+}

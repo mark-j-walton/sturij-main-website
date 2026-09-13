@@ -7,6 +7,8 @@ import { describe, expect, it } from 'vitest'
 import { FEED, GALLERIES, HANDLE_GALLERY_INDEX, isPainted, registryMisfits, tileByKey } from '@/lib/galleries'
 // the build script is plain ESM, imported for its pure functions
 import { familyOf, normalise, run } from '../scripts/materials-feed.mjs'
+// the finish renders: the rig, the prompt, the floor, the register row
+import { masterRow, meetsFloor, promptFor, PROVIDERS } from '../scripts/render-finishes.mjs'
 
 const feed = JSON.parse(readFileSync('public/materials.json', 'utf8'))
 const range = JSON.parse(readFileSync('data/range.json', 'utf8'))
@@ -29,8 +31,9 @@ describe('the snapshot — public/materials.json', () => {
     expect(feed.snapshot.decors).toBe(feed.decors.length)
     expect(feed.snapshot.held).toBe(feed.handles.filter((h: { held: boolean }) => h.held).length)
   })
-  it('regenerates byte for byte from the registry read kept as data', () => {
-    const again = normalise(rows, range, { at: rows.read_at, read: 'session (data/registry/decor-boards.2026-09-13.json)', read_by: rows.read_by })
+  it('regenerates byte for byte from the registry read kept as data and the masters register', () => {
+    const masters = JSON.parse(readFileSync('data/finish-masters.json', 'utf8'))
+    const again = normalise(rows, range, { at: rows.read_at, read: 'session (data/registry/decor-boards.2026-09-13.json)', read_by: rows.read_by }, masters)
     expect(JSON.stringify(again)).toBe(JSON.stringify(feed))
   })
   it('every decor is a registry row by id: the seven Egger codes, two uncoded rows placed by the selection with a misfit line', () => {
@@ -134,5 +137,41 @@ describe('the galleries read the feed', () => {
     }
     expect(hits).toEqual([])
     expect(existsSync('data/galleries.json')).toBe(false)
+  })
+})
+
+describe('the finish masters — system renders under the rig', () => {
+  const rig = JSON.parse(readFileSync('data/finish-rig.json', 'utf8'))
+  const meta = { at: rows.read_at, read: 'test' }
+  const master = (finish: string, width: number, height: number) => ({ masters: [{ finish, name: finish, path: `/showcase/metals/${finish}.jpg`, width, height, bytes: 1000, sha256: 'ab'.repeat(32), kind: 'system', provider: 'gemini', model: 'm', prompt_sha256: 'x', rig_version: 1, rendered_at: '2026-09-14T00:00:00.000Z', rights: rig.rights, caveat: rig.caveat }] })
+  it('a master at the floor shows the finish as a system render with the caveat; one under the floor keeps the tile held — never upscaled', () => {
+    const shown = normalise(rows, range, meta, master('satin-brass', 2048, 2048))
+    const sb = shown.handles.find((h: { id: string }) => h.id === 'satin-brass')
+    expect(sb.held).toBe(false); expect(sb.system).toBe(true); expect(sb.caveat).toContain('Illustration only'); expect(sb.image.path).toBe('/showcase/metals/satin-brass.jpg')
+    expect(shown.snapshot.held).toBe(14); expect(shown.snapshot.system).toBe(1)
+    expect(shown.misfits.filter((m: { kind: string }) => m.kind === 'system-render').length).toBe(1)
+    const small = normalise(rows, range, meta, master('satin-brass', 1024, 1024))
+    const sb2 = small.handles.find((h: { id: string }) => h.id === 'satin-brass')
+    expect(sb2.held).toBe(true); expect(sb2.image).toBeNull(); expect(sb2.misfit).toContain('under the floor')
+  })
+  it('the rig makes one family: every prompt carries the same handle, door, light and angle, the finish and its note differ, nothing else', () => {
+    const finishes = range.handles.finishes
+    const prompts = finishes.map((f: { id: string; name: string; note: string }) => promptFor(rig, f))
+    expect(new Set(prompts).size).toBe(15)
+    for (const [i, p] of prompts.entries()) {
+      expect(p).toContain(finishes[i].name); expect(p).toContain(finishes[i].note)
+      expect(p).toContain('slim D-shaped cabinet pull handle'); expect(p).toContain('flat matt charcoal slab door'); expect(p).toContain('soft north daylight'); expect(p).toContain('no text, no watermark')
+    }
+    expect(finishes.every((f: { note?: string }) => f.note && f.note.length > 20)).toBe(true)
+  })
+  it('the floor is the rule\'s: 1500 px on the short side; the register row carries provider, model, prompt hash, rig version, rights and caveat', () => {
+    expect(rig.floor.short_side_px).toBe(1500)
+    expect(meetsFloor({ width: 2048, height: 2048 }, rig).ok).toBe(true)
+    expect(meetsFloor({ width: 1024, height: 1024 }, rig).ok).toBe(false)
+    expect(meetsFloor({ width: 3000, height: 1499 }, rig).ok).toBe(false)
+    const row = masterRow({ id: 'bronze', name: 'Bronze' }, 'public/showcase/metals/bronze.jpg', { width: 2048, height: 2048 }, 123, 'f'.repeat(64), { provider: 'gemini', model: 'gemini-3-pro-image-preview', prompt_sha256: 'p', at: '2026-09-14T00:00:00.000Z' }, rig)
+    expect(row).toMatchObject({ finish: 'bronze', path: '/showcase/metals/bronze.jpg', kind: 'system', provider: 'gemini', rig_version: 1, caveat: rig.caveat })
+    expect(row.rights.kind).toBe('system')
+    expect(PROVIDERS).toEqual(['gemini'])
   })
 })

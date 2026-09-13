@@ -37,6 +37,9 @@ export interface Tile {
   texture?: string | null
   /** A held finish: no master in the library yet — a labelled tile, never an upscaled file. */
   held?: boolean
+  /** A system render of the finish (the render path, under the rig), not the maker's photograph — shown with its caveat. */
+  system?: boolean
+  caveat?: string
   misfit?: string
 }
 
@@ -47,7 +50,7 @@ export const ROOM_CATEGORIES: RoomCategory[] = ['ceiling', 'walls', 'skirting', 
 
 interface FeedImage { id: string; path: string; width: number | null; height: number | null; bytes: number | null }
 interface FeedDecor { id: string; code: string | null; name: string; supplier: string | null; family: Family; family_from: string; tab: string; finish: string | null; texture: string | null; colour: { hex: string } | null; image: FeedImage | null; misfit: string | null }
-interface FeedHandle { id: string; name: string; supplier: string | null; image: FeedImage | null; held: boolean; misfit: string | null }
+interface FeedHandle { id: string; name: string; supplier: string | null; image: FeedImage | null; held: boolean; system?: boolean; caveat?: string | null; misfit: string | null }
 interface FeedTab { id: string; label: string; kind: 'material' | 'handle'; family: Family | null }
 export interface FeedMisfit { kind: string; name?: string; material?: string; note: string }
 interface Feed {
@@ -81,9 +84,10 @@ function handleTile(h: FeedHandle): Tile {
   const t: Tile = { id: h.id, name: h.name, kind: 'handle', supplier: h.supplier, code: null }
   if (h.image) {
     t.src = h.image.path
-    t.alt = `${h.name} finish`
+    t.alt = h.system ? `${h.name} finish — a system render, illustration only` : `${h.name} finish`
     if (h.image.width) t.width = h.image.width
     if (h.image.height) t.height = h.image.height
+    if (h.system) { t.system = true; if (h.caveat) t.caveat = h.caveat }
   } else t.held = true
   if (h.misfit) t.misfit = h.misfit
   return t

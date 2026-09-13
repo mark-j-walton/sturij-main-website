@@ -18,6 +18,7 @@
     "with_colour": 7,
     "handles": 15,
     "held": 15,
+    "system": 0,
     "misfits": 22
   },
   "rule": {
@@ -375,6 +376,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -383,6 +386,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -391,6 +396,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -399,6 +406,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -407,6 +416,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -415,6 +426,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -423,6 +436,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -431,6 +446,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -439,6 +456,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -447,6 +466,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -455,6 +476,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -463,6 +486,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -471,6 +496,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -479,6 +506,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     },
     {
@@ -487,6 +516,8 @@
       "supplier": null,
       "image": null,
       "held": true,
+      "system": false,
+      "caveat": null,
       "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
     }
   ],

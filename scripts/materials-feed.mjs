@@ -24,6 +24,8 @@ import { fileURLToPath } from 'node:url'
 
 export const FEED_PATH = 'public/materials.json'
 export const RANGE_PATH = 'data/range.json'
+export const MASTERS_PATH = 'data/finish-masters.json'
+export const MASTER_FLOOR_PX = 1500
 export const DEFAULT_REGISTRY_URL = 'https://uxdrokyxywwezorpvfsp.supabase.co'
 export const KEY_NAME = 'STURIJ_ASSETS_READ_KEY'
 export const URL_NAME = 'STURIJ_ASSETS_URL'
@@ -43,8 +45,12 @@ export function familyOf(row, sel, range) {
  * The feed from the registry rows and the selection. `rows` is the shape data/registry/*.json keeps (and the
  * REST read assembles): decors with their swatch image and measurement nested. Pure; throws E_FEED_* when the
  * registry did not give what the selection needs — the caller falls back, never writes a thin feed.
+ * @param {{ decors?: any[], counts?: any }} rows
+ * @param {any} range
+ * @param {{ at: string, read: string, read_by?: string | null }} meta
+ * @param {{ masters?: Array<Record<string, any>> }} [masters] the finish masters on record (data/finish-masters.json)
  */
-export function normalise(rows, range, meta) {
+export function normalise(rows, range, meta, masters = { masters: [] }) {
   const decorsById = new Map((rows.decors ?? []).map((d) => [d.id, d]))
   const tabsByFamily = new Map(range.tabs.filter((t) => t.family).map((t) => [t.family, t.id]))
   const misfits = []
@@ -87,11 +93,19 @@ export function normalise(rows, range, meta) {
   }
   for (const n of range.not_in_registry ?? []) misfits.push({ kind: 'not-in-registry', name: n.name, note: `${n.note} (the handoff placed it in ${n.handoff_tab})` })
 
-  const handles = (range.handles?.finishes ?? []).map((f) => ({
-    id: f.id ?? slug(f.name), name: f.name, supplier: null, image: null, held: true,
-    misfit: 'no finish record in the registry and no master in the library — held: sample at the visit',
-  }))
-  for (const h of handles) misfits.push({ kind: 'held-finish', name: h.name, note: h.misfit })
+  const floor = range.handles?.rule?.master_min_short_side_px ?? MASTER_FLOOR_PX
+  const handles = (range.handles?.finishes ?? []).map((f) => {
+    const id = f.id ?? slug(f.name)
+    const m = (masters.masters ?? []).find((x) => x.finish === id)
+    const atFloor = !!m && Math.min(m.width ?? 0, m.height ?? 0) >= floor
+    if (m && atFloor) {
+      // a master on record: a system render (or the maker's file) at the floor — shown, marked, with its caveat
+      return { id, name: f.name, supplier: null, image: { id: m.sha256 ? m.sha256.slice(0, 12) : id, path: m.path, width: m.width, height: m.height, bytes: m.bytes ?? null, kind: m.kind ?? 'system' }, held: false, system: (m.kind ?? 'system') === 'system', caveat: m.caveat ?? null, provider: m.provider ?? null, model: m.model ?? null, rendered_at: m.rendered_at ?? null, misfit: null }
+    }
+    return { id, name: f.name, supplier: null, image: null, held: true, system: false, caveat: null, misfit: m ? `a master is on record at ${m.width}×${m.height}, under the floor of ${floor} px on the short side — held, never upscaled` : 'no finish record in the registry and no master in the library — held: sample at the visit' }
+  })
+  for (const h of handles) if (h.held) misfits.push({ kind: 'held-finish', name: h.name, note: h.misfit })
+  for (const h of handles) if (h.system) misfits.push({ kind: 'system-render', name: h.name, note: `shown as a system render (${h.provider ?? '?'} ${h.model ?? '?'}, ${h.rendered_at ?? '?'}) with the caveat; the maker's photograph replaces it when it lands` })
 
   const tabs = range.tabs.map((t) => ({ id: t.id, label: t.label, kind: t.kind === 'handle' ? 'handle' : 'material', family: t.family ?? null, tiles: t.kind === 'handle' ? handles.length : decors.filter((d) => d.tab === t.id).length }))
   const emptyTab = tabs.find((t) => t.tiles === 0)
@@ -102,7 +116,7 @@ export function normalise(rows, range, meta) {
       at: meta.at, registry: REGISTRY, read: meta.read, read_by: meta.read_by ?? null,
       counts: rows.counts ?? null,
       decors: decors.length, coded: decors.filter((d) => d.code).length, with_image: decors.filter((d) => d.image).length, with_colour: decors.filter((d) => d.colour).length,
-      handles: handles.length, held: handles.filter((h) => h.held).length, misfits: misfits.length,
+      handles: handles.length, held: handles.filter((h) => h.held).length, system: handles.filter((h) => h.system).length, misfits: misfits.length,
     },
     rule: range.handles?.rule ?? null,
     tabs, decors, handles, misfits,
@@ -152,6 +166,7 @@ export function readJson(path) { return JSON.parse(readFileSync(path, 'utf8')) }
  */
 export async function run({ argv = [], env = process.env, cwd = process.cwd(), write = true, fetchImpl } = {}) {
   const range = readJson(`${cwd}/${RANGE_PATH}`)
+  const masters = existsSync(`${cwd}/${MASTERS_PATH}`) ? readJson(`${cwd}/${MASTERS_PATH}`) : { masters: [] }
   const previous = existsSync(`${cwd}/${FEED_PATH}`) ? readJson(`${cwd}/${FEED_PATH}`) : null
   const fromArg = argv.indexOf('--from') >= 0 ? argv[argv.indexOf('--from') + 1] : null
   if (argv.includes('--check')) return { mode: 'check', feed: previous, line: previous ? `materials feed: snapshot of ${previous.snapshot.at} (${previous.snapshot.read}) · ${previous.snapshot.decors} decors · ${previous.snapshot.held} finishes held · ${previous.snapshot.misfits} misfits` : 'materials feed: no snapshot' }
@@ -164,9 +179,9 @@ export async function run({ argv = [], env = process.env, cwd = process.cwd(), w
       rows = await (fetchImpl ?? fetchRegistry)(env, range)
       meta = { at: rows.read_at, read: `rest (${URL_NAME}, ${KEY_NAME} by name)` }
     }
-    const feed = normalise(rows, range, meta)
+    const feed = normalise(rows, range, meta, masters)
     if (write) writeFileSync(`${cwd}/${FEED_PATH}`, JSON.stringify(feed, null, 2) + '\n')
-    return { mode: fromArg ? 'from' : 'rest', feed, line: `materials feed: read ${feed.snapshot.read} at ${feed.snapshot.at} · ${feed.snapshot.decors} decors (${feed.snapshot.coded} coded, ${feed.snapshot.with_image} with an image, ${feed.snapshot.with_colour} with a measured colour) · ${feed.snapshot.handles} finishes, ${feed.snapshot.held} held · ${feed.snapshot.misfits} misfits → ${FEED_PATH}` }
+    return { mode: fromArg ? 'from' : 'rest', feed, line: `materials feed: read ${feed.snapshot.read} at ${feed.snapshot.at} · ${feed.snapshot.decors} decors (${feed.snapshot.coded} coded, ${feed.snapshot.with_image} with an image, ${feed.snapshot.with_colour} with a measured colour) · ${feed.snapshot.handles} finishes, ${feed.snapshot.held} held, ${feed.snapshot.system} system renders · ${feed.snapshot.misfits} misfits → ${FEED_PATH}` }
   } catch (e) {
     const reason = (e && e.code ? e.code + ': ' : '') + String((e && e.message) || e)
     if (!previous) throw Object.assign(new Error(`materials feed: the registry could not be read (${reason}) and no previous ${FEED_PATH} exists — the site cannot build without a feed`), { code: 'E_NO_FEED' })

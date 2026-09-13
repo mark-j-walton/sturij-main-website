@@ -42,7 +42,8 @@ export function Ribbon({ tiles, duration, reverse, onTile, ariaHidden, sizes }: 
                 ? <span className="sw held" role="img" aria-label={`${t.name} — sample at the visit`} data-held={t.misfit ?? 'no master yet'}><b>{t.name}</b><i>sample at the visit</i></span>
               // a decor without a swatch image (the registry's misfit list): its own colour as a labelled tile, never a broken image
                 : <span className="sw" role="img" aria-label={`${t.name} — swatch to follow`} data-misfit={t.misfit ?? 'no swatch image'} style={{ background: tileBackground(t) }} />}
-            <figcaption>{t.name}</figcaption>
+            <figcaption>{t.name}{t.system && <em className="sys" title={t.caveat ?? 'a system render — illustration only'}> · illustration</em>}</figcaption>
+            {t.system && <span className="syschip" aria-hidden="true">illustration</span>}
             {onTile && <button type="button" className="tilehit" aria-label={`Choose ${t.name}`} tabIndex={repeat ? -1 : 0} onClick={() => onTile(t)} />}
           </figure>
         )

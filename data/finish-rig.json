@@ -1,0 +1,28 @@
+{
+  "note": "The rig for the handle-finish masters — system renders under the finish rule (materials-feed addendum 1): one handle form, one light, one crop and angle, so the fifteen read as a family. scripts/render-finishes.mjs reads this file and data/range.json's finish names and notes, calls the provider named, refuses any image under the rule's floor, writes the master into the store and a row into data/finish-masters.json. Every master is a SYSTEM render and carries the caveat below wherever it shows: on the tile, in the feed, in the pack. Nothing here names a decor; the finish names and their notes are data/range.json's.",
+  "version": 1,
+  "floor": { "short_side_px": 1500, "jpeg_quality": 90 },
+  "caveat": "Illustration only — a system render of the finish, not the maker's photograph. Colour and lustre are approximate; a sample is shown at the visit.",
+  "rights": { "holder": "Sturij Ltd", "kind": "system", "licence": "Sturij — illustration only; not the maker's imagery" },
+  "provider": {
+    "default": "gemini",
+    "gemini": {
+      "model_env": "GEMINI_IMAGE_MODEL_MASTER",
+      "model_default": "gemini-3-pro-image-preview",
+      "key_env": "GEMINI_API_KEY",
+      "image": { "aspectRatio": "1:1", "imageSize": "2K" },
+      "note": "the 2K size is the pro image model's; the flash image model answers 1024 px and fails the floor — the script says so rather than upscaling"
+    }
+  },
+  "prompt": {
+    "template": "Product photograph, macro, of a single slim D-shaped cabinet pull handle in {finish}. {finish_note} The handle is mounted horizontally, centred, on a flat matt charcoal slab door that fills the frame; three-quarter view from slightly above and to the right; soft north daylight from the left through a large softbox, a gentle fall-off to the right, one soft contact shadow; shallow depth of field on the handle's near end; the metal's true colour, machining marks, grain and lustre rendered faithfully. Square frame, photographic realism, no text, no watermark, no logo, no other object, no hand, no reflection of a camera or a person.",
+    "negatives": "Not a rendering that looks painted or plastic; not gold-plated when the finish is brass; not mirror-chrome unless the finish says polished; no visible screws unless the finish note asks; no second handle; no wood-grain door."
+  },
+  "family": {
+    "handle_form": "slim D-shaped pull, 160 mm centres",
+    "door": "flat matt charcoal slab",
+    "light": "soft north daylight, softbox left",
+    "angle": "three-quarter, slightly above and right",
+    "crop": "square, the handle across the middle third"
+  }
+}
