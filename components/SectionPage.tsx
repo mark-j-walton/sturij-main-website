@@ -52,7 +52,7 @@ export async function SectionPage({ id }: { id: string }) {
       : <p key={l.id} className={className}>{title}<Copy slot={c(l.id)} as="span" /></p>
   })
 
-  const renderBlock = (block: Block): ReactNode => {
+  const renderBlock = (block: Block, level: 'h2' | 'h3'): ReactNode => {
     if (block.kind === 'partners') {
       const shown = partners.filter((p) => partnerPublishable(p))
       if (shown.length === 0) return <div key={block.id} className="partners empty" data-partners="0" />
@@ -72,7 +72,7 @@ export async function SectionPage({ id }: { id: string }) {
     }
     const allHeld = block.lines.length > 0 && block.lines.every(isHeld)
     if (allHeld) return <div key={block.id} className="heldblock" data-held-block={block.id}>{block.lines.map((l) => <HeldOutline key={l.id} section={section} line={l} />)}</div>
-    const title = block.title ? <Copy slot={c(`sec.${section.id}.${block.id}.title`)} as="h3" /> : null
+    const title = block.title ? <Copy slot={c(`sec.${section.id}.${block.id}.title`)} as={level} /> : null
     if (block.kind === 'maker') return <div key={block.id} className="maker reveal" data-block={block.id}>{title}{renderLines(block.lines, 'p')}</div>
     if (block.kind === 'list') return <div key={block.id} className="means reveal" data-block={block.id}>{title}<ul>{renderLines(block.lines, 'li')}</ul></div>
     if (block.kind === 'closing') return <div key={block.id} className="closing reveal" data-block={block.id}>{renderLines(block.lines, 'p')}</div>
@@ -93,7 +93,8 @@ export async function SectionPage({ id }: { id: string }) {
                 {part.kicker !== undefined && <Copy slot={c(`sec.${section.id}.${part.id}.kicker`)} as="div" className="kicker reveal" />}
                 <Copy slot={c(`sec.${section.id}.${part.id}.heading`)} as={Heading} className="lead reveal" />
                 {part.standfirst && (isHeld(part.standfirst) ? <HeldOutline section={section} line={part.standfirst} /> : <Copy slot={c(part.standfirst.id)} as="p" className="standfirst reveal" />)}
-                <div className="secbody">{part.blocks.map(renderBlock)}</div>
+                {/* the heading order descends: the first part's heading is the page's h1 and its block titles are h2; later parts are h2 with h3 block titles */}
+                <div className="secbody">{part.blocks.map((b) => renderBlock(b, i === 0 ? 'h2' : 'h3'))}</div>
               </div>
             </section>
           )

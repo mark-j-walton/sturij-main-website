@@ -295,5 +295,7 @@ try {
   writeFileSync(file, JSON.stringify(report, null, 2))
   const failed = report.checks.filter((c) => !c.pass)
   console.log(`\nquality: ${report.checks.length - failed.length}/${report.checks.length} checks passed · ${file}`)
-  process.exit(failed.length ? 1 : 0)
+  // a run that never reached a check (a refused port, a server that did not start) is a failure, not a pass
+  if (report.checks.length === 0) console.log('quality: NO CHECK RAN - the run failed before the first check')
+  process.exit(failed.length || report.checks.length === 0 ? 1 : 0)
 }
