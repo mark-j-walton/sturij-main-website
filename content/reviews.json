@@ -1,0 +1,9 @@
+{
+  "note": "First-party reviews (addendum 6): a review is a record — the customer's own words captured with the completion certificate, stored on the customer's record with its date and a publish-consent tick, published here never edited, withdrawn on request. Nothing renders without permission and a date; the count and the average are readings from these rows; Review and AggregateRating structured data are emitted only from rows that qualify (collected on our own site — eligible; a third party's score is never marked up). Trustpilot: the badge/link only (footer.trustpilot slot); no scraped review or score; the Review Collector widget is held until a consent banner exists, because it sets cookies. The Google Business Profile is linked, never embedded.",
+  "rules": {
+    "requires": ["customer", "text", "date", "permission"],
+    "aggregateRatingMinimum": 3,
+    "thirdPartyMarkup": "never"
+  },
+  "reviews": []
+}

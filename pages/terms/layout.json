@@ -1,0 +1,121 @@
+{
+  "page": "terms",
+  "slug": "/terms",
+  "design": "sturij-public",
+  "kind": "legal",
+  "sizes": [
+    "1440",
+    "1024",
+    "390"
+  ],
+  "grid": {
+    "unit": 8,
+    "columns": 12
+  },
+  "title": "Terms & Conditions — Sturij",
+  "description": "The terms on which Storage Innovation Limited, trading as Sturij, designs, makes and fits your furniture — the current published version.",
+  "source": "content/legal/terms.json",
+  "note": "A legal page rendered from its record (content/legal/<id>.json — the snapshot of the current version, hash-checked by a test): the nav, the identity paragraph, the document as HTML, the version and date in the page footer, the footer. Nothing on this page is edited on the site; a change is a new version of the record.",
+  "regions": [
+    {
+      "id": "nav",
+      "artifact": "nav-bar",
+      "slots": [
+        {
+          "id": "nav.logo",
+          "type": "brand-mark",
+          "consumer": "nav-bar",
+          "asset": "brand.logo-white"
+        }
+      ]
+    },
+    {
+      "id": "document",
+      "artifact": "legal-document",
+      "slots": [
+        {
+          "id": "legal.terms",
+          "type": "legal",
+          "consumer": "legal-document",
+          "data": "content/legal/terms.json"
+        },
+        {
+          "id": "legal.terms.identity",
+          "type": "identity",
+          "consumer": "legal-document",
+          "data": "content/identity.json"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "artifact": "site-footer",
+      "slots": [
+        {
+          "id": "footer.logo",
+          "type": "brand-mark",
+          "consumer": "site-footer",
+          "asset": "brand.logo-white"
+        },
+        {
+          "id": "footer.tagline",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.facebook",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.instagram",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.linkedin",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trustpilot",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trademark",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.admin",
+          "type": "copy",
+          "consumer": "admin-editing",
+          "note": "the control, not content"
+        },
+        {
+          "id": "footer.disclosure",
+          "type": "identity",
+          "consumer": "site-footer",
+          "data": "content/identity.json",
+          "note": "the trading disclosure, the NAP and the copyright line, rendered from the identity record"
+        }
+      ]
+    }
+  ],
+  "locks": [],
+  "artifacts": [
+    {
+      "artifact": "social-links"
+    },
+    {
+      "artifact": "admin-editing"
+    }
+  ],
+  "variations": {
+    "390": {
+      "nav.links": "phone"
+    },
+    "1024": {}
+  }
+}

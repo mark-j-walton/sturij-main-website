@@ -1,0 +1,74 @@
+{
+  "note": "The supporting trades and the stone partner as records, not prose (site-copy-family Part 5; provenance d6ac7868 — all five worked on Mark's own £6M apartment development). An entry renders only the fields it marks publishable, only with consent on record (an ISO date), only until its review date; registrations stay on record with each partner, never on the page. consent and reviewDate are Mark's data edits — both null holds the entry.",
+  "entries": [
+    {
+      "id": "kirkburton-electrical",
+      "trade": "Electrical — installation, connection and certification; security and AV",
+      "name": "Kirkburton Electrical Ltd",
+      "town": "Huddersfield",
+      "contact": "Chris Jackson",
+      "phone": "01484 621442",
+      "email": "info@kirkburtonelectricals.co.uk",
+      "blurb": "Kirkburton Electrical have been wiring homes and businesses around Huddersfield since 1978. They do the electrical work a fitted room needs — connecting and certifying the lighting we build in, the sockets and switches a media wall or a utility room asks for, and the security and audio-visual side when a project calls for it — for residential and commercial customers alike. Chris Jackson is the person we work with.",
+      "publishable": ["trade", "name", "town", "contact", "phone", "email", "blurb"],
+      "consent": null,
+      "reviewDate": null,
+      "registrationOnRecord": "[P]",
+      "note": "from their own pages: established 1978; residential, commercial and solar work — a re-read of their site before publishing"
+    },
+    {
+      "id": "omega-stone",
+      "trade": "Stone fabrication and fitting",
+      "name": "Omega Stone Ltd",
+      "town": "Pudsey, Leeds",
+      "phone": "0113 873 0102",
+      "email": "quote@omegastone.co.uk",
+      "website": "https://omegastone.co.uk",
+      "publishable": ["trade", "name", "town", "phone", "email", "website"],
+      "consent": null,
+      "reviewDate": null,
+      "registrationOnRecord": "company no. 07757121 on record",
+      "note": "the partner section on the worktops page is gated on this entry's consent and review date"
+    },
+    {
+      "id": "ledsite",
+      "trade": "LED lighting materials — a supplier: the LED strip, profiles, drivers and controls we build in",
+      "name": "LEDsite Ltd",
+      "town": "Morley, Leeds",
+      "phone": "0113 467 1666",
+      "website": "https://ledsite.co.uk",
+      "publishable": ["trade", "name", "town", "phone", "website"],
+      "consent": null,
+      "reviewDate": null,
+      "registrationOnRecord": "LED Site Limited, no. 10175312 on record",
+      "note": "a supplier, not a maker — the system-level claims in the lighting section still need the maker's description of the drivers and controls they supply us"
+    },
+    {
+      "id": "wakefield-plumbing",
+      "trade": "Plumbing and heating",
+      "name": "Wakefield Plumbing Co Limited",
+      "town": "Ossett",
+      "contact": "James Leaves",
+      "phone": "07947 750669",
+      "email": "info@wakefieldplumber.co.uk",
+      "website": "https://wakefieldplumber.co.uk",
+      "publishable": ["trade", "name", "town", "contact", "phone", "email", "website"],
+      "consent": null,
+      "reviewDate": null,
+      "registrationOnRecord": "[P] — Gas Safe only if any gas work is in scope; company no. 12692271 on record"
+    },
+    {
+      "id": "haus-creative",
+      "trade": "Interior design and decorating — colour and project consultation and management; painting and decorating; Venetian plaster and surface design; murals and commissioned artwork",
+      "name": "Haus Creative",
+      "phone": "07811 257346",
+      "email": "hauscreative2020@gmail.com",
+      "website": "https://hauscreative.co.uk",
+      "publishable": ["trade", "name", "phone", "email", "website"],
+      "consent": null,
+      "reviewDate": null,
+      "registrationOnRecord": "[P]",
+      "note": "contact name [P]; address on record only (an apartment) — publish only the contact details they consent to"
+    }
+  ]
+}

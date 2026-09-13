@@ -1,6 +1,6 @@
 # sturij.com — the public site
 
-The Sturij public site (bespoke fitted furniture, Harrogate), rebuilt on the page platform's rules from the
+The Sturij public site (bespoke fitted furniture, made in Skelmanthorpe, Yorkshire), rebuilt on the page platform's rules from the
 Claude Design handoff of 9 September 2026 (`design_handoff_sturij_public_site`). Next.js on Vercel; the Studio
 and the Canvas pages are served unchanged from `public/` at their existing URLs (studio.sturij.com/studio, /canvas).
 

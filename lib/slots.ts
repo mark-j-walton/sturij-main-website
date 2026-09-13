@@ -2,10 +2,16 @@
 // version in sturij-web's slot tables when the deployment carries the project's public names. A page holds
 // no content; it reads its slots (page-platform S1/S5). Reads are cached and revalidated (ISR) — an admin
 // save calls /api/revalidate so visitors see the new version on the next request.
+//
+// The seed has two sources: content/copy.seed.json (the home page, the calculator, the footer, the
+// accessibility statement) and content/sections/*.json (the content sections from the copy family — every
+// line a slot, every [P] claim a closing slot, lib/sections.ts). Both land in the same map; the slot tables
+// override either.
 import { cache } from 'react'
 import seed from '@/content/copy.seed.json'
 import { asset } from './assets'
 import { sanitizeCopy } from './copy'
+import { allSectionSlots } from './sections'
 
 export interface ImageRef {
   src: string
@@ -56,7 +62,20 @@ export const IMAGE_SLOT_CROPS: Record<string, SlotCrop> = {
   'stack.4.image': { zoom: 1.2, x: '50%', y: '58%' },
 }
 
-export const COPY_SLOT_IDS: string[] = Object.keys(seed.slots)
+/** The whole seed: the seed file's slots and every section's slots (lines, questions, extras, claim slots). */
+export const SEED_SLOTS: Record<string, string> = (() => {
+  const merged: Record<string, string> = { ...(seed.slots as Record<string, string>) }
+  for (const [k, v] of Object.entries(allSectionSlots())) {
+    if (k in merged) throw new Error(`A_UNDECLARED: slot ${k} is seeded by both copy.seed.json and a section`)
+    merged[k] = v
+  }
+  return merged
+})()
+
+/** The copy slots a page can read (everything seeded except the claim-closing slots, which are controls). */
+export const COPY_SLOT_IDS: string[] = Object.keys(SEED_SLOTS).filter((k) => !k.startsWith('claim.'))
+/** The claim-closing slots: empty until Mark closes a register row with a line in the slot table. */
+export const CLAIM_SLOT_IDS: string[] = Object.keys(SEED_SLOTS).filter((k) => k.startsWith('claim.'))
 
 export const SLOT_REVALIDATE_SECONDS = 60
 export const SITE_IMAGES_BUCKET = 'site-images'
@@ -74,7 +93,7 @@ export function bucketPublicUrl(url: string, path: string): string {
 
 function seedContent(): SiteContent {
   const copy: Record<string, string> = {}
-  for (const [id, value] of Object.entries(seed.slots)) copy[id] = sanitizeCopy(value)
+  for (const [id, value] of Object.entries(SEED_SLOTS)) copy[id] = sanitizeCopy(value)
   const images: Record<string, ImageRef> = {}
   for (const [slot, assetId] of Object.entries(IMAGE_SLOTS)) {
     const a = asset(assetId)
@@ -125,7 +144,7 @@ export const loadContent = cache(async (): Promise<SiteContent> => {
 
 export function copyOf(content: SiteContent, id: string): string {
   const value = content.copy[id]
-  if (value === undefined) throw new Error(`A_UNDECLARED: copy slot ${id} is not seeded in content/copy.seed.json`)
+  if (value === undefined) throw new Error(`A_UNDECLARED: copy slot ${id} is not seeded (content/copy.seed.json or content/sections/*.json)`)
   return value
 }
 

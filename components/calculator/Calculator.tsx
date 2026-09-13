@@ -31,7 +31,7 @@ const gbp = (v: number) => `£${v.toLocaleString('en-GB')}`
 export interface CalculatorView { configurations: CalculatorConfiguration[]; tiers: CalculatorTier[]; watermark: string; basis: string }
 
 /** The view data comes from the server page (lib/calculator-data reads the table there); the browser never holds the table. */
-export function Calculator({ kicker, title, body, finishesHref, standalone, view }: { kicker: Slot; title: Slot; body: Slot; finishesHref: string; standalone?: boolean; view: CalculatorView }) {
+export function Calculator({ kicker, title, body, finishesHref, standalone, view, note }: { kicker: Slot; title: Slot; body: Slot; finishesHref: string; standalone?: boolean; view: CalculatorView; /** The short pricing line under the band (site-copy-family Part 7). */ note?: Slot }) {
   const CALC_CONFIGURATIONS = view.configurations, CALC_TIERS = view.tiers, CALC_WATERMARK = view.watermark, CALC_BASIS = view.basis
   const { picks, latestSwatch, setGuide, guide } = useConfigurator()
   const [cfgId, setCfgId] = useState<string>(CALC_CONFIGURATIONS[0]!.id)
@@ -170,6 +170,7 @@ export function Calculator({ kicker, title, body, finishesHref, standalone, view
                 <div className="calc-watermark">{busy ? 'Working it out…' : CALC_WATERMARK}</div>
               )}
             </div>
+            {note && <Copy slot={note} as="p" className="calc-pricenote" />}
 
             <div className="calc-acts">
               <a className="mbtn calc-cta" href="#enquire" data-guide={guide?.line ?? ''}>Take this further →</a>

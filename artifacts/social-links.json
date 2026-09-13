@@ -1,0 +1,15 @@
+{
+  "id": "social-links",
+  "kind": "block",
+  "description": "The three profile links — Facebook, Instagram, LinkedIn — as one artifact: each an accessible link naming the platform, opening in a new tab with rel=\"noopener noreferrer\"; the platforms' official icons from their brand resource centres, unaltered, in the footer's ink; the URLs are data (content/identity.json), never code, and the same three go into the Organization structured data as sameAs. A link is a link: no platform pixel, SDK or embedded feed loads with it (addendum 7).",
+  "tags": ["social", "footer", "links", "signpost"],
+  "contentTypes": [],
+  "consumers": ["sturij-public", "site-footer"],
+  "properties": [{ "name": "icons", "values": ["official", "text"], "default": "text", "description": "official when the platform's supplied asset is at public/brand/social/<platform>.svg; the platform's name as text until then" }],
+  "disabled": [{ "property": "embed", "reason": "an embedded feed or page plugin sets cookies and needs consent, and it would bring customer rooms onto the site against the image decision 4b2489df — no embedded feeds on the site" }],
+  "states": ["idle", "hover"],
+  "recipes": [],
+  "capabilities": [],
+  "tokens": { "ink": "custom.ink.on-dark-72", "hover": "accent", "label": "type.label" },
+  "size": { "w": 3, "h": 1 }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "boards",
+  "slug": "/boards",
+  "nav": { "group": "What we build with", "label": "The boards", "order": 1 },
+  "title": "The boards we build with — Sturij",
+  "description": "Four makers, three countries, one workshop: the engineered boards every Sturij piece is built from, and what that means when it is fitted.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 1 — The boards we build with (materials)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "makers",
+      "kicker": "The material is the product",
+      "heading": "Four makers. One way of building.",
+      "standfirst": { "id": "sec.boards.makers.standfirst", "text": "Every piece we make is one thing: an engineered board, faced with a decor, cut on our own CNC in Skelmanthorpe and fitted by the people who built it. We build the same way in all of them. The finish is where it becomes yours." },
+      "blocks": [
+        { "id": "intro", "kind": "prose", "lines": [
+          { "id": "sec.boards.intro.1", "text": "We don't buy boards on price. We buy them because they cut clean, stay flat, and look — and feel — like the material they're standing in for. That narrows the field to a handful of makers, and we've settled on four." }
+        ] },
+        { "id": "egger", "kind": "maker", "title": "Egger — Austria", "lines": [
+          { "id": "sec.boards.egger.1", "text": "The widest decor collection we work with, and the one most of our wardrobes and media walls are built in.", "claims": ["egger-default"] },
+          { "id": "sec.boards.egger.2", "text": "Board, matching edging and laminate come from one collection, so a run reads as one piece from every angle.", "claims": ["egger-one-collection"] },
+          { "id": "sec.boards.egger.3", "text": "The textured ranges are pressed to follow the printed grain, so what you feel under your hand matches what you see.", "claims": ["egger-textures"] }
+        ] },
+        { "id": "pfleiderer", "kind": "maker", "title": "Pfleiderer — Germany", "lines": [
+          { "id": "sec.boards.pfleiderer.1", "text": "", "claims": ["pfleiderer-line"] }
+        ] },
+        { "id": "cleaf", "kind": "maker", "title": "Cleaf — Italy", "lines": [
+          { "id": "sec.boards.cleaf.1", "text": "Deeply textured surfaces — brushed timber, fabric, stone, metal — designed in Italy for people who want a piece to be touched as well as looked at. We use Cleaf where the surface is the point.", "claims": ["cleaf-ranges"] }
+        ] },
+        { "id": "emporio", "kind": "maker", "title": "Emporio Skin — Italy", "lines": [
+          { "id": "sec.boards.emporio.1", "text": "A younger Italian collection, made near Pordenone, built around ten textures across a compact set of decors — wood, stone, cement, metal and fabric — with a matching edge for every one.", "claims": ["emporio-facts"] },
+          { "id": "sec.boards.emporio.2", "text": "It reaches us through Lawcris in Leeds, which is why we can show you a sample quickly.", "claims": ["distributors-named"] }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.boards.closing.1", "text": "Four makers, three countries, one workshop. If you've seen a finish you like — anywhere — bring it to the design visit and we'll tell you honestly whether one of these can do it." }
+        ] }
+      ]
+    },
+    {
+      "id": "built",
+      "heading": "Flat, true, and cut to the millimetre.",
+      "blocks": [
+        { "id": "built", "kind": "prose", "lines": [
+          { "id": "sec.boards.built.1", "text": "These boards don't move. Unlike solid timber they don't warp, cup or split with the seasons, so a panel that leaves the workshop flat arrives at your wall flat, and stays that way. That is the difference between fitted furniture that lines through and furniture that needs a filler strip." },
+          { "id": "sec.boards.built.2", "text": "They cut clean. A dense, consistent core means our saw and CNC leave an edge that takes its banding without chipping — less waste on the bench and a crisper line in the room." },
+          { "id": "sec.boards.built.3", "text": "They wear well. Melamine-faced boards are made for daily life: hard-wearing, easy to wipe clean, and not precious about sunlight or a damp cloth." },
+          { "id": "sec.boards.built.4", "text": "And every decor has its edge. The banding is matched to the face by the maker, so a door reads as one material all the way round." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "real-wood", "q": "Is it real wood?", "a": [
+      { "id": "sec.boards.faq.real-wood.1", "text": "No — and that's deliberate. It's an engineered board with a decor face: the look and texture of oak, walnut, stone or paint, on a core that doesn't move. Solid wood is beautiful and it warps; fitted furniture has to stay true to a wall for years." },
+      { "id": "sec.boards.faq.real-wood.2", "text": "Where you want the real thing, the Atelier specification uses veneer and painted finishes.", "claims": ["atelier-veneer"] }
+    ] },
+    { "id": "where-from", "q": "Where do the boards come from?", "a": [
+      { "id": "sec.boards.faq.where-from.1", "text": "Egger from Austria, Pfleiderer from Germany, Cleaf and Emporio Skin from Italy." },
+      { "id": "sec.boards.faq.where-from.2", "text": "We buy through UK distributors and hold samples in the workshop.", "claims": ["distributors-named"] }
+    ] },
+    { "id": "scratch", "q": "Will it scratch or mark?", "a": [
+      { "id": "sec.boards.faq.scratch.1", "text": "Melamine faces are made for daily use — hard-wearing, easy to clean, not precious. Nothing is indestructible, but these surfaces stand up to a family's wear far better than a painted door." }
+    ] },
+    { "id": "edges", "q": "Can you match the edges?", "a": [
+      { "id": "sec.boards.faq.edges.1", "text": "Yes. Every decor we use has a matching edge from the same maker, so doors and panels read as one material all the way round." }
+    ] },
+    { "id": "guarantee", "q": "What is the 10-year board guarantee?", "a": [
+      { "id": "sec.boards.faq.guarantee.1", "text": "", "claims": ["board-guarantee"] }
+    ] },
+    { "id": "sustainable", "q": "Are the boards sustainable?", "a": [
+      { "id": "sec.boards.faq.sustainable.1", "text": "", "claims": ["sustainability"] }
+    ] },
+    { "id": "how-many", "q": "How many finishes can I choose from?", "a": [
+      { "id": "sec.boards.faq.how-many.1", "text": "Thousands across the four makers — but we'll show you the ones that suit your room, not the whole catalogue. Compose a swatch in the range and it follows you to the enquiry; we'll have the samples with us at the design visit." }
+    ] },
+    { "id": "see-one", "q": "Can I see one before I decide?", "a": [
+      { "id": "sec.boards.faq.see-one.1", "text": "Yes. The swatches you build on this site come with your enquiry; we order the samples and bring them to the design visit." }
+    ] }
+  ],
+  "claims": [
+    { "id": "egger-default", "claim": "Egger is the default for wardrobes and media walls", "location": "Egger block", "status": "ours", "source": "our own practice; Part 8 item 3 — Mark confirms the default in his words" },
+    { "id": "egger-textures", "claim": "Egger textures pressed to follow the printed grain", "location": "Egger block", "status": "P", "source": "Egger decor collection literature" },
+    { "id": "egger-one-collection", "claim": "Board, edging and laminate from one Egger collection", "location": "Egger block", "status": "P", "source": "Egger literature" },
+    { "id": "pfleiderer-line", "claim": "What we buy from Pfleiderer and why", "location": "Pfleiderer block", "status": "P", "source": "Mark" },
+    { "id": "cleaf-ranges", "claim": "Cleaf's textured ranges and where we use them", "location": "Cleaf block", "status": "P", "source": "Cleaf range descriptions; Mark" },
+    { "id": "emporio-facts", "claim": "Emporio Skin — Italian, born 2010, made near Pordenone, ten textures, matching edge, exclusive to Lawcris in the UK", "location": "Emporio block", "status": "sourced", "source": "emporioskin.it; lawcris.co.uk", "sourcedOn": "2026-09-11", "note": "re-read before publishing" },
+    { "id": "distributors-named", "claim": "Distributors (Lawcris) named on the page", "location": "Emporio block; FAQ", "status": "P", "source": "Mark — Part 8 item 22" },
+    { "id": "built-ours", "claim": "Boards don't warp; cut clean; edge without chipping", "location": "built-and-fitted", "status": "ours", "source": "none" },
+    { "id": "hard-wearing", "claim": "Hard-wearing, easy to clean", "location": "built-and-fitted; FAQ", "status": "ours", "source": "as written, no maker's number quoted; [P] the moment a resistance class is quoted — the maker's surface data by class" },
+    { "id": "board-guarantee", "claim": "10-year board guarantee", "location": "FAQ; the Standard tier", "status": "P", "source": "the guarantor and the terms — whose guarantee it is (the maker's, the distributor's, or ours), what it covers" },
+    { "id": "sustainability", "claim": "FSC / PEFC; recycled content", "location": "FAQ", "status": "P", "source": "each maker's certificate reference and figure" },
+    { "id": "atelier-veneer", "claim": "Atelier uses veneer and painted finishes", "location": "FAQ", "status": "P", "source": "Mark" }
+  ]
+}

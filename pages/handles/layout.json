@@ -1,0 +1,174 @@
+{
+  "page": "handles",
+  "slug": "/handles",
+  "design": "sturij-public",
+  "kind": "section",
+  "sizes": [
+    "1440",
+    "1024",
+    "390"
+  ],
+  "grid": {
+    "unit": 8,
+    "columns": 12
+  },
+  "nav": {
+    "group": "What we build with",
+    "label": "Handles",
+    "order": 4
+  },
+  "title": "Handles — Sturij",
+  "description": "The part you hold: Hendel & Hendel handles in fifteen finishes, with weight in the hand and a finish that stays right.",
+  "source": "content/sections/handles.json",
+  "note": "A content section from the copy family (site-copy-family v1, Part 4 — Handles (Hendel & Hendel)) as a page: the nav, the section's parts with their blocks (every line a copy slot; a [P] claim holds its line until Mark closes the row), the FAQ accordion (visible; FAQPage structured data from the same items), the enquiry band, the footer. The held-line count is the reading on <main data-held>.",
+  "regions": [
+    {
+      "id": "nav",
+      "artifact": "nav-bar",
+      "slots": [
+        {
+          "id": "nav.logo",
+          "type": "brand-mark",
+          "consumer": "nav-bar",
+          "asset": "brand.logo-white"
+        }
+      ]
+    },
+    {
+      "id": "section",
+      "artifact": "content-section",
+      "slots": [
+        {
+          "id": "sec.handles",
+          "type": "section",
+          "consumer": "content-section",
+          "data": "content/sections/handles.json",
+          "note": "expands to every line, title, kicker, heading, standfirst and claim slot of the section (lib/sections.ts sectionSlots)"
+        }
+      ]
+    },
+    {
+      "id": "faq",
+      "artifact": "faq-accordion",
+      "slots": [
+        {
+          "id": "sec.handles.faq",
+          "type": "faq",
+          "consumer": "faq-accordion",
+          "data": "content/sections/handles.json"
+        }
+      ]
+    },
+    {
+      "id": "enquire",
+      "artifact": "enquiry-form",
+      "slots": [
+        {
+          "id": "enquiry.kicker",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.title",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.body",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.submit",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.note",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.post",
+          "type": "enquiry",
+          "consumer": "enquiry-form",
+          "door": "/api/enquiry -> sturij-web enquiry function"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "artifact": "site-footer",
+      "slots": [
+        {
+          "id": "footer.logo",
+          "type": "brand-mark",
+          "consumer": "site-footer",
+          "asset": "brand.logo-white"
+        },
+        {
+          "id": "footer.tagline",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.facebook",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.instagram",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.linkedin",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trustpilot",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trademark",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.admin",
+          "type": "copy",
+          "consumer": "admin-editing",
+          "note": "the control, not content"
+        },
+        {
+          "id": "footer.disclosure",
+          "type": "identity",
+          "consumer": "site-footer",
+          "data": "content/identity.json",
+          "note": "the trading disclosure, the NAP and the copyright line, rendered from the identity record"
+        }
+      ]
+    }
+  ],
+  "locks": [],
+  "artifacts": [
+    {
+      "artifact": "social-links"
+    },
+    {
+      "artifact": "admin-editing"
+    }
+  ],
+  "variations": {
+    "390": {
+      "nav.links": "phone",
+      "form.grid": "1col",
+      "section.measure": "full"
+    },
+    "1024": {
+      "nav.links": "all"
+    }
+  }
+}

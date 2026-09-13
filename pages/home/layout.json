@@ -422,6 +422,12 @@
           "type": "band",
           "consumer": "calculator",
           "door": "/api/band"
+        },
+        {
+          "id": "sec.pricing.short",
+          "type": "copy",
+          "consumer": "calculator",
+          "note": "the short pricing line under the band — seeded by content/sections/pricing.json"
         }
       ]
     },
@@ -478,7 +484,27 @@
           "consumer": "site-footer"
         },
         {
-          "id": "footer.copyright",
+          "id": "footer.social.facebook",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.instagram",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.linkedin",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trustpilot",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trademark",
           "type": "copy",
           "consumer": "site-footer"
         },
@@ -487,6 +513,13 @@
           "type": "copy",
           "consumer": "admin-editing",
           "note": "the control, not content"
+        },
+        {
+          "id": "footer.disclosure",
+          "type": "identity",
+          "consumer": "site-footer",
+          "data": "content/identity.json",
+          "note": "the trading disclosure, the NAP and the copyright line, rendered from the identity record"
         }
       ]
     }
@@ -498,20 +531,24 @@
     },
     {
       "artifact": "admin-editing"
+    },
+    {
+      "artifact": "social-links"
     }
   ],
   "variations": {
-    "1024": {
-      "nav.links": "all",
-      "features.grid": "2col",
-      "stack.rail": "column"
-    },
     "390": {
       "nav.links": "phone",
       "features.grid": "1col",
       "stack.rail": "row",
       "galleries.minis": "1col",
       "form.grid": "1col"
+    },
+    "1024": {
+      "nav.links": "all",
+      "features.grid": "2col",
+      "stack.rail": "column"
     }
-  }
+  },
+  "kind": "home"
 }

@@ -179,6 +179,213 @@
           "kind": "list"
         }
       ]
+    },
+    {
+      "id": "section",
+      "description": "A content section from the copy family as data (content/sections/<id>.json): parts with blocks of lines, a FAQ, a claims register. Every line is a copy slot; a line whose claim is [P] renders nothing until Mark closes the row.",
+      "required": [
+        {
+          "name": "parts",
+          "kind": "list"
+        },
+        {
+          "name": "claims",
+          "kind": "list"
+        }
+      ],
+      "composable": [
+        {
+          "name": "faq",
+          "kind": "list"
+        },
+        {
+          "name": "extra",
+          "kind": "list"
+        }
+      ],
+      "approver": "owner"
+    },
+    {
+      "id": "faq",
+      "description": "A visible question-and-answer accordion drawn from a section; the same items feed FAQPage structured data — nothing hidden for crawlers.",
+      "required": [
+        {
+          "name": "q",
+          "kind": "string"
+        },
+        {
+          "name": "a",
+          "kind": "list"
+        }
+      ],
+      "composable": [
+        {
+          "name": "claims",
+          "kind": "list"
+        }
+      ]
+    },
+    {
+      "id": "claim",
+      "description": "A row of a claims register: claim, location, status (P | ours | sourced | general | dropped), source. [P] at go-live means the line is not on the page; closing a row is a data edit with a line in the slot table (claim.<section>.<row>).",
+      "required": [
+        {
+          "name": "claim",
+          "kind": "string"
+        },
+        {
+          "name": "location",
+          "kind": "string"
+        },
+        {
+          "name": "status",
+          "kind": "enum",
+          "values": [
+            "P",
+            "ours",
+            "sourced",
+            "general",
+            "dropped"
+          ]
+        },
+        {
+          "name": "source",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "sourcedOn",
+          "kind": "string"
+        },
+        {
+          "name": "note",
+          "kind": "string"
+        }
+      ]
+    },
+    {
+      "id": "partner",
+      "description": "A supporting trade or partner as a record (content/partners.json): renders only its publishable fields, only with consent on record and a review date not yet passed; registrations stay on record, never on the page.",
+      "required": [
+        {
+          "name": "trade",
+          "kind": "string"
+        },
+        {
+          "name": "name",
+          "kind": "string"
+        },
+        {
+          "name": "publishable",
+          "kind": "list"
+        },
+        {
+          "name": "consent",
+          "kind": "string"
+        },
+        {
+          "name": "reviewDate",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "contact",
+          "kind": "string"
+        },
+        {
+          "name": "phone",
+          "kind": "string"
+        },
+        {
+          "name": "email",
+          "kind": "string"
+        },
+        {
+          "name": "website",
+          "kind": "string"
+        },
+        {
+          "name": "blurb",
+          "kind": "string"
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "description": "The business identity record (content/identity.json): the trading name and legal entity paired, the NAP, the registered office — the same values in the footer, the structured data and the legal pages.",
+      "required": [
+        {
+          "name": "legalName",
+          "kind": "string"
+        },
+        {
+          "name": "tradingName",
+          "kind": "string"
+        },
+        {
+          "name": "companyNumber",
+          "kind": "string"
+        }
+      ],
+      "composable": []
+    },
+    {
+      "id": "legal",
+      "description": "A governed legal document rendered byte-faithful from its record (the version and date in the page footer; never hand-edited on the site; re-rendered when the record's version changes).",
+      "required": [
+        {
+          "name": "content",
+          "kind": "string"
+        },
+        {
+          "name": "version",
+          "kind": "number"
+        },
+        {
+          "name": "sha256",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "externalId",
+          "kind": "string"
+        }
+      ]
+    },
+    {
+      "id": "review",
+      "description": "A first-party review as a record: the customer, their words, the date, the permission on record — never edited, withdrawn on request; structured data only from qualifying rows.",
+      "required": [
+        {
+          "name": "customer",
+          "kind": "string"
+        },
+        {
+          "name": "text",
+          "kind": "string"
+        },
+        {
+          "name": "date",
+          "kind": "string"
+        },
+        {
+          "name": "permission",
+          "kind": "string"
+        }
+      ],
+      "composable": [
+        {
+          "name": "rating",
+          "kind": "number"
+        },
+        {
+          "name": "project",
+          "kind": "string"
+        }
+      ]
     }
   ]
 }
