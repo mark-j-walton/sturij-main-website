@@ -97,9 +97,37 @@ async function drive() {
     check('every served image is a rendition ≤ 800 KB', over === 0 && seen.size > 0, `${seen.size} images, largest ${Math.round(maxBytes / 1024)} KB`)
     check('no image slot serves its master directly', masters === 0, `${masters} masters`)
     check('no third-party requests from the page', thirdParty.length === 0, [...new Set(thirdParty)].join(', ') || 'none')
+    // 2b · the scripts a visitor loads: none of them is the auth library (it arrives on demand when an admin signs in), and their weight is recorded
+    const scriptSrcs = [...new Set(await page.evaluate(() => [...document.scripts].map((s) => s.src).filter(Boolean)))]
+    let scriptBytes = 0, authChunks = 0
+    for (const s of scriptSrcs) { try { const t = await (await fetch(s)).text(); scriptBytes += t.length; if (/supabase-js[/]|gotrue-js[/]|auth[/]v1[/]token/.test(t)) authChunks++ } catch { /* counted as missing below */ } }
+    report.scripts = { count: scriptSrcs.length, bytes: scriptBytes, authChunks }
+    check("the visitor's scripts carry no auth library (it loads on demand)", scriptSrcs.length > 0 && authChunks === 0, `${scriptSrcs.length} scripts, ${Math.round(scriptBytes / 1024)} KB raw, ${authChunks} carrying the auth client`)
+    // 2c · nothing broken: every image that has finished loading has pixels
+    const brokenImgs = await page.evaluate(() => [...document.images].filter((i) => i.complete && i.naturalWidth === 0 && (i.currentSrc || i.src)).map((i) => (i.currentSrc || i.src).slice(0, 80)))
+    check('no image on the page is broken', brokenImgs.length === 0, brokenImgs.length ? brokenImgs.slice(0, 3).join(' | ') : 'none broken')
     // 3 · the configurator in the DOM
     const cfg = await page.evaluate(() => ({ tabs: document.querySelectorAll('.galtabs [role=tab]').length, tiles: document.querySelectorAll('.galmain figure').length, roundel: !!document.getElementById('roundel'), minis: document.querySelectorAll('.gmini').length }))
     check('the configurator renders its four galleries and the roundel', cfg.tabs === 4 && cfg.roundel && cfg.minis === 3 && cfg.tiles > 0, JSON.stringify(cfg))
+    // 3b · every gallery: readers and the keyboard meet each decor once (the loop's repeats are aria-hidden with their buttons out of the tab order); a decor without a swatch image is a labelled tile
+    const ribbons = []
+    for (let i = 0; i < cfg.tabs; i++) {
+      await page.click(`.galtabs [role=tab]:nth-of-type(${i + 1})`)
+      await sleep(350)
+      ribbons.push(await page.evaluate(() => {
+        const figs = [...document.querySelectorAll('.galmain .ribbon figure')]
+        const shown = figs.filter((f) => f.getAttribute('aria-hidden') !== 'true')
+        const names = new Set(figs.map((f) => f.querySelector('figcaption')?.textContent))
+        const hiddenTabbable = figs.filter((f) => f.getAttribute('aria-hidden') === 'true' && f.querySelector('button')?.getAttribute('tabindex') !== '-1').length
+        const misfits = [...document.querySelectorAll('.galmain .ribbon .sw')]
+        const unlabelled = misfits.filter((m) => !m.getAttribute('aria-label') || !m.closest('figure')?.querySelector('figcaption')?.textContent).length
+        return { tab: document.querySelector('.galtabs [aria-selected=true]')?.textContent, figures: figs.length, shown: shown.length, decors: names.size, hiddenTabbable, misfits: misfits.length, unlabelled }
+      }))
+    }
+    await page.click('.galtabs [role=tab]:nth-of-type(1)')
+    report.ribbons = ribbons
+    check('each gallery shows readers and the keyboard every decor once, its repeats hidden', ribbons.every((r) => r.shown === r.decors && r.figures > r.shown && r.hiddenTabbable === 0), ribbons.map((r) => `${r.tab}: ${r.decors} decors, ${r.figures} figures, ${r.shown} shown`).join('; '))
+    check('every decor without a swatch image is a labelled tile', ribbons.every((r) => r.unlabelled === 0), `${ribbons.reduce((n, r) => n + r.misfits, 0)} gradient tiles (${ribbons.filter((r) => r.misfits).map((r) => r.tab).join(', ') || 'none'}), ${ribbons.reduce((n, r) => n + r.unlabelled, 0)} unlabelled`)
     // 4 · the enquiry: a failed post shows the fallback; a good post says sent
     probing = true
     await page.route('**/api/enquiry', (route) => route.fulfill({ status: 502, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'probe: down', fallback: { phone: '01937 326011', email: 'contact@sturij.com' } }) }))
