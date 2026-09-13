@@ -164,3 +164,20 @@ describe('the editing mode\'s refusals and the migration\'s shape', () => {
     expect(sql).toContain('bytes between 1 and 819200')
   })
 })
+
+describe('a held finish in the render request', () => {
+  const b64 = 'AAAA'
+  const req = { room: 'Bedroom', picks: { doors: 'Bookmatch Oak', carcass: 'Taormina Travertine', handle: 'Antique Brass' }, textures: [b64, b64, b64] }
+  it('travels as a placeholder channel, validated to the three names, and the prompt names the finish and calls its texture a placeholder', () => {
+    const v = validateRenderRequest({ ...req, placeholders: ['handle', 'handle', 'walls'] })
+    expect(v).toMatchObject({ ok: true })
+    if (!v.ok) return
+    expect(v.value.placeholders).toEqual(['handle'])
+    const p = composePrompt(v.value)
+    expect(p).toContain('the handle metal finish (Antique Brass) has no swatch attached')
+    expect(p).toContain('render that finish from the name')
+    const none = validateRenderRequest(req)
+    expect(none.ok && none.value.placeholders).toEqual([])
+    expect(none.ok ? composePrompt(none.value) : '').not.toContain('placeholder')
+  })
+})

@@ -121,13 +121,19 @@ async function drive() {
         const hiddenTabbable = figs.filter((f) => f.getAttribute('aria-hidden') === 'true' && f.querySelector('button')?.getAttribute('tabindex') !== '-1').length
         const misfits = [...document.querySelectorAll('.galmain .ribbon .sw')]
         const unlabelled = misfits.filter((m) => !m.getAttribute('aria-label') || !m.closest('figure')?.querySelector('figcaption')?.textContent).length
-        return { tab: document.querySelector('.galtabs [aria-selected=true]')?.textContent, figures: figs.length, shown: shown.length, decors: names.size, hiddenTabbable, misfits: misfits.length, unlabelled }
+        const held = shown.map((f) => f.querySelector('.sw.held')).filter(Boolean)
+        const heldUnlabelled = held.filter((h) => !/sample at the visit/.test(h.getAttribute('aria-label') || '') || !h.textContent?.includes('sample at the visit')).length
+        return { tab: document.querySelector('.galtabs [aria-selected=true]')?.textContent, figures: figs.length, shown: shown.length, decors: names.size, hiddenTabbable, misfits: misfits.length, unlabelled, held: held.length, heldUnlabelled }
       }))
     }
     await page.click('.galtabs [role=tab]:nth-of-type(1)')
     report.ribbons = ribbons
     check('each gallery shows readers and the keyboard every decor once, its repeats hidden', ribbons.every((r) => r.shown === r.decors && r.figures > r.shown && r.hiddenTabbable === 0), ribbons.map((r) => `${r.tab}: ${r.decors} decors, ${r.figures} figures, ${r.shown} shown`).join('; '))
     check('every decor without a swatch image is a labelled tile', ribbons.every((r) => r.unlabelled === 0), `${ribbons.reduce((n, r) => n + r.misfits, 0)} gradient tiles (${ribbons.filter((r) => r.misfits).map((r) => r.tab).join(', ') || 'none'}), ${ribbons.reduce((n, r) => n + r.unlabelled, 0)} unlabelled`)
+    const handlesTab = ribbons.find((r) => /handles/i.test(String(r.tab)))
+    check('the handle finishes are held tiles — the name and "sample at the visit", never a small file scaled up', !!handlesTab && handlesTab.held === handlesTab.shown && handlesTab.heldUnlabelled === 0 && handlesTab.shown === 15, handlesTab ? `${handlesTab.held} held of ${handlesTab.shown} shown, ${handlesTab.heldUnlabelled} unlabelled` : 'no Handles tab')
+    const snapshotAt = await page.$eval('#range', (e) => e.getAttribute('data-snapshot')).catch(() => null)
+    check('the range declares the registry snapshot it reads', !!snapshotAt && /^\d{4}-\d{2}-\d{2}T/.test(snapshotAt), snapshotAt ?? 'none')
     // 4 · the enquiry: a failed post shows the fallback; a good post says sent
     probing = true
     await page.route('**/api/enquiry', (route) => route.fulfill({ status: 502, contentType: 'application/json', body: JSON.stringify({ ok: false, error: 'probe: down', fallback: { phone: '01937 326011', email: 'contact@sturij.com' } }) }))

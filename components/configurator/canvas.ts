@@ -12,7 +12,15 @@ export const POLY: Record<'handle' | 'doors' | 'carcass', Array<[number, number]
 export const loadImg = (src: string) => new Promise<HTMLImageElement>((res, rej) => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = rej; i.src = src })
 
 export function tileBackground(t: Tile): string {
-  return t.src ? `url('${t.src}') center/cover no-repeat` : `linear-gradient(165deg, ${t.gradient?.[0]}, ${t.gradient?.[1]})`
+  if (t.src) return `url('${t.src}') center/cover no-repeat`
+  if (t.held || !t.gradient) return 'var(--custom-held-ground)'
+  return `linear-gradient(165deg, ${t.gradient[0]}, ${t.gradient[1]})`
+}
+
+/** The neutral ground a held tile paints on a canvas: the token, read from the page; a fixed fallback where no page is present. */
+function heldCanvasColour(): string {
+  const v = typeof document !== 'undefined' && typeof getComputedStyle === 'function' ? getComputedStyle(document.documentElement).getPropertyValue('--custom-held-canvas').trim() : ''
+  return v || '#8C8680' // token-audit:allow — the token's own value, for a canvas outside the page
 }
 
 async function paintTile(ctx: CanvasRenderingContext2D, t: Tile, W: number, H: number) {
@@ -20,6 +28,10 @@ async function paintTile(ctx: CanvasRenderingContext2D, t: Tile, W: number, H: n
     const img = await loadImg(t.src)
     const s = Math.max(W / img.width, H / img.height)
     ctx.drawImage(img, (W - img.width * s) / 2, (H - img.height * s) / 2, img.width * s, img.height * s)
+  } else if (t.held || !t.gradient) {
+    // a held finish: a neutral placeholder texture — the render names the finish; nothing here guesses a metal
+    ctx.fillStyle = heldCanvasColour()
+    ctx.fillRect(0, 0, W, H)
   } else {
     const g = ctx.createLinearGradient(0, 0, W, H)
     g.addColorStop(0, t.gradient?.[0] ?? '#888888') // token-audit:allow — a tile's own colour, not a design token

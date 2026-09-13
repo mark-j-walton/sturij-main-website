@@ -9,7 +9,8 @@
     { "name": "gallery", "values": ["woods", "materials", "colours", "handles"], "default": "woods", "description": "The active gallery — the full marquee; the other three are minis" },
     { "name": "facet", "values": ["doors", "carcass", "handle"], "default": "doors", "description": "The roundel facet a tile is set for" },
     { "name": "limit", "values": ["4"], "default": "4", "description": "Swatches per session (README §5)" },
-    { "name": "visualise", "values": ["server", "off"], "default": "server", "description": "Where the render happens: the site's /api/render with the vault's key; never a visitor's key" }
+    { "name": "visualise", "values": ["server", "off"], "default": "server", "description": "Where the render happens: the site's /api/render with the vault's key; never a visitor's key" },
+    { "name": "feed", "values": ["snapshot", "door"], "default": "snapshot", "description": "Where the decors and finishes come from: the sturij-assets snapshot public/materials.json emitted at build from data/range.json's selection by id (Part A); the registry door live with revalidation (Part B, held for Mark's word)" }
   ],
   "disabled": [
     { "property": "visitor-key", "reason": "the handoff asked the visitor for a Gemini key held in localStorage; removed — the render is server-side with the key from the vault by name" }
@@ -24,7 +25,7 @@
     { "recipe": "blur-reveal", "trigger": "state" },
     { "recipe": "reveal-on-scroll", "trigger": "enter" }
   ],
-  "capabilities": ["render:server", "download:zip", "download:png", "storage:local(sturij_visuals — the visitor's own visuals, no personal data)"],
+  "capabilities": ["render:server", "download:zip", "download:png", "storage:local(sturij_visuals — the visitor's own visuals, no personal data)", "feed:registry-snapshot (public/materials.json from sturij-assets at build, read through STURIJ_ASSETS_READ_KEY by name; the previous snapshot stands when the registry cannot be read)"],
   "tokens": {
     "background": "band-hi",
     "backgroundEnd": "band-mid",
@@ -64,7 +65,10 @@
     "visBadge": "custom.veil.chip",
     "carouselMask": "custom.mask.fade-x",
     "miniFrost": "custom.glass.mini-frost",
-    "railPlaceholder": "custom.placeholder.opacity-on-dark"
+    "railPlaceholder": "custom.placeholder.opacity-on-dark",
+    "heldGround": "custom.held.ground",
+    "heldLine": "custom.held.line",
+    "heldCanvas": "custom.held.canvas"
   },
   "size": { "w": 12, "h": 10 },
   "reference": {
@@ -72,7 +76,7 @@
     "where": "PublicPage.dc.html §3 Egger band, §4 swatch modal, §5 swatch lifecycle, §6 visualise flow",
     "delta": [
       "one component and one state: the galleries, the roundel, the modal, the 3D viewer, the rails, the room builder, the room picker, the generation and the lightbox read one context",
-      "gallery tiles keyed by registry decor code where sturij-assets holds one; the rest carry a misfit line (data/galleries.json)",
+      "the decors and the finishes read from ONE registry — the sturij-assets snapshot public/materials.json, selected by id in data/range.json; no decor named in code; a decor without an image is a labelled tile; a handle finish without a master is held — 'sample at the visit' (materials-feed brief, 13 Sep 2026)",
       "the render moved server-side (/api/render): the visitor's key prompt and localStorage key removed; the vault's GEMINI_API_KEY by name; rate limits; one retry; distinct errors",
       "every generated image labelled VISUALISATION in place, in the lightbox and on the download strip",
       "every value a token of the sturij-public instance",

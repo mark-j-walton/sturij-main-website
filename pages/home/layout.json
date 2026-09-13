@@ -146,13 +146,17 @@
           "id": "range.galleries",
           "type": "material",
           "consumer": "finish-configurator",
-          "data": "data/galleries.json"
+          "data": "public/materials.json",
+          "selection": "data/range.json",
+          "reading": "snapshot.at → #range[data-snapshot]"
         },
         {
           "id": "range.handles",
           "type": "handle",
           "consumer": "finish-configurator",
-          "data": "data/galleries.json"
+          "data": "public/materials.json",
+          "selection": "data/range.json",
+          "reading": "held finishes → .sw.held, 'sample at the visit'"
         },
         {
           "id": "range.rooms",

@@ -1,0 +1,610 @@
+{
+  "snapshot": {
+    "at": "2026-09-13T20:56:51.851Z",
+    "registry": "sturij-assets (uxdrokyxywwezorpvfsp)",
+    "read": "session (data/registry/decor-boards.2026-09-13.json)",
+    "read_by": "claude-code-session-2026-09-11-materials-feed (Supabase MCP execute_sql, read-only)",
+    "counts": {
+      "materials": 887,
+      "published": 855,
+      "material_images": 564,
+      "material_measurements": 11,
+      "material_variants": 10864,
+      "suppliers": 10
+    },
+    "decors": 9,
+    "coded": 7,
+    "with_image": 9,
+    "with_colour": 7,
+    "handles": 15,
+    "held": 15,
+    "misfits": 22
+  },
+  "rule": {
+    "master_min_short_side_px": 1500,
+    "master_kinds": [
+      "supplier",
+      "system"
+    ],
+    "rendition": "down, never up",
+    "min_quality": 85,
+    "held_label": "sample at the visit"
+  },
+  "tabs": [
+    {
+      "id": "woods",
+      "label": "Woods",
+      "kind": "material",
+      "family": "wood",
+      "tiles": 3
+    },
+    {
+      "id": "materials",
+      "label": "Materials",
+      "kind": "material",
+      "family": "material",
+      "tiles": 4
+    },
+    {
+      "id": "colours",
+      "label": "Colours",
+      "kind": "material",
+      "family": "colour",
+      "tiles": 2
+    },
+    {
+      "id": "handles",
+      "label": "Handles",
+      "kind": "handle",
+      "family": null,
+      "tiles": 15
+    }
+  ],
+  "decors": [
+    {
+      "id": "be0d5308-2f73-40c2-8c5e-92972d1262a4",
+      "code": "H1316",
+      "name": "Bookmatch Oak",
+      "supplier": "Egger",
+      "family": "wood",
+      "family_from": "code",
+      "tab": "woods",
+      "finish": "ST17",
+      "texture": "woodgrain",
+      "colour": {
+        "hex": "#BD956E",
+        "oklch": {
+          "l": 0.6976,
+          "c": 0.0715,
+          "h": 64.79
+        },
+        "confidence": 0.839,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "bd48feb8-72ea-4c66-b761-a29f857e2889",
+        "path": "/showcase/finishes/bookmatch-oak.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 376354,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST17",
+        "decor_texture_code": "H1316 ST17"
+      },
+      "misfit": null
+    },
+    {
+      "id": "d59f7601-8442-4648-a6d5-4e277a619a09",
+      "code": null,
+      "name": "Natural Dimaro Walnut",
+      "supplier": "Egger",
+      "family": "wood",
+      "family_from": "placed",
+      "tab": "woods",
+      "finish": null,
+      "texture": null,
+      "colour": null,
+      "image": {
+        "id": "328e35ca-c06c-49a6-95ef-5370a57a2de3",
+        "path": "/showcase/finishes/natural-dimaro-walnut.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 766582,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {},
+      "misfit": "no decor code in the registry; placed in woods by the handoff (README §3) — the registry row carries no decor code and no measurement, so the family cannot be read from it"
+    },
+    {
+      "id": "b152640d-6eb1-4c1c-a901-dc7128e0dc7d",
+      "code": "H1388",
+      "name": "Sand Casella Oak",
+      "supplier": "Egger",
+      "family": "wood",
+      "family_from": "code",
+      "tab": "woods",
+      "finish": "ST40",
+      "texture": "woodgrain",
+      "colour": {
+        "hex": "#D4BCA3",
+        "oklch": {
+          "l": 0.809,
+          "c": 0.0436,
+          "h": 68.88
+        },
+        "confidence": 0.855,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "8d33d2bf-256a-45ea-af8d-4e8d87d25ad3",
+        "path": "/showcase/finishes/sand-casella-oak.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 479350,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST40",
+        "decor_texture_code": "H1388 ST40"
+      },
+      "misfit": null
+    },
+    {
+      "id": "919c3b85-a0a9-4ee5-bb36-989007c6d264",
+      "code": "F037",
+      "name": "Taormina Travertine",
+      "supplier": "Egger",
+      "family": "material",
+      "family_from": "code",
+      "tab": "materials",
+      "finish": "ST76",
+      "texture": "stone",
+      "colour": {
+        "hex": "#DDCCBA",
+        "oklch": {
+          "l": 0.8546,
+          "c": 0.0315,
+          "h": 69.58
+        },
+        "confidence": 0.896,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "5b2bbd4c-5238-498c-b1d3-47fbb7c3f6df",
+        "path": "/showcase/finishes/taormina-travertine.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 477390,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST76",
+        "decor_texture_code": "F037 ST76"
+      },
+      "misfit": null
+    },
+    {
+      "id": "80e62ad3-064a-44d9-b9f9-0c1e53768bf0",
+      "code": "F579",
+      "name": "Champagne Crossed Metal",
+      "supplier": "Egger",
+      "family": "material",
+      "family_from": "code",
+      "tab": "materials",
+      "finish": "ST20",
+      "texture": null,
+      "colour": {
+        "hex": "#9B8979",
+        "oklch": {
+          "l": 0.6408,
+          "c": 0.0314,
+          "h": 62.95
+        },
+        "confidence": 0.926,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "5e63e10b-d60c-44ee-b383-f456f87bcb6f",
+        "path": "/showcase/finishes/champagne-crossed-metal.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 447174,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST20",
+        "decor_texture_code": "F579 ST20"
+      },
+      "misfit": null
+    },
+    {
+      "id": "e7c2d4d1-8059-440b-81ec-fb02fe59f6ea",
+      "code": "F662",
+      "name": "Pebble Grey Calcit Stone",
+      "supplier": "Egger",
+      "family": "material",
+      "family_from": "code",
+      "tab": "materials",
+      "finish": "ST76",
+      "texture": null,
+      "colour": {
+        "hex": "#B1A397",
+        "oklch": {
+          "l": 0.7235,
+          "c": 0.0236,
+          "h": 64.7
+        },
+        "confidence": 0.911,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "60c32654-f437-40c3-8e56-51101306d666",
+        "path": "/showcase/finishes/pebble-grey-calcit-stone.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 450438,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST76",
+        "decor_texture_code": "F662 ST76"
+      },
+      "misfit": null
+    },
+    {
+      "id": "d4929df7-d066-4f10-a479-6fa6ad8c383a",
+      "code": "F661",
+      "name": "Sand Beige Calcit Stone",
+      "supplier": "Egger",
+      "family": "material",
+      "family_from": "code",
+      "tab": "materials",
+      "finish": "ST76",
+      "texture": null,
+      "colour": {
+        "hex": "#D6C5B5",
+        "oklch": {
+          "l": 0.833,
+          "c": 0.0291,
+          "h": 63.37
+        },
+        "confidence": 0.934,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "3547512d-f175-4b32-8cf6-af8093fa8eb2",
+        "path": "/showcase/finishes/sand-beige-calcit-stone.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 162236,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "texture_code": "ST76",
+        "decor_texture_code": "F661 ST76"
+      },
+      "misfit": null
+    },
+    {
+      "id": "c33455d7-d2c0-41e6-8708-1a89889e25cb",
+      "code": "U604",
+      "name": "Reed Green",
+      "supplier": "Egger",
+      "family": "colour",
+      "family_from": "code",
+      "tab": "colours",
+      "finish": null,
+      "texture": "plain",
+      "colour": {
+        "hex": "#6D7165",
+        "oklch": {
+          "l": 0.5417,
+          "c": 0.0189,
+          "h": 122.06
+        },
+        "confidence": 0.996,
+        "fidelity": "photographic",
+        "measured_at": "2026-09-10T03:01:58.841Z",
+        "by": "vision-pass@1"
+      },
+      "image": {
+        "id": "87de98f9-8ef2-4c83-9889-3f8658605eaa",
+        "path": "/showcase/finishes/reed-green.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 11340,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {
+        "ncs": "S5010-G30Y **",
+        "ral": "7033*",
+        "pantone": "5635U*"
+      },
+      "misfit": null
+    },
+    {
+      "id": "29b1f888-4a11-4991-986f-e6a3a9068f33",
+      "code": null,
+      "name": "Cassis",
+      "supplier": "Egger",
+      "family": "colour",
+      "family_from": "placed",
+      "tab": "colours",
+      "finish": null,
+      "texture": null,
+      "colour": null,
+      "image": {
+        "id": "d98822a2-9f1f-4d6c-a656-354b41be8789",
+        "path": "/showcase/finishes/cassis.webp",
+        "width": 1800,
+        "height": 1012,
+        "bytes": 3366,
+        "kind": "swatch",
+        "render_ready": true
+      },
+      "refs": {},
+      "misfit": "no decor code in the registry; placed in colours by the handoff (README §3) — the registry row carries no decor code and no measurement, so the family cannot be read from it"
+    }
+  ],
+  "handles": [
+    {
+      "id": "antique-brass",
+      "name": "Antique Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "antique-pewter",
+      "name": "Antique Pewter",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "brushed-anodised",
+      "name": "Brushed Anodised",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "brushed-nickel",
+      "name": "Brushed Nickel",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "brushed-satin-brass",
+      "name": "Brushed Satin Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "burnished-brass",
+      "name": "Burnished Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "chrome-plated",
+      "name": "Chrome Plated",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "dark-brushed-brass",
+      "name": "Dark Brushed Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "dull-nickel",
+      "name": "Dull Nickel",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "matt-black",
+      "name": "Matt Black",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "oil-rubbed-bronze",
+      "name": "Oil Rubbed Bronze",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "polished-brass",
+      "name": "Polished Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "polished-nickel",
+      "name": "Polished Nickel",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "id": "satin-brass",
+      "name": "Satin Brass",
+      "supplier": null,
+      "image": null,
+      "held": true,
+      "misfit": "no finish record in the registry and no master in the library — held: sample at the visit"
+    }
+  ],
+  "misfits": [
+    {
+      "kind": "no-code",
+      "material": "d59f7601-8442-4648-a6d5-4e277a619a09",
+      "name": "Natural Dimaro Walnut",
+      "note": "in the registry (Egger, published) without a decor code"
+    },
+    {
+      "kind": "no-measurement",
+      "material": "d59f7601-8442-4648-a6d5-4e277a619a09",
+      "name": "Natural Dimaro Walnut",
+      "note": "no measured colour in the registry (material_measurements) — the vision pass has not run on this decor"
+    },
+    {
+      "kind": "no-code",
+      "material": "29b1f888-4a11-4991-986f-e6a3a9068f33",
+      "name": "Cassis",
+      "note": "in the registry (Egger, published) without a decor code"
+    },
+    {
+      "kind": "flat-swatch",
+      "material": "29b1f888-4a11-4991-986f-e6a3a9068f33",
+      "name": "Cassis",
+      "note": "the registry's swatch file is 3366 bytes — a flat synthetic colour, not the decor's texture; a photographic swatch is owed"
+    },
+    {
+      "kind": "no-measurement",
+      "material": "29b1f888-4a11-4991-986f-e6a3a9068f33",
+      "name": "Cassis",
+      "note": "no measured colour in the registry (material_measurements) — the vision pass has not run on this decor"
+    },
+    {
+      "kind": "not-in-registry",
+      "name": "Alpine White",
+      "note": "drawn as a gradient in the handoff; no row in the registry on 13 Sep 2026 — collected into the registry with its Egger code, it enters the strip by id (the handoff placed it in colours)"
+    },
+    {
+      "kind": "not-in-registry",
+      "name": "Graphite Grey",
+      "note": "drawn as a gradient in the handoff; no row in the registry on 13 Sep 2026 — collected into the registry with its Egger code, it enters the strip by id (the handoff placed it in colours)"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Antique Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Antique Pewter",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Bronze",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Brushed Anodised",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Brushed Nickel",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Brushed Satin Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Burnished Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Chrome Plated",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Dark Brushed Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Dull Nickel",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Matt Black",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Oil Rubbed Bronze",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Polished Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Polished Nickel",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    },
+    {
+      "kind": "held-finish",
+      "name": "Satin Brass",
+      "note": "no finish record in the registry and no master in the library — held: sample at the visit"
+    }
+  ]
+}

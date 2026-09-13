@@ -101,6 +101,11 @@ button { font: inherit; }
 .galmain .ribbon figure:hover figcaption, .galmain .ribbon figure:focus-within figcaption { transform: none; }
 .ribbon .tilehit { position: absolute; inset: 0; z-index: 2; background: none; border: 0; padding: 0; margin: 0; cursor: pointer; border-radius: inherit; }
 .ribbon .tilehit:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* a held finish: no master in the library yet — the name on the neutral ground, never a small file scaled up */
+.ribbon .sw.held { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px; text-align: center; background: var(--custom-held-ground); box-shadow: inset 0 0 0 1px var(--custom-held-line); }
+.ribbon .sw.held b { font-family: var(--type-title-family); font-weight: var(--type-title-weight); font-size: clamp(14px, 1.4vw, 18px); line-height: 1.2; color: var(--ink-on-dark); }
+.ribbon .sw.held i { font-style: normal; font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--custom-ink-on-dark-58); }
+.gmini .sw.held b, .gmini .sw.held i { display: none; }
 .galmain .ribbon:hover { animation-play-state: paused; }
 @keyframes ribbonscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .galmain { overflow: hidden; max-width: 1180px; margin: 0 auto; -webkit-mask-image: var(--custom-mask-fade-x); mask-image: var(--custom-mask-fade-x); transition: opacity var(--motion-normal) var(--motion-ease-enter); } /* inside the page width; the edges fade, no hard cut */

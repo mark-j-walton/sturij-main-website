@@ -27,6 +27,8 @@ export async function requestRender(swatch: Swatch, room: Room, base: string | n
     codes: { doors: swatch.picks.doors.code ?? null, carcass: swatch.picks.carcass.code ?? null },
     roomFinishes: Object.fromEntries(Object.entries(swatch.room).map(([k, t]) => [k, t?.name ?? null])),
     textures,
+    // a held finish has no texture: its channel is a neutral placeholder and the render works from the name
+    placeholders: (['doors', 'carcass', 'handle'] as const).filter((k) => !!swatch.picks[k].held),
     // the remix: the block's own image is the base — the room, camera and layout kept, the furniture re-finished
     base: base ?? null,
   }

@@ -6,7 +6,7 @@
 // band to the enquiry; "see it in a room" hands the materials to the site's render flow, labelled.
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { CalculatorConfiguration, CalculatorTier } from '@/lib/calculator-data'
-import { GALLERIES } from '@/lib/galleries'
+import { isPainted } from '@/lib/galleries'
 import { Copy, type Slot } from '../Copy'
 import { useConfigurator, type Guide } from '../configurator/ConfiguratorProvider'
 import { VisualTarget } from '../configurator/VisualTarget'
@@ -27,7 +27,6 @@ interface BandReply {
 type Reply = BandReply | { ok: false; code: string; message: string }
 
 const gbp = (v: number) => `£${v.toLocaleString('en-GB')}`
-const PAINTED_GALLERY = 'colours'
 
 export interface CalculatorView { configurations: CalculatorConfiguration[]; tiers: CalculatorTier[]; watermark: string; basis: string }
 
@@ -50,7 +49,7 @@ export function Calculator({ kicker, title, body, finishesHref, standalone, view
   const doors = picks.doors ?? latestSwatch?.picks.doors ?? null
   const carcass = picks.carcass ?? latestSwatch?.picks.carcass ?? null
   const handle = picks.handle ?? latestSwatch?.picks.handle ?? null
-  const painted = !!doors && (GALLERIES.find((g) => g.tiles.includes(doors))?.id === PAINTED_GALLERY)
+  const painted = isPainted(doors) // the registry's family, never a gallery named in code
   const swatchComplete = !!(doors && carcass && handle)
 
   const price = useCallback(async () => {

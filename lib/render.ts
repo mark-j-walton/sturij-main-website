@@ -17,6 +17,8 @@ export interface RenderRequest {
   codes?: { doors?: string | null; carcass?: string | null }
   roomFinishes?: Partial<Record<'ceiling' | 'walls' | 'skirting' | 'flooring', string | null>>
   textures: [string, string, string]
+  /** Channels whose texture is a neutral placeholder — a held finish with no master yet, rendered from its name. */
+  placeholders?: Array<'doors' | 'carcass' | 'handle'>
   /** The remix: the block's own image — a path under /showcase or a public object in the site-images bucket. */
   base?: string | null
   /** The base image as base64 JPEG, loaded by the route from the path above; never sent by the client. */
@@ -53,6 +55,8 @@ export function validateRenderRequest(body: unknown): { ok: true; value: RenderR
   const rf = (b.roomFinishes ?? {}) as Record<string, unknown>
   const base = validateBase(b.base)
   if (base === 'invalid') return { ok: false, code: 'E_BAD_REQUEST', message: 'The base image must be one of the site\'s own images' }
+  const isChannel = (x: unknown): x is 'doors' | 'carcass' | 'handle' => x === 'doors' || x === 'carcass' || x === 'handle'
+  const placeholders = Array.isArray(b.placeholders) ? [...new Set((b.placeholders as unknown[]).filter(isChannel))] : []
   return {
     ok: true,
     value: {
@@ -61,9 +65,20 @@ export function validateRenderRequest(body: unknown): { ok: true; value: RenderR
       codes: { doors: name(codes.doors, 20), carcass: name(codes.carcass, 20) },
       roomFinishes: { ceiling: name(rf.ceiling), walls: name(rf.walls), skirting: name(rf.skirting), flooring: name(rf.flooring) },
       textures: textures as [string, string, string],
+      placeholders,
       base,
     },
   }
+}
+
+const CHANNEL_LABEL = { doors: 'door finish', carcass: 'carcass finish', handle: 'handle metal finish' } as const
+
+/** A held finish travels as a neutral placeholder texture: the prompt says so and names the finish, so the model renders the finish, not the grey. */
+export function heldSentence(r: RenderRequest): string {
+  const ph = r.placeholders ?? []
+  if (!ph.length) return ''
+  const parts = ph.map((k) => `the ${CHANNEL_LABEL[k]} (${r.picks[k]})`)
+  return ` Note: ${parts.join(' and ')} ${ph.length > 1 ? 'have' : 'has'} no swatch attached — ${ph.length > 1 ? 'those textures are' : 'that texture is'} a neutral placeholder; render ${ph.length > 1 ? 'those finishes' : 'that finish'} from the name, as the maker's real finish would look.`
 }
 
 /** The prompt as the handoff composes it (README §6), with the code beside a decor where the registry has one — and the REMIX form when a base image travels: the block's own room kept, the fitted furniture re-finished, the rest of the room made to complement the scheme. */
@@ -74,9 +89,9 @@ export function composePrompt(r: RenderRequest): string {
   const roomSpec = f.flooring ? `; room finishes — ceiling: ${f.ceiling ?? 'white'}, walls: ${f.walls ?? 'warm white'}, skirting: ${f.skirting ?? 'white'}, flooring: ${f.flooring}` : ''
   if (r.base) {
     const complement = f.flooring ? `Use the stated room finishes${roomSpec}.` : 'Choose wall colour, flooring, soft furnishings and accessories that complement the new scheme — quiet, tonal, of a piece with it — and change nothing else.'
-    return `The first attached image is a photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Remix it true to a new scheme: keep the room, the camera, the layout, the furniture and the light exactly as they are; re-finish only the fitted furniture in these materials — ${spec}. The three textures that follow are the door finish, the carcass finish and the handle metal finish; apply them faithfully, with their grain and texture, to the fitted furniture. ${complement} Photorealistic, no people, no text or watermarks, the same framing as the original.`
+    return `The first attached image is a photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Remix it true to a new scheme: keep the room, the camera, the layout, the furniture and the light exactly as they are; re-finish only the fitted furniture in these materials — ${spec}. The three textures that follow are the door finish, the carcass finish and the handle metal finish; apply them faithfully, with their grain and texture, to the fitted furniture. ${complement} Photorealistic, no people, no text or watermarks, the same framing as the original.${heldSentence(r)}`
   }
-  return `Photorealistic interior photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Materials — ${spec}${roomSpec}. The first attached texture is the door finish, the second the carcass finish, the third the handle metal finish; apply them faithfully to the fitted furniture. Warm natural light, realistic proportions, no people, no text or watermarks. Landscape 4:3.`
+  return `Photorealistic interior photograph of a ${r.room.toLowerCase()} in a UK home with bespoke fitted furniture made by a joinery workshop. Materials — ${spec}${roomSpec}. The first attached texture is the door finish, the second the carcass finish, the third the handle metal finish; apply them faithfully to the fitted furniture. Warm natural light, realistic proportions, no people, no text or watermarks. Landscape 4:3.${heldSentence(r)}`
 }
 
 export function geminiBody(prompt: string, textures: [string, string, string], baseImage?: string | null) {
