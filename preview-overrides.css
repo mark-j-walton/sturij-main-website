@@ -1,0 +1,15 @@
+/* preview-overrides.css — the drop preview only (branch preview/design-drop-2026-08-15).
+   Loaded into studio.html at runtime by studio-preview.html; no archive file is edited.
+
+   The reading (dd2b862b, 12 Sep 2026): on studio.html the mode switcher pill (workarea-nav.js,
+   fixed top:10px right:84px) sits on the Studio's own dark header row and covers three pills.
+   The lift: the switcher keeps its place and gets its own row; the header, the white menu bar
+   (action-bar.js) and everything keyed to --nav drop by one row of 48px, studio.html only.
+   Studio v2's own responsive rule already parks the switcher bottom-right at 1000px and below,
+   clear of the toolbar, so nothing changes there. The archive keeps the fault; v5 fixes it. */
+@media (min-width: 1001px) {
+  html:root { --nav: 152px; }                  /* 104px + 48px */
+  header.top { padding-top: 55px; }            /* 7px + 48px: both header rows sit below the switcher */
+  .abar  { top: 106px !important; }            /* 58px + 48px */
+  .aslip { top: 154px !important; }            /* 106px + 48px */
+}
