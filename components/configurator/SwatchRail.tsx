@@ -82,7 +82,7 @@ export function SwatchRail({ variant, targetKey, roomLabel, className, id, slots
                     <p>Make a swatch in the range — doors, carcass, handle — and it appears in these four places. Tap it to remix this {room} in your scheme.</p>
                   </>
                 )}
-                <button type="button" className="swtip-x" onClick={dismissTips} aria-label="Dismiss this tip">Got it</button>
+                <button type="button" className="swtip-x" onClick={dismissTips} aria-label="Got it — dismiss this tip">Got it</button>
               </div>
             )}
           </span>

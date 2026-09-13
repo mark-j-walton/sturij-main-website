@@ -6,6 +6,7 @@ import Image, { getImageProps } from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { GALLERIES, HANDLE_GALLERY_INDEX, type Tile } from '@/lib/galleries'
 import { blobBytes, drawRoundel, makeZip, saveBlob, slug, tileBackground, type Picks } from './canvas'
+import { ribbonList } from './ribbon'
 import { MAX_SWATCHES, useConfigurator } from './ConfiguratorProvider'
 import { SwatchRail } from './SwatchRail'
 import { Viewer3D } from './Viewer3D'
@@ -26,20 +27,20 @@ export function tileBackgroundRendition(t: Tile, width = 640): string {
 
 /** A ribbon of tiles duplicated for the seamless −50% loop (README §3). Every image is a rendition sized for its tile. */
 export function Ribbon({ tiles, duration, reverse, onTile, ariaHidden, sizes }: { tiles: Tile[]; duration: number; reverse?: boolean; onTile?: (t: Tile) => void; ariaHidden?: boolean; sizes?: string }) {
-  let list = tiles
-  while (list.length < 10) list = list.concat(tiles)
-  const doubled = [...list, ...list]
+  const { list: doubled, unique } = ribbonList(tiles)
   return (
     <div className={`ribbon${reverse ? ' rev' : ''}`} style={{ animationDuration: `${duration}s` }} aria-hidden={ariaHidden ? 'true' : undefined}>
       {doubled.map((t, i) => {
         const dims = tileDims(t)
+        const repeat = i >= unique
         return (
-          <figure key={`${t.id}-${i}`}>
+          <figure key={`${t.id}-${i}`} aria-hidden={repeat ? 'true' : undefined} data-repeat={repeat ? '' : undefined}>
             {t.src
               ? <Image src={t.src} alt={t.alt ?? t.name} width={dims.width} height={dims.height} sizes={sizes ?? '(max-width: 760px) 60vw, 310px'} loading="lazy" quality={75} />
-              : <span className="sw" style={{ background: tileBackground(t) }} />}
+              // a decor without a swatch image (the registry's misfit list): its own colour as a labelled tile, never a broken image
+              : <span className="sw" role="img" aria-label={`${t.name} — swatch to follow`} data-misfit={t.misfit ?? 'no swatch image'} style={{ background: tileBackground(t) }} />}
             <figcaption>{t.name}</figcaption>
-            {onTile && <button type="button" className="tilehit" aria-label={`Choose ${t.name}`} tabIndex={i < list.length ? 0 : -1} onClick={() => onTile(t)} />}
+            {onTile && <button type="button" className="tilehit" aria-label={`Choose ${t.name}`} tabIndex={repeat ? -1 : 0} onClick={() => onTile(t)} />}
           </figure>
         )
       })}
