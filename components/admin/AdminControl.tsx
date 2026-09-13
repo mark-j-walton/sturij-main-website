@@ -6,7 +6,7 @@
 // site-images bucket and a site_image_slots row; copy to site_content_slots; every save is audited by the
 // database (a publish content act at the login class); nothing lives in the visitor's browser.
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { publicSupabase } from '@/lib/supabase/browser'
+import { CONFIGURED, publicSupabase, sessionHint } from '@/lib/supabase/browser'
 import { COPY_LIMIT, sanitizeCopy } from '@/lib/copy'
 import { validateImageFile, IMAGE_LIMIT_BYTES } from './validate'
 
@@ -25,7 +25,7 @@ export function AdminControl() {
   const say = (text: string, err = false) => setMessage({ text, err })
 
   const refresh = useCallback(async () => {
-    const sb = publicSupabase()
+    const sb = await publicSupabase()
     if (!sb) { setStatus('unconfigured'); return }
     const { data } = await sb.auth.getSession()
     if (!data.session) { setStatus('signed-out'); return }
@@ -36,15 +36,24 @@ export function AdminControl() {
   }, [])
 
   useEffect(() => {
-    void refresh()
     if (location.hash === '#admin') setOpen(true)
-    const sb = publicSupabase()
-    const sub = sb?.auth.onAuthStateChange(() => { void refresh() })
-    return () => sub?.data.subscription.unsubscribe()
+    if (!CONFIGURED) { setStatus('unconfigured'); return }
+    // The auth library loads only when there is a reason to — a session cookie, a return from the sign-in
+    // email, the admin hash. A plain visit is signed out and downloads nothing (the phone's script budget).
+    if (!sessionHint(document.cookie, location.hash, location.search)) { setStatus('signed-out'); return }
+    let alive = true
+    let sub: { data: { subscription: { unsubscribe(): void } } } | undefined
+    void (async () => {
+      await refresh()
+      const sb = await publicSupabase()
+      if (!alive || !sb) return
+      sub = sb.auth.onAuthStateChange(() => { void refresh() })
+    })()
+    return () => { alive = false; sub?.data.subscription.unsubscribe() }
   }, [refresh])
 
   const sendLink = async () => {
-    const sb = publicSupabase()
+    const sb = await publicSupabase()
     if (!sb || !email) return
     const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: `${location.origin}/#admin`, shouldCreateUser: false } })
     if (error) { say(error.message, true); return }
@@ -52,14 +61,14 @@ export function AdminControl() {
     say('Email sent — open the link, or enter the code from it here')
   }
   const verify = async () => {
-    const sb = publicSupabase()
+    const sb = await publicSupabase()
     if (!sb || !email || !code) return
     const { error } = await sb.auth.verifyOtp({ email, token: code.trim(), type: 'email' })
     if (error) { say(error.message, true); return }
     say('Signed in')
     void refresh()
   }
-  const signOut = async () => { await publicSupabase()?.auth.signOut(); setEditing(false); setStatus('signed-out'); say('Signed out') }
+  const signOut = async () => { await (await publicSupabase())?.auth.signOut(); setEditing(false); setStatus('signed-out'); say('Signed out') }
 
   const publish = useCallback(() => {
     if (publishTimer.current) window.clearTimeout(publishTimer.current)
@@ -93,7 +102,7 @@ export function AdminControl() {
   }, [])
 
   const uploadFor = useCallback(async (slotId: string, file: File) => {
-    const sb = publicSupabase()
+    const sb = await publicSupabase()
     if (!sb) return
     const v = await validateImageFile(file)
     if (!v.ok) { say(`Refused: ${v.reason}`, true); return }
@@ -133,7 +142,7 @@ export function AdminControl() {
       const text = sanitizeCopy(el.innerHTML).slice(0, COPY_LIMIT)
       if (before === undefined || sanitizeCopy(before) === text) return
       el.innerHTML = text
-      const sb = publicSupabase()
+      const sb = await publicSupabase()
       if (!sb) return
       const slot = el.dataset.copySlot as string
       const ins = await sb.from('site_content_slots').insert({ slot_id: slot, text })
