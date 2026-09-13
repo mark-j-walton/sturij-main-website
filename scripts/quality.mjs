@@ -5,7 +5,7 @@
 //
 //   node scripts/quality.mjs [--url https://…] [--skip-build] [--no-lighthouse] [--port 3131]
 import { execFileSync, spawn } from 'node:child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { chromium } from 'playwright'
 
 const args = process.argv.slice(2)
@@ -223,6 +223,37 @@ async function drive() {
       const r = await fetch(BASE + p)
       check(`legacy page ${p} still answers`, r.status === 200, String(r.status))
     }
+    // 10 · the page register: every page answers with the trading disclosures; a section page declares its held count and none of its held lines is in the page; finance and the FRN appear nowhere outside the legal pages; Harrogate is never the workshop
+    const register = readdirSync('pages').map((d) => JSON.parse(readFileSync(`pages/${d}/layout.json`, 'utf8')))
+    const pageRows = []
+    for (const L of register) {
+      const r = await fetch(BASE + L.slug)
+      const html = await r.text()
+      const text = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
+      let leaked = 0, expectedHeld = null
+      if (L.kind === 'section') {
+        const sec = JSON.parse(readFileSync(L.source, 'utf8'))
+        const openP = new Set(sec.claims.filter((c) => c.status === 'P' || c.status === 'dropped').map((c) => c.id))
+        const heldLines = [...sec.parts.flatMap((p) => [...(p.standfirst ? [p.standfirst] : []), ...p.blocks.flatMap((b) => b.lines)]), ...sec.faq.flatMap((f) => f.a)].filter((l) => l.text && ((l.claims ?? []).some((c) => openP.has(c)) || l.partner))
+        for (const l of heldLines) if (text.includes(l.text.slice(0, 48))) leaked++
+        expectedHeld = heldLines.length
+      }
+      pageRows.push({ page: L.page, kind: L.kind, status: r.status, disclosure: /trading name of Storage Innovation Limited/.test(text) && /12903072/.test(text) && /Skelmanthorpe/.test(text), held: Number((html.match(/data-held="(\d+)"/) || [])[1] ?? -1), expectedHeld, leaked, faq: (html.match(/<details class="faq"/g) || []).length, finance: L.kind === 'legal' ? false : /\bfinance\b|703401|ideal4finance|introducer appointed representative/i.test(text), harrogate: /Harrogate workshop|CNC in Harrogate/.test(text), jsonld: (html.match(/application\/ld\+json/g) || []).length })
+    }
+    report.pages = pageRows
+    check('every page in the register answers 200 with the trading disclosures and the NAP in its footer', pageRows.every((p) => p.status === 200 && p.disclosure), pageRows.map((p) => `${p.page}:${p.status}${p.disclosure ? '' : ' no-disclosure'}`).join(' '))
+    check('every section page declares its held count and no held line is in the page', pageRows.filter((p) => p.kind === 'section').every((p) => p.held >= 0 && p.leaked === 0), pageRows.filter((p) => p.kind === 'section').map((p) => `${p.page}: held ${p.held} (${p.expectedHeld} held lines by data), leaked ${p.leaked}, faq ${p.faq}`).join('; '))
+    check('finance and the FRN appear nowhere outside the legal pages, and no page names Harrogate as the workshop', pageRows.every((p) => !p.finance && !p.harrogate), pageRows.filter((p) => p.finance || p.harrogate).map((p) => p.page).join(', ') || 'none')
+    check('every page carries the organisation structured data; every section with visible questions carries FAQPage', pageRows.every((p) => p.jsonld >= 1) && pageRows.filter((p) => p.kind === 'section' && p.faq > 0).every((p) => p.jsonld >= 2), pageRows.map((p) => `${p.page}:${p.jsonld}`).join(' '))
+    // 11 · cookies and storage on a first visit (PECR regulation 6): the inventory — the site sets no cookie; what it stores is the visitor's own compositions
+    const ip = await browser.newPage({ viewport: { width: 1440, height: 900 } })
+    await ip.goto(BASE + '/', { waitUntil: 'load' })
+    await ip.evaluate(async () => { for (let y = 0; y <= document.body.scrollHeight; y += 900) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 40)) } })
+    await sleep(500)
+    const inventory = await ip.evaluate(() => ({ cookies: document.cookie, local: Object.keys(localStorage), session: Object.keys(sessionStorage) }))
+    await ip.close()
+    report.storageInventory = inventory
+    check('a first visit sets no cookie; the storage it uses is listed (functional, the visitor\'s own)', inventory.cookies === '', `cookies: "${inventory.cookies}"; localStorage: ${inventory.local.join(', ') || 'none'}; sessionStorage: ${inventory.session.join(', ') || 'none'}`)
     check('no console errors', report.console.length === 0, report.console.slice(0, 3).join(' | ') || 'none')
   } finally {
     await browser.close()

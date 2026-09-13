@@ -7,8 +7,8 @@ import { sep } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { CORE_ROLES, declaredVars, loadInstance, toCss } from '@/lib/platform/instance.mjs'
 import { checkBehaviours, loadArtifacts, loadRecipes } from '@/lib/platform/artifacts.mjs'
-import { COPY_SLOT_IDS, IMAGE_SLOTS } from '@/lib/slots'
-import layout from '@/pages/home/layout.json'
+import { loadSection, sectionSlots } from '@/lib/sections'
+import { CLAIM_SLOT_IDS, COPY_SLOT_IDS, IMAGE_SLOTS } from '@/lib/slots'
 
 const run = (script: string) => execFileSync(process.execPath, [script], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
 
@@ -74,25 +74,38 @@ describe('S3 / S9 — artifacts and recipes', () => {
   })
 })
 
-describe('S5 — the page declaration', () => {
-  const slotIds = layout.regions.flatMap((r) => r.slots.map((s) => s.id))
-  it('declares every copy slot the seed holds, and no other copy slot', () => {
-    const declaredCopy = layout.regions.flatMap((r) => r.slots.filter((s) => s.type === 'copy' && !('note' in s)).map((s) => s.id))
-    expect([...declaredCopy].sort()).toEqual([...COPY_SLOT_IDS].sort())
+describe('S5 — the page declarations: every layout in the register', () => {
+  const artifactIds = new Set(loadArtifacts().map((a) => a.id))
+  const layouts = readdirSync('pages').map((d) => JSON.parse(readFileSync(`pages/${d}/layout.json`, 'utf8')) as { page: string; slug: string; design: string; kind?: string; regions: Array<{ artifact: string; slots: Array<{ id: string; type: string; note?: string }> }> })
+  const copySlotsOf = (L: (typeof layouts)[number]) => L.regions.flatMap((r) => r.slots.filter((s) => s.type === 'copy' && !s.note?.includes('the control')).map((s) => s.id))
+  it('every region names a declared artifact, the design instance exists, every slug has a route', () => {
+    expect(layouts.length).toBeGreaterThanOrEqual(13)
+    for (const L of layouts) {
+      for (const r of L.regions) expect(artifactIds.has(r.artifact), `${L.page}: ${r.artifact}`).toBe(true)
+      expect(existsSync(`design/${L.design}/DESIGN.md`)).toBe(true)
+      expect(existsSync(`app${L.slug === '/' ? '' : L.slug}/page.tsx`), L.slug).toBe(true)
+    }
   })
-  it('declares every image slot the page reads', () => {
-    for (const id of Object.keys(IMAGE_SLOTS)) expect(slotIds, id).toContain(id)
+  it('every copy slot a layout declares is seeded; every seeded copy slot and claim slot is declared by a layout or a section', () => {
+    const declared = new Set<string>()
+    for (const L of layouts) for (const r of L.regions) for (const s of r.slots) {
+      if (s.type === 'copy' && !s.note?.includes('the control')) { expect(COPY_SLOT_IDS, `${L.page}: ${s.id}`).toContain(s.id); declared.add(s.id) }
+      if (s.type === 'section') for (const k of Object.keys(sectionSlots(loadSection(s.id.replace(/^sec\./, ''))))) declared.add(k)
+    }
+    for (const id of [...COPY_SLOT_IDS, ...CLAIM_SLOT_IDS]) expect(declared.has(id), id).toBe(true)
   })
-  it('every region names a declared artifact and the design instance exists', () => {
-    const ids = new Set(loadArtifacts().map((a) => a.id))
-    for (const r of layout.regions) expect(ids.has(r.artifact), r.artifact).toBe(true)
-    expect(existsSync(`design/${layout.design}/DESIGN.md`)).toBe(true)
+  it('the home and calculator pages read exactly the copy slots their layouts declare', () => {
+    for (const [page, file] of [['home', 'app/page.tsx'], ['calculator', 'app/calculator/page.tsx']] as const) {
+      const L = layouts.find((l) => l.page === page)!
+      const src = readFileSync(file, 'utf8')
+      const used = new Set<string>()
+      for (const m of src.matchAll(/c\('([a-z0-9.-]+)'\)/g)) used.add(m[1] as string)
+      for (const m of src.matchAll(/c\(`([a-z]+)\.\$\{n\}\.([a-z]+)`\)/g)) for (const n of [1, 2, 3, 4]) if (COPY_SLOT_IDS.includes(`${m[1]}.${n}.${m[2]}`)) used.add(`${m[1]}.${n}.${m[2]}`)
+      expect([...used].sort(), page).toEqual([...new Set(copySlotsOf(L))].sort())
+    }
   })
-  it('the page component reads exactly the seeded copy slots', () => {
-    const page = readFileSync('app/page.tsx', 'utf8')
-    const used = new Set<string>()
-    for (const m of page.matchAll(/c\('([a-z0-9.]+)'\)/g)) used.add(m[1] as string)
-    for (const m of page.matchAll(/c\(`([a-z]+)\.\$\{n\}\.([a-z]+)`\)/g)) for (const n of [1, 2, 3, 4]) if (COPY_SLOT_IDS.includes(`${m[1]}.${n}.${m[2]}`)) used.add(`${m[1]}.${n}.${m[2]}`)
-    expect([...used].sort()).toEqual([...COPY_SLOT_IDS].sort())
+  it('the home page declares every image slot it reads', () => {
+    const ids = layouts.find((l) => l.page === 'home')!.regions.flatMap((r) => r.slots.map((s) => s.id))
+    for (const id of Object.keys(IMAGE_SLOTS)) expect(ids, id).toContain(id)
   })
 })

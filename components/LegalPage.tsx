@@ -3,7 +3,7 @@
 // date, source and hash in the page footer. Nothing here is edited on the site.
 import type { Metadata } from 'next'
 import { asset } from '@/lib/assets'
-import { IDENTITY, registeredOfficeLine, workshopLine } from '@/lib/identity'
+import { IDENTITY, workshopLine } from '@/lib/identity'
 import { legalHash, loadLegal, renderMarkdown, type LegalId } from '@/lib/legal'
 import { pageBySlug } from '@/lib/signpost'
 import { copyOf, loadContent } from '@/lib/slots'
@@ -32,7 +32,7 @@ export async function LegalPage({ id }: { id: LegalId }) {
           <div className="wrap">
             <div className="kicker reveal">Legal · {IDENTITY.tradingName}</div>
             <p className="standfirst identity" data-legal-identity>
-              {IDENTITY.legalName}, trading as {IDENTITY.tradingName} — registered in {IDENTITY.registeredIn} no. {IDENTITY.companyNumber}, registered office {registeredOfficeLine()}. Workshop: {workshopLine()}. {IDENTITY.email} · {IDENTITY.phone.display}.
+              {IDENTITY.legalName}, trading as {IDENTITY.tradingName} — registered in {IDENTITY.registeredIn} no. {IDENTITY.companyNumber}. Workshop: {workshopLine()}. {IDENTITY.email} · {IDENTITY.phone.display}.
             </p>
             <article className="legaldoc" data-legal-document dangerouslySetInnerHTML={{ __html: html }} />
             <footer className="legalmeta mono" data-legal-meta>

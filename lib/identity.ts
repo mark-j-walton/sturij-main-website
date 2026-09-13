@@ -44,7 +44,7 @@ export function copyrightLine(year = new Date().getFullYear()): string {
 /** The trade-mark line — only once the UK registration number is on record in the footer's slot; plain "Sturij" until then (addendum 2). */
 export function trademarkLine(registration: string | null | undefined): string | null {
   const n = (registration ?? '').replace(/<[^>]+>/g, '').trim()
-  return /^UK\d{8}$/.test(n) ? `${identity.tradingName}® is a registered trade mark of ${identity.legalName} (${n}).` : null
+  return /^UK\d{8,11}$/.test(n) ? `${identity.tradingName}® is a registered trade mark of ${identity.legalName} (${n}).` : null
 }
 
 /** The social links from the footer's slots, with the icon file where the platform's official asset has been placed, unaltered, per its guidelines. */
