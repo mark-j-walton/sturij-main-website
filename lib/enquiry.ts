@@ -3,10 +3,22 @@
 // project, message, website honeypot, source, page). The visitor's composed swatch and visualised room
 // travel inside the message text: the function has no column for them, and the function's contract is not
 // this repository's to change — a finding for the enquiry type (form-surface §5.1).
+//
+// SWATCHES AND BAND (11 Sep 2026, 4edd148f): the function gained `swatches` and `band` columns and
+// validation (sturij PR #63) — every swatch the visitor kept for this enquiry now travels by reference
+// (doors decor id and code, carcass id, handle finish id — never a name; the function resolves names from
+// the registry for the team email), and the calculator's guide travels as {from, to, currency,
+// tableVersion}. The free-text `finishes`/`guide` fields still travel too, for the message's human-reading
+// summary — the structured fields are additive, not a replacement.
 import { CONTACT } from './contact'
 
 export const DEFAULT_ENQUIRY_FUNCTION_URL = 'https://bcpmgpktmuaicjessseg.supabase.co/functions/v1/enquiry'
 export const ENQUIRY_SOURCE = 'sturij.com'
+
+/** One swatch, by reference only — exactly the shape the function validates (sturij: supabase/functions/enquiry/swatches.ts). */
+export interface SwatchRef { doorsDecorId: string; doorsDecorCode: string; carcassId: string; handleFinishId: string }
+/** The calculator's guide at enquiry time — a band, never the priced job. */
+export interface BandRef { from: number; to: number; currency: string; tableVersion: number | string | null }
 
 export interface EnquiryInput {
   name: string
@@ -21,13 +33,49 @@ export interface EnquiryInput {
   /** The calculator's guide line — configuration, width, tier and the band (never a single figure). */
   guide?: string | null
   page?: string | null
+  /** At most four (the collector's own limit); a malformed entry is dropped, not refused — this is our own
+   * client's data, not raw user text, so the honest response to a shape we didn't expect is to omit it. */
+  swatches?: SwatchRef[] | null
+  band?: BandRef | null
 }
 
-/** The enquiry after validation: every field a string (empty when absent). */
-export type EnquiryValue = { [K in keyof Required<EnquiryInput>]: string }
+const STRING_FIELDS = ['name', 'email', 'phone', 'postcode', 'room', 'notes', 'website', 'finishes', 'visualisedRoom', 'guide', 'page'] as const
+type StringField = (typeof STRING_FIELDS)[number]
+
+/** The enquiry after validation: every text field a string (empty when absent), plus the structured swatches and band. */
+export type EnquiryValue = { [K in StringField]: string } & { swatches: SwatchRef[]; band: BandRef | null }
 export type Validated = { ok: true; value: EnquiryValue } | { ok: false; error: string }
 
 const clean = (v: unknown, max: number): string => (typeof v === 'string' ? v.trim().slice(0, max) : '')
+const cleanId = (v: unknown, max = 80): string | null => { const s = clean(v, max); return s || null }
+
+/** Structural only — the same shape the function itself validates; a bad entry is dropped, not refused,
+ * because this is our own client's data. At most four, matching the collector's MAX_SWATCHES. */
+function cleanSwatches(v: unknown): SwatchRef[] {
+  if (!Array.isArray(v)) return []
+  const out: SwatchRef[] = []
+  for (const raw of v.slice(0, 4)) {
+    if (!raw || typeof raw !== 'object') continue
+    const r = raw as Record<string, unknown>
+    const doorsDecorId = cleanId(r.doorsDecorId)
+    const doorsDecorCode = cleanId(r.doorsDecorCode, 40)
+    const carcassId = cleanId(r.carcassId)
+    const handleFinishId = cleanId(r.handleFinishId)
+    if (doorsDecorId && doorsDecorCode && carcassId && handleFinishId) out.push({ doorsDecorId, doorsDecorCode, carcassId, handleFinishId })
+  }
+  return out
+}
+
+function cleanBand(v: unknown): BandRef | null {
+  if (!v || typeof v !== 'object') return null
+  const b = v as Record<string, unknown>
+  const from = typeof b.from === 'number' ? b.from : null
+  const to = typeof b.to === 'number' ? b.to : null
+  if (from === null || to === null || from > to) return null
+  const currency = typeof b.currency === 'string' ? b.currency.slice(0, 8) : 'GBP'
+  const tableVersion = typeof b.tableVersion === 'number' || typeof b.tableVersion === 'string' ? b.tableVersion : null
+  return { from, to, currency, tableVersion }
+}
 
 export function validateEnquiry(body: unknown): Validated {
   if (!body || typeof body !== 'object') return { ok: false, error: 'The enquiry was not readable' }
@@ -50,6 +98,8 @@ export function validateEnquiry(body: unknown): Validated {
       visualisedRoom: clean(b.visualisedRoom, 60),
       guide: clean(b.guide, 300),
       page: clean(b.page, 500),
+      swatches: cleanSwatches(b.swatches),
+      band: cleanBand(b.band),
     },
   }
 }
@@ -66,14 +116,17 @@ export function composeMessage(v: EnquiryValue): string {
 
 export interface FunctionPayload {
   name: string; email: string; phone: string; postcode: string; project: string; message: string; website: string; source: string; page: string
+  // Optional: postEnquiry forwards whatever is given as JSON; the function treats an absent field as
+  // none (supabase/functions/enquiry/swatches.ts). Existing fixtures that predate this need no change.
+  swatches?: SwatchRef[]; band?: BandRef | null
 }
 
 export function toFunctionPayload(v: EnquiryValue): FunctionPayload {
-  return { name: v.name, email: v.email, phone: v.phone, postcode: v.postcode, project: v.room, message: composeMessage(v), website: v.website, source: ENQUIRY_SOURCE, page: v.page }
+  return { name: v.name, email: v.email, phone: v.phone, postcode: v.postcode, project: v.room, message: composeMessage(v), website: v.website, source: ENQUIRY_SOURCE, page: v.page, swatches: v.swatches, band: v.band }
 }
 
 export type EnquiryOutcome =
-  | { ok: true; status: number; id: string; notified: unknown }
+  | { ok: true; status: number; id: string; reference: string; notified: unknown; acknowledged: unknown }
   | { ok: false; status: number; error: string; fallback: { phone: string; email: string } }
 
 export const FALLBACK = { phone: CONTACT.phoneDisplay, email: CONTACT.email }
@@ -86,9 +139,10 @@ export async function postEnquiry(payload: FunctionPayload, url: string = proces
   } catch {
     return { ok: false, status: 502, error: 'The enquiry service could not be reached', fallback: FALLBACK }
   }
-  const json = (await res.json().catch(() => null)) as { ok?: boolean; id?: string; notified?: unknown; error?: string } | null
+  const json = (await res.json().catch(() => null)) as { ok?: boolean; id?: string; reference?: string; notified?: unknown; acknowledged?: unknown; error?: string } | null
   if (!res.ok || !json?.ok || !json.id) {
     return { ok: false, status: res.status >= 400 && res.status < 500 ? res.status : 502, error: json?.error || `The enquiry service answered ${res.status}`, fallback: FALLBACK }
   }
-  return { ok: true, status: 200, id: json.id, notified: json.notified ?? null }
+  // reference falls back to the old client-side slice for a function version that predates it — never absent.
+  return { ok: true, status: 200, id: json.id, reference: json.reference || json.id.slice(0, 8).toUpperCase(), notified: json.notified ?? null, acknowledged: json.acknowledged ?? null }
 }
