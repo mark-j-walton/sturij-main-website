@@ -1,0 +1,25 @@
+{
+  "note": "The business's identity as data — one NAP everywhere: the footer, the structured data, the legal pages' identity paragraphs and (Mark's act) the Google Business Profile. Mark's word of 11 Sep 2026 (cd1b8490; addenda 1, 2 and 4 of claude-code-session-2026-09-11-site-content-sections). The registered office appears in the footer's trading disclosure and nowhere else on the site. The values Mark edits in the admin — the social URLs, the reviews link, the trade-mark registration — are footer slots (content/copy.seed.json), not this file.",
+  "tradingName": "Sturij",
+  "legalName": "Storage Innovation Limited",
+  "companyNumber": "12903072",
+  "registeredIn": "England and Wales",
+  "vat": "366695249",
+  "registeredOffice": { "lines": ["7 Woodland Close", "Wetherby"], "postcode": "LS22 6BJ" },
+  "workshop": {
+    "name": "Unit 2b Skelmanthorpe Technology Park",
+    "street": "Sandback Way",
+    "locality": "Skelmanthorpe",
+    "town": "Huddersfield",
+    "postcode": "HD8 9GA",
+    "region": "West Yorkshire",
+    "country": "GB"
+  },
+  "phone": { "display": "01937 326011", "e164": "+441937326011" },
+  "email": "contact@sturij.com",
+  "areaServed": "Yorkshire",
+  "ico": {
+    "registrationReference": null,
+    "note": "[P] the ICO registration reference exactly as the register shows it, held in the Sturij name — for the privacy policy's next version (addendum 4), never typed into the site's copy"
+  }
+}

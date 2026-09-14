@@ -1,0 +1,79 @@
+{
+  "id": "hardware",
+  "slug": "/hardware",
+  "nav": { "group": "What we build with", "label": "The hardware", "order": 2 },
+  "title": "The hardware we fit — Sturij",
+  "description": "The hinges and runners you will touch every day: why Sturij fits Blum, and Häfele's solid-metal fittings at Atelier.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 2 — The hardware we fit (Blum; Häfele at Atelier)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "hardware",
+      "kicker": "The parts that move",
+      "heading": "The bit you'll use every day.",
+      "standfirst": { "id": "sec.hardware.hardware.standfirst", "text": "A wardrobe is opened ten thousand times. The hinge and the runner are the part of the furniture you'll actually touch, so we don't economise on them. We fit Blum." },
+      "blocks": [
+        { "id": "blum", "kind": "prose", "lines": [
+          { "id": "sec.hardware.blum.1", "text": "Blum are an Austrian family firm who make one thing — the moving parts of furniture — and have done since 1952.", "claims": ["blum-facts"] },
+          { "id": "sec.hardware.blum.2", "text": "Their soft-close hinges and drawer runners are the ones you find in the kitchens people remember, and there's no mystery to why: the door settles shut on its own, the drawer glides on a full load, and it does the same on the last day as the first." }
+        ] },
+        { "id": "means", "kind": "list", "title": "What it means in your room", "lines": [
+          { "id": "sec.hardware.means.1", "title": "Soft-close, as standard from Signature.", "text": "Doors and drawers close quietly on their own damping — no slam, no bounce.", "claims": ["blumotion", "tiers-hardware"] },
+          { "id": "sec.hardware.means.2", "title": "Adjustable after fitting.", "text": "Every door can be trued in three directions on the hinge itself, so when a house settles over a winter, the gap can be closed at the next visit rather than the door re-hung.", "claims": ["adjustment"] },
+          { "id": "sec.hardware.means.3", "title": "Full-extension drawers.", "text": "Drawers pull right out to the back, so nothing lives in the dark at the rear. Load figures are Blum's, and we'll quote the rating for the runner we specify on your drawing.", "claims": ["runners-loads"] },
+          { "id": "sec.hardware.means.4", "title": "Handleless if you want it.", "text": "Push-to-open for a clean face, or a handle from the range — both are Blum's own mechanisms, not an aftermarket fitting.", "claims": ["push-to-open"] }
+        ] },
+        { "id": "hafele", "kind": "prose", "title": "Häfele at Atelier.", "lines": [
+          { "id": "sec.hardware.hafele.1", "text": "For the Atelier specification we fit Häfele's solid-metal fittings — handles, rails and brackets you can feel the weight of.", "claims": ["hafele-atelier"] }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.hardware.closing.1", "text": "Fitted furniture is only as good as its hinges. Ours are the ones the trade specifies for itself." }
+        ] }
+      ]
+    },
+    {
+      "id": "workshop",
+      "heading": "Why it matters in the workshop.",
+      "blocks": [
+        { "id": "workshop", "kind": "prose", "lines": [
+          { "id": "sec.hardware.workshop.1", "text": "Hardware that's the same every time is hardware we can set up once and trust. Blum's hinges and runners drill to their own templates, take the same settings on every cabinet, and adjust without tools on site — which is why our fitters finish a room in a day and don't come back for a rattle." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "soft-close", "q": "Do the doors and drawers close softly?", "a": [
+      { "id": "sec.hardware.faq.soft-close.1", "text": "Yes, from the Signature specification up: Blum soft-close on hinges and runners, so everything settles shut on its own. Standard carries steel runners without the damping.", "claims": ["tiers-hardware"] }
+    ] },
+    { "id": "handleless", "q": "Can I have handleless doors?", "a": [
+      { "id": "sec.hardware.faq.handleless.1", "text": "Yes. Push-to-open opens a door with a light press on the face; it's a Blum mechanism, fitted in the workshop, not added afterwards.", "claims": ["push-to-open"] }
+    ] },
+    { "id": "fails", "q": "What if a hinge or runner fails?", "a": [
+      { "id": "sec.hardware.faq.fails.1", "text": "It shouldn't — and if it does, we replace it.", "claims": ["hardware-warranty"] }
+    ] },
+    { "id": "adjusted", "q": "Can the doors be adjusted later?", "a": [
+      { "id": "sec.hardware.faq.adjusted.1", "text": "Yes. Every hinge adjusts in three directions on the cabinet, so a door that has drifted after a season can be trued at a visit without re-hanging it.", "claims": ["adjustment"] }
+    ] },
+    { "id": "weight", "q": "How much weight will a drawer take?", "a": [
+      { "id": "sec.hardware.faq.weight.1", "text": "Depends on the runner we specify for the drawer's size; the rating is Blum's and it's on your drawing. Pan drawers and wardrobe deep drawers get the heavier runner.", "claims": ["runners-loads"] }
+    ] },
+    { "id": "cheaper", "q": "Why not cheaper hinges?", "a": [
+      { "id": "sec.hardware.faq.cheaper.1", "text": "Because the hinge is the part you use every day, and the part that fails first on cheap furniture. A door that drops or a drawer that sticks is the whole piece feeling wrong. We'd rather fit the parts that last the life of the furniture." }
+    ] },
+    { "id": "hafele", "q": "What's Häfele, and when do you use it?", "a": [
+      { "id": "sec.hardware.faq.hafele.1", "text": "Häfele make the solid-metal handles and fittings we specify at Atelier — the pieces you can feel the weight of.", "claims": ["hafele-atelier"] }
+    ] }
+  ],
+  "claims": [
+    { "id": "blum-facts", "claim": "Blum — Austrian, family-owned, founded 1952", "location": "body", "status": "P", "source": "blum.com" },
+    { "id": "blumotion", "claim": "Soft-close damping (BLUMOTION)", "location": "body; FAQ", "status": "P", "source": "Blum literature" },
+    { "id": "adjustment", "claim": "Three-dimensional adjustment", "location": "body; FAQ", "status": "P", "source": "Blum hinge literature (the range we fit)" },
+    { "id": "runners-loads", "claim": "Full-extension runners and rated loads", "location": "body; FAQ", "status": "P", "source": "Blum data for the runner specified" },
+    { "id": "push-to-open", "claim": "Push-to-open / electric opening", "location": "body; FAQ", "status": "P", "source": "Blum literature; only what we offer" },
+    { "id": "cycle-testing", "claim": "Cycle testing (200,000)", "location": "not used", "status": "dropped", "source": "only if Blum publishes it for the exact product" },
+    { "id": "marketing-lines", "claim": "\"Blum Inside\", \"zero callbacks\"", "location": "not used", "status": "dropped", "source": "marketing claims" },
+    { "id": "tiers-hardware", "claim": "Which tiers carry Blum hinges, runners, steel runners", "location": "standfirst; FAQ", "status": "P", "source": "the calculator's tier copy — Mark" },
+    { "id": "hafele-atelier", "claim": "Häfele solid-metal fittings at Atelier and why", "location": "body; FAQ", "status": "P", "source": "Mark" },
+    { "id": "hardware-warranty", "claim": "Our warranty on hardware", "location": "FAQ", "status": "P", "source": "Mark" },
+    { "id": "workshop-ours", "claim": "Templates, same settings, tool-free on site, a room in a day", "location": "workshop section", "status": "ours", "source": "none" }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "worktops",
+  "slug": "/worktops",
+  "nav": { "group": "What we build with", "label": "Worktops and surfaces", "order": 6 },
+  "title": "Worktops and surfaces — Sturij",
+  "description": "Granite, marble, quartz and sintered stone on furniture built to carry it — templated, cut and fitted by a stone partner working to our drawing.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 6 — Worktops and surfaces (with Omega Stone, the partner of choice)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "surfaces",
+      "kicker": "The surface you work on",
+      "heading": "Stone, on furniture built to carry it.",
+      "standfirst": { "id": "sec.worktops.surfaces.standfirst", "text": "A worktop is the surface a kitchen lives on. We build the cabinetry to take the weight and the joints; a stone partner templates, cuts and fits the top once the furniture is in." },
+      "blocks": [
+        { "id": "natural", "kind": "prose", "title": "Natural stone.", "lines": [
+          { "id": "sec.worktops.natural.1", "text": "Granite and marble are what they are — every slab different, the veining and colour formed in the ground, no two islands alike. Granite is hard-wearing and takes heat well; marble is softer and more beautiful, and asks to be looked after. We'll tell you honestly which suits how you cook.", "claims": ["natural-general"] }
+        ] },
+        { "id": "quartz", "kind": "prose", "title": "Quartz.", "lines": [
+          { "id": "sec.worktops.quartz.1", "text": "An engineered stone: consistent from slab to slab, non-porous, and needs no sealing — the surface for a busy family kitchen where the look has to stay the same for years. Whites with soft veining, bold veins, plain solids.", "claims": ["quartz-nonporous"] }
+        ] },
+        { "id": "sintered", "kind": "prose", "title": "Sintered and porcelain.", "lines": [
+          { "id": "sec.worktops.sintered.1", "text": "The newer surfaces — very thin, very hard, stable in sunlight and under heat — for outdoor kitchens, cladding a media wall, or a run that has to take punishment.", "claims": ["sintered-performance"] }
+        ] },
+        { "id": "how", "kind": "prose", "title": "How it happens.", "lines": [
+          { "id": "sec.worktops.how.1", "text": "The worktop is designed with the furniture, not after it: the island's overhang, the sink and hob cut-outs, the edge profile, a waterfall end, a matching upstand or splashback." },
+          { "id": "sec.worktops.how.2", "text": "Once the cabinetry is fitted and level, the stone is templated to the room as it actually is, cut on the partner's machines, hand-finished at the edges and fitted by their own team.", "claims": ["partner-process"] }
+        ] },
+        { "id": "who", "kind": "prose", "title": "Who fits it.", "lines": [
+          { "id": "sec.worktops.who.1", "text": "Stone is heavy and unforgiving; it is fitted by the stone company that cut it, working to our drawing and to the room." },
+          { "id": "sec.worktops.who.2", "text": "Ours is Omega Stone in Leeds.", "partner": "omega-stone" }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.worktops.closing.1", "text": "Bring a sample of the stone you like to the design visit and we'll put it against the doors and the handles. It's the pairing that makes the room." }
+        ] }
+      ]
+    },
+    {
+      "id": "omega",
+      "partner": "omega-stone",
+      "kicker": "The partner of choice",
+      "heading": "Cut in Leeds, fitted by the people who cut it.",
+      "standfirst": { "id": "sec.worktops.omega.standfirst", "text": "Our worktops and stone surfaces are templated, cut and fitted by Omega Stone — a Leeds stonemasonry with its own workshop, its own fitters and a showroom where you can see and touch the slab before you choose it." },
+      "blocks": [
+        { "id": "omega-who", "kind": "prose", "title": "Who they are.", "lines": [
+          { "id": "sec.worktops.omega-who.1", "text": "Omega Stone are specialists in granite, quartz, marble, porcelain and natural stone, based at their workshop in Pudsey, Leeds, with over fifteen years' experience, their own expert fitters and CNC machinery, and membership of the Worktop Fabricators Federation. They supply and fit for homes and businesses across Yorkshire and beyond — Harrogate, Wetherby and York are on their own list.", "claims": ["omega-facts"] }
+        ] },
+        { "id": "omega-what", "kind": "prose", "title": "What they cut.", "lines": [
+          { "id": "sec.worktops.omega-what.1", "text": "A wider choice of stone than we could ever hold ourselves: quartz from Silestone by Cosentino, Caesarstone, Cambria, Compac, CRL, Quartzforms and more, in the popular styles — Carrara whites, Calacatta and Statuario veining, greys, golds; granite from Levantina, Sensa by Cosentino and other suppliers — every slab unique; sintered stone and porcelain — Dekton, Neolith, Lapitec, CRL Ceralsio — for outdoor kitchens, thin profiles and hard-wearing surfaces; terrazzo; and stone beyond the kitchen — media walls, backlit slabs, hearths, cladding and staircases — which is why a Sturij media wall can carry a stone face or a stone hearth from the same partner.", "claims": ["omega-ranges"] }
+        ] },
+        { "id": "omega-means", "kind": "prose", "title": "What it means for you.", "lines": [
+          { "id": "sec.worktops.omega-means.1", "text": "You can choose your slab at their Leeds showroom. Once our cabinetry is fitted and level, they template to the room, cut in their workshop, and fit — their site says three to seven days from template, and three to four hours to fit an average kitchen. Most slabs run to 3.2 m by 1.6 m; four of their quartz colours come as \"super jumbo\" slabs at 3.5 m by 2 m for a long run with fewer joins. Their quartz is guaranteed against staining and needs no sealing; payment for the stone is taken after template, before cutting, because a cut slab fits only your room.", "claims": ["omega-numbers"] }
+        ] },
+        { "id": "omega-paperwork", "kind": "prose", "title": "The paperwork is theirs too.", "lines": [
+          { "id": "sec.worktops.omega-paperwork.1", "text": "Omega Stone publish their guarantees, their cleaning and maintenance guidance and their environmental policy on their own site; we'll point you to them with your quote.", "claims": ["omega-pages"] }
+        ] },
+        { "id": "omega-closing", "kind": "closing", "lines": [
+          { "id": "sec.worktops.omega-closing.1", "text": "We design the top with the furniture; they make it real. If you want to see the stone first, we'll book you into their showroom." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "which", "q": "Granite, quartz or sintered — which should I choose?", "a": [
+      { "id": "sec.worktops.faq.which.1", "text": "Depends on how you cook and what you want to see. Granite for character and heat; quartz for consistency and no maintenance; sintered stone for outdoor, ultra-thin or heavy-use surfaces. We'll show you samples against your doors at the design visit." }
+    ] },
+    { "id": "sealing", "q": "Does stone need sealing?", "a": [
+      { "id": "sec.worktops.faq.sealing.1", "text": "Granite and marble do, periodically; quartz doesn't. We'll tell you what your surface needs and how often.", "claims": ["care-guidance"] }
+    ] },
+    { "id": "joins", "q": "Will there be joins?", "a": [
+      { "id": "sec.worktops.faq.joins.1", "text": "On a long run, yes — slabs have a maximum size. Joins are planned on the drawing where they'll be least visible, and finished tight.", "claims": ["joins-bookmatch-viewing"] }
+    ] },
+    { "id": "waterfall", "q": "Can I have a waterfall end or a stone splashback?", "a": [
+      { "id": "sec.worktops.faq.waterfall.1", "text": "Yes — both are drawn with the furniture and cut from the same slab where the pattern needs to flow.", "claims": ["joins-bookmatch-viewing"] }
+    ] },
+    { "id": "when", "q": "When is the worktop fitted?", "a": [
+      { "id": "sec.worktops.faq.when.1", "text": "After the cabinetry is in and level. The stone is templated to the fitted furniture, then cut and fitted — there's a gap between the two visits, which we'll give you at the design stage." }
+    ] },
+    { "id": "slab", "q": "Can I see the actual slab?", "a": [
+      { "id": "sec.worktops.faq.slab.1", "text": "For natural stone, yes — every slab is different, and you can choose yours at the yard.", "claims": ["joins-bookmatch-viewing"] }
+    ] },
+    { "id": "yourselves", "q": "Do you do the stone yourselves?", "a": [
+      { "id": "sec.worktops.faq.yourselves.1", "text": "No. We make the furniture; a specialist stone company templates, cuts and fits the surface, working to our drawing. It's the right way round — each does the part it does best." }
+    ] }
+  ],
+  "claims": [
+    { "id": "natural-general", "claim": "Granite hard-wearing and heat-tolerant; marble softer", "location": "body; FAQ", "status": "general", "source": "general knowledge, plain" },
+    { "id": "quartz-nonporous", "claim": "Quartz non-porous, no sealing", "location": "body; FAQ", "status": "sourced", "source": "Omega's FAQ", "sourcedOn": "2026-09-11", "note": "re-read at review" },
+    { "id": "sintered-performance", "claim": "Sintered/porcelain thin, hard, UV- and heat-stable", "location": "body; FAQ", "status": "P", "source": "the makers' statements (Dekton, Neolith, Lapitec)" },
+    { "id": "partner-process", "claim": "The partner's process in their words; the typical gap between cabinets fitted and stone fitted", "location": "body", "status": "P", "source": "Omega" },
+    { "id": "omega-facts", "claim": "Omega Stone — Leeds workshop, own fitters, CNC, showroom, 15+ years, WFF", "location": "partner section", "status": "sourced", "source": "omegastone.co.uk — home, footer, FAQ, health-and-safety pages", "sourcedOn": "2026-09-11", "note": "re-read at review" },
+    { "id": "omega-ranges", "claim": "The ranges Omega cut", "location": "partner section", "status": "sourced", "source": "omegastone.co.uk — range and applications pages", "sourcedOn": "2026-09-11", "note": "name only what they still list" },
+    { "id": "omega-numbers", "claim": "Their numbers: 3–7 days from template, 3–4 hours to fit, slab sizes, super jumbo, payment after template", "location": "partner section", "status": "sourced", "source": "omegastone.co.uk — their FAQ", "sourcedOn": "2026-09-11", "note": "re-read before every publish" },
+    { "id": "omega-pages", "claim": "Their guarantees, care and environmental pages", "location": "partner section", "status": "sourced", "source": "linked, not copied — their pages", "sourcedOn": "2026-09-11" },
+    { "id": "omega-consent", "claim": "Consent to be named; review date", "location": "partner section; supporting trades", "status": "P", "source": "Mark — content/partners.json entry omega-stone" },
+    { "id": "care-guidance", "claim": "Granite and marble need periodic sealing; quartz does not", "location": "FAQ", "status": "general", "source": "general knowledge; the maker's care guidance when a product is named" },
+    { "id": "joins-bookmatch-viewing", "claim": "Joins, book-matching, viewing the slab", "location": "FAQ", "status": "P", "source": "Omega" },
+    { "id": "marketing-lines", "claim": "\"Scratch-proof\", \"world's finest quarries\", \"immaculate\", \"flawless\"", "location": "not used", "status": "dropped", "source": "not ours" },
+    { "id": "carry-ours", "claim": "We build the cabinetry to take the weight; the top designed with the furniture", "location": "body", "status": "ours", "source": "none" }
+  ]
+}

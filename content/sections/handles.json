@@ -1,0 +1,69 @@
+{
+  "id": "handles",
+  "slug": "/handles",
+  "nav": { "group": "What we build with", "label": "Handles", "order": 4 },
+  "title": "Handles — Sturij",
+  "description": "The part you hold: Hendel & Hendel handles in fifteen finishes, with weight in the hand and a finish that stays right.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 4 — Handles (Hendel & Hendel)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "handles",
+      "kicker": "The finishing touch",
+      "heading": "The part you hold.",
+      "standfirst": { "id": "sec.handles.handles.standfirst", "text": "A handle is the one piece of your furniture you'll touch every day. It should have weight in the hand and a finish that stays right for years. We fit Hendel & Hendel." },
+      "blocks": [
+        { "id": "design", "kind": "prose", "lines": [
+          { "id": "sec.handles.design.1", "text": "Hendel & Hendel design their handles in Britain, and they design them to be held: solid, weighty, with textures you notice — ribbed, reeded, hammered — and a palette of finishes broad enough to sit with any decor on this site and the taps and lighting already in the room.", "claims": ["hh-design"] }
+        ] },
+        { "id": "fifteen", "kind": "prose", "title": "Fifteen finishes.", "lines": [
+          { "id": "sec.handles.fifteen.1", "text": "Brass in five moods, nickel in four, bronze, pewter, chrome, anodised, matt black. Compose a swatch in the range with the handle finish you're drawn to and the room visual follows it — the same finish sits in the drawing and comes to the design visit as a sample.", "claims": ["finishes-palette"] }
+        ] },
+        { "id": "weight", "kind": "prose", "title": "Weight you can feel.", "lines": [
+          { "id": "sec.handles.weight.1", "text": "These are solid handles, not hollow ones. The difference is obvious the first time you open a wardrobe door, and it doesn't wear off.", "claims": ["hh-materials"] }
+        ] },
+        { "id": "fitted", "kind": "prose", "title": "Made to be fitted.", "lines": [
+          { "id": "sec.handles.fitted.1", "text": "Precise threads and proper fixings, so the handle sits square and stays tight." },
+          { "id": "sec.handles.fitted.2", "text": "Backplates on the ranges where a plate makes for a cleaner line.", "claims": ["backplates"] }
+        ] },
+        { "id": "guaranteed", "kind": "prose", "title": "Guaranteed.", "lines": [
+          { "id": "sec.handles.guaranteed.1", "text": "Hendel & Hendel guarantee their handles for life.", "claims": ["hh-guarantee"] }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.handles.closing.1", "text": "Pick the finish you keep coming back to. We'll bring it with us." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "which", "q": "Which handle finishes can I choose from?", "a": [
+      { "id": "sec.handles.faq.which.1", "text": "Fifteen, shown in the range on this site — several brasses and nickels, bronze, pewter, chrome, anodised and matt black. Compose a swatch with the one you like and it comes with your enquiry.", "claims": ["finishes-palette"] }
+    ] },
+    { "id": "match", "q": "Will the finish match my taps and lights?", "a": [
+      { "id": "sec.handles.faq.match.1", "text": "Usually, yes — the palette is broad enough to sit with the common tap and light finishes. Bring a photo or the tap's finish name to the design visit and we'll put the sample beside it." }
+    ] },
+    { "id": "mix", "q": "Can I mix finishes in one room?", "a": [
+      { "id": "sec.handles.faq.mix.1", "text": "Yes, deliberately: a brass handle on a dark door with matt-black lighting profiles can look considered. We'd rather show you the combination with the samples than describe it." }
+    ] },
+    { "id": "solid", "q": "Do the handles feel solid?", "a": [
+      { "id": "sec.handles.faq.solid.1", "text": "They do — Hendel & Hendel's handles are solid and weighty, which is most of what \"quality\" means when you're holding a handle.", "claims": ["hh-materials"] }
+    ] },
+    { "id": "guaranteed", "q": "Are the handles guaranteed?", "a": [
+      { "id": "sec.handles.faq.guaranteed.1", "text": "Hendel & Hendel guarantee their handles for life; our own warranty covers the fitting.", "claims": ["hh-guarantee", "fitting-warranty"] }
+    ] },
+    { "id": "none", "q": "Can I have no handles at all?", "a": [
+      { "id": "sec.handles.faq.none.1", "text": "Yes — handleless doors with push-to-open, or a routed grip in the door edge. See the hardware section." }
+    ] }
+  ],
+  "claims": [
+    { "id": "hh-design", "claim": "H&H — British design; solid, weighty; textures", "location": "body; FAQ", "status": "P", "source": "hendelandhendel.co.uk" },
+    { "id": "collections", "claim": "Collections named (Barrington, Greenwich, Felix, Okus, Dixton)", "location": "not used unless stocked", "status": "P", "source": "Mark" },
+    { "id": "finishes-palette", "claim": "The fifteen finishes are H&H's palette", "location": "body; FAQ; registry", "status": "P", "source": "the registry's handle rows and H&H's finish list" },
+    { "id": "hh-materials", "claim": "Materials (brass, Zamak)", "location": "body; FAQ", "status": "P", "source": "H&H — only if they publish it" },
+    { "id": "backplates", "claim": "Backplates on some ranges", "location": "body", "status": "P", "source": "H&H range pages" },
+    { "id": "hh-guarantee", "claim": "Lifetime guarantee", "location": "body; FAQ", "status": "P", "source": "H&H's guarantee page — exact terms and scope" },
+    { "id": "fitting-warranty", "claim": "Our own warranty covers the fitting", "location": "FAQ", "status": "P", "source": "Mark — our fitting warranty in our words" },
+    { "id": "marketing-lines", "claim": "\"Never pit, tarnish or fail\"; \"jewellery of the room\"; higher price justified", "location": "not used", "status": "dropped", "source": "marketing" },
+    { "id": "fitted-ours", "claim": "Precise threads, proper fixings, sits square", "location": "body", "status": "ours", "source": "none" },
+    { "id": "handleless-ours", "claim": "Handleless and routed-grip options", "location": "FAQ", "status": "ours", "source": "none" }
+  ]
+}

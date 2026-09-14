@@ -37,10 +37,10 @@ export default async function CalculatorPage() {
           <Copy slot={c('range.title')} as="h2" className="reveal" />
           <Copy slot={c('range.body')} as="p" className="reveal" />
         </>} />
-        <Calculator kicker={c('calculator.kicker')} title={c('calculator.title')} body={c('calculator.body')} finishesHref="#range" standalone view={CALCULATOR_VIEW} />
+        <Calculator kicker={c('calculator.kicker')} title={c('calculator.title')} body={c('calculator.body')} finishesHref="#range" standalone view={CALCULATOR_VIEW} note={c('sec.pricing.short')} />
         <EnquiryBand kicker={c('enquiry.kicker')} title={c('enquiry.title')} body={c('enquiry.body')} submit={c('enquiry.submit')} note={c('enquiry.note')} />
       </main>
-      <SiteFooter logo={logo} tagline={c('footer.tagline')} copyright={c('footer.copyright')} />
+      <SiteFooter logo={logo} tagline={c('footer.tagline')} social={{ facebook: c('footer.social.facebook'), instagram: c('footer.social.instagram'), linkedin: c('footer.social.linkedin') }} trustpilot={c('footer.trustpilot')} trademark={c('footer.trademark')} />
       <RoomBuilder />
       <Lightbox />
       <Toast />
