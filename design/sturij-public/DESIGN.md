@@ -207,6 +207,9 @@ The public site's instance: the handoff's palette (design_handoff_sturij_public_
   "placeholder.opacity-hover": { "value": "0.3", "reason": "the placeholder under the pointer", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T08:00:00Z" },
   "placeholder.opacity-on-dark": { "value": "0.22", "reason": "the placeholder on the dark range band, beside the roundel, where 0.14 vanishes (Mark's mock, 11 Sep 2026)", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T10:00:00Z" },
   "mask.fade-x": { "value": "linear-gradient(to right, transparent, black 8%, black 92%, transparent)", "reason": "the fade on both edges of the main finish carousel — inside the page width, no hard cut (Mark, 11 Sep 2026)", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T10:00:00Z" },
-  "glass.mini-frost": { "value": "rgba(250,248,242,.09)", "reason": "the light frost over the three inactive galleries, in place of dimming them dark — the swatch colours were lost (Mark, 11 Sep 2026)", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T10:00:00Z" }
+  "glass.mini-frost": { "value": "rgba(250,248,242,.09)", "reason": "the light frost over the three inactive galleries, in place of dimming them dark — the swatch colours were lost (Mark, 11 Sep 2026)", "by": "claude-code (from Mark's mock)", "at": "2026-09-11T10:00:00Z" },
+  "held.ground": { "value": "rgba(250,248,242,.06)", "reason": "the neutral ground of a held finish tile — no master in the library yet, the name shown, never a small file scaled up (materials-feed addendum 1, 11 Sep 2026)", "by": "claude-code (from the brief)", "at": "2026-09-13T21:00:00Z" },
+  "held.line": { "value": "rgba(250,248,242,.16)", "reason": "the hairline inside a held finish tile", "by": "claude-code (from the brief)", "at": "2026-09-13T21:00:00Z" },
+  "held.canvas": { "value": "#8C8680", "reason": "the flat neutral a held finish paints on the roundel and in the placeholder texture — the render names the finish, the grey guesses nothing", "by": "claude-code (from the brief)", "at": "2026-09-13T21:00:00Z" }
 }
 ```

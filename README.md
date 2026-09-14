@@ -1,6 +1,6 @@
 # sturij.com — the public site
 
-The Sturij public site (bespoke fitted furniture, Harrogate), rebuilt on the page platform's rules from the
+The Sturij public site (bespoke fitted furniture, made in Skelmanthorpe, Yorkshire), rebuilt on the page platform's rules from the
 Claude Design handoff of 9 September 2026 (`design_handoff_sturij_public_site`). Next.js on Vercel; the Studio
 and the Canvas pages are served unchanged from `public/` at their existing URLs (studio.sturij.com/studio, /canvas).
 
@@ -16,7 +16,7 @@ and the Canvas pages are served unchanged from `public/` at their existing URLs 
 | Assets by id | `assets/sources.json` → `assets/manifest.json` (`scripts/measure-assets.mjs`) | a page holds no asset; `next/image` derives renditions, never the master |
 | Copy slots (seed) | `content/copy.seed.json` | live values: `site_content_slots` on sturij-web, highest version per slot |
 | Image slots | `lib/slots.ts` `IMAGE_SLOTS` | live values: `site_image_slots` + the `site-images` bucket |
-| Gallery data (codes or misfits) | `data/galleries.json`, `data/rooms.json` | keyed by Egger decor code where sturij-assets holds one |
+| The materials feed (one registry) | `public/materials.json` ← `scripts/materials-feed.mjs` from sturij-assets, selected by id in `data/range.json`; `data/rooms.json` for room finishes | read at build through `STURIJ_ASSETS_READ_KEY` by name, else the committed snapshot stands; no decor named in code; held finishes are labelled tiles |
 | The enquiry door | `app/api/enquiry` → sturij-web `enquiry` function | the customer table; a failed post shows the phone and the mailbox |
 | The render door | `app/api/render` | server-side, `GEMINI_API_KEY` from the vault by name; every image labelled VISUALISATION |
 | The admin login + editing mode | `components/admin/AdminControl.tsx`, `supabase/migrations/20260910150000_site_slots.sql` | Supabase Auth on sturij-web; `site_admin` allowlist; append-only versions; audit by trigger |

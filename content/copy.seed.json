@@ -1,9 +1,9 @@
 {
-  "note": "The page's copy, one slot per content text, seeded verbatim from design_handoff_sturij_public_site (9 Sep 2026). The live value is the latest version in sturij-web's site_content_slots; this file is the seed and the fallback. Markup allowed: <br>, <em>, <strong>, <span class=\"em\"> (gold) and <span class=\"claret\">.",
+  "note": "The page's copy, one slot per content text, seeded verbatim from design_handoff_sturij_public_site (9 Sep 2026). The live value is the latest version in sturij-web's site_content_slots; this file is the seed and the fallback. Markup allowed: <br>, <em>, <strong>, <span class=\"em\"> (gold) and <span class=\"claret\">. The footer.social.* slots hold the three profile URLs (a link is a link); footer.trustpilot holds the Trustpilot profile URL and footer.trademark the UK trade-mark registration number — both empty (held) until Mark supplies them. The copyright line is rendered from content/identity.json with the year.",
   "slots": {
     "hero.kicker": "Fitted furniture · Made in Yorkshire",
     "hero.title": "Built to your walls.<br>Not to a range.",
-    "hero.body": "Bespoke wardrobes, media walls and home offices — designed, made and fitted from our Harrogate workshop, to your millimetre.",
+    "hero.body": "Bespoke wardrobes, media walls and home offices — designed, made and fitted from our Skelmanthorpe workshop, to your millimetre.",
     "panel.wardrobes.kicker": "Wardrobes &amp; bedrooms",
     "panel.wardrobes.title": "Wardrobes that fit like they grew there.",
     "panel.wardrobes.body": "Fitted, corner returns, walk-ins — hinged or mirrored, with the insides planned around what you actually own. Measured to the millimetre so there's no filler, no gap, no compromise.",
@@ -42,7 +42,7 @@
     "manifesto.1.title": "Truly bespoke, honestly priced.",
     "manifesto.1.body": "Priced from the cutting list, not a price book — you see what every panel, hinge and drawer costs.",
     "manifesto.2.title": "Made in our workshop.",
-    "manifesto.2.body": "Cut on our own CNC in Harrogate, edge-banded and assembled by the people who'll fit it.",
+    "manifesto.2.body": "Cut on our own CNC in Skelmanthorpe, edge-banded and assembled by the people who'll fit it.",
     "manifesto.3.title": "Fitted by the makers.",
     "manifesto.3.body": "No subcontract chain — the team that built your furniture installs it, usually in a day.",
     "enquiry.kicker": "Book a design visit",
@@ -51,9 +51,20 @@
     "enquiry.submit": "Request the visit",
     "enquiry.note": "Your enquiry goes straight to the Sturij team. We'll be in touch within a working day.",
     "footer.tagline": "Fitted furniture · Made in Yorkshire",
-    "footer.copyright": "© Sturij · Harrogate",
     "calculator.kicker": "A guide price",
     "calculator.title": "What might it cost? <span class=\"em\">An honest band.</span>",
-    "calculator.body": "Choose what we're making, its width and its specification. You'll see a from–to guide based on recent projects — never a single figure. The exact price comes from your measurements at the design visit, priced from the cutting list."
+    "calculator.body": "Choose what we're making, its width and its specification. You'll see a from–to guide based on recent projects — never a single figure. The exact price comes from your measurements at the design visit, priced from the cutting list.",
+    "footer.social.facebook": "https://www.facebook.com/SturijWardrobes",
+    "footer.social.instagram": "https://www.instagram.com/sturij_wardrobes/",
+    "footer.social.linkedin": "https://www.linkedin.com/company/sturij/",
+    "footer.trustpilot": "",
+    "footer.trademark": "",
+    "access.kicker": "Accessibility",
+    "access.heading": "Everyone should be able to use this site.",
+    "access.intro": "We want sturij.com to work for everyone, whatever device or assistive technology you use. This statement says what we aim for, what we know falls short, and how to tell us.",
+    "access.standard": "We aim for the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. Every page is built to be read by a screen reader, worked with a keyboard alone, and shown without motion where your device asks for it; text keeps its contrast against the paper and the charcoal, and every image carries a description.",
+    "access.known": "Known exceptions: the finish galleries scroll as a marquee, which stops under reduced motion; the swatch viewer and the room visualiser are visual tools and describe their result in words beside the image; the Studio, which this site links to, is an older application and does not yet meet this standard.",
+    "access.contact": "If something here does not work for you, tell us and we will fix it or find you another way: contact@sturij.com or 01937 326011.",
+    "access.reviewed": "This statement was prepared in September 2026 and is reviewed with every change to the site."
   }
 }

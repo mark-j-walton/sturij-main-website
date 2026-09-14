@@ -1,0 +1,88 @@
+{
+  "id": "services",
+  "slug": "/lighting-and-services",
+  "nav": { "group": "What we build with", "label": "Lighting and services", "order": 5 },
+  "title": "Lighting, services and supporting trades — Sturij",
+  "description": "Lighting built into the furniture, services planned behind it, and the specialist trades Sturij works alongside — your relationship with each of them direct.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 5 — Lighting, services and supporting trades", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "lighting",
+      "kicker": "Light where you need it",
+      "heading": "Lighting that's part of the furniture.",
+      "standfirst": { "id": "sec.services.lighting.standfirst", "text": "Under a shelf, along a hanging rail, inside a drawer, washing down a media wall. Planned on the drawing, wired inside the carcass, switched where you'd expect. Not stuck on afterwards." },
+      "blocks": [
+        { "id": "lit", "kind": "prose", "lines": [
+          { "id": "sec.services.lit.1", "text": "Every piece is lit as part of its design: we plan the lighting with you at the design visit — task light for a dressing area, a low wash for a media wall, a sensor in a wardrobe that comes on when the door opens — and build it into the carcass on a low-voltage system with the profiles and drivers concealed." },
+          { "id": "sec.services.lit.2", "text": "Dimmable, warm or cool, switched or on sensors — the choices are made with the samples in front of you, and the finish of the profiles sits with the handles and the decor.", "claims": ["lighting-options"] }
+        ] },
+        { "id": "connection", "kind": "prose", "title": "The connection.", "lines": [
+          { "id": "sec.services.connection.1", "text": "We fit and wire the lighting inside the furniture. Connection to the house supply is made by one of the qualified trades we work with — registered for the work they do, in homes and commercial premises alike." }
+        ] }
+      ]
+    },
+    {
+      "id": "behind",
+      "kicker": "What runs behind the furniture",
+      "heading": "Built around the pipes, the ducts and the sockets.",
+      "standfirst": { "id": "sec.services.behind.standfirst", "text": "A vanity has a waste. An island has an extractor. A utility has a machine that steams. We plan the services into the furniture at the design stage so nothing is squeezed in on the day." },
+      "blocks": [
+        { "id": "map", "kind": "prose", "lines": [
+          { "id": "sec.services.map.1", "text": "At the design visit we map what has to pass through or behind the piece — waste and supply pipes, extractor ducting, cable routes, sockets and switches — and the cabinetry is drawn around them: service voids where they're needed, ventilation gaps where an appliance breathes, access where a trade will need it later." }
+        ] },
+        { "id": "who", "kind": "prose", "title": "Who does what.", "lines": [
+          { "id": "sec.services.who.1", "text": "We make and fit the furniture. Plumbing, gas, ventilation and electrical work is carried out only by qualified trades — registered for the work they do, in homes and commercial premises alike — and the sequence is agreed before we start so the room comes together in the right order." }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.services.closing.1", "text": "If a room needs more than furniture, say so at the first visit. We'll bring the right people with us." }
+        ] }
+      ]
+    },
+    {
+      "id": "trades",
+      "heading": "The people we work with.",
+      "standfirst": { "id": "sec.services.trades.standfirst", "text": "Some rooms need more than furniture. These are the specialist trades we work alongside — and the relationship with each of them is yours, direct." },
+      "blocks": [
+        { "id": "statement", "kind": "statement", "lines": [
+          { "id": "sec.services.statement.1", "text": "These relationships started on our own project — a £6M apartment development, where every one of these trades did outstanding work and never let us down — and they've continued on the jobs we've done together since. That's the whole basis of the list: experience and trust, earned on real work." },
+          { "id": "sec.services.statement.2", "text": "We want to be clear about how it works. Your relationship is entirely with the specialist. Their pricing and their terms of engagement are agreed with them directly. We receive no commission, referral fee or financial incentive of any kind from any trade on this page; nobody is here because they pay to be." },
+          { "id": "sec.services.statement.3", "text": "If your project needs a trade you don't already have a relationship with, contact any of the specialists below directly. What you can be confident in is the number of projects we've completed together successfully — and because we've worked together before, we know each other's work and the order things need to happen in. Your project gets the benefit of that." },
+          { "id": "sec.services.statement.4", "text": "Every trade here is qualified and registered for the work they do, for homes and commercial premises alike." }
+        ] },
+        { "id": "entries", "kind": "partners", "lines": [] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "built-in", "q": "Can the lighting be built into the furniture?", "a": [
+      { "id": "sec.services.faq.built-in.1", "text": "Yes — planned on the drawing, wired inside the carcass, profiles concealed, switched or on sensors, dimmable.", "claims": ["lighting-options"] }
+    ] },
+    { "id": "mains", "q": "Who connects the lighting to the mains?", "a": [
+      { "id": "sec.services.faq.mains.1", "text": "One of the qualified trades we work with — registered for the work — or your own. We fit and wire the lighting inside the furniture; the connection to the house supply is theirs and is certified." }
+    ] },
+    { "id": "own-trades", "q": "Do I need my own electrician or plumber?", "a": [
+      { "id": "sec.services.faq.own-trades.1", "text": "Not necessarily. We work with registered trades and can bring them; if you have your own, we'll agree the sequence with them before we start." }
+    ] },
+    { "id": "extractor", "q": "Can an extractor be vented through an island?", "a": [
+      { "id": "sec.services.faq.extractor.1", "text": "Usually, yes — the ducting route is planned into the island's cabinetry at the design stage, with the access a trade needs later. Whether it's possible depends on the floor and the route to outside, which we check at the visit." }
+    ] },
+    { "id": "existing", "q": "Can you build around existing pipes and sockets?", "a": [
+      { "id": "sec.services.faq.existing.1", "text": "Yes. We map them at the design visit and draw the furniture around them, with service voids and access panels where they're needed." }
+    ] },
+    { "id": "dimmable", "q": "Is the lighting dimmable?", "a": [
+      { "id": "sec.services.faq.dimmable.1", "text": "Yes, where you want it — dimming is planned with the circuit at the design stage.", "claims": ["lighting-dimming"] }
+    ] }
+  ],
+  "claims": [
+    { "id": "lighting-system", "claim": "The lighting system we fit; one driver per room; dimming", "location": "lighting body; FAQ", "status": "P", "source": "the maker's own description (LEDsite to say which range)" },
+    { "id": "lighting-options", "claim": "The lighting options we actually offer", "location": "lighting body; FAQ", "status": "P", "source": "Mark" },
+    { "id": "lighting-dimming", "claim": "The system's dimming as its maker describes it", "location": "FAQ", "status": "P", "source": "the maker's description" },
+    { "id": "trades-registered", "claim": "Qualified trades, registered for the work, homes and commercial", "location": "lighting; services; trades statement", "status": "ours", "source": "registrations on record — none on the page" },
+    { "id": "transformer-lines", "claim": "\"Single-transformer technology\", \"flicker-free\", \"synchronised dimming\"", "location": "not used", "status": "dropped", "source": "only as the maker publishes it" },
+    { "id": "licensing-lines", "claim": "\"Legal qualifications\", \"licensed plumbing\", \"gas-safe ventilation\"", "location": "not used", "status": "dropped", "source": "mis-stated; replaced by the statement" },
+    { "id": "prevention-lines", "claim": "Preventing warping, mould, heat degradation", "location": "not used", "status": "dropped", "source": "replaced by \"we plan ventilation and access\"" },
+    { "id": "trades-statement", "claim": "The trades statement: relationships from the £6M development; no commission or incentive; contact direct", "location": "supporting trades", "status": "ours", "source": "Mark's, 11 Sep 2026" },
+    { "id": "partner-entries", "claim": "Partner entries", "location": "supporting trades", "status": "P", "source": "consent; registration on record; review date — content/partners.json" },
+    { "id": "services-ours", "claim": "We map services and draw the furniture around them", "location": "services; FAQ", "status": "ours", "source": "none" }
+  ]
+}

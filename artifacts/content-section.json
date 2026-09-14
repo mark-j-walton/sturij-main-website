@@ -1,0 +1,60 @@
+{
+  "id": "content-section",
+  "kind": "block",
+  "description": "A content section from the copy family as data: kicker, heading and standfirst; blocks of lines (prose, a maker, a list of what it means, a closing line, the trades statement, the partner entries); every line a copy slot; a [P] claim holds its line until Mark closes the row; a partner renders only its publishable fields with consent and a review date. The held-line count is a reading on the page.",
+  "tags": [
+    "section",
+    "content",
+    "claims",
+    "copy"
+  ],
+  "contentTypes": [
+    "section",
+    "copy",
+    "claim",
+    "partner"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [
+    {
+      "name": "measure",
+      "values": [
+        "reading",
+        "full"
+      ],
+      "default": "reading",
+      "description": "the text measure: a reading column on desktop, full width on the phone (a licensed variation)"
+    }
+  ],
+  "disabled": [],
+  "states": [
+    "idle"
+  ],
+  "recipes": [
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "kicker": "claret",
+    "title": "type.title",
+    "body": "type.body",
+    "label": "type.label",
+    "rule": "accent",
+    "heldOutline": "accent"
+  },
+  "size": {
+    "w": 12,
+    "h": 8
+  }
+}

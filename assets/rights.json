@@ -1,0 +1,344 @@
+{
+  "note": "The rights register (addendum 5, item 11): a row for every image the site renders — its class (system render · supplier reproduction · commercial project photograph · project photograph · brand · system-procedural), the rights holder, the terms, and whether the row is on record or [P]. No image renders without a row; a [P] row is counted on the receipt. The og:image (kitchen-bright) is photo.kitchen-bright. Generated from assets/manifest.json on 13 Sep 2026; edit the rows, not the generator.",
+  "rows": [
+    {
+      "asset": "photo.kitchen-bright",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.wardrobe-cream-straight",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.media-wall-led",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.wardrobe-open-shelves",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.mudroom",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.walkin",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "photo.kitchen-media2",
+      "class": "project-photograph",
+      "holder": "Sturij (the project record)",
+      "terms": "the client's written permission on the project record",
+      "status": "P",
+      "note": "a photograph of a real install; the permission row on the project record is Mark's to confirm (addendum 5, item 11)"
+    },
+    {
+      "asset": "partner.handles",
+      "class": "supplier",
+      "holder": "the supplier named in the manifest source (from Mark's blum.zip)",
+      "terms": "the supplier's own montage — its licence terms for use on our site",
+      "status": "P"
+    },
+    {
+      "asset": "partner.boards",
+      "class": "supplier",
+      "holder": "the supplier named in the manifest source (from Mark's blum.zip)",
+      "terms": "the supplier's own montage — its licence terms for use on our site",
+      "status": "P"
+    },
+    {
+      "asset": "partner.hardware",
+      "class": "supplier",
+      "holder": "the supplier named in the manifest source (from Mark's blum.zip)",
+      "terms": "the supplier's own montage — its licence terms for use on our site",
+      "status": "P"
+    },
+    {
+      "asset": "swatch.bookmatch-oak",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.natural-dimaro-walnut",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.sand-casella-oak",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.taormina-travertine",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.champagne-crossed-metal",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.pebble-grey-calcit-stone",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.sand-beige-calcit-stone",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.reed-green",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.cassis",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.caramel-beige",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "swatch.soft-beige",
+      "class": "supplier",
+      "holder": "Egger",
+      "terms": "the maker's reproduction of a decor — its licence terms for use on our site, recorded per image",
+      "status": "P",
+      "note": "IS v2 asset migration files the licence row"
+    },
+    {
+      "asset": "metal.antique-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.antique-pewter",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.bronze",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.brushed-anodised",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.brushed-nickel",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.brushed-satin-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.burnished-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.chrome-plated",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.dark-brushed-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.dull-nickel",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.matt-black",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.oil-rubbed-bronze",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.polished-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.polished-nickel",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "metal.satin-brass",
+      "class": "system-procedural",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a procedural swatch; held as a tile under the finish rule until a supplier master lands",
+      "status": "on-record"
+    },
+    {
+      "asset": "brand.mark-white",
+      "class": "brand",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — the brand mark",
+      "status": "on-record"
+    },
+    {
+      "asset": "brand.logo-white",
+      "class": "brand",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — the brand mark",
+      "status": "on-record"
+    },
+    {
+      "asset": "brand.roundel-sample",
+      "class": "brand",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — the brand mark",
+      "status": "on-record"
+    },
+    {
+      "asset": "render.kitchen-sage-island",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    },
+    {
+      "asset": "render.utility-navy-shaker",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    },
+    {
+      "asset": "render.bedroom-dark-marble-wardrobe",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    },
+    {
+      "asset": "render.media-wall-walnut",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    },
+    {
+      "asset": "render.office-green-walnut",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    },
+    {
+      "asset": "render.living-room-linen-media-wall",
+      "class": "system",
+      "holder": "Storage Innovation Limited",
+      "terms": "ours — a render from the platform, labelled a visualisation wherever it appears",
+      "status": "on-record",
+      "note": "the scene id and hash to be recorded when the render lab writes them (4b2489df bearing 2)"
+    }
+  ]
+}

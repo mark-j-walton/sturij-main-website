@@ -6,7 +6,7 @@
 // band to the enquiry; "see it in a room" hands the materials to the site's render flow, labelled.
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { CalculatorConfiguration, CalculatorTier } from '@/lib/calculator-data'
-import { GALLERIES } from '@/lib/galleries'
+import { isPainted } from '@/lib/galleries'
 import { Copy, type Slot } from '../Copy'
 import { useConfigurator, type Guide } from '../configurator/ConfiguratorProvider'
 import { VisualTarget } from '../configurator/VisualTarget'
@@ -27,12 +27,11 @@ interface BandReply {
 type Reply = BandReply | { ok: false; code: string; message: string }
 
 const gbp = (v: number) => `£${v.toLocaleString('en-GB')}`
-const PAINTED_GALLERY = 'colours'
 
 export interface CalculatorView { configurations: CalculatorConfiguration[]; tiers: CalculatorTier[]; watermark: string; basis: string }
 
 /** The view data comes from the server page (lib/calculator-data reads the table there); the browser never holds the table. */
-export function Calculator({ kicker, title, body, finishesHref, standalone, view }: { kicker: Slot; title: Slot; body: Slot; finishesHref: string; standalone?: boolean; view: CalculatorView }) {
+export function Calculator({ kicker, title, body, finishesHref, standalone, view, note }: { kicker: Slot; title: Slot; body: Slot; finishesHref: string; standalone?: boolean; view: CalculatorView; /** The short pricing line under the band (site-copy-family Part 7). */ note?: Slot }) {
   const CALC_CONFIGURATIONS = view.configurations, CALC_TIERS = view.tiers, CALC_WATERMARK = view.watermark, CALC_BASIS = view.basis
   const { picks, latestSwatch, setGuide, guide } = useConfigurator()
   const [cfgId, setCfgId] = useState<string>(CALC_CONFIGURATIONS[0]!.id)
@@ -50,7 +49,7 @@ export function Calculator({ kicker, title, body, finishesHref, standalone, view
   const doors = picks.doors ?? latestSwatch?.picks.doors ?? null
   const carcass = picks.carcass ?? latestSwatch?.picks.carcass ?? null
   const handle = picks.handle ?? latestSwatch?.picks.handle ?? null
-  const painted = !!doors && (GALLERIES.find((g) => g.tiles.includes(doors))?.id === PAINTED_GALLERY)
+  const painted = isPainted(doors) // the registry's family, never a gallery named in code
   const swatchComplete = !!(doors && carcass && handle)
 
   const price = useCallback(async () => {
@@ -171,6 +170,7 @@ export function Calculator({ kicker, title, body, finishesHref, standalone, view
                 <div className="calc-watermark">{busy ? 'Working it out…' : CALC_WATERMARK}</div>
               )}
             </div>
+            {note && <Copy slot={note} as="p" className="calc-pricenote" />}
 
             <div className="calc-acts">
               <a className="mbtn calc-cta" href="#enquire" data-guide={guide?.line ?? ''}>Take this further →</a>

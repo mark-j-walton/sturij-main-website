@@ -1,0 +1,65 @@
+{
+  "id": "fittings",
+  "slug": "/fixtures-and-fittings",
+  "nav": { "group": "What we build with", "label": "Fixtures and fittings", "order": 3 },
+  "title": "Fixtures and fittings — Sturij",
+  "description": "Rails, pull-outs, pocket doors, concealed hinges and built-in lighting: the fittings behind the pieces you use, from Häfele and Sugatsune.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 3 — Fixtures and fittings (Häfele, Sugatsune, built-in lighting)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "details",
+      "kicker": "Fixtures and fittings",
+      "heading": "The details are where a room starts to feel finished.",
+      "standfirst": { "id": "sec.fittings.details.standfirst", "text": "Rails that don't sag. Lighting that's built in, not stuck on. A door that disappears into the wall. These are the fittings behind the pieces you'll actually use, and we specify them from two makers who do this and nothing else." },
+      "blocks": [
+        { "id": "hafele", "kind": "maker", "title": "Häfele — Germany", "lines": [
+          { "id": "sec.fittings.hafele.1", "text": "A family firm from Nagold that has made furniture fittings since 1923, and the maker we turn to for the everyday things a wardrobe or media wall needs: hanging rails, wirework and pull-outs, connectors, and the integrated LED lighting we build into shelves and hanging spaces.", "claims": ["hafele-facts", "hafele-ranges"] },
+          { "id": "sec.fittings.hafele.2", "text": "At Atelier, Häfele's solid-metal handles and fittings are the ones you can feel the weight of.", "claims": ["hafele-atelier"] }
+        ] },
+        { "id": "sugatsune", "kind": "maker", "title": "Sugatsune — Japan", "lines": [
+          { "id": "sec.fittings.sugatsune.1", "text": "Where a room needs a fitting that does something unusual — a heavy lift-up door that opens and holds itself, a pocket door that slides away and closes softly, a concealed hinge that lets a door vanish into panelling — we specify Sugatsune. They make the pieces most people never see and everyone notices.", "claims": ["sugatsune"] }
+        ] },
+        { "id": "lighting", "kind": "prose", "title": "Built-in lighting.", "lines": [
+          { "id": "sec.fittings.lighting.1", "text": "Shelf, rail and drawer lighting is planned on the drawing, wired inside the carcass on a low-voltage system, and switched where you'd expect. It's part of the furniture, not an afterthought." }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.fittings.closing.1", "text": "If there's a fitting you've seen in a hotel or a showroom and wondered how it works, ask at the design visit. It's usually one of these two." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [
+    { "id": "lighting", "q": "Can you build lighting into the furniture?", "a": [
+      { "id": "sec.fittings.faq.lighting.1", "text": "Yes. Shelf, rail and drawer lighting is planned on your drawing and built into the carcass — warm or cool, switched or sensor-triggered.", "claims": ["lighting-options"] }
+    ] },
+    { "id": "pocket", "q": "Can a door slide away into the cabinet?", "a": [
+      { "id": "sec.fittings.faq.pocket.1", "text": "Yes — a pocket door slides in beside the carcass so the opening is fully clear, and closes softly. We use Sugatsune's systems for these.", "claims": ["sugatsune"] }
+    ] },
+    { "id": "hidden", "q": "Can a door be hidden in the panelling?", "a": [
+      { "id": "sec.fittings.faq.hidden.1", "text": "Yes. A concealed hinge lets a door sit flush in a run of panelling with no visible hardware, adjustable after fitting. Sugatsune make the ones we trust for it.", "claims": ["sugatsune"] }
+    ] },
+    { "id": "rails", "q": "Will the rails sag?", "a": [
+      { "id": "sec.fittings.faq.rails.1", "text": "Not the ones we fit. Wardrobe rails are specified for the span and the load — a long run gets a centre support or a stronger section, not a hope." }
+    ] },
+    { "id": "handles", "q": "Can I choose the handles?", "a": [
+      { "id": "sec.fittings.faq.handles.1", "text": "Yes — from the range on this site, in the finishes shown." },
+      { "id": "sec.fittings.faq.handles.2", "text": "At Atelier the handles and fittings are Häfele's solid-metal pieces.", "claims": ["hafele-atelier"] }
+    ] },
+    { "id": "match", "q": "Do the fittings match the finish?", "a": [
+      { "id": "sec.fittings.faq.match.1", "text": "Handles, rails and lighting profiles come in finishes that sit with the door decor and each other; we'll show you the combinations with the samples at the visit." }
+    ] }
+  ],
+  "claims": [
+    { "id": "hafele-facts", "claim": "Häfele — German, family firm, Nagold, since 1923", "location": "body", "status": "P", "source": "haefele.com" },
+    { "id": "hafele-ranges", "claim": "Which Häfele ranges Sturij fits", "location": "body; FAQ", "status": "P", "source": "Mark" },
+    { "id": "hafele-atelier", "claim": "Häfele solid-metal fittings at Atelier", "location": "body; FAQ", "status": "P", "source": "Mark" },
+    { "id": "sugatsune", "claim": "Sugatsune — Japanese; Lapcon; HES; pocket-door systems", "location": "body; FAQ", "status": "P", "source": "sugatsune range pages; Mark's line on jobs" },
+    { "id": "stainless-brass", "claim": "316 stainless and solid brass", "location": "not used", "status": "dropped", "source": "only if Sugatsune publishes it for the exact fitting" },
+    { "id": "ixconnect", "claim": "Ixconnect; \"industry standard\"", "location": "not used", "status": "dropped", "source": "connectors named only if we fit them" },
+    { "id": "no-licensing-claim", "claim": "\"No specialist electrician licensing\"", "location": "not used", "status": "dropped", "source": "a regulatory claim we do not make" },
+    { "id": "architects-specify", "claim": "Architects specify these brands; \"preferred partner\"", "location": "not used", "status": "dropped", "source": "marketing claim" },
+    { "id": "rails-span", "claim": "Rails specified for span and load", "location": "FAQ", "status": "ours", "source": "none" },
+    { "id": "lighting-options", "claim": "The lighting options we actually offer", "location": "FAQ", "status": "P", "source": "Mark" },
+    { "id": "handle-finish-makers", "claim": "Handle finishes and their maker(s)", "location": "FAQ", "status": "P", "source": "the registry's handle rows — Mark" }
+  ]
+}

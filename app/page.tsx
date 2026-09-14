@@ -9,6 +9,8 @@ import { Features } from '@/components/Features'
 import { Manifesto } from '@/components/Manifesto'
 import { Montage } from '@/components/Montage'
 import { NavBar } from '@/components/NavBar'
+import { Reviews } from '@/components/Reviews'
+import { SITE } from '@/lib/site'
 import { PageVeil } from '@/components/PageVeil'
 import { PanelStack } from '@/components/PanelStack'
 import { RevealObserver } from '@/components/RevealObserver'
@@ -63,12 +65,14 @@ export default async function Page() {
 
         <Manifesto kicker={c('manifesto.kicker')} title={c('manifesto.title')} steps={[1, 2, 3].map((n) => ({ no: `0${n}`, title: c(`manifesto.${n}.title`), body: c(`manifesto.${n}.body`) }))} />
 
-        <Calculator kicker={c('calculator.kicker')} title={c('calculator.title')} body={c('calculator.body')} finishesHref="#range" view={CALCULATOR_VIEW} />
+        <Calculator kicker={c('calculator.kicker')} title={c('calculator.title')} body={c('calculator.body')} finishesHref="#range" view={CALCULATOR_VIEW} note={c('sec.pricing.short')} />
+
+        <Reviews site={SITE} />
 
         <EnquiryBand kicker={c('enquiry.kicker')} title={c('enquiry.title')} body={c('enquiry.body')} submit={c('enquiry.submit')} note={c('enquiry.note')} />
       </main>
 
-      <SiteFooter logo={logo} tagline={c('footer.tagline')} copyright={c('footer.copyright')} />
+      <SiteFooter logo={logo} tagline={c('footer.tagline')} social={{ facebook: c('footer.social.facebook'), instagram: c('footer.social.instagram'), linkedin: c('footer.social.linkedin') }} trustpilot={c('footer.trustpilot')} trademark={c('footer.trademark')} />
 
       <RoomBuilder />
       <Lightbox />

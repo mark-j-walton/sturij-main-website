@@ -2,10 +2,11 @@ import type { NextConfig } from 'next'
 
 // The Studio, the Canvas and the legacy pages are served unchanged from public/ at the URLs they
 // have today (studio.sturij.com/studio, /canvas, …). vercel.json's cleanUrls used to do this; with
-// Next.js the clean URLs are explicit rewrites, so the list is data a test can read.
+// Next.js the clean URLs are explicit rewrites, so the list is data a test can read. The legal pages left
+// this list on 13 Sep 2026: /privacy, /terms and /complaints are app routes rendering their records
+// (components/LegalPage.tsx); the old static pages are parked under legacy/legal-2026-02-03.
 export const LEGACY_PAGES = [
   'studio', 'canvas', 'chat', 'customer', 'review', 'mobile',
-  'complaints', 'privacy', 'terms',
   'projects/mf', 'projects/oval', 'projects/vne',
 ] as const
 
@@ -16,7 +17,12 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
     // The bucket the admin editing mode uploads into (sturij-web's site-images); renditions are
     // derived on request from the master there, never served as the master.
-    remotePatterns: [{ protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/site-images/**' }],
+    remotePatterns: [
+      { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/site-images/**' },
+      // the materials registry's own storage (sturij-assets), for the registry door when it lands (materials-feed
+      // Part B); today the registry names files in this repository's showcase folder as its store.
+      { protocol: 'https', hostname: 'uxdrokyxywwezorpvfsp.supabase.co', pathname: '/storage/v1/object/public/**' },
+    ],
   },
   async rewrites() {
     return {

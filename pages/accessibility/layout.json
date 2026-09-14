@@ -1,0 +1,143 @@
+{
+  "page": "accessibility",
+  "slug": "/accessibility",
+  "design": "sturij-public",
+  "kind": "statement",
+  "sizes": [
+    "1440",
+    "1024",
+    "390"
+  ],
+  "grid": {
+    "unit": 8,
+    "columns": 12
+  },
+  "title": "Accessibility statement — Sturij",
+  "description": "What sturij.com aims for (WCAG 2.2 AA), what we know falls short, and how to tell us.",
+  "note": "The accessibility statement (Equality Act 2010 duty; WCAG 2.2 AA as the standard; addendum 5 item 12): the nav, the statement as copy slots Mark edits in place, the footer.",
+  "regions": [
+    {
+      "id": "nav",
+      "artifact": "nav-bar",
+      "slots": [
+        {
+          "id": "nav.logo",
+          "type": "brand-mark",
+          "consumer": "nav-bar",
+          "asset": "brand.logo-white"
+        }
+      ]
+    },
+    {
+      "id": "statement",
+      "artifact": "content-section",
+      "slots": [
+        {
+          "id": "access.kicker",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.heading",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.intro",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.standard",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.known",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.contact",
+          "type": "copy",
+          "consumer": "content-section"
+        },
+        {
+          "id": "access.reviewed",
+          "type": "copy",
+          "consumer": "content-section"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "artifact": "site-footer",
+      "slots": [
+        {
+          "id": "footer.logo",
+          "type": "brand-mark",
+          "consumer": "site-footer",
+          "asset": "brand.logo-white"
+        },
+        {
+          "id": "footer.tagline",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.facebook",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.instagram",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.linkedin",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trustpilot",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trademark",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.admin",
+          "type": "copy",
+          "consumer": "admin-editing",
+          "note": "the control, not content"
+        },
+        {
+          "id": "footer.disclosure",
+          "type": "identity",
+          "consumer": "site-footer",
+          "data": "content/identity.json",
+          "note": "the trading disclosure, the NAP and the copyright line, rendered from the identity record"
+        }
+      ]
+    }
+  ],
+  "locks": [],
+  "artifacts": [
+    {
+      "artifact": "social-links"
+    },
+    {
+      "artifact": "admin-editing"
+    }
+  ],
+  "variations": {
+    "390": {
+      "nav.links": "phone"
+    },
+    "1024": {}
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "note": "The range's selection as data, under page-platform S1 (records from sturij-assets, files by id). It names no decor: it names registry rows by id and the rule that places a decor in a tab. scripts/materials-feed.mjs joins this to the registry snapshot and emits public/materials.json, which the strip, the collector and the calculator read. A decor the registry does not hold cannot appear here; it is a misfit for the registry (IS v2's asset migration), listed below so the feed can report it.",
+  "registry": {
+    "project": "uxdrokyxywwezorpvfsp",
+    "tables": [
+      "materials",
+      "material_images",
+      "material_measurements"
+    ],
+    "store": "the registry's material_images.storage_path is a path in this repository's public folder — the showcase directory the record names as the image store (745e6fe7)",
+    "read_key": "STURIJ_ASSETS_READ_KEY — a read-only key held in the vault by name; STURIJ_ASSETS_URL beside it. Never the service-role key; never a value in this repository."
+  },
+  "families": {
+    "note": "Egger's decor code grammar: the first letter of the code says the family. A rule on the supplier's own data, declared once here — not a decor named in code.",
+    "H": "wood",
+    "F": "material",
+    "U": "colour",
+    "W": "colour"
+  },
+  "tabs": [
+    {
+      "id": "woods",
+      "label": "Woods",
+      "family": "wood"
+    },
+    {
+      "id": "materials",
+      "label": "Materials",
+      "family": "material"
+    },
+    {
+      "id": "colours",
+      "label": "Colours",
+      "family": "colour"
+    },
+    {
+      "id": "handles",
+      "label": "Handles",
+      "kind": "handle"
+    }
+  ],
+  "decors": [
+    {
+      "material": "be0d5308-2f73-40c2-8c5e-92972d1262a4",
+      "code": "H1316"
+    },
+    {
+      "material": "d59f7601-8442-4648-a6d5-4e277a619a09",
+      "code": null,
+      "family": "wood",
+      "placed": "by the handoff (README §3) — the registry row carries no decor code and no measurement, so the family cannot be read from it"
+    },
+    {
+      "material": "b152640d-6eb1-4c1c-a901-dc7128e0dc7d",
+      "code": "H1388"
+    },
+    {
+      "material": "919c3b85-a0a9-4ee5-bb36-989007c6d264",
+      "code": "F037"
+    },
+    {
+      "material": "80e62ad3-064a-44d9-b9f9-0c1e53768bf0",
+      "code": "F579"
+    },
+    {
+      "material": "e7c2d4d1-8059-440b-81ec-fb02fe59f6ea",
+      "code": "F662"
+    },
+    {
+      "material": "d4929df7-d066-4f10-a479-6fa6ad8c383a",
+      "code": "F661"
+    },
+    {
+      "material": "c33455d7-d2c0-41e6-8708-1a89889e25cb",
+      "code": "U604"
+    },
+    {
+      "material": "29b1f888-4a11-4991-986f-e6a3a9068f33",
+      "code": null,
+      "family": "colour",
+      "placed": "by the handoff (README §3) — the registry row carries no decor code and no measurement, so the family cannot be read from it"
+    }
+  ],
+  "not_in_registry": [
+    {
+      "name": "Alpine White",
+      "handoff_tab": "colours",
+      "note": "drawn as a gradient in the handoff; no row in the registry on 13 Sep 2026 — collected into the registry with its Egger code, it enters the strip by id"
+    },
+    {
+      "name": "Graphite Grey",
+      "handoff_tab": "colours",
+      "note": "drawn as a gradient in the handoff; no row in the registry on 13 Sep 2026 — collected into the registry with its Egger code, it enters the strip by id"
+    }
+  ],
+  "handles": {
+    "note": "The handle finishes. The registry holds handle products (Hendel & Hendel 80, Häfele 449) but no finish record: the variants' `finish` axis is a surface (gloss, matt, satin, textured) and their `colour` axis a synthetic palette. The fifteen finish names below are the handoff's, kept as data until the registry names finishes; under the finish rule (addendum 1, 11 Sep 2026) each is HELD — a labelled tile, 'sample at the visit' — until a master lands in the library at no less than 1500 px on the short side from the maker's own photography or a system render. The fifteen files in showcase/metals are procedural 1024 px swatches and are not masters.",
+    "rule": {
+      "master_min_short_side_px": 1500,
+      "master_kinds": [
+        "supplier",
+        "system"
+      ],
+      "rendition": "down, never up",
+      "min_quality": 85,
+      "held_label": "sample at the visit"
+    },
+    "finishes": [
+      {
+        "id": "antique-brass",
+        "name": "Antique Brass",
+        "note": "aged brass, warm and mid-toned, softly darkened in the recesses, a low satin sheen"
+      },
+      {
+        "id": "antique-pewter",
+        "name": "Antique Pewter",
+        "note": "dark grey pewter with a soft, almost matt lustre and gentle tonal variation"
+      },
+      {
+        "id": "bronze",
+        "name": "Bronze",
+        "note": "deep brown-gold bronze, a quiet satin lustre, slightly darker at the edges"
+      },
+      {
+        "id": "brushed-anodised",
+        "name": "Brushed Anodised",
+        "note": "brushed aluminium with a fine linear grain, cool silver-grey, low reflectivity"
+      },
+      {
+        "id": "brushed-nickel",
+        "name": "Brushed Nickel",
+        "note": "warm silver nickel with a fine brushed grain and a soft directional sheen"
+      },
+      {
+        "id": "brushed-satin-brass",
+        "name": "Brushed Satin Brass",
+        "note": "pale brass with a fine brushed grain and a satin sheen, no gloss"
+      },
+      {
+        "id": "burnished-brass",
+        "name": "Burnished Brass",
+        "note": "brass hand-burnished to a warm, uneven, softly darkened patina with brighter high points"
+      },
+      {
+        "id": "chrome-plated",
+        "name": "Chrome Plated",
+        "note": "bright polished chrome, mirror-like, cool and crisp, reflecting the soft light"
+      },
+      {
+        "id": "dark-brushed-brass",
+        "name": "Dark Brushed Brass",
+        "note": "deep smoked brass, brushed, a dark warm tone with a restrained sheen"
+      },
+      {
+        "id": "dull-nickel",
+        "name": "Dull Nickel",
+        "note": "muted nickel with a matt, slightly grey satin surface and no bright highlights"
+      },
+      {
+        "id": "matt-black",
+        "name": "Matt Black",
+        "note": "matt black powder-coat, velvety, absorbing the light with a faint texture"
+      },
+      {
+        "id": "oil-rubbed-bronze",
+        "name": "Oil Rubbed Bronze",
+        "note": "very dark bronze with warm copper undertones showing at the worn edges"
+      },
+      {
+        "id": "polished-brass",
+        "name": "Polished Brass",
+        "note": "bright polished brass, golden and reflective with soft highlights"
+      },
+      {
+        "id": "polished-nickel",
+        "name": "Polished Nickel",
+        "note": "bright polished nickel, warm silver, reflective with a soft edge"
+      },
+      {
+        "id": "satin-brass",
+        "name": "Satin Brass",
+        "note": "even satin brass, warm gold, a smooth low-gloss sheen without brush marks"
+      }
+    ],
+    "masters": "data/finish-masters.json — a finish with a master at the floor (short side ≥ 1500 px) shows it as a system render with the caveat; without one it is held. Masters come from scripts/render-finishes.mjs (the rig in data/finish-rig.json) or from the maker's set when it lands."
+  }
+}

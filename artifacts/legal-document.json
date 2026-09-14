@@ -1,0 +1,37 @@
+{
+  "id": "legal-document",
+  "kind": "block",
+  "description": "A governed legal document rendered byte-faithful from its record — the markdown of the current version as HTML, the document's version, date and hash in the page footer; never hand-edited on the site; a change is a new version of the record.",
+  "tags": [
+    "legal",
+    "document",
+    "record"
+  ],
+  "contentTypes": [
+    "legal",
+    "identity"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [],
+  "disabled": [],
+  "states": [
+    "idle"
+  ],
+  "recipes": [],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "title": "type.title",
+    "body": "type.body",
+    "label": "type.label",
+    "line": "custom.line.ink-7"
+  },
+  "size": {
+    "w": 12,
+    "h": 10
+  }
+}

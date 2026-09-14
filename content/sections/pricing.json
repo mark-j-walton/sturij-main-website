@@ -1,0 +1,48 @@
+{
+  "id": "pricing",
+  "slug": "/how-we-price",
+  "nav": { "group": "What we build with", "label": "How we price", "order": 7 },
+  "title": "How we price — Sturij",
+  "description": "Materials at the price we pay, with our discounts passed on. We charge for what we make and fit. The quote shows every line.",
+  "source": { "document": "site-copy-family", "version": 1, "part": "Part 7 — How we price (Mark's decision cf496e63)", "sha256": "68e5cd4a63a9eb854bec5a9de56ccdbd9c05f0b5c47f01e7612a00278becd435" },
+  "parts": [
+    {
+      "id": "pricing",
+      "kicker": "Honestly priced",
+      "heading": "Materials at cost. We charge for what we make and fit.",
+      "standfirst": { "id": "sec.pricing.pricing.standfirst", "text": "We've only ever earned money one way — by doing our own work well. So the price is built the way the furniture is: from the parts, in the open." },
+      "blocks": [
+        { "id": "materials", "kind": "prose", "title": "Materials at the price we pay.", "lines": [
+          { "id": "sec.pricing.materials.1", "text": "Every board, hinge, runner, handle and fitting goes on your quote at the price we buy it for — with our trade and volume discounts passed on to you, and no margin added. We don't hold stock; materials are ordered for your job and typically arrive the next day, so there's nothing to mark up and no reason to." }
+        ] },
+        { "id": "work", "kind": "prose", "title": "We charge for our work.", "lines": [
+          { "id": "sec.pricing.work.1", "text": "Manufacturing — the cutting, edging and assembly in our Skelmanthorpe workshop; delivery; and installation by the people who built it. That's where our expertise is, and that's what you pay us for." }
+        ] },
+        { "id": "more", "kind": "prose", "title": "Where a job needs more, we say so.", "lines": [
+          { "id": "sec.pricing.more.1", "text": "On larger projects, or where a job calls for project-management time, or sourcing, finishing or preparing materials beyond the ordinary — a special finish, a hard-to-find fitting, boards prepared before they're cut — we may charge up to 10% of the trade cost of those materials for the extra work in the supply process. It's on the quote as its own line, with the reason, or it isn't charged.", "claims": ["supply-charge"] }
+        ] },
+        { "id": "expenses", "kind": "prose", "title": "Expenses at cost.", "lines": [
+          { "id": "sec.pricing.expenses.1", "text": "Out-of-pocket costs — a courier, a delivery charge, a specialist's call-out — are passed on as they are, with the receipt." }
+        ] },
+        { "id": "why", "kind": "prose", "title": "Why we do it this way.", "lines": [
+          { "id": "sec.pricing.why.1", "text": "Because a price you can read is a price you can trust. Your quote shows the materials at cost, our manufacturing, delivery and installation, any supply charge with its reason, and expenses — nothing else. We think that transparency is the foundation of a job that goes well, for you and for us." }
+        ] },
+        { "id": "closing", "kind": "closing", "lines": [
+          { "id": "sec.pricing.closing.1", "text": "Priced from the cutting list, not a price book. If a line on your quote isn't clear, ask — we'd rather explain it than have you wonder." }
+        ] }
+      ]
+    }
+  ],
+  "faq": [],
+  "extra": {
+    "short": "Guide prices are honest bands from recent projects. Your quote is built from the cutting list: materials at the price we pay, our manufacturing, delivery and installation, and any extras stated with their reason. No margin on materials."
+  },
+  "claims": [
+    { "id": "materials-at-cost", "claim": "Materials at the price we pay, discounts passed on, no margin", "location": "body; short version; quote", "status": "ours", "source": "a promise — the quote proves it on every job" },
+    { "id": "no-stock", "claim": "No stock; typically next day", "location": "body", "status": "ours", "source": "\"typically\" stays" },
+    { "id": "our-work", "claim": "Manufacturing, delivery, installation", "location": "body; quote", "status": "ours", "source": "none" },
+    { "id": "supply-charge", "claim": "Up to 10% of trade material cost for supply work, own line with reason", "location": "body; quote", "status": "P", "source": "Mark — \"up to\" or fixed" },
+    { "id": "expenses", "claim": "Expenses at cost with receipt", "location": "body; quote", "status": "ours", "source": "none" },
+    { "id": "cutting-list", "claim": "Priced from the cutting list, not a price book", "location": "closing", "status": "ours", "source": "already on the site" }
+  ]
+}

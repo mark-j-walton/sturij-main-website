@@ -1,0 +1,47 @@
+{
+  "id": "faq-accordion",
+  "kind": "block",
+  "description": "A question-and-answer accordion in native <details>/<summary>: visible content, no script, nothing hidden from people for crawlers; the same visible items feed the page's FAQPage structured data. A held item is not in the DOM.",
+  "tags": [
+    "faq",
+    "accordion",
+    "content",
+    "seo"
+  ],
+  "contentTypes": [
+    "faq",
+    "copy"
+  ],
+  "consumers": [
+    "sturij-public",
+    "content-section"
+  ],
+  "properties": [],
+  "disabled": [],
+  "states": [
+    "idle",
+    "active"
+  ],
+  "recipes": [
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "line": "custom.line.ink-7",
+    "marker": "accent",
+    "title": "type.title"
+  },
+  "size": {
+    "w": 12,
+    "h": 6
+  }
+}

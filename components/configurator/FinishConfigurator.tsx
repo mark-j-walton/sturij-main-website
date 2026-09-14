@@ -4,7 +4,7 @@
 // (four per session, the download pack built in-browser). One artifact — artifacts/finish-configurator.json.
 import Image, { getImageProps } from 'next/image'
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { GALLERIES, HANDLE_GALLERY_INDEX, type Tile } from '@/lib/galleries'
+import { FEED, GALLERIES, HANDLE_GALLERY_INDEX, type Tile } from '@/lib/galleries'
 import { blobBytes, drawRoundel, makeZip, saveBlob, slug, tileBackground, type Picks } from './canvas'
 import { ribbonList } from './ribbon'
 import { MAX_SWATCHES, useConfigurator } from './ConfiguratorProvider'
@@ -37,9 +37,13 @@ export function Ribbon({ tiles, duration, reverse, onTile, ariaHidden, sizes }: 
           <figure key={`${t.id}-${i}`} aria-hidden={repeat ? 'true' : undefined} data-repeat={repeat ? '' : undefined}>
             {t.src
               ? <Image src={t.src} alt={t.alt ?? t.name} width={dims.width} height={dims.height} sizes={sizes ?? '(max-width: 760px) 60vw, 310px'} loading="lazy" quality={75} />
+              // a held finish — no master in the library yet: the name on the neutral ground, "sample at the visit"; never a small file scaled up
+              : t.held
+                ? <span className="sw held" role="img" aria-label={`${t.name} — sample at the visit`} data-held={t.misfit ?? 'no master yet'}><b>{t.name}</b><i>sample at the visit</i></span>
               // a decor without a swatch image (the registry's misfit list): its own colour as a labelled tile, never a broken image
-              : <span className="sw" role="img" aria-label={`${t.name} — swatch to follow`} data-misfit={t.misfit ?? 'no swatch image'} style={{ background: tileBackground(t) }} />}
-            <figcaption>{t.name}</figcaption>
+                : <span className="sw" role="img" aria-label={`${t.name} — swatch to follow`} data-misfit={t.misfit ?? 'no swatch image'} style={{ background: tileBackground(t) }} />}
+            <figcaption>{t.name}{t.system && <em className="sys" title={t.caveat ?? 'a system render — illustration only'}> · illustration</em>}</figcaption>
+            {t.system && <span className="syschip" aria-hidden="true">illustration</span>}
             {onTile && <button type="button" className="tilehit" aria-label={`Choose ${t.name}`} tabIndex={repeat ? -1 : 0} onClick={() => onTile(t)} />}
           </figure>
         )
@@ -139,7 +143,7 @@ export function FinishConfigurator({ lead }: { lead: ReactNode }) {
   const facetStyle = (t: Tile | null): CSSProperties => (t ? { background: tileBackgroundRendition(t, 640), backgroundSize: 'cover' } : {})
 
   return (
-    <section className="eggerband" id="range" data-artifact="finish-configurator">
+    <section className="eggerband" id="range" data-artifact="finish-configurator" data-snapshot={FEED.snapshot.at} data-feed="/materials.json">
       <div className="eb-lead">
         <div className="eb-txt">{lead}</div>
         <div className="eb-side reveal">

@@ -47,12 +47,12 @@ describe('the slots', () => {
 })
 
 describe('the galleries — registry codes or misfits, never a guess', () => {
-  it('holds the seven Egger codes sturij-assets carries and lists every tile without one', () => {
+  it('holds the seven Egger codes sturij-assets carries; every gap is on the misfit list with a line', () => {
     const coded = GALLERIES.flatMap((g) => g.tiles).filter((t) => t.code).map((t) => t.code)
     expect(coded.sort()).toEqual(['F037', 'F579', 'F661', 'F662', 'H1316', 'H1388', 'U604'])
     const misfits = registryMisfits()
-    expect(misfits.length).toBe(6 + 15)
-    expect(misfits.every((m) => m.misfit.length > 10)).toBe(true)
+    expect(misfits.length).toBe(22)
+    expect(misfits.every((m) => m.note.length > 10)).toBe(true)
   })
   it('the four rooms map to the four stacking cards', () => {
     expect(ROOMS.map((r) => r.card)).toEqual([0, 1, 2, 3])

@@ -1,0 +1,48 @@
+{
+  "id": "reviews",
+  "kind": "block",
+  "description": "First-party reviews with permission on record — genuine, dated, from an identifiable customer — never edited, withdrawn on request; the count and the average are readings; Review and AggregateRating structured data from qualifying rows only; renders nothing until a row qualifies. A paid third-party widget would slot in here without a re-cut; a third party's score is never marked up.",
+  "tags": [
+    "reviews",
+    "trust",
+    "content"
+  ],
+  "contentTypes": [
+    "review"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [],
+  "disabled": [
+    {
+      "property": "third-party-widget",
+      "reason": "the Trustpilot TrustBoxes are on paid plans and the Review Collector sets cookies before consent — held; the footer carries the profile link instead"
+    }
+  ],
+  "states": [
+    "idle"
+  ],
+  "recipes": [
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "kicker": "claret",
+    "title": "type.title",
+    "label": "type.mono"
+  },
+  "size": {
+    "w": 12,
+    "h": 6
+  }
+}
