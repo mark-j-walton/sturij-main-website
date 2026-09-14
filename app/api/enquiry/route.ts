@@ -14,5 +14,5 @@ export async function POST(req: Request) {
   if (!payload.page) payload.page = req.headers.get('referer') ?? ''
   const out = await postEnquiry(payload)
   if (!out.ok) return NextResponse.json({ ok: false, error: out.error, fallback: out.fallback }, { status: out.status })
-  return NextResponse.json({ ok: true, id: out.id, notified: out.notified })
+  return NextResponse.json({ ok: true, id: out.id, reference: out.reference, notified: out.notified, acknowledged: out.acknowledged })
 }

@@ -312,7 +312,14 @@ button { font: inherit; }
 .form .enq-result.fallback { border-left: 2px solid var(--accent); padding-left: 14px; }
 .form .enq-result a { color: var(--accent); }
 .form .enq-spec { grid-column: 1 / -1; font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-@media (max-width: 760px) { .steps { grid-template-columns: 1fr; } .form { grid-template-columns: 1fr; } }
+.form .enq-swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.form .enq-swatch { display: flex; align-items: center; gap: 8px; background: var(--input); border: 1px solid var(--input-line); border-radius: var(--radius-input); padding: 6px 8px 6px 6px; max-width: 100%; }
+.form .enq-swatch img { width: 40px; height: 40px; border-radius: 50%; display: block; flex: none; }
+.form .enq-swatch span { font-size: 13px; color: var(--ink-on-dark); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 30ch; }
+.form .enq-swatch button { font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--custom-ink-on-dark-50); background: transparent; border: 0; cursor: pointer; padding: 6px; min-height: var(--target); flex: none; }
+.form .enq-swatch button:hover { color: var(--accent); }
+.form .enq-empty { font-size: 14px; line-height: 1.6; color: var(--custom-ink-on-dark-72); margin: 0; }
+@media (max-width: 760px) { .steps { grid-template-columns: 1fr; } .form { grid-template-columns: 1fr; } .form .enq-swatch span { max-width: 18ch; } }
 
 /* ===== footer + admin control ===== */
 .foot { background: var(--structure); color: var(--custom-ink-on-dark-60); font-size: 13px; }
