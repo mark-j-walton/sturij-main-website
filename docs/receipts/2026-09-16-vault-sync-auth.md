@@ -166,3 +166,48 @@ So the audit line the brief wants recorded is written by trigger and cannot be f
 7. **Then the admin loop**: sign in at `https://studio.sturij.com/#admin`, one copy edit, read it back through the page (`data-content-source` turns `seed+db`), and the `site_content_slots` row with its `site_slot_audit` line — the database half is already proved ready (§5).
 
 **Unchanged and untouched by this session:** the vault, every Vercel environment, sturij-web's auth configuration, `MOTION_PLUS_API`, and every secret value in the estate.
+
+---
+
+## Addendum — 16 September 2026, 16:08 Z · the gate opened
+
+Same session, same model (claude-opus-5). **The two public names have arrived on production.** The readings above were true when taken at 12:54 Z; this supersedes §3's "the names have not arrived" and nothing else.
+
+| Reading | Then (12:54 Z) | Now (16:08 Z) |
+|---|---|---|
+| `https://studio.sturij.com/` | 200, `data-content-source="seed"` | 200, **`data-content-source="seed+db"`** |
+| `https://sturij.com/` | TLS fails (apex still Google) | TLS fails — **the cutover has not happened**, as expected |
+
+**What `seed+db` proves, exactly.** `lib/slots.ts` sets `source = 'seed+db'` only after `supabasePublicConfig()` returns non-null **and** at least one of the two `_current` views answers. So both public names are in the build **and** the publishable key authenticates against sturij-web **and** RLS lets the anonymous reader through. That is the site-to-database read path proved live for the first time. It does **not** prove a copy edit: an empty result counts, and the slot tables are empty (below).
+
+**What carried them.** Two production redeploys of the **same commit** `f863224`, `action: redeploy`, no new code:
+
+| Deployment | Created | |
+|---|---|---|
+| `dpl_2Nr9JDhzx9m9qDBrH7Uog7DdKfut` | ~14:52 Z | redeploy of `dpl_9qTPZfyxTL9d2JFScTZwzcNDynwJ` |
+| `dpl_LnUehuEMTB9ZEBRGApp7Hiec9Gox` | ~14:59 Z | redeploy of the above — **current production** |
+
+A redeploy of an unchanged commit is the signature of names added to the Vercel environment and then baked in by a rebuild. It confirms the ordering §3 warned about: the sync landing is not enough on its own, because `NEXT_PUBLIC_*` are fixed at build.
+
+**Still unread from here:** whether `GEMINI_API_KEY` and `GEMINI_IMAGE_MODEL` also arrived, and whether `MOTION_PLUS_API` survived. There is no environment-variable tool, CLI or token in this session, and `/api/render` is POST-only with no preflight — probing it would spend the key, so it was not probed. `disableSecretDeletion: true` is the guarantee for `MOTION_PLUS_API`; it remains unverified by run.
+
+**The admin loop — still not run.** Read on sturij-web at 16:08 Z:
+
+| Table | Rows |
+|---|---|
+| `public.site_content_slots` | **0** |
+| `public.site_slot_audit` | **0** |
+| `public.site_image_slots` | 0 |
+
+So the gate is open and the loop's remaining acts are Mark's: the redirect allowlist (§4), then sign-in at `https://studio.sturij.com/#admin` and one copy edit. The timestamp column on all three tables is `at`, not `created_at` — noted so the next reader does not lose a query to it.
+
+**The write path, proved sound this session** (read from sturij-web, not assumed):
+
+- `site_content_slots_current` and `site_image_slots_current` are views with `security_invoker=true`, so the base tables' RLS governs the anonymous reader.
+- `site_content_read` / `site_image_read`: SELECT for `{anon, authenticated}`, `qual: true` — **an edit does reach the page.**
+- `site_content_write` / `site_image_write`: INSERT only, `{authenticated}`, `with_check: site_is_admin() AND edited_by = auth.uid()`. There are no UPDATE or DELETE policies — **append-only in the database, not by convention.**
+- `site_is_admin()`: `STABLE SECURITY DEFINER`, `search_path` pinned to `public`, matching `auth.jwt() ->> 'email'` against `site_admin` (2 rows).
+- `site_slot_audit_row()`: `SECURITY DEFINER`, writes `actor` (`auth.uid()`), `actor_email` (the JWT), the slot, the version and `sha256` of the payload. **The audit line carries its own checksum and is written by the trigger, so the writing path cannot omit it.**
+- `site_slot_next_version()`: `coalesce(max(version), 0) + 1` per slot — the version is the database's, not the client's.
+
+The page caches slots for `SLOT_REVALIDATE_SECONDS = 60`, so an edit takes up to a minute to show.
