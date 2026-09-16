@@ -1,0 +1,59 @@
+{
+  "id": "what-happens-at-a-design-visit",
+  "slug": "/blog/what-happens-at-a-design-visit",
+  "category": "Process",
+  "title": "What actually happens at a design visit",
+  "description": "No sales pitch, no pressure, no 'let me check with my manager' theatre. Here's what a genuine design visit looks like, start to finish.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.what-happens-at-a-design-visit.standfirst",
+    "text": "No sales pitch, no pressure, no 'let me check with my manager' theatre. Here's what a genuine design visit looks like, start to finish."
+  },
+  "body": [
+    {
+      "id": "post.what-happens-at-a-design-visit.body.1",
+      "text": "If you've had a visit from a national fitted furniture company, you might have a particular expectation of what a design visit involves. Typically: a salesperson arrives, measures quickly, opens a laptop with pre-rendered room designs, walks you through packages, applies a discount, and pushes for a decision before they leave. The visit is a sales appointment that includes some measuring.",
+      "heading": "Before we arrive"
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.2",
+      "text": "Ours works differently because the person visiting you is the same person who'll design, manufacture, and install your furniture. They're not selling — they're assessing. The visit is a technical survey that includes a design conversation."
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.3",
+      "text": "The first thing that happens is measuring. Not a quick tape measure across the room — a thorough survey of every surface the furniture will touch. Wall-to-wall at multiple heights (walls are rarely perfectly plumb). Floor-to-ceiling at multiple points (ceilings aren't always level). Alcove depths, skirting board profiles, coving dimensions, window positions, radiator pipe locations, socket positions, light switch heights.",
+      "heading": "The survey"
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.4",
+      "text": "We note the condition of the walls and floor — is the plaster flat or wavy? Is the floor level or does it slope? These details determine how the furniture is manufactured to fit. A surveyor who doesn't check wall flatness is a surveyor whose furniture will have gaps."
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.5",
+      "text": "Everything is recorded digitally with dimensions and photographs. The photographs aren't just for reference — they capture details that measurements alone miss: the exact profile of an existing cornice, the way light falls across the room at that time of day, the visual weight of existing features."
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.6",
+      "text": "Then we talk. What are you trying to achieve? What frustrates you about the current space? How do you actually use the room — not how a catalogue assumes you use it? Do you need hanging space for long dresses or mostly folded items? Do both people in the household need equal wardrobe space? Is there anything you've seen that you particularly liked — or particularly didn't?",
+      "heading": "The conversation"
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.7",
+      "text": "This conversation shapes the design. It's collaborative, not prescriptive. We might suggest approaches you haven't considered — internal configurations, material combinations, structural solutions for awkward spaces. But the design serves your needs, not a template."
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.8",
+      "text": "After the visit, we produce a detailed proposal. This includes a full specification of every material and hardware component, dimensioned layout drawings, and a fully itemised quote. We send it by email so you can review it in your own time. There's no 'this price is only valid if you sign today.' The quote is valid for 30 days, and if materials pricing changes after that, we update it transparently.",
+      "heading": "After we leave"
+    },
+    {
+      "id": "post.what-happens-at-a-design-visit.body.9",
+      "text": "Most people have questions after reviewing the proposal. That's expected and welcome — the more questions you ask, the better the final result. Some people want to adjust the specification, try different materials, or reconfigure the layout. That's straightforward because the itemised format makes every change visible."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

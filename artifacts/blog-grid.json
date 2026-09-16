@@ -1,0 +1,47 @@
+{
+  "id": "blog-grid",
+  "kind": "block",
+  "description": "The blog index: every published post as a card (category, title, standfirst, read time), newest first. A post with no real go-live date on its claim slot is held — absent from the grid, never shown with a guessed date. The published count is a reading on the page.",
+  "tags": [
+    "blog",
+    "grid",
+    "cards",
+    "content"
+  ],
+  "contentTypes": [
+    "post",
+    "copy"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [],
+  "disabled": [],
+  "states": [
+    "idle"
+  ],
+  "recipes": [
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "kicker": "claret",
+    "title": "type.title",
+    "body": "type.body",
+    "label": "type.label",
+    "line": "custom.line.ink-7"
+  },
+  "size": {
+    "w": 12,
+    "h": 12
+  }
+}

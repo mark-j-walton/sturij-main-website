@@ -1,0 +1,50 @@
+{
+  "id": "edging-the-detail-that-reveals-quality",
+  "slug": "/blog/edging-the-detail-that-reveals-quality",
+  "category": "Materials",
+  "title": "Edging — the small detail that reveals everything about quality",
+  "description": "The narrow strip along the edge of every panel. Most people never notice it. Once you know what to look for, it tells you everything about how the furniture was made.",
+  "author": "Sturij",
+  "readTime": "4 min read",
+  "standfirst": {
+    "id": "post.edging-the-detail-that-reveals-quality.standfirst",
+    "text": "The narrow strip along the edge of every panel. Most people never notice it. Once you know what to look for, it tells you everything about how the furniture was made."
+  },
+  "body": [
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.1",
+      "text": "Every panel in a piece of fitted furniture has edges — the narrow faces where the board has been cut to size. On a melamine-faced board, the top and bottom surfaces are finished with the decorative layer, but the cut edges expose the raw chipboard or MDF core. Edging is the thin strip applied to these exposed edges to finish them.",
+      "heading": "What edging is"
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.2",
+      "text": "It sounds trivial. It isn't. Edging is the single best indicator of manufacturing quality in fitted furniture. You can assess the precision of an entire workshop by looking closely at a 2mm strip of material along the front edge of a shelf."
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.3",
+      "text": "The first thing to notice is the match. Egger produces edging tape matched to every decor in their range — same colour, same pattern, same texture. When applied correctly, the edging should be virtually invisible. The transition from face to edge should feel seamless. If the edging is a slightly different shade, a different texture, or a generic 'close enough' match, the manufacturer is cutting corners on materials.",
+      "heading": "Where quality shows"
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.4",
+      "text": "The second thing is the application. Precision-applied edging is bonded with heat-activated adhesive, trimmed flush to the panel face, and buffed smooth. The joint line — where edging meets face — should be invisible to the touch. Run your finger across it and you shouldn't feel a step or a ridge."
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.5",
+      "text": "Compare this to pre-glued iron-on edging tape, which is the DIY and budget manufacturer's alternative. It's applied with a domestic iron or heat gun and trimmed with a hand tool. The adhesion is adequate but not as durable. The trim is rarely perfectly flush. Over time, iron-on edging can lift at the corners, particularly on surfaces that are handled frequently — drawer fronts, shelf edges, door frames."
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.6",
+      "text": "When you're looking at fitted furniture — in a showroom, in photographs, or during installation — look at the edges. Are they flush? Is the colour match exact? Can you see or feel the joint line? Do corners show a clean, slightly rounded profile or a rough, angular cut? These tiny details tell you whether the furniture was manufactured with precision tooling by someone who cares about their output, or assembled quickly with shortcuts that will show over time.",
+      "heading": "What to look for"
+    },
+    {
+      "id": "post.edging-the-detail-that-reveals-quality.body.7",
+      "text": "It's a two-millimetre strip of material. It shouldn't matter as much as it does. But precision at the smallest scale is almost always a reliable indicator of precision at every other scale. If someone gets the edging right, they've probably got everything else right too."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

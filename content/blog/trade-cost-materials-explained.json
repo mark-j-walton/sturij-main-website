@@ -1,0 +1,55 @@
+{
+  "id": "trade-cost-materials-explained",
+  "slug": "/blog/trade-cost-materials-explained",
+  "category": "Pricing",
+  "title": "Trade cost materials — what it means and how it works",
+  "description": "We charge trade cost for materials with no markup. Here's exactly what that means, how you can verify it, and why most fitted furniture companies can't offer the same.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.trade-cost-materials-explained.standfirst",
+    "text": "We charge trade cost for materials with no markup. Here's exactly what that means, how you can verify it, and why most fitted furniture companies can't offer the same."
+  },
+  "body": [
+    {
+      "id": "post.trade-cost-materials-explained.body.1",
+      "text": "When we say materials at trade cost, we mean the price we pay is the price you pay. No markup, no handling fee, no 'materials management' surcharge. The Egger boards, Blum hardware, handles, edging, shelving systems — every material component on your quote shows the actual price from our supplier.",
+      "heading": "What trade cost means"
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.2",
+      "text": "This is unusual in the industry. Most fitted furniture companies treat material cost as a profit centre. They buy boards at trade price and sell them to you at retail price or higher, with the margin hidden inside a bundled quote. The markup on materials can be 40-100% depending on the company and the product."
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.3",
+      "text": "Verification is straightforward. Every material on your quote includes the product code. Egger decor codes, Blum article numbers, handle manufacturer references — they're all there. You can contact any trade supplier and ask for a trade price on those exact products. Our quoted prices will match or be lower, because we benefit from volume pricing agreements that reflect our annual purchasing.",
+      "heading": "How verification works"
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.4",
+      "text": "We encourage this comparison. Not because we expect you to actually phone suppliers — most people won't — but because the transparency itself builds trust. A company that invites you to verify its pricing is a company that has nothing to hide. The offer to check is often more valuable than the checking."
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.5",
+      "text": "Volume discounts are passed through too. Because we purchase Egger boards consistently across multiple projects, we qualify for tiered pricing that individual buyers wouldn't access. A homeowner buying two sheets of H3158 ST19 Vicenza Oak pays more per sheet than we do buying twenty sheets across several projects in a quarter. Our volume rate is the rate on your quote.",
+      "heading": "Volume discounts"
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.6",
+      "text": "The same applies to Blum hardware. Annual purchase volumes earn bracket pricing. A box of CLIP top hinges at volume pricing is meaningfully cheaper per unit than a small order. That volume rate appears on your itemised quote."
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.7",
+      "text": "This model doesn't work for most fitted furniture companies because their business model depends on material margin. A national chain with showrooms, a sales force, and head office overhead needs every revenue stream it can generate. Marking up materials is the easiest margin in the business because it's invisible to the customer in a bundled quote.",
+      "heading": "Why competitors can't do this"
+    },
+    {
+      "id": "post.trade-cost-materials-explained.body.8",
+      "text": "Our model works because our overhead is fundamentally different. No showrooms, no sales team, no head office. The same person who quotes you builds your furniture. The business generates its margin from the labour day rate, which is visible, competitive, and earned. Materials are a pass-through cost, not a profit centre. It's a structurally different business model, and it's why the pricing transparency is genuine rather than performative."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

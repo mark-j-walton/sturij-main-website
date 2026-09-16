@@ -419,6 +419,21 @@ button { font: inherit; }
 .calc-pricenote { max-width: 60ch; margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink-muted); }
 @media (max-width: 1000px) { .secpage .secbody { max-width: none; } }
 
+/* ---- the blog (artifacts/blog-grid.json, artifacts/blog-post.json) ---- */
+.bloggrid { list-style: none; margin: clamp(26px, 4vw, 44px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 3vw, 32px); }
+.blogcard { border-top: 1px solid var(--custom-line-ink-7); padding-top: 18px; }
+.blogcard a { display: block; color: inherit; text-decoration: none; }
+.blogcard .kicker { display: block; margin-bottom: 8px; }
+.blogcard h2 { font-size: clamp(19px, 2vw, 23px); line-height: 1.25; margin: 0 0 8px; color: var(--ink-heading); }
+.blogcard .standfirst { font-size: 15px; line-height: 1.6; color: var(--ink-muted); max-width: none; margin: 0 0 10px; }
+.blogcard .readtime { font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted); }
+.blogcard:hover h2 { color: var(--accent); }
+.blogindex .empty { color: var(--ink-muted); margin-top: clamp(26px, 4vw, 44px); }
+.blogpost .draftnote { font-size: 13px; color: var(--claret); border: 1px dashed var(--custom-line-ink-20); border-radius: var(--radius-button); padding: 8px 12px; margin: 10px 0 0; display: inline-block; }
+.blogpost .backlink { margin-top: clamp(26px, 4vw, 44px); }
+.blogpost .backlink a { font-family: var(--type-label-family); font-weight: var(--type-label-weight); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--claret); text-decoration: none; }
+@media (max-width: 700px) { .bloggrid { grid-template-columns: 1fr; } }
+
 /* ---- the legal pages: the record's own headings and lists read as the page ---- */
 .legalpage .identity { font-size: 15px; line-height: 1.6; color: var(--ink-muted); max-width: 72ch; }
 .legaldoc { max-width: 72ch; margin-top: clamp(22px, 3vw, 34px); }

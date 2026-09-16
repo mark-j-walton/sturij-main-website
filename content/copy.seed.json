@@ -65,6 +65,9 @@
     "access.standard": "We aim for the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. Every page is built to be read by a screen reader, worked with a keyboard alone, and shown without motion where your device asks for it; text keeps its contrast against the paper and the charcoal, and every image carries a description.",
     "access.known": "Known exceptions: the finish galleries scroll as a marquee, which stops under reduced motion; the swatch viewer and the room visualiser are visual tools and describe their result in words beside the image; the Studio, which this site links to, is an older application and does not yet meet this standard.",
     "access.contact": "If something here does not work for you, tell us and we will fix it or find you another way: contact@sturij.com or 01937 326011.",
-    "access.reviewed": "This statement was prepared in September 2026 and is reviewed with every change to the site."
+    "access.reviewed": "This statement was prepared in September 2026 and is reviewed with every change to the site.",
+    "blog.hero.kicker": "The workshop journal",
+    "blog.hero.title": "Notes from the bench.",
+    "blog.hero.description": "Materials, process, pricing and hardware — written by the people who design, make and fit your furniture."
   }
 }

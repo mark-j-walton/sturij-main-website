@@ -1,0 +1,67 @@
+{
+  "id": "why-same-team-matters",
+  "slug": "/blog/why-same-team-matters",
+  "category": "Process",
+  "title": "Why the same person should design, build, and install your furniture",
+  "description": "Most fitted furniture companies split the work between separate teams. Here's why that matters more than you'd think — and what happens when one person does everything.",
+  "author": "Sturij",
+  "readTime": "7 min read",
+  "standfirst": {
+    "id": "post.why-same-team-matters.standfirst",
+    "text": "Most fitted furniture companies split the work between separate teams. Here's why that matters more than you'd think — and what happens when one person does everything."
+  },
+  "body": [
+    {
+      "id": "post.why-same-team-matters.body.1",
+      "text": "In most fitted furniture companies, your project passes through at least three different people. A salesperson visits your home and takes measurements. A designer in an office creates the layout. A fitter — who has never seen your room in person — arrives to install it. Sometimes there's a fourth person: a separate manufacturer who builds the units based on the designer's drawings.",
+      "heading": "The standard model"
+    },
+    {
+      "id": "post.why-same-team-matters.body.2",
+      "text": "This model exists because it's efficient for the company. Salespeople sell. Designers design. Fitters fit. Everyone specialises. The workflow scales. You can run a national operation with this structure. And many companies do."
+    },
+    {
+      "id": "post.why-same-team-matters.body.3",
+      "text": "The problem is that every handoff between people is a point where information gets lost. And in fitted furniture, the details that get lost are exactly the ones that matter most."
+    },
+    {
+      "id": "post.why-same-team-matters.body.4",
+      "text": "Consider a simple scenario: an alcove with a slight curve in the plaster, a skirting board that's thicker on one side, and a ceiling that drops by 15mm from front to back. The salesperson notes the main dimensions. The designer works from those numbers. The fitter arrives and discovers the alcove isn't quite the rectangle the drawings assumed.",
+      "heading": "Where information gets lost"
+    },
+    {
+      "id": "post.why-same-team-matters.body.5",
+      "text": "Now the fitter has to make decisions on site. Trim here, pack there, adjust this panel. These aren't design decisions — they're compromises forced by incomplete information. The finished product is usually fine, but it's not what it could have been if the person making it had stood in that alcove themselves."
+    },
+    {
+      "id": "post.why-same-team-matters.body.6",
+      "text": "Scale this up to a full bedroom or kitchen project with dozens of junctions, corners, and intersections with existing architecture, and the gap between what was designed and what gets installed can be significant. Not catastrophic — just a persistent series of small compromises that add up to furniture that fits the room rather than belonging to it."
+    },
+    {
+      "id": "post.why-same-team-matters.body.7",
+      "text": "When one person handles everything, the dynamic is completely different. The person measuring your alcove is already thinking about how they'll manufacture the panels to accommodate that curve. They're noting the skirting board thickness because they know exactly how it'll affect the base unit scribing. They're measuring the ceiling drop because they'll be the one cutting the cornice detail to follow it.",
+      "heading": "What single-ownership looks like"
+    },
+    {
+      "id": "post.why-same-team-matters.body.8",
+      "text": "There's no translation between what was observed and what was communicated. The observation and the manufacturing decision happen in the same mind. Every quirk of your room is accounted for at the point of design, not discovered at the point of installation."
+    },
+    {
+      "id": "post.why-same-team-matters.body.9",
+      "text": "This also changes the relationship with you as a customer. Your designer isn't handing you off to someone else. They're personally committed to the outcome because their name is on every aspect of it — the design, the build quality, the fit, the finish. There's no finger-pointing between departments if something isn't right."
+    },
+    {
+      "id": "post.why-same-team-matters.body.10",
+      "text": "In practical terms, this means fewer site surprises, tighter fits, cleaner details, and a result that looks purpose-built rather than adapted. It also means that when your designer says 'I'll make sure this is right,' they mean it literally. They'll be the one making it right, with their own hands.",
+      "heading": "The practical difference"
+    },
+    {
+      "id": "post.why-same-team-matters.body.11",
+      "text": "It's a harder model to scale. You can't just hire salespeople and fitters — you need craftspeople who can do all three. That limits how fast you grow and how many projects you can take on simultaneously. But the quality of the output is genuinely better, project after project. And for us, that trade-off is the whole point."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "pull-out-mechanisms-that-earn-their-keep",
+  "slug": "/blog/pull-out-mechanisms-that-earn-their-keep",
+  "category": "Hardware",
+  "title": "Pull-out mechanisms that actually earn their keep",
+  "description": "Not every pull-out accessory is worth the cost. Here's which internal mechanisms genuinely improve daily use — and which are showroom gimmicks.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.pull-out-mechanisms-that-earn-their-keep.standfirst",
+    "text": "Not every pull-out accessory is worth the cost. Here's which internal mechanisms genuinely improve daily use — and which are showroom gimmicks."
+  },
+  "body": [
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.1",
+      "text": "Walk through a fitted furniture showroom and you'll see an impressive array of internal accessories. Pull-down hanging rails, rotating shoe carousels, motorised trouser racks, pull-out mirror units, illuminated jewellery drawers. Every mechanism is demonstrated in its open position, looking sleek and purposeful.",
+      "heading": "The showroom effect"
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.2",
+      "text": "The question nobody asks in the showroom is: will I actually use this every day? Because a mechanism you don't use is worse than empty space — it costs money, adds complexity, and occupies volume that could have been a simple shelf."
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.3",
+      "text": "Pull-out shoe drawers are genuinely useful. A tilted shelf behind a door that slides forward on runners lets you see every pair at a glance. Without one, shoes end up in a pile at the bottom of the wardrobe where you can only see the front row. The mechanism is simple, durable, and used twice a day.",
+      "heading": "What works"
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.4",
+      "text": "Pull-down hanging rails solve a real problem in wardrobes with high ceilings. If your wardrobe is 2.4 metres tall, the upper rail is unreachable without a step. A pull-down mechanism — Blum's AVENTOS or Kesseböhmer's wardrobe lift — brings the rail down to chest height with one hand, then returns it with a gentle push. The rail uses the full height of the wardrobe without daily stretching."
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.5",
+      "text": "Internal drawer dividers and organisers earn their place through daily convenience. Shallow drawer inserts for accessories, deeper divided sections for folded items — these impose order on the contents and maintain it. Blum's AMBIA-LINE system creates clean internal compartments in LEGRABOX drawers that look as considered as the furniture itself."
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.6",
+      "text": "Rotating corner carousels, on the other hand, rarely justify their cost. They're mechanically complex, expensive, and the curved shelves waste space in the corners they're supposedly optimising. A simple pull-out shelf on standard runners gives you the same access to corner contents at a fraction of the cost and complexity.",
+      "heading": "What to skip"
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.7",
+      "text": "Motorised mechanisms — electric lifts, power-operated doors — add failure points without meaningful benefit. A manual pull-down rail works identically to an electric one but never needs a power supply, a remote control, or a service call. The manual version will still work perfectly in twenty years. The motorised version might not."
+    },
+    {
+      "id": "post.pull-out-mechanisms-that-earn-their-keep.body.8",
+      "text": "The framework is simple: does this mechanism solve a problem I have every day? If yes, it's worth considering. If it solves a problem I have occasionally, a simpler solution probably exists. If it solves a problem I don't have at all, it's a showroom feature, not a living feature.",
+      "heading": "The decision framework"
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

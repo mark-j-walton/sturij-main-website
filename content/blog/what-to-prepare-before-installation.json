@@ -1,0 +1,51 @@
+{
+  "id": "what-to-prepare-before-installation",
+  "slug": "/blog/what-to-prepare-before-installation",
+  "category": "Process",
+  "title": "Preparing your room for fitted furniture installation",
+  "description": "A few simple preparations before installation day make the process smoother and faster. Here's what helps, what doesn't matter, and what to leave to us.",
+  "author": "Sturij",
+  "readTime": "4 min read",
+  "standfirst": {
+    "id": "post.what-to-prepare-before-installation.standfirst",
+    "text": "A few simple preparations before installation day make the process smoother and faster. Here's what helps, what doesn't matter, and what to leave to us."
+  },
+  "body": [
+    {
+      "id": "post.what-to-prepare-before-installation.body.1",
+      "text": "Installation day runs smoothly when the room is ready. The good news is that 'ready' doesn't mean much beyond clearing the space and making sure we can get through the front door with long panels. Most of the preparation is common sense, but a few specifics help.",
+      "heading": "The basics"
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.2",
+      "text": "Clear the room of freestanding furniture that's in the way of the installation area. Wardrobes, chests of drawers, bedside tables — anything that occupies the wall space where fitted furniture is going needs to be moved out. The bed and other furniture on the opposite side of the room can usually stay, provided there's enough floor space for us to work."
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.3",
+      "text": "Walls should be in their finished state — painted, papered, whatever you're doing. We scribe furniture to the wall surface, so if you're planning to replaster or add a thick wallpaper after installation, the gap tolerances change. If walls are being replastered, that should happen before we do the final survey, not between survey and installation.",
+      "heading": "Walls and floors"
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.4",
+      "text": "Flooring is less critical. We can install onto most finished floors — carpet, laminate, engineered wood, tile. If you're having new flooring laid, the ideal sequence is: flooring first, then fitted furniture. But we can work either way. If furniture goes in first, we leave a gap at the base for the flooring to slide underneath. If flooring is down first, we protect it during installation."
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.5",
+      "text": "On the day, we need access to a power socket for tools and reasonable access to the room. Panels up to 2.4 metres long need a clear path from the vehicle to the room — hallways, stairs, doorways. If there's a tight corner or a narrow staircase, we'll have assessed this during the survey and manufactured panels in sections if necessary.",
+      "heading": "On the day"
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.6",
+      "text": "We lay dust sheets on any flooring we're working on and any route we're carrying materials through. All cutting happens in our workshop, not in your home — the panels arrive manufactured to final dimensions. On-site work is assembly, scribing to walls, and fitting. There's some drilling and the occasional trim cut, but nothing that generates significant dust."
+    },
+    {
+      "id": "post.what-to-prepare-before-installation.body.7",
+      "text": "Don't worry about removing curtain poles, picture hooks, or small fixtures on the walls. We'll take down whatever's in the way and can refit it afterwards if needed. Don't worry about the exact positioning of the furniture — that's determined by the survey measurements and the design specification. And don't worry about feeding us tea, although it's always appreciated.",
+      "heading": "What not to worry about"
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

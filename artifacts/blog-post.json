@@ -1,0 +1,46 @@
+{
+  "id": "blog-post",
+  "kind": "block",
+  "description": "A single post as a page: category, title, author and read time, the standfirst, then the body as paragraphs with their subheadings, every line a copy slot the admin's versioned slot tables can override. A post whose claim slot carries no real go-live date does not render — the route holds, not a guess.",
+  "tags": [
+    "blog",
+    "article",
+    "content"
+  ],
+  "contentTypes": [
+    "post",
+    "copy"
+  ],
+  "consumers": [
+    "sturij-public"
+  ],
+  "properties": [],
+  "disabled": [],
+  "states": [
+    "idle"
+  ],
+  "recipes": [
+    "reveal-on-scroll"
+  ],
+  "behaviours": [
+    {
+      "recipe": "reveal-on-scroll",
+      "trigger": "enter"
+    }
+  ],
+  "capabilities": [],
+  "tokens": {
+    "background": "ground",
+    "ink": "ink",
+    "muted": "ink-muted",
+    "kicker": "claret",
+    "title": "type.title",
+    "body": "type.body",
+    "label": "type.label",
+    "line": "custom.line.ink-7"
+  },
+  "size": {
+    "w": 12,
+    "h": 12
+  }
+}

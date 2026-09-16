@@ -1,0 +1,55 @@
+{
+  "id": "why-sale-prices-should-concern-you",
+  "slug": "/blog/why-sale-prices-should-concern-you",
+  "category": "Pricing",
+  "title": "Why 'sale' prices should make you ask more questions, not fewer",
+  "description": "Half-price sales, limited-time discounts, 'today only' offers. When a fitted furniture company leads with discounts, it tells you something important about how they price.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.why-sale-prices-should-concern-you.standfirst",
+    "text": "Half-price sales, limited-time discounts, 'today only' offers. When a fitted furniture company leads with discounts, it tells you something important about how they price."
+  },
+  "body": [
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.1",
+      "text": "Browse the website of most national fitted furniture companies and you'll find a sale running. Not occasionally — always. The specific promotion changes, but the pattern is constant: an original price, a crossed-out price, a new lower price, and urgency language. 'Save 50% — ends Sunday.' The following Monday, a new sale begins.",
+      "heading": "The permanent sale"
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.2",
+      "text": "This has been standard practice in the industry for decades. It's so normalised that many customers expect it — some will delay their purchase specifically to wait for a sale, not realising the sale never actually ends."
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.3",
+      "text": "The mechanism is straightforward. The 'original' price is set high enough that after the discount, the actual selling price delivers the margin the company needs. A wardrobe listed at £8,000 and 'reduced' to £4,000 was always intended to sell at £4,000. The £8,000 figure exists solely to make £4,000 feel like a deal.",
+      "heading": "How it works"
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.4",
+      "text": "Some companies take this further with the in-home negotiation. The salesperson quotes the full price, pauses, and then offers a discount 'because they have availability this month' or 'because the installation team is in your area.' The discount was always coming. The theatre of discovering it during the visit is designed to create a sense of personal advantage — you got a special deal."
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.5",
+      "text": "This works because of a well-documented cognitive bias called anchoring. Once you've seen the number £8,000, the number £4,000 feels cheap by comparison — even if £4,000 is the normal price you were always going to pay. The anchor distorts your sense of value. You're no longer evaluating whether the furniture is worth £4,000 on its merits. You're celebrating a £4,000 saving that never existed.",
+      "heading": "The psychology"
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.6",
+      "text": "The pressure to decide quickly serves the same purpose. 'This offer is only valid today' prevents you from getting a second quote. If you can't compare, you can't discover that the 'discounted' price is actually the market rate — or in some cases, above it."
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.7",
+      "text": "Transparent pricing works differently. The price is the price. It's based on the actual cost of materials (which you can verify), a stated labour rate (which you can compare), and a visible margin. There's no starting-high-to-come-down-later, because the starting point is already honest.",
+      "heading": "The alternative"
+    },
+    {
+      "id": "post.why-sale-prices-should-concern-you.body.8",
+      "text": "This means there's no dramatic discount to offer. If that feels less exciting than '50% off,' consider what the alternative implies. A company that can halve its price and still make money was either planning to overcharge you by 100%, or is now cutting corners on materials and labour to deliver at the lower figure. Neither option benefits you."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}
