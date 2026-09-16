@@ -1,0 +1,67 @@
+{
+  "id": "understanding-board-finishes",
+  "slug": "/blog/understanding-board-finishes",
+  "category": "Materials",
+  "title": "Understanding board finishes — what the codes actually mean",
+  "description": "Egger's naming system seems cryptic at first. Once you understand the logic, it becomes a powerful way to find exactly the right finish for your project.",
+  "author": "Sturij",
+  "readTime": "6 min read",
+  "standfirst": {
+    "id": "post.understanding-board-finishes.standfirst",
+    "text": "Egger's naming system seems cryptic at first. Once you understand the logic, it becomes a powerful way to find exactly the right finish for your project."
+  },
+  "body": [
+    {
+      "id": "post.understanding-board-finishes.body.1",
+      "text": "When you first look at an Egger product catalogue, the naming convention can seem impenetrable. U702 ST9 Premium White. H3170 ST12 Natural Kendal Oak. W1000 ST9 BU. Letters, numbers, abbreviations — it reads like a parts inventory rather than a material you're about to live with for the next twenty years.",
+      "heading": "The naming system"
+    },
+    {
+      "id": "post.understanding-board-finishes.body.2",
+      "text": "But there's a clean logic behind it, and once you understand the system, you can identify any board in the range instantly. More importantly, you can make informed decisions about which finishes will work together in your space."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.3",
+      "text": "Every Egger board has two core identifiers: a decor code (the colour and pattern) and a texture code (how the surface feels under your hand). Together, they define the complete finish. The same decor can be produced with different textures, changing both the look and feel of the board dramatically."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.4",
+      "text": "The decor code is the letter-number combination at the front. The letter tells you the family: U for plain colours, H for woodgrains, F for stone and fantasy designs, W for whites specifically formulated for furniture production. So U702 is a plain colour (a mid-grey), H3170 is a woodgrain (Kendal Oak), and F812 is a stone effect.",
+      "heading": "Decor codes"
+    },
+    {
+      "id": "post.understanding-board-finishes.body.5",
+      "text": "Within each family, the numbers are essentially catalogue references — they don't encode colour information directly, but similar numbers tend to sit near each other in the range. Over time, you start to recognise them: the U700 series runs through the greys, the H3300s are walnut-adjacent, the H1100s to H1500s cover the oaks."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.6",
+      "text": "The texture code follows after the space — ST9, ST12, ST38, and so on. This is where things get interesting. ST stands for 'structure' (Egger's term for surface texture), and the number identifies the specific finish. ST9 is the workhorse: a fine, uniform matt texture that works on virtually anything. It's the default for most plain colours and lighter woodgrains.",
+      "heading": "Texture codes"
+    },
+    {
+      "id": "post.understanding-board-finishes.body.7",
+      "text": "ST12 is called Premium Matt — slightly smoother than ST9 with a contemporary feel. ST38 is Feelwood, a deeply embossed texture designed to follow the grain pattern of the woodgrain decor it's paired with. When you run your fingers across an ST38 Natural Halifax Oak, the ridges in the texture align with the visible grain. It's genuinely convincing."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.8",
+      "text": "Other textures serve specific purposes. ST76 is a rough-sawn finish for rustic woodgrains. ST2 is a gloss white for high-shine applications. ST87 is a deeply textured stone effect. Each is designed to complement particular decors."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.9",
+      "text": "Why does any of this matter when you're choosing furniture? Because texture affects how a board looks in different lighting, how it feels when you touch it every day, and how it ages over time. A plain white in ST9 looks and feels different from the same white in ST12 or ST2. The decor is the same; the experience is different.",
+      "heading": "Why this matters for your project"
+    },
+    {
+      "id": "post.understanding-board-finishes.body.10",
+      "text": "When we bring samples to your design visit, we always bring the specific decor-texture combination, not just a colour chip. A photograph on a screen can show you the decor. Only a physical sample can show you the texture. This is why we built the material explorer with texture filtering — so you can narrow down the options before we meet, and we bring exactly the right samples."
+    },
+    {
+      "id": "post.understanding-board-finishes.body.11",
+      "text": "If you're browsing the explorer and you see something you like, save it. Your designer will bring that exact board. And if you want to understand the codes better, the pattern is always the same: letter for family, number for specific decor, ST-number for texture. Once you see it, you can't un-see it."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

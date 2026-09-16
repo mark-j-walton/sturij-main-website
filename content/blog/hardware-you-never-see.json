@@ -1,0 +1,59 @@
+{
+  "id": "hardware-you-never-see",
+  "slug": "/blog/hardware-you-never-see",
+  "category": "Hardware",
+  "title": "The hardware you'll never see — and why it matters most",
+  "description": "Hinges, runners, and mechanisms are invisible when furniture is closed. They're also the components that determine whether it still feels new in ten years.",
+  "author": "Sturij",
+  "readTime": "6 min read",
+  "standfirst": {
+    "id": "post.hardware-you-never-see.standfirst",
+    "text": "Hinges, runners, and mechanisms are invisible when furniture is closed. They're also the components that determine whether it still feels new in ten years."
+  },
+  "body": [
+    {
+      "id": "post.hardware-you-never-see.body.1",
+      "text": "When people think about fitted furniture, they think about the finish — the colour of the doors, the grain of the wood, how it looks against the wall. These are the visible decisions, and they matter. But the components that determine whether your furniture still feels like new in a decade are the ones you never see: hinges, drawer runners, shelf supports, and internal mechanisms.",
+      "heading": "The invisible investment"
+    },
+    {
+      "id": "post.hardware-you-never-see.body.2",
+      "text": "This is where many fitted furniture companies make their margin. The boards are priced by the sheet — you can look up the cost. But hardware varies enormously, and unless you know what's inside, you can't compare. A 'soft-close hinge' from a budget manufacturer and a Blum CLIP top are both soft-close hinges. The difference in daily use is stark."
+    },
+    {
+      "id": "post.hardware-you-never-see.body.3",
+      "text": "A quality hinge does three things well. It opens and closes smoothly, with consistent resistance throughout the arc. It self-closes gently from a few degrees — you push the door near shut and it draws itself closed without slamming. And it holds its adjustment over years of use, so the doors stay aligned.",
+      "heading": "Hinges"
+    },
+    {
+      "id": "post.hardware-you-never-see.body.4",
+      "text": "Blum's CLIP top hinge achieves this with an integrated soft-close mechanism (BLUMOTION) and three-dimensional adjustment — you can fine-tune the door position left-right, up-down, and in-out with a single screwdriver after installation. When a door drops slightly after a few years of use, a 30-second adjustment brings it back to perfect."
+    },
+    {
+      "id": "post.hardware-you-never-see.body.5",
+      "text": "Budget hinges use a separate soft-close add-on that's either on or off — there's no graduated damping. The soft-close wears out before the hinge does. And adjustment is typically limited to two dimensions, making precise alignment difficult. Multiply this across a room with twenty doors and the difference in feel is significant."
+    },
+    {
+      "id": "post.hardware-you-never-see.body.6",
+      "text": "Drawer systems show the gap even more clearly. A standard roller runner lets you pull a drawer out most of the way. Push it back and it slides, sometimes smoothly, sometimes not. Over time, rollers wear, and the drawer starts to stick or wobble. Weight capacity is limited — overload it and the runner bends.",
+      "heading": "Drawer systems"
+    },
+    {
+      "id": "post.hardware-you-never-see.body.7",
+      "text": "Blum's TANDEMBOX or LEGRABOX systems are full-extension, meaning the drawer pulls out completely so you can see and reach everything inside. The soft-close is integrated into the runner mechanism and works consistently regardless of how hard you push. Weight capacity is rated and tested — a LEGRABOX handles 40kg or 70kg depending on specification. The drawer glides on steel ball-bearing runners that feel the same after 100,000 cycles as they do on day one."
+    },
+    {
+      "id": "post.hardware-you-never-see.body.8",
+      "text": "The LEGRABOX in particular has a slim steel side panel that replaces the traditional wooden drawer side, creating a clean, contemporary look inside the drawer. It's both functional and aesthetic — more space inside the drawer and a detail that looks considered."
+    },
+    {
+      "id": "post.hardware-you-never-see.body.9",
+      "text": "When you're comparing quotes, ask specifically what hardware is being used. Not 'soft-close hinges' — the brand and model. Not 'quality runners' — the system name and weight rating. Any company using premium hardware will tell you exactly what it is, because it's a selling point. Vagueness on hardware specification usually means budget components.",
+      "heading": "What to ask"
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

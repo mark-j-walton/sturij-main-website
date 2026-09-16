@@ -7,6 +7,7 @@ export const NAV_LINKS = [
   { href: '/#media', label: 'Media walls', hideOnPhone: true },
   { href: '/#range', label: 'Finishes', hideOnPhone: false },
   { href: '/#make', label: 'The Sturij way', hideOnPhone: true },
+  { href: '/blog', label: 'Blog', hideOnPhone: true },
 ] as const
 
 export function NavBar({ logo }: { logo: string }) {

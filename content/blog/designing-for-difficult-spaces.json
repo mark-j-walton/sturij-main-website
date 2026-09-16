@@ -1,0 +1,55 @@
+{
+  "id": "designing-for-difficult-spaces",
+  "slug": "/blog/designing-for-difficult-spaces",
+  "category": "Design",
+  "title": "Designing storage for difficult spaces",
+  "description": "Sloping ceilings, deep alcoves, chimney breasts, and awkward angles. The spaces that off-the-shelf furniture can't handle are often the ones with the most potential.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.designing-for-difficult-spaces.standfirst",
+    "text": "Sloping ceilings, deep alcoves, chimney breasts, and awkward angles. The spaces that off-the-shelf furniture can't handle are often the ones with the most potential."
+  },
+  "body": [
+    {
+      "id": "post.designing-for-difficult-spaces.body.1",
+      "text": "Every home has spaces that standard furniture ignores. The area under a sloping ceiling in a loft conversion. The deep alcoves either side of a chimney breast. The corner where two walls meet at an angle that isn't quite 90 degrees. These are the spaces people struggle with, filling them with freestanding furniture that doesn't fit or leaving them empty.",
+      "heading": "The opportunity in awkward"
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.2",
+      "text": "These are also the spaces where bespoke fitted furniture has its most dramatic impact. When furniture is manufactured to follow the exact geometry of a room — every angle, every slope, every irregularity — it transforms dead space into functional storage. And it looks like it was always meant to be there."
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.3",
+      "text": "Loft conversions are the classic example. The sloping ceiling creates a triangular void along each eave wall that's too low for standard wardrobes and too deep for most shelving systems. Most people put a chest of drawers against the knee wall and accept that the space behind it is wasted.",
+      "heading": "Under-eave bedrooms"
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.4",
+      "text": "A fitted wardrobe designed for this space follows the ceiling slope exactly. Full-height hanging at the tallest point, stepping down to half-height hanging, then shelving, then deep drawers at the lowest point where the ceiling meets the floor. Every centimetre of the eave is used. The wardrobe doors are cut to the rake angle, so there's no triangular gap between the top of the door and the ceiling. It looks built-in because it is."
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.5",
+      "text": "Victorian and Edwardian alcoves present a different challenge. They're rarely symmetrical — one alcove is typically 10-30mm wider than the other, the back walls aren't always flat, and the chimney breast itself may not be perfectly centred. Standard alcove units designed for a 'typical' width leave gaps that have to be filled with scribing strips.",
+      "heading": "Victorian alcoves"
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.6",
+      "text": "When we measure alcoves, we take dimensions at multiple heights because the walls are often not plumb. The cabinetry is then manufactured to match the actual shape of each alcove at each height — wider at the top if the wall leans in, narrower at the base if the skirting board protrudes. The result is cabinetry that fits so precisely it looks like original joinery, not something that was retrofitted."
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.7",
+      "text": "The underlying design principle is simple: start with the room, not the catalogue. Instead of choosing a unit and making it fit, we measure the space and design specifically for it. This sounds obvious, but it's the opposite of how most furniture companies work. Their business model depends on standardised units because those are efficient to mass-produce.",
+      "heading": "The design principle"
+    },
+    {
+      "id": "post.designing-for-difficult-spaces.body.8",
+      "text": "If your home has spaces that frustrate you — spaces where nothing quite fits, where you've compromised with freestanding furniture, or where you've simply given up — those are exactly the spaces where bespoke fitted furniture will make the biggest difference. The more awkward the space, the more value a purpose-built solution delivers."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

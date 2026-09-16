@@ -1,0 +1,55 @@
+{
+  "id": "how-long-does-a-project-actually-take",
+  "slug": "/blog/how-long-does-a-project-actually-take",
+  "category": "Process",
+  "title": "How long does a fitted furniture project actually take?",
+  "description": "From first contact to finished installation. A realistic timeline for a bespoke fitted furniture project, with honest explanations for each stage.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.how-long-does-a-project-actually-take.standfirst",
+    "text": "From first contact to finished installation. A realistic timeline for a bespoke fitted furniture project, with honest explanations for each stage."
+  },
+  "body": [
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.1",
+      "text": "The most common question after 'how much will it cost' is 'how long will it take.' The honest answer is typically 4-8 weeks from confirmed order to completed installation. That range feels wide, so here's what determines where your project falls within it.",
+      "heading": "The honest answer"
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.2",
+      "text": "There are four stages, and each has its own timeline: design and specification, material ordering, manufacture, and installation. Some overlap; some can't start until the previous stage completes."
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.3",
+      "text": "Design and specification typically takes 1-2 weeks. This includes the survey visit, proposal preparation, any revisions you request, and final sign-off. Some projects are straightforward — a single fitted wardrobe with a clear brief might go from survey to confirmed specification in a few days. A multi-room project with several material options to compare and a layout to iterate might take two weeks of back-and-forth.",
+      "heading": "Design and specification"
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.4",
+      "text": "The pace of this stage is largely in your hands. We don't rush it because the specification needs to be right — changes after materials are ordered cost time and money. Take whatever time you need to be confident in the design."
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.5",
+      "text": "Material lead times are the variable most outside anyone's control. Standard Egger boards from UK stock typically arrive within 5-7 working days. Specialist decors or textures not held in UK warehouses can take 2-3 weeks. Blum hardware is usually available within a week. If your specification includes anything unusual — a specific handle from Häfele, a pull-out system from Kesseböhmer — lead times vary.",
+      "heading": "Material lead times"
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.6",
+      "text": "We confirm exact lead times before you sign off the order, so there are no surprises. If a particular material has a long lead time, we'll flag it during specification so you can decide whether to wait or consider an alternative."
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.7",
+      "text": "Manufacture depends on the project's complexity and scale. A single fitted wardrobe might take 2-3 days in the workshop. A full bedroom with wardrobes, bedside units, and a dressing area might take 5-7 days. A multi-room project is scheduled in sequence. Everything is manufactured to final dimensions — there's no 'assemble on site from flat-pack' stage.",
+      "heading": "Manufacture and installation"
+    },
+    {
+      "id": "post.how-long-does-a-project-actually-take.body.8",
+      "text": "Installation is the fastest stage. A single wardrobe installs in a day. A full bedroom is typically 2-3 days. Multi-room projects are scheduled room by room. Because the same person who manufactured the furniture is installing it, there's no waiting for a separate fitting team. And because everything was made to precise measurements, installation is assembly and scribing, not adaptation."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

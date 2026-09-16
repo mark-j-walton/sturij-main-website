@@ -1,0 +1,178 @@
+{
+  "page": "blog",
+  "slug": "/blog",
+  "design": "sturij-public",
+  "kind": "listing",
+  "sizes": [
+    "1440",
+    "1024",
+    "390"
+  ],
+  "grid": {
+    "unit": 8,
+    "columns": 12
+  },
+  "nav": {
+    "group": "Read",
+    "label": "Blog",
+    "order": 1
+  },
+  "title": "The workshop journal — Sturij",
+  "description": "Notes from the workshop: materials, process, pricing and hardware, written by the people who design, make and fit your furniture.",
+  "source": "content/blog",
+  "note": "The blog index (page-platform S1/S5): every published post as a card, newest first (lib/blog.ts publishablePosts). A post is published only once Mark closes its claim.blog.<id> slot with a real ISO date — the fictional backdated dates from sturij-web's Feb 2026 seed were dropped on migration. The published count is the reading on <main data-published>.",
+  "regions": [
+    {
+      "id": "nav",
+      "artifact": "nav-bar",
+      "slots": [
+        {
+          "id": "nav.logo",
+          "type": "brand-mark",
+          "consumer": "nav-bar",
+          "asset": "brand.logo-white"
+        }
+      ]
+    },
+    {
+      "id": "hero",
+      "artifact": "blog-grid",
+      "slots": [
+        {
+          "id": "blog.hero.kicker",
+          "type": "copy",
+          "consumer": "blog-grid"
+        },
+        {
+          "id": "blog.hero.title",
+          "type": "copy",
+          "consumer": "blog-grid"
+        },
+        {
+          "id": "blog.hero.description",
+          "type": "copy",
+          "consumer": "blog-grid"
+        },
+        {
+          "id": "blog.posts",
+          "type": "blog",
+          "consumer": "blog-grid",
+          "data": "content/blog",
+          "note": "expands to every post's standfirst, body lines and claim.blog.<id> date slot (lib/blog.ts postSlots)"
+        }
+      ]
+    },
+    {
+      "id": "enquire",
+      "artifact": "enquiry-form",
+      "slots": [
+        {
+          "id": "enquiry.kicker",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.title",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.body",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.submit",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.note",
+          "type": "copy",
+          "consumer": "enquiry-form"
+        },
+        {
+          "id": "enquiry.post",
+          "type": "enquiry",
+          "consumer": "enquiry-form",
+          "door": "/api/enquiry -> sturij-web enquiry function"
+        }
+      ]
+    },
+    {
+      "id": "footer",
+      "artifact": "site-footer",
+      "slots": [
+        {
+          "id": "footer.logo",
+          "type": "brand-mark",
+          "consumer": "site-footer",
+          "asset": "brand.logo-white"
+        },
+        {
+          "id": "footer.tagline",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.facebook",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.instagram",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.social.linkedin",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trustpilot",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.trademark",
+          "type": "copy",
+          "consumer": "site-footer"
+        },
+        {
+          "id": "footer.admin",
+          "type": "copy",
+          "consumer": "admin-editing",
+          "note": "the control, not content"
+        },
+        {
+          "id": "footer.disclosure",
+          "type": "identity",
+          "consumer": "site-footer",
+          "data": "content/identity.json",
+          "note": "the trading disclosure, the NAP and the copyright line, rendered from the identity record"
+        }
+      ]
+    }
+  ],
+  "locks": [],
+  "artifacts": [
+    {
+      "artifact": "social-links"
+    },
+    {
+      "artifact": "admin-editing"
+    }
+  ],
+  "variations": {
+    "390": {
+      "nav.links": "phone",
+      "form.grid": "1col",
+      "blog.grid.columns": "1col"
+    },
+    "1024": {
+      "nav.links": "all",
+      "blog.grid.columns": "2col"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "choosing-between-matt-and-woodgrain",
+  "slug": "/blog/choosing-between-matt-and-woodgrain",
+  "category": "Materials",
+  "title": "Matt, woodgrain, or both — choosing your palette",
+  "description": "The most common decision in any fitted furniture project. Here's how to think about plain colours vs woodgrains, and why the best results usually combine them.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.choosing-between-matt-and-woodgrain.standfirst",
+    "text": "The most common decision in any fitted furniture project. Here's how to think about plain colours vs woodgrains, and why the best results usually combine them."
+  },
+  "body": [
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.1",
+      "text": "Every Egger board falls into one of two broad families: plain colours (the U-code range) and woodgrains (the H-code range). There are others — stone effects, fantasy patterns — but 90% of residential fitted furniture uses some combination of these two.",
+      "heading": "Two families"
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.2",
+      "text": "The question comes up in every design visit: which way do you go? And the answer is almost never purely one or the other."
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.3",
+      "text": "Plain colours give you control. A cashmere grey wardrobe or a white home office lets the room's other elements — flooring, soft furnishings, artwork — do the visual work. The furniture recedes. It becomes architecture rather than decoration. This is particularly effective in smaller rooms where you want the furniture to feel like part of the wall rather than an object placed against it.",
+      "heading": "The case for plain"
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.4",
+      "text": "The Egger plain range runs from bright whites through warm taupes, cool greys, deep navies, and into near-blacks. Each comes in multiple textures, so a 'white wardrobe' could be smooth and contemporary (ST12 Premium Matt), gently textured (ST9), or high-gloss (ST2). The colour is the same; the character is different."
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.5",
+      "text": "Woodgrains bring warmth and visual interest. A Natural Halifax Oak or a Tobacco Gladstone Oak has depth that changes with the light throughout the day. Woodgrains are particularly effective on larger surfaces — a full wall of wardrobes in a convincing oak feels substantial in a way that a plain colour sometimes doesn't.",
+      "heading": "The case for woodgrain"
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.6",
+      "text": "The best woodgrains are the ones paired with Egger's ST38 Feelwood texture, where the embossed surface follows the printed grain pattern. In the right light, from the right angle, these boards are genuinely difficult to distinguish from real timber veneer. The illusion is remarkably good."
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.7",
+      "text": "The most interesting projects combine both. A common approach: woodgrain carcasses (the visible internal surfaces — shelves, bases, side panels) with plain-colour doors. You open the wardrobe and get the warmth of oak inside, but the room sees clean, minimal door fronts. Or the reverse — plain internal with a feature woodgrain on the exterior.",
+      "heading": "Combining both"
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.8",
+      "text": "Another effective combination is using woodgrain for the main furniture and a contrasting plain colour for the desk, shelving, or bedside units. This creates a visual hierarchy — the wardrobe anchors the room, the smaller pieces complement without competing."
+    },
+    {
+      "id": "post.choosing-between-matt-and-woodgrain.body.9",
+      "text": "The key is to limit the palette. Two materials plus a handle finish is usually the sweet spot. Three can work if one is clearly dominant. Beyond that, the room starts to feel busy. Restraint is almost always the right call."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

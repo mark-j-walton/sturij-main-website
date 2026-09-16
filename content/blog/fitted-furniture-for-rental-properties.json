@@ -1,0 +1,55 @@
+{
+  "id": "fitted-furniture-for-rental-properties",
+  "slug": "/blog/fitted-furniture-for-rental-properties",
+  "category": "Design",
+  "title": "Fitted furniture for rental properties — what landlords get wrong",
+  "description": "Most landlords treat fitted furniture as a cost to minimise. The smart ones treat it as an investment that reduces voids and increases rental value.",
+  "author": "Sturij",
+  "readTime": "5 min read",
+  "standfirst": {
+    "id": "post.fitted-furniture-for-rental-properties.standfirst",
+    "text": "Most landlords treat fitted furniture as a cost to minimise. The smart ones treat it as an investment that reduces voids and increases rental value."
+  },
+  "body": [
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.1",
+      "text": "The default landlord approach to fitted furniture is to spend as little as possible. Flatpack wardrobes from a big-box store, assembled on site, with budget hinges and laminate finishes. The logic is understandable: tenants will damage it, so why invest? Replace it cheaply when it falls apart.",
+      "heading": "The false economy"
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.2",
+      "text": "This logic fails on its own terms. Budget furniture in a rental property typically lasts 3-5 years before doors sag, drawers stick, and surfaces chip. Replacement means another purchase, another assembly, and a period where the property is less presentable. Over a 15-year period, a landlord might replace budget wardrobes three or four times."
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.3",
+      "text": "Quality fitted furniture changes the equation in ways most landlords don't consider. Well-built wardrobes with Blum hinges and proper edging don't just last longer — they make the property more attractive to better tenants. In a competitive rental market, built-in storage is consistently cited as a deciding factor, particularly for professional tenants who expect a finished home, not a furnished shell.",
+      "heading": "What tenants actually value"
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.4",
+      "text": "What tenants value is function and feel. Doors that close properly. Drawers that glide. Enough hanging space and shelving to actually live with. Internal lighting is a surprisingly effective differentiator in rental viewings — it reads as quality immediately. None of this requires premium materials. It requires competent specification of mid-range materials with good hardware."
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.5",
+      "text": "For rental specification, we typically recommend Egger's ST9 texture in neutral tones — whites, light greys, or pale woodgrains. These are the most forgiving finishes for wear and cleaning. Hardware should be Blum or equivalent — CLIP top hinges with BLUMOTION, TANDEMBOX drawers. These components are designed for commercial cycle counts and will outlast the tenancy.",
+      "heading": "Specification for durability"
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.6",
+      "text": "Handles should be robust and timeless. Simple stainless steel bar handles or routed grip profiles (no handle at all — a channel cut into the door edge) avoid the dated look that decorative handles acquire within a few years. The furniture should feel current in a decade without any updates."
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.7",
+      "text": "Run the numbers over ten years. Three sets of budget wardrobes at £800 each, plus assembly costs, plus the void days during replacement: roughly £3,000-3,500. One set of fitted wardrobes at £2,500-3,000, installed once, lasting the full period with no maintenance beyond occasional hinge adjustment: the fitted option costs less over the period and delivers higher rental income throughout.",
+      "heading": "The numbers"
+    },
+    {
+      "id": "post.fitted-furniture-for-rental-properties.body.8",
+      "text": "The investment case is strongest for HMO and professional rental properties where tenant expectations are highest and void costs are most painful. But even for a single buy-to-let, the maths consistently favours building it properly once over replacing it repeatedly."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

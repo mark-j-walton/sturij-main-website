@@ -10,6 +10,7 @@
 import { cache } from 'react'
 import seed from '@/content/copy.seed.json'
 import { asset } from './assets'
+import { allBlogSlots } from './blog'
 import { sanitizeCopy } from './copy'
 import { allSectionSlots } from './sections'
 
@@ -67,6 +68,10 @@ export const SEED_SLOTS: Record<string, string> = (() => {
   const merged: Record<string, string> = { ...(seed.slots as Record<string, string>) }
   for (const [k, v] of Object.entries(allSectionSlots())) {
     if (k in merged) throw new Error(`A_UNDECLARED: slot ${k} is seeded by both copy.seed.json and a section`)
+    merged[k] = v
+  }
+  for (const [k, v] of Object.entries(allBlogSlots())) {
+    if (k in merged) throw new Error(`A_UNDECLARED: slot ${k} is seeded by both copy.seed.json/a section and a blog post`)
     merged[k] = v
   }
   return merged

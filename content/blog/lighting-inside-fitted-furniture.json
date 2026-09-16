@@ -1,0 +1,55 @@
+{
+  "id": "lighting-inside-fitted-furniture",
+  "slug": "/blog/lighting-inside-fitted-furniture",
+  "category": "Design",
+  "title": "Why lighting inside your furniture changes everything",
+  "description": "Internal LED lighting isn't a luxury feature. It's a practical improvement that transforms how you use your wardrobe, shelving, and display storage every day.",
+  "author": "Sturij",
+  "readTime": "4 min read",
+  "standfirst": {
+    "id": "post.lighting-inside-fitted-furniture.standfirst",
+    "text": "Internal LED lighting isn't a luxury feature. It's a practical improvement that transforms how you use your wardrobe, shelving, and display storage every day."
+  },
+  "body": [
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.1",
+      "text": "Internal lighting in fitted furniture sounds like a luxury extra — something for high-end showrooms and magazine photoshoots. In practice, it's one of the most useful features you can add to a wardrobe or shelving unit, and the cost relative to the overall project is minimal.",
+      "heading": "Not a gimmick"
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.2",
+      "text": "The basic case is simple: most wardrobes are deeper than the room's ambient light can reach. The back third of a standard 60cm-deep wardrobe is effectively in shadow, especially in bedrooms where the wardrobe might be on the wall opposite the window. You're reaching past clothes you can see to find clothes you can't."
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.3",
+      "text": "LED strip lighting along the top edge of each compartment illuminates the full depth of the space. Hanging clothes are lit from above, so you can see colour and texture accurately. Shelf sections are illuminated so you can distinguish between the navy jumper and the black one without pulling both out. In drawers, a strip along the inside front edge lights the contents when the drawer opens.",
+      "heading": "Practical benefits"
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.4",
+      "text": "Sensor-activated lighting takes this further. The LED strips turn on automatically when you open a door or pull out a drawer, and turn off when you close it. No switches, no remembering, no wasted electricity. The effect is immediate and surprisingly satisfying — open a wardrobe in a dim bedroom and everything inside is perfectly visible."
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.5",
+      "text": "The most common specification is warm-white LED strip (3000K colour temperature), which is close to incandescent bulb colour and flatters both clothing and the furniture's internal finish. Cool-white (4000K+) gives more accurate colour rendering but can feel clinical in a bedroom. The choice is personal — we bring samples so you can compare in your actual room.",
+      "heading": "Options and specification"
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.6",
+      "text": "LED strips run on low-voltage DC power, typically 12V or 24V, fed from a small driver unit that connects to a standard mains socket. The driver can be concealed inside the furniture — behind a top panel or in a void space. Wiring runs through the carcass behind back panels and is completely invisible once installed."
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.7",
+      "text": "Beyond the practical benefits, internal lighting elevates fitted furniture from storage to a design feature. Open shelving with concealed LED strips becomes a display gallery. A wardrobe with lit interiors feels considered and intentional rather than utilitarian. Alcove units with downlighting create atmosphere in a living space.",
+      "heading": "The design impact"
+    },
+    {
+      "id": "post.lighting-inside-fitted-furniture.body.8",
+      "text": "It's a modest addition to the specification — typically a few hundred pounds for a full wardrobe. Relative to the total project cost, it's a small percentage. Relative to the daily experience of using the furniture, it's transformative."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

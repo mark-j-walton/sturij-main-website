@@ -1,0 +1,59 @@
+{
+  "id": "home-office-that-actually-works",
+  "slug": "/blog/home-office-that-actually-works",
+  "category": "Design",
+  "title": "Building a home office that actually works",
+  "description": "After years of makeshift desks and repurposed spare rooms, people are investing in permanent home offices. Here's what makes the difference between a desk in a room and a workspace.",
+  "author": "Sturij",
+  "readTime": "6 min read",
+  "standfirst": {
+    "id": "post.home-office-that-actually-works.standfirst",
+    "text": "After years of makeshift desks and repurposed spare rooms, people are investing in permanent home offices. Here's what makes the difference between a desk in a room and a workspace."
+  },
+  "body": [
+    {
+      "id": "post.home-office-that-actually-works.body.1",
+      "text": "The home office has gone from emergency pandemic solution to permanent fixture. What started as a laptop on the kitchen table evolved into a desk in the spare room, and now people are investing in purpose-built workspaces. The shift is significant — this isn't about furniture that looks like an office, it's about a room that genuinely supports productive work.",
+      "heading": "Beyond the pandemic desk"
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.2",
+      "text": "The difference between a desk in a room and a fitted home office is the same as the difference between a portable clothes rail and a fitted wardrobe. One occupies space. The other uses it."
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.3",
+      "text": "The desk is the foundation, and depth matters more than width. Most freestanding desks are 60cm deep. That's fine for a laptop but inadequate for a monitor at a comfortable viewing distance. A fitted desk at 70-75cm deep lets you position a screen properly and still have working space in front of the keyboard. If you use dual monitors, 80cm isn't excessive.",
+      "heading": "The desk itself"
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.4",
+      "text": "A fitted desk can also follow the room's geometry. An L-shape or U-shape configuration that would require multiple freestanding desks (with visible joins and mismatched heights) is a single continuous surface when built in. The desk wraps into corners and alcoves, creating more usable workspace without occupying more floor space."
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.5",
+      "text": "Cable management is where most home offices fall apart. A tangle of power leads, USB cables, monitor cables, and charging wires running across the desk and down the wall. A fitted desk has cable management built in — a channel along the back edge of the desk with access flaps, grommets for individual cables to pass through, and a concealed power strip mounted underneath. Cables run from device to desk channel to concealed strip to a single exit point to the wall socket."
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.6",
+      "text": "Above and around the desk, storage needs careful thought. Open shelving for reference books and items you reach for daily. Closed cabinets for files, supplies, and the visual clutter that accumulates in any workspace. A mix of both prevents the office from feeling either clinical or chaotic.",
+      "heading": "Storage and display"
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.7",
+      "text": "Display shelving — where you put things you want to see and be seen on video calls — benefits from considered proportions. Evenly spaced shelves of equal height look institutional. Varying the shelf heights to suit actual objects (books, a plant, framed photographs) looks intentional and personal."
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.8",
+      "text": "Lighting deserves specific attention. Task lighting for the desk surface, separate from ambient room lighting. If the desk faces a window, consider how screen glare works at different times of day. Under-shelf LED strips provide excellent task light without taking up desk space — they can be built into the fitted shelving as part of the installation.",
+      "heading": "The details"
+    },
+    {
+      "id": "post.home-office-that-actually-works.body.9",
+      "text": "Sound is the overlooked factor. If you take calls regularly, the room's acoustics matter. Fitted bookcases full of books are surprisingly effective sound absorbers. Soft-close doors and drawers eliminate the background noise of a workspace in use. These aren't dramatic changes, but they accumulate into a room that feels professional and calm."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

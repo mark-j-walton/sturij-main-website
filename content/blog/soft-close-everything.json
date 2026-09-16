@@ -1,0 +1,55 @@
+{
+  "id": "soft-close-everything",
+  "slug": "/blog/soft-close-everything",
+  "category": "Hardware",
+  "title": "Should everything be soft-close?",
+  "description": "Soft-close doors and drawers are now standard in quality fitted furniture. But not every application needs it, and understanding the mechanism helps you choose.",
+  "author": "Sturij",
+  "readTime": "4 min read",
+  "standfirst": {
+    "id": "post.soft-close-everything.standfirst",
+    "text": "Soft-close doors and drawers are now standard in quality fitted furniture. But not every application needs it, and understanding the mechanism helps you choose."
+  },
+  "body": [
+    {
+      "id": "post.soft-close-everything.body.1",
+      "text": "Soft-close has become the baseline expectation for fitted furniture. Open a door, let go, and it draws itself shut silently. Pull a drawer, push it back, and it decelerates to a whisper. No slamming, no noise, no effort. Once you've lived with it, going back to conventional hardware feels jarring.",
+      "heading": "The default expectation"
+    },
+    {
+      "id": "post.soft-close-everything.body.2",
+      "text": "We specify soft-close on every door and drawer as standard. The cost difference between a standard hinge and a BLUMOTION-integrated hinge is modest per unit, and across a full project the upgrade is a small percentage of the total. It's one of those specifications that costs relatively little and delivers daily satisfaction."
+    },
+    {
+      "id": "post.soft-close-everything.body.3",
+      "text": "The mechanism in Blum's BLUMOTION is a small oil-filled damper integrated into the hinge or drawer runner. When the door or drawer reaches the last few degrees of closing, the damper engages and decelerates the movement. The speed of deceleration is consistent regardless of how firmly you push — a gentle nudge and a firm shove both result in the same soft close. The damper is sealed and maintenance-free.",
+      "heading": "How it works"
+    },
+    {
+      "id": "post.soft-close-everything.body.4",
+      "text": "This is different from cheaper soft-close mechanisms that use a spring-loaded catch. Catch-based systems have a binary feel — the door moves freely until it hits the catch zone, then snaps shut with a mechanical click. The deceleration isn't progressive, and the catch mechanism wears over time, eventually failing to engage consistently."
+    },
+    {
+      "id": "post.soft-close-everything.body.5",
+      "text": "Soft-close matters most on frequently used doors and drawers in bedrooms and kitchens. Wardrobe doors opened and closed morning and evening, kitchen drawers accessed dozens of times daily, bathroom cabinets used in the quiet of early morning. These are the touchpoints where the mechanism earns its keep through reduced noise and a sense of quality.",
+      "heading": "Where it matters most"
+    },
+    {
+      "id": "post.soft-close-everything.body.6",
+      "text": "It also matters in shared spaces. A soft-close wardrobe in a bedroom means getting dressed in the morning without waking a sleeping partner. Soft-close kitchen drawers mean unloading the dishwasher without the percussion section of slamming cutlery drawers. The practical benefit is less about the furniture and more about the household."
+    },
+    {
+      "id": "post.soft-close-everything.body.7",
+      "text": "Where it matters less: tall larder units with very light doors, display shelving with infrequently opened glass doors, or deep storage units accessed monthly. The mechanism still works, but you're paying for a feature that barely gets used. In these cases, a standard self-closing hinge without the BLUMOTION damper is perfectly adequate — the door still closes on its own, just without the dramatic deceleration.",
+      "heading": "Where it matters less"
+    },
+    {
+      "id": "post.soft-close-everything.body.8",
+      "text": "Our standard specification includes BLUMOTION on everything because the cost is justified and the daily experience is noticeably better. But if you're working to a tight budget, we can identify the doors and drawers where standard self-closing is sufficient and reserve the BLUMOTION for the high-use locations. It's a sensible optimisation when it's needed."
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

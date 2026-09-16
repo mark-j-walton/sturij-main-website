@@ -1,0 +1,63 @@
+{
+  "id": "what-a-transparent-quote-looks-like",
+  "slug": "/blog/what-a-transparent-quote-looks-like",
+  "category": "Pricing",
+  "title": "What a transparent furniture quote should look like",
+  "description": "If your quote is a single number, you can't compare it to anything. Here's what a fully itemised quote contains and why it matters.",
+  "author": "Sturij",
+  "readTime": "6 min read",
+  "standfirst": {
+    "id": "post.what-a-transparent-quote-looks-like.standfirst",
+    "text": "If your quote is a single number, you can't compare it to anything. Here's what a fully itemised quote contains and why it matters."
+  },
+  "body": [
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.1",
+      "text": "When most fitted furniture companies give you a quote, you get a single number. Sometimes there are a few line items — 'supply and installation of fitted wardrobe, £X,000' — but the price is fundamentally bundled. Materials, manufacturing, installation, design, and profit are all wrapped into one figure.",
+      "heading": "The bundled quote problem"
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.2",
+      "text": "This might feel simpler, but it makes comparison impossible. If Company A quotes £8,000 and Company B quotes £12,000, you have no way of knowing why. Is Company A using cheaper materials? Less hardware? Fewer installation days? Or is Company B adding 60% margin where Company A adds 30%? You genuinely cannot tell."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.3",
+      "text": "This is by design. Bundled pricing protects margins. If you can't see the components, you can't question any of them individually. The only lever available to you is the total — and that's where the 'sale' pricing and negotiation games begin. Start high, offer a discount, make the customer feel they've got a deal. The actual cost basis remains invisible."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.4",
+      "text": "An itemised quote works differently. Every material is listed individually — the board (specifying the Egger decor code, the dimensions, and the unit price), every hinge, every drawer runner, every handle, every shelf support, every strip of edging tape. You see the supplier, the product, the quantity, and the cost per unit.",
+      "heading": "What itemised looks like"
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.5",
+      "text": "Labour is listed separately from materials. Our quotes specify the number of days for manufacturing and the number of days for installation, with the day rate clearly shown. If the quote says three days manufacture at £X per day and two days installation at £X per day, you know exactly what the labour element costs and what it covers."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.6",
+      "text": "Any additional costs are itemised too. If your project requires specialist materials like stone worktops or glass, those are quoted from the fabricator with their cost shown transparently. Delivery costs from suppliers are listed. If there's a project management fee (which only applies to complex multi-trade projects), it's calculated as 10% of the labour element only, and it's shown as a separate line."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.7",
+      "text": "This level of detail makes real comparison possible. You can take an itemised quote and compare the material costs against another supplier's catalogue prices. You can compare the labour day rate against other tradespeople in your area. You can see whether the material specification is equivalent between two quotes, or whether one is using premium hardware and the other isn't.",
+      "heading": "What this makes possible"
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.8",
+      "text": "It also makes design changes straightforward. If you want to upgrade the drawer runners from standard soft-close to LEGRABOX, you can see exactly what that change costs — the difference in unit price multiplied by the number of drawers. No mysterious price adjustment, just arithmetic."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.9",
+      "text": "And crucially, it means the final invoice matches reality. If your project takes one less day to install than quoted, the invoice reflects that. If you decide during the project to add an extra shelf, you can see exactly what it adds. There are no surprises because there's nowhere for surprises to hide."
+    },
+    {
+      "id": "post.what-a-transparent-quote-looks-like.body.10",
+      "text": "When you're comparing quotes from different companies, ask three questions: Can you show me the cost of materials separately from labour? Can you tell me the specific products you're using — board type, hinge brand, runner system? And can you show me your day rate? If the answer to any of these is vague or evasive, the quote is designed to prevent comparison. A company confident in its pricing has nothing to hide.",
+      "heading": "Questions to ask any provider"
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

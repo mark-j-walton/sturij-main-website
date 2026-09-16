@@ -161,9 +161,9 @@ describe('the reviews rule', () => {
 })
 
 describe('the page register — the nav and the sitemap derive from it', () => {
-  it('the seven sections in order, every register slug in the sitemap, no hand-written sitemap', () => {
+  it('the seven sections in order, every register slug in the sitemap, no hand-written sitemap', async () => {
     expect(sectionNav().map((s) => s.slug)).toEqual(['/boards', '/hardware', '/fixtures-and-fittings', '/handles', '/lighting-and-services', '/worktops', '/how-we-price'])
-    const urls = sitemap().map((e) => e.url)
+    const urls = (await sitemap()).map((e) => e.url)
     for (const p of pageRegister()) expect(urls).toContain(p.slug === '/' ? 'https://sturij.com/' : `https://sturij.com${p.slug}`)
     expect(existsSync('public/sitemap.xml')).toBe(false)
     expect(pageRegister().length).toBeGreaterThanOrEqual(13)

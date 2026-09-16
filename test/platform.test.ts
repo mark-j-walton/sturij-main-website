@@ -7,6 +7,7 @@ import { sep } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { CORE_ROLES, declaredVars, loadInstance, toCss } from '@/lib/platform/instance.mjs'
 import { checkBehaviours, loadArtifacts, loadRecipes } from '@/lib/platform/artifacts.mjs'
+import { allBlogSlots } from '@/lib/blog'
 import { loadSection, sectionSlots } from '@/lib/sections'
 import { CLAIM_SLOT_IDS, COPY_SLOT_IDS, IMAGE_SLOTS } from '@/lib/slots'
 
@@ -91,6 +92,7 @@ describe('S5 — the page declarations: every layout in the register', () => {
     for (const L of layouts) for (const r of L.regions) for (const s of r.slots) {
       if (s.type === 'copy' && !s.note?.includes('the control')) { expect(COPY_SLOT_IDS, `${L.page}: ${s.id}`).toContain(s.id); declared.add(s.id) }
       if (s.type === 'section') for (const k of Object.keys(sectionSlots(loadSection(s.id.replace(/^sec\./, ''))))) declared.add(k)
+      if (s.type === 'blog') for (const k of Object.keys(allBlogSlots())) declared.add(k)
     }
     for (const id of [...COPY_SLOT_IDS, ...CLAIM_SLOT_IDS]) expect(declared.has(id), id).toBe(true)
   })

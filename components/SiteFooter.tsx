@@ -34,7 +34,7 @@ export function SiteFooter({ logo, tagline, social, trustpilot, trademark }: { l
           <SocialLinks urls={{ facebook: social.facebook.value, instagram: social.instagram.value, linkedin: social.linkedin.value }} />
         </div>
         <div className="mono links">
-          <a href="/#wardrobes">Wardrobes</a> · <a href="/#media">Media walls</a> · <a href="/#range">Finishes</a> · <a href="/calculator">Guide price</a> · <a href="/#enquire">Book a visit</a><br />
+          <a href="/#wardrobes">Wardrobes</a> · <a href="/#media">Media walls</a> · <a href="/#range">Finishes</a> · <a href="/calculator">Guide price</a> · <a href="/blog">Blog</a> · <a href="/#enquire">Book a visit</a><br />
           {sections.map((s, i) => <span key={s.slug}>{i ? ' · ' : ''}<a href={s.slug}>{s.label}</a></span>)}
           {sections.length > 0 && <br />}
           <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><br />

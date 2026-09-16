@@ -1,0 +1,55 @@
+{
+  "id": "why-we-use-egger-not-alternatives",
+  "slug": "/blog/why-we-use-egger-not-alternatives",
+  "category": "Materials",
+  "title": "Why we use Egger — and what the alternatives are",
+  "description": "Egger isn't the only board manufacturer. But there are specific reasons it's our default specification, and understanding them helps you evaluate any fitted furniture quote.",
+  "author": "Sturij",
+  "readTime": "6 min read",
+  "standfirst": {
+    "id": "post.why-we-use-egger-not-alternatives.standfirst",
+    "text": "Egger isn't the only board manufacturer. But there are specific reasons it's our default specification, and understanding them helps you evaluate any fitted furniture quote."
+  },
+  "body": [
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.1",
+      "text": "We specify Egger boards for the majority of our projects, and people sometimes ask whether that's a limitation. It isn't — it's a deliberate choice, and you're always free to specify alternatives. Understanding why we default to Egger helps you make that decision.",
+      "heading": "Not a monopoly"
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.2",
+      "text": "The European decorative board market has several major manufacturers: Egger (Austrian), Kronospan (Austrian/international), Pfleiderer (German), Sonae Arauco (Portuguese/Spanish), and Finsa (Spanish). All produce melamine-faced chipboard and MDF to European standards. The core product — a particle board with a decorative melamine surface — is fundamentally similar across manufacturers."
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.3",
+      "text": "Where Egger distinguishes itself is range, texture quality, and ecosystem. The decor range is vast — over 400 decors across plain colours, woodgrains, stone effects, and metallic finishes. More importantly, every decor has matched edging tape, matched ABS thick edging, and matched compact laminate available. When you choose an Egger decor, every component matches precisely because they're manufactured together.",
+      "heading": "The Egger advantage"
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.4",
+      "text": "Egger's texture technology is the other differentiator. The ST38 Feelwood range, where the surface texture follows the woodgrain pattern, is a step beyond what most competitors offer. Running your fingers across an ST38 Natural Halifax Oak, the ridges and valleys of the texture align with the visible grain. It's a tactile detail that makes the board feel like real timber veneer."
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.5",
+      "text": "Availability matters for project timelines. Egger's UK distribution — primarily through their Barony plant in Scotland and the Hexham plant in Northumberland — means the most popular decors are available within a week. Their distributor network (we buy through established trade suppliers) holds significant UK stock. Less common decors may come from European warehouses, adding a week or two."
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.6",
+      "text": "Kronospan is the most common alternative and produces good boards at competitive prices. Their decor range is smaller but covers the essentials. Texture quality is generally a step behind Egger's premium offerings but perfectly adequate for most applications. Kronospan boards are widely available through UK distributors and often slightly cheaper per sheet.",
+      "heading": "The alternatives"
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.7",
+      "text": "Pfleiderer offers excellent quality, particularly in their premium woodgrain textures, but UK availability is more limited. Lead times can be longer, and the matched accessories ecosystem isn't as comprehensive. For specific decors that Pfleiderer does well — some of their oak and walnut finishes are exceptional — they're worth considering if the timeline allows."
+    },
+    {
+      "id": "post.why-we-use-egger-not-alternatives.body.8",
+      "text": "If you have a strong preference for a non-Egger decor, we'll source it. Our pricing model passes through the actual material cost, so you'll see exactly what the board costs regardless of manufacturer. The recommendation for Egger is based on the combination of quality, range, matching accessories, and reliable UK availability — not exclusivity.",
+      "heading": "Your choice"
+    }
+  ],
+  "source": {
+    "document": "sturij-web content_item (content_type=blog, authored Feb 2026)",
+    "note": "migrated 16 Sep 2026 into the governed slot system; the fabricated Unsplash cover image and the backdated publish date were dropped — see docs/receipts/2026-09-16-blog-section.md"
+  }
+}

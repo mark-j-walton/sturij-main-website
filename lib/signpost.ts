@@ -9,7 +9,7 @@ export interface PageEntry {
   page: string
   slug: string
   design: string
-  kind?: 'home' | 'section' | 'legal' | 'tool' | 'statement'
+  kind?: 'home' | 'section' | 'legal' | 'tool' | 'statement' | 'listing'
   title?: string
   description?: string
   nav?: NavEntry
