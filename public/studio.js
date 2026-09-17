@@ -1580,12 +1580,46 @@ function buildRenderRefs(cb){
     var d=defs.shift(); swatchRef(d[0],d[1],d[2],function(r){if(r)out.push(r);next();}); }
   next();
 }
+/* ===================== Open the visualiser itself, inside the Studio =====================
+   Mark, 17 Sep 2026: Visualise opens the whole visualiser — room, plan, 3D, the Unit Builder — full-screen
+   over the Studio, with a Close back to the scheme; the room-type renders stay in the menu below it.
+   The visualiser's embed page (sturij #76, #/embed/visualiser) draws it without its own site menus.
+   The address is fixed here and nothing from the page's URL reaches it. The scheme is not carried yet.
+   Closing hides the frame and keeps it, so reopening returns to where you were. */
+var VISUALISER_EMBED='https://sturij.vercel.app/#/embed/visualiser';
+var visFrame=null;
+function openVisualiser(){
+  if(!visFrame){
+    visFrame=document.createElement('div');visFrame.className='visframe';
+    visFrame.setAttribute('role','dialog');visFrame.setAttribute('aria-modal','true');visFrame.setAttribute('aria-label','Sturij visualiser');
+    var bar=document.createElement('div');bar.className='visframe-bar';
+    var title=document.createElement('span');title.className='visframe-title';title.textContent='Visualiser';
+    var close=document.createElement('button');close.type='button';close.className='hbtn visframe-close';
+    close.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Close</span>';
+    close.onclick=closeVisualiser;
+    bar.appendChild(title);bar.appendChild(close);
+    var view=document.createElement('iframe');view.className='visframe-view';view.title='Sturij visualiser';view.setAttribute('allow','fullscreen');view.src=VISUALISER_EMBED;
+    visFrame.appendChild(bar);visFrame.appendChild(view);document.body.appendChild(visFrame);
+  }
+  visFrame.classList.add('on');document.documentElement.classList.add('visframe-open');
+  visFrame.querySelector('.visframe-close').focus();
+}
+function closeVisualiser(){
+  if(!visFrame||!visFrame.classList.contains('on'))return;
+  visFrame.classList.remove('on');document.documentElement.classList.remove('visframe-open');
+  el('vis').focus(); // back to Visualise — the menu item that opened it is hidden with its menu
+}
+/* Escape closes it while focus is in the Studio's own bar (a key pressed inside the visualiser stays inside the frame) */
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&visFrame&&visFrame.classList.contains('on')){e.stopPropagation();closeVisualiser();} },true);
+
 var ROOM_TYPES=['Kitchen','Bedroom','Living room','Home office','Boot room','Utility room','Dressing room','Media room'];
 var visRoom=localStorage.getItem('sturij-vis-room')||'Kitchen';
 (function(){
   var m=el('vismenu'); if(!m)return;
-  m.innerHTML=ROOM_TYPES.map(function(r){return '<button type="button" role="menuitem" data-room="'+r+'">'+r+'</button>';}).join('');
+  m.innerHTML='<button type="button" role="menuitem" data-open="visualiser">Open the visualiser</button><div class="vismenu-sep" role="separator"></div>'
+    +ROOM_TYPES.map(function(r){return '<button type="button" role="menuitem" data-room="'+r+'">'+r+' render</button>';}).join('');
   m.addEventListener('click',function(e){
+    if(e.target.closest('button[data-open="visualiser"]')){ m.classList.remove('on'); openVisualiser(); return; }
     var b=e.target.closest('button[data-room]'); if(!b)return;
     visRoom=b.getAttribute('data-room'); localStorage.setItem('sturij-vis-room',visRoom);
     m.classList.remove('on'); runVisualise();

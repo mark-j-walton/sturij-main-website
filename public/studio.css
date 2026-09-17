@@ -569,6 +569,16 @@ header.top{position:relative}
 .vismenu.on{display:flex}
 .vismenu button{all:unset;cursor:pointer;padding:9px 12px;border-radius:8px;font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:rgba(250,248,243,.85)}
 .vismenu button:hover{background:rgba(250,248,243,.12);color:#FAF8F3}
+.vismenu .vismenu-sep{height:1px;margin:4px 6px;background:rgba(250,248,243,.16)}
+
+/* ===== The visualiser itself, full-screen over the Studio (Visualise › Open the visualiser) =====
+   Above the Studio's header and panels (≤100), below the render progress overlay. */
+.visframe{position:fixed;inset:0;z-index:1000;display:none;flex-direction:column;background:var(--navy)}
+.visframe.on{display:flex}
+.visframe-bar{height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 14px;color:var(--paper)}
+.visframe-title{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
+.visframe-view{flex:1;width:100%;min-height:0;border:0;display:block;background:var(--paper)}
+html.visframe-open,html.visframe-open body{overflow:hidden}
 
 .zip.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,29,29,.25)}
 .zip.alt:hover{background:rgba(29,29,29,.06)}
