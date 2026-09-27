@@ -6,7 +6,7 @@
 // site-images bucket and a site_image_slots row; copy to site_content_slots; every save is audited by the
 // database (a publish content act at the login class); nothing lives in the visitor's browser.
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { CONFIGURED, publicSupabase, sessionHint } from '@/lib/supabase/browser'
+import { CONFIGURED, normaliseAuthReturn, publicSupabase, sessionHint } from '@/lib/supabase/browser'
 import { COPY_LIMIT, sanitizeCopy } from '@/lib/copy'
 import { validateImageFile, IMAGE_LIMIT_BYTES } from './validate'
 
@@ -36,6 +36,11 @@ export function AdminControl() {
   }, [])
 
   useEffect(() => {
+    // The link in the sign-in email can come back with its PKCE code buried in the fragment — see
+    // normaliseAuthReturn. Move it into the query before anything reads the URL, so the library exchanges
+    // the code and the '#admin' test below still matches.
+    const returned = normaliseAuthReturn(location.pathname, location.search, location.hash)
+    if (returned) history.replaceState(null, '', returned)
     if (location.hash === '#admin') setOpen(true)
     if (!CONFIGURED) { setStatus('unconfigured'); return }
     // The auth library loads only when there is a reason to — a session cookie, a return from the sign-in

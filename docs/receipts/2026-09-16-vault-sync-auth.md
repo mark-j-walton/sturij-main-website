@@ -211,3 +211,51 @@ So the gate is open and the loop's remaining acts are Mark's: the redirect allow
 - `site_slot_next_version()`: `coalesce(max(version), 0) + 1` per slot — the version is the database's, not the client's.
 
 The page caches slots for `SLOT_REVALIDATE_SECONDS = 60`, so an edit takes up to a minute to show.
+
+---
+
+## Addendum — 27 September 2026 · the sign-in email carries no code, and the link's return is malformed
+
+Mark, from the live site: *"its just a magic link not a code"*. That is the third gate, and neither of the
+two the earlier sections named. Recorded here rather than by rewriting §4, which was true when written.
+
+**What the code already expects.** `components/admin/AdminControl.tsx` offers both routes and says so in its
+own message — *"Email sent — open the link, or enter the code from it here"*. `sendLink` calls
+`signInWithOtp({ email, options: { emailRedirectTo: `${location.origin}/#admin`, shouldCreateUser: false } })`
+and `verify` calls `verifyOtp({ email, token: code.trim(), type: 'email' })`. The code box is not
+aspirational; it is wired.
+
+**Why there is no code to type.** The six-digit token is generated for that same request, but the project's
+**Magic Link** email template renders `{{ .ConfirmationURL }}` and not `{{ .Token }}`, so the email carries
+only the link. The token inside the link is a `token_hash`, not the OTP, so nothing can be copied out of it.
+The fix is one field in Supabase → Authentication → Emails → Magic Link: add `{{ .Token }}`. It is Mark's —
+this session has no Supabase management token and the MCP server exposes no auth-configuration tool, so the
+allowlist of §4 and this template are both console acts. **`verifyOtp` is a direct API call with no
+redirect, so the code route does not depend on the allowlist at all** — it is the way to prove the loop
+before §4 is done.
+
+**The second gate was already open,** read this session and worth recording so it is not re-checked:
+`public.site_admin` holds 2 rows, one for Mark's address; `auth.users` holds the account (which matters,
+because `shouldCreateUser: false` refuses an unknown address); and the only policy on `site_admin` is
+`site_admin_self` — `SELECT` for `{authenticated}` where `email = auth.jwt() ->> 'email'`. So
+`sessionIsAdmin`'s test — any visible row — is sound rather than accidentally true for any signed-in user.
+
+**The link route has a defect of its own, and it is ours, not the console's.** `emailRedirectTo` is
+`${location.origin}/#admin` — a URL that already ends in a fragment. The client is
+`createBrowserClient` from `@supabase/ssr`, so the flow is PKCE and the return carries `?code=…`. A
+composition that appends that query to a URL ending in `#admin` lands the code **inside** the fragment:
+`/#admin?code=…`. There `location.search` is empty, so the library never exchanges the code, and
+`location.hash` is `'#admin?code=…'` rather than `'#admin'`, so the panel does not even open — the link
+appears to do nothing whatever. Which way GoTrue composes it could not be read from here, so this is written
+as the likely mechanism, not a confirmed one; the address bar after a click settles it.
+
+`normaliseAuthReturn` in `lib/supabase/browser.ts` now moves such a buried code into the query before
+anything reads the URL, so the exchange happens whichever way the return is composed. It deliberately
+leaves implicit-flow tokens (`#access_token=…`) in the fragment: the library reads those from there, and
+moving them into a query string would put a credential somewhere that gets logged. Ten cases are asserted in
+`test/tuning.test.ts`, including that a name merely ending in `code` (`postcode=`) is not the code, and that
+the rescue runs before the hash is read. Six mutations of the guard were each seen to fail.
+
+**So the loop's remaining acts, corrected.** The template's `{{ .Token }}` is the short road: add it, then
+the code box signs Mark in with the allowlist untouched. §4's allowlist is still owed — it governs the link
+route and every other redirect — but it is no longer what stands between here and a proved loop.
