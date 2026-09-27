@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { ribbonList } from '@/components/configurator/ribbon'
-import { sessionHint } from '@/lib/supabase/browser'
+import { normaliseAuthReturn, sessionHint } from '@/lib/supabase/browser'
 
 describe('the ribbon — each decor once', () => {
   it('pads to ten and doubles for the loop, with the decors as the first entries', () => {
@@ -36,6 +36,25 @@ describe('the admin control — the auth library on demand', () => {
     expect(sessionHint('', '#access_token=abc&refresh_token=def', '')).toBe(true)
     expect(sessionHint('', '', '?code=abc')).toBe(true)
   })
+  it('rescues a PKCE code that came back buried in the fragment, and leaves every other shape alone', () => {
+    // emailRedirectTo is `${location.origin}/#admin`, a URL that already ends in a fragment. A composition
+    // that appends the query lands the code inside it, where location.search is empty and the library never
+    // exchanges it — and where location.hash is not '#admin', so the panel never opens either.
+    expect(normaliseAuthReturn('/', '', '#admin?code=abc')).toBe('/?code=abc#admin')
+    expect(normaliseAuthReturn('/', '?utm=x', '#admin?code=abc')).toBe('/?utm=x&code=abc#admin')
+    expect(normaliseAuthReturn('/', '', '#admin?code=abc&state=s')).toBe('/?code=abc&state=s#admin')
+    expect(normaliseAuthReturn('/', '', '#?code=abc')).toBe('/?code=abc')
+    // Nothing to move: the ordinary return, a bare hash, an error with no code, and — deliberately — the
+    // implicit flow's tokens, which the library reads from the fragment and which must not reach a query
+    // string that gets logged.
+    expect(normaliseAuthReturn('/', '?code=abc', '#admin')).toBe(null)
+    expect(normaliseAuthReturn('/', '', '#admin')).toBe(null)
+    expect(normaliseAuthReturn('/', '', '')).toBe(null)
+    expect(normaliseAuthReturn('/', '', '#admin?error=access_denied')).toBe(null)
+    expect(normaliseAuthReturn('/', '', '#access_token=a&refresh_token=b')).toBe(null)
+    // A name that merely ends in `code` is not the code.
+    expect(normaliseAuthReturn('/', '', '#admin?postcode=LS1')).toBe(null)
+  })
   it('imports @supabase/ssr dynamically and nowhere statically on the client', () => {
     const browser = readFileSync('lib/supabase/browser.ts', 'utf8')
     expect(browser).toMatch(/import\('@supabase\/ssr'\)/)
@@ -43,5 +62,7 @@ describe('the admin control — the auth library on demand', () => {
     const admin = readFileSync('components/admin/AdminControl.tsx', 'utf8')
     expect(admin).not.toMatch(/from '@supabase\//)
     expect(admin).toMatch(/if \(!sessionHint\(document\.cookie, location\.hash, location\.search\)\)/)
+    // The rescue has to run before the hash is read, or it cannot help the two things that read it.
+    expect(admin.indexOf('normaliseAuthReturn(location.pathname')).toBeLessThan(admin.indexOf("location.hash === '#admin'"))
   })
 })

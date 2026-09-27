@@ -31,3 +31,26 @@ export function publicSupabase(): Promise<SupabaseClient | null> {
   if (!loading) loading = import('@supabase/ssr').then(({ createBrowserClient }) => (client = createBrowserClient(url, key)))
   return loading
 }
+
+/**
+ * The sign-in email's link returns with a PKCE code in the query (`?code=…`), which is what
+ * `createBrowserClient` looks for. But the link asks to come back to `${location.origin}/#admin` — a URL
+ * that already ends in a fragment — so a composition that simply appends the query lands the code INSIDE
+ * the fragment: `/#admin?code=…`. There `location.search` is empty, so the library never exchanges the
+ * code, and `location.hash` is `'#admin?code=…'` rather than `'#admin'`, so the panel does not even open:
+ * the link appears to do nothing at all (Mark, 27 Sep 2026 — the reason a code is the reliable route until
+ * the email template carries one).
+ *
+ * Given the three parts of such a URL this returns the rewritten `…?code=…#admin` for `replaceState`, or
+ * null when there is nothing to move — the ordinary `/?code=…#admin`, or no code at all. Implicit-flow
+ * tokens in the fragment (`#access_token=…`) are deliberately left alone: the library reads those from the
+ * fragment itself, and moving them into the query would put a credential in a place that gets logged.
+ */
+export function normaliseAuthReturn(pathname: string, search: string, hash: string): string | null {
+  const q = hash.indexOf('?')
+  if (q < 0) return null
+  const buried = hash.slice(q + 1)
+  if (!/(^|&)code=/.test(buried)) return null
+  const fragment = hash.slice(0, q)
+  return `${pathname}${search ? `${search}&${buried}` : `?${buried}`}${fragment === '#' ? '' : fragment}`
+}
