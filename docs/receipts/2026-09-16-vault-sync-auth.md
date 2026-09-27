@@ -373,3 +373,41 @@ App Password. One `422 otp_disabled` at 07:41 is `shouldCreateUser: false` refus
 `auth.users`. **Gmail SMTP is the wrong long-term carrier for auth mail** (500/day, From-address rewriting
 that hurts deliverability); a transactional provider is the destination, and that is a decision, not a
 defect.
+
+---
+
+## Correction — 27 September 2026, 10:05 Z · the migration's repository was named wrongly
+
+The 08:10 addendum above says the applied migration belongs in **"sturij-web's `supabase/migrations/`"** and that
+**"the migration has no file in sturij-web's repository"**. Both name the wrong repository. The migrations for
+`bcpmgpktmuaicjessseg` live in **`mark-j-walton/sturij`**, as `<name>_up.sql` / `<name>_down.sql` pairs applied by
+hand at the console — the convention those files state in their own headers.
+
+**`mark-j-walton/sturij-web` is a restoration repository, not a live one.** Its history says so: `restore: working
+tree as archived 7 Apr 2026`, then `restore: working tree as downloaded 13 Aug 2026 — no commits exist for the
+interval since 17 Feb 2026`, then a provenance README on 9 September. It was rebuilt from a zip and a Drive
+archive of a deleted repository, and has had no work since. Its `supabase/migrations/` holds six files dated
+March–April that match nothing in the applied history, and it carries no `functions/` directory at all.
+`mark-j-walton/sturij` is the live project: commits on 17 September (PRs #76–#79 — the visualiser embed route, the
+canvas plan hand-off), and its `supabase/migrations/` filenames match the applied history exactly, nine of them,
+including `enquiry_notification_up`, `enquiry_swatches_band_timestamps_up` and `enquiry_funnel_reading_up`.
+
+**Three different things in this receipt are called some form of "sturij". They are not interchangeable, and
+conflating them is what produced the error above:**
+
+| Written as | What it is | Identifier |
+|---|---|---|
+| sturij-web | the **Supabase project** — the live database this receipt reads throughout | `bcpmgpktmuaicjessseg` |
+| sturij | the **Vercel project** for the application, a Vite build | `prj_cpmBmCQDY7vnulSfP8BkZiNzm4h1` |
+| `mark-j-walton/sturij` | the **repository** that feeds that Vercel project and holds the database's migrations and edge functions | — |
+| `mark-j-walton/sturij-web` | a **restoration** of a deleted repository, legacy reference only — never to be developed in | — |
+| sturij-main-website | this repository and its Vercel project, serving `sturij.com` and `studio.sturij.com` | `prj_O82gEMdE8RHY5qwfMVwXQiUVDEmF` |
+
+Every other mention of "sturij-web" above refers to the **Supabase project** and is correct as written — including
+"read from sturij-web", the allowlist console at §4, and `NOTIFY_TO`'s store on that project's function secrets.
+
+The migration's two files are written in `mark-j-walton/sturij`'s own convention and were handed to Mark directly:
+`site_slot_audit_digest_fix_up.sql` and `site_slot_audit_digest_fix_down.sql`. This session could not file them —
+push access to that repository was refused — so placing them is Mark's. The `_down` file reinstates the fault
+deliberately and says so in its own header: a down migration should restore the previous state honestly rather
+than quietly improve on it, and there is no good reason to apply it.
