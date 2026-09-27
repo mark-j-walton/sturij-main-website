@@ -259,3 +259,117 @@ the rescue runs before the hash is read. Six mutations of the guard were each se
 **So the loop's remaining acts, corrected.** The template's `{{ .Token }}` is the short road: add it, then
 the code box signs Mark in with the allowlist untouched. §4's allowlist is still owed — it governs the link
 route and every other redirect — but it is no longer what stands between here and a proved loop.
+
+---
+
+## Addendum — 27 September 2026, 08:10 Z · the loop is proved, and §4's "write path proved sound" was wrong
+
+Ran by **Claude Opus 5** (`claude-opus-5`), Claude Code cloud session `session_01PiE4zwdPfckYcHkUsipGM1`.
+
+**The loop ran.** Mark signed in at `https://studio.sturij.com/#admin`, was recognised as an admin, and saved
+two copy edits. Read back from sturij-web and from the live page:
+
+| Slot | Version | `edited_by` | Audit row | Checksum verifies | At (Z) |
+|---|---|---|---|---|---|
+| `range.body` | 1 | set | yes, `mark.walton@gmail.com` | **yes** | 08:05:31 |
+| `panel.finishes.body` | 1 | set | yes, `mark.walton@gmail.com` | **yes** | 08:06:40 |
+
+`site_content_slots` 2 rows · `site_image_slots` 0 · `site_slot_audit` **2**. Versions are the database's
+(`site_slot_next_version()`), not the client's. Both texts were then found in the HTML served from
+`https://studio.sturij.com/`, which reports `source: seed+db`. The 60-second `SLOT_REVALIDATE_SECONDS`
+window is why the page looked unchanged at first — not a fault.
+
+"Checksum verifies" is the row that matters: not that a checksum is *present*, but that
+`checksum = encode(sha256(convert_to(text,'UTF8')),'hex')` is **true for both rows**. The trigger did the
+right thing, not merely run.
+
+### The fault that only a real write could expose
+
+The first edit was refused with:
+
+```
+Edit refused for hero.body: function digest(text, unknown) does not exist
+```
+
+Postgres `42883`. `public.site_slot_audit_row()` is `SECURITY DEFINER` with `search_path` pinned to
+`'public'` — correct hardening — and called **bare** `digest(payload, 'sha256')`. `pgcrypto` on this project
+is installed in the **`extensions`** schema, so `digest` was not resolvable from inside the function. The
+same file already qualifies `auth.uid()` and `auth.jwt()`; `encode` happens to live in `pg_catalog` and so
+resolved. `digest` was the single unqualified call that could not. **Every** first write to **every** slot
+would have failed this way — copy and images alike, since both tables' audit triggers call this one function.
+
+**§3 of the 16 September section of this receipt called this write path "proved sound". That was wrong in
+this one respect.** What was checked: the views' `security_invoker`, the read policies, the INSERT-only
+policies and the absent UPDATE/DELETE, `site_is_admin()`'s pinned `search_path`, the trigger's existence and
+its `SECURITY DEFINER` property, and that it wrote a sha256 of the payload. What was **not** checked: that
+`digest` was reachable from the very `search_path` the receipt praised for being pinned. A pinned path is a
+security property and a resolution constraint at once, and only the second half was left untested. Recorded
+as a correction rather than a rewrite, per the estate's discipline.
+
+### The fix, and how it was proved
+
+Migration **`20260927080021_site_slot_audit_digest_search_path_fix`**, applied to `bcpmgpktmuaicjessseg`.
+It replaces `pgcrypto`'s `digest` with Postgres's built-in `sha256(bytea)`, which lives in `pg_catalog` and
+therefore resolves whatever `search_path` is pinned to. **The hardening is untouched; the extension
+dependency is gone.** This was the only function in `public` referencing `digest(` or `sha256(` at all, so
+nothing else relied on the old call.
+
+Three things proved rather than assumed:
+
+1. **Byte-identical output.** On this database (`server_encoding UTF8`), for a string carrying `£` and `é`,
+   `encode(extensions.digest(s,'sha256'),'hex')` and `encode(sha256(convert_to(s,'UTF8')),'hex')` both gave
+   `532354d1bfbb47094fbbbd0898fdb10f5c19144bd78cffa85f0a2634ece17beb`. So a line written now is comparable
+   with one written by the old call.
+2. **The new expression resolves at runtime.** A successful `CREATE OR REPLACE` proves nothing for plpgsql —
+   which is exactly why this bug reached production. A throwaway function with the **same** pinned
+   `search_path` was created, called and dropped: the new expression hashed; the old form raised
+   `undefined_function`. The check could return non-zero, and did for the old code.
+3. **Nothing collateral.** All four triggers still attached and enabled
+   (`site_content_slots_audit`, `site_content_slots_version`, `site_image_slots_audit`,
+   `site_image_slots_version`), `prosecdef` true and `proconfig` still `search_path=public`, the probe
+   function gone, and `site_slot_audit` still at 0 rows at that moment. **No test row was inserted**: a row
+   written as `postgres` would carry a null actor and would have contaminated the very proof Mark was about
+   to make.
+
+The applied statement, verbatim, for whoever files it in sturij-web's `supabase/migrations/`:
+
+```sql
+create or replace function public.site_slot_audit_row()
+returns trigger
+language plpgsql
+security definer
+set search_path to 'public'
+as $function$
+declare payload text;
+begin
+  if tg_table_name = 'site_content_slots' then payload := new.text; else payload := new.asset_path || ':' || new.bytes::text; end if;
+  insert into public.site_slot_audit (table_name, row_id, slot_id, version, actor, actor_email, checksum)
+  values (tg_table_name, new.id, new.slot_id, new.version, auth.uid(), auth.jwt() ->> 'email', encode(sha256(convert_to(payload, 'UTF8')), 'hex'));
+  return new;
+end $function$;
+```
+
+Rollback, if ever wanted, is the same statement with
+`encode(digest(payload, 'sha256'), 'hex')` — which is the broken form, so it should not be wanted.
+
+### Two things still open
+
+**The migration has no file in sturij-web's repository.** That repo is not in this session's scope, so the
+database carries migration `20260927080021` and its repo does not. The SQL above is the whole of it. This is
+drift by necessity, named rather than left to be discovered.
+
+**The redirect allowlist of §4 is still unset.** It was never what blocked the loop: `verifyOtp` is a direct
+API call with no redirect, which is the route Mark used. It governs the magic-link route and every other
+redirect, and remains owed.
+
+### The email, for the record
+
+The sign-in email came from Supabase's built-in service (`noreply@mail.app.supabase.io`). Two sends
+succeeded at 07:10 and 07:30 Z; three `/otp` requests then failed `429 over_email_send_rate_limit` at 07:33
+against the built-in 2-per-hour limit; the limit was raised to 30 at 07:37. Custom SMTP pointed at Gmail
+then failed six times with `535 5.7.8 BadCredentials` and `534 5.7.9 Application-specific password
+required` — Gmail will not accept an account password over SMTP while 2FA is on; it needs a 16-character
+App Password. One `422 otp_disabled` at 07:41 is `shouldCreateUser: false` refusing an address not in
+`auth.users`. **Gmail SMTP is the wrong long-term carrier for auth mail** (500/day, From-address rewriting
+that hurts deliverability); a transactional provider is the destination, and that is a decision, not a
+defect.
