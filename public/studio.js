@@ -263,7 +263,7 @@ syncSub();
 })();
 function neutralPaint(){for(var i=0;i<FB.length;i++)if(FB[i][0]==='All White')return FB[i];return FB[0];}
 function bothChosen(){return sel.paint&&sel.board;}
-function updateBar(){ var on=!!bothChosen(); var c=el('cam'); if(c)c.classList.toggle('show',on); if(on) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
+function updateBar(){ if(window._syncPfav)_syncPfav(); var on=!!bothChosen(); var c=el('cam'); if(c)c.classList.toggle('show',on); if(on) setTimeout(showSuggest,700); else {el('suggest').classList.remove('show','on');} }
 
 var WORKTOPS=[];
 _ready.push(fetch('showcase/worktops/worktops.json').then(function(r){return r.json();}).then(function(m){WORKTOPS=m.map(function(w){return {s:w.file,n:w.name,img:'showcase/worktops/'+w.file};});rail(el('sideWorktop'),el('railWorktop'),'worktop',WORKTOPS,false);}).catch(function(){}));
@@ -436,7 +436,7 @@ if(el('talk'))el('talk').onclick=function(){talkOnce();};
 var FAVES=[];
 function favKey(f){return f.key||f.s;}
 window._refreshRails=function(){['railPaint','railWallpaper','railWorktop','railCarcass','railBoard'].forEach(function(id){var r=el(id);if(r&&r._refresh)r._refresh();});};
-function renderFaves(){ var row=el('favrow'), dr=el('favdraw'); if(!row||!dr)return;
+function renderFaves(){ var row=el('favrow'), dr=el('favdraw'); if(window._syncPfav)_syncPfav(); if(!row||!dr)return;
   dr.classList.toggle('on',FAVES.length>0);document.body.classList.toggle('hasfaves',FAVES.length>0&&!dr.classList.contains('min'));
   var hd=dr.querySelector('.favhd');
   if(hd&&!hd._bound){hd._bound=true;hd.setAttribute('role','button');hd.setAttribute('tabindex','0');
@@ -488,7 +488,7 @@ function placeWood(b,x,y){
   d.innerHTML='<img src="showcase/finishes/'+b.s+'.webp" draggable="false"><div class="cn">'+b.n+'</div><button class="wh" title="Add to favourites" aria-label="Add to favourites"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="11" height="11" aria-hidden="true"><path d="M12 20.3l-7.1-7A4.6 4.6 0 0 1 11.4 6l.6.6.6-.6a4.6 4.6 0 0 1 6.5 7.2z"/></svg></button><button class="wx" title="Delete"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="11" height="11" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
   layer.appendChild(d);
   var xb=d.querySelector('.wx'); xb.onclick=function(e){e.stopPropagation();d.remove();};
-  var hb=d.querySelector('.wh'); hb.onclick=function(e){e.stopPropagation();addFave(b);hb.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" width="11" height="11" aria-hidden="true"><path d="M12 20.3l-7.1-7A4.6 4.6 0 0 1 11.4 6l.6.6.6-.6a4.6 4.6 0 0 1 6.5 7.2z"/></svg>';hb.classList.add('on');};
+  var hb=d.querySelector('.wh'); hb.onclick=function(e){e.stopPropagation();addFave(b);hb.classList.add('on');};
   d.addEventListener('pointerdown',function(e){ if(xb.contains(e.target))return; e.stopPropagation();
     var mx=e.clientX,my=e.clientY,l=parseFloat(d.style.left),t=parseFloat(d.style.top);
     function mv(ev){d.style.left=(l+ev.clientX-mx)+'px';d.style.top=(t+ev.clientY-my)+'px';}
@@ -1538,6 +1538,14 @@ Promise.all(_ready).then(function(){
     });
     side.appendChild(b);
   });
+  /* Mark, 30 Sep 2026: a favourite shows on its heart (see-through bronze fill, studio.css) */
+  window._syncPfav=function(){
+    ['sideCeiling','sidePaint','sideSkirting','sideWorktop','sideCarcass','sideBoard'].forEach(function(id){
+      var side=el(id), b=side&&side.querySelector('.pfav'); if(!b)return;
+      var c=current(id), key=c?(Array.isArray(c[1])?c[1][0]:c[1].s):null;
+      b.classList.toggle('on',!!key&&FAVES.some(function(q){return favKey(q)===key;}));
+    });
+  };
 })();
 
 /* ===== Tools modal: accordions, frosted layers, wallpaper toggle removed (lives on the Walls tab) ===== */

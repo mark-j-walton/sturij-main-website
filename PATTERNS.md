@@ -43,7 +43,9 @@ Actions belong in the header rows (main bar + contextual second row) or in edge 
 
 ## 7. Materials are full-bleed and label-free
 
-Samples render edge-to-edge with **no permanent text on them**. Names appear only: on hover (frosted label), via post-it notes the user places, or in tooltips. Truncated text is banned — tooltip instead.
+Samples render edge-to-edge with **no permanent text on them**, and **no colour or brand name shows on any instance** — no tile, swatch, placed card, favourites chip or suggestion card (Mark, 30 Sep 2026: the choice is made by eye, not by name; this is not a product search or a brand comparison). The **post-it** is the detail surface: the customer sticks it on an instance and it carries the detail. The frosted hover label and tooltips show names **only when the designer switch is on** (`body.shownames`), for admin and interior-designer accounts; customers never see the switch. Truncated text is banned — tooltip instead.
+
+**Favourites** show on their heart: the outline stays and the fill goes from transparent to see-through bronze, `color-mix(in srgb, var(--bronze) 45%, transparent)` — the heart tab (`.pfav.on`) and a placed card's heart (`.wh.on`) alike.
 
 ## 8. Drawers
 
