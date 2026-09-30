@@ -24,7 +24,7 @@ Every line that separates two samples or two panels is **1px solid var(--seam)**
 
 ## 3. Frost — the one translucency recipe
 
-All floating light chrome uses the same frost: `background: rgba(250,248,243,.5)` + `backdrop-filter: blur(...)`. This exact value is shared by: panel tabs, the favourites drawer + tab, the Suggested Pairings pill, sample identity pills. Don't invent new alpha values — matching frost is what makes the layers read as one material. Dark floating chrome (menus, the vismenu) is `rgba(29,26,23,.92)` + blur.
+All floating light chrome uses the same frost: `background: rgba(250,248,243,.25)` + `backdrop-filter: blur(10px)` (with the `-webkit-` prefix). The blur is what makes it frost: without it the layer is only pale white over the sample. The one exception is **the main tile tab** (`.pgrip`, the label tab at the top of each panel), which is `rgba(250,248,243,.5)` with the same blur so the panel's name reads over any material (Mark, 30 Sep 2026). The frost is shared by: the tile tabs, the heart tab (`.pfav`), the favourites drawer and its tab, the panel filter drawer, the panel close tab and the Suggested Pairings pill. Don't invent new alpha values or blurs — matching frost is what makes the layers read as one material. Dark floating chrome (menus, the vismenu) is `rgba(29,26,23,.92)` + blur. Hover states on frost may lift the alpha; resting states never differ. The paper colour used for borders, text and hovers on the dark chrome is not frost and is not governed here.
 
 ## 4. Type
 
