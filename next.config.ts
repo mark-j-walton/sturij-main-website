@@ -26,7 +26,13 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return {
-      beforeFiles: [],
+      // The materials registry review UI (the finishes/variants + decors viewer) lives in the
+      // sturij-assets Supabase project as the registry-review function. /registry is its single
+      // gateway on studio.sturij.com — proxied so the address stays here rather than exposing the
+      // function URL. Not a LEGACY_PAGES entry: it has no public/*.html, it forwards to the function.
+      beforeFiles: [
+        { source: '/registry', destination: 'https://uxdrokyxywwezorpvfsp.supabase.co/functions/v1/registry-review' },
+      ],
       afterFiles: LEGACY_PAGES.map((p) => ({ source: `/${p}`, destination: `/${p}.html` })),
       fallback: [],
     }
