@@ -55,6 +55,8 @@ All edge drawers share: same width when open, `z-index` above the canvas (never 
 
 Animation uses the Motion library (commercial licence held). Springs around `stiffness 260 / damping 24`; nothing snappier. Rails glide with inertia; drawers slide; notes settle. No bounces for their own sake, no decorative loops. Everything honours `prefers-reduced-motion`.
 
+**Endless carousels always loop** (Mark, 30 Sep 2026). When there are too few swatches to fill the rail and one more — a filtered band, a small range — each swatch grows deeper along the scroll until they do (`loopDepth` in `studio.js`), so no swatch is ever on screen twice and the scroll stays endless and even. The set depth (the Tools panel's swatch height) is the minimum, never reduced.
+
 ## 10. Data is manifest-driven
 
 Materials load from `showcase/**/*.json` manifests (paints, boards, wallpaper, floors, handles, worktops, suggestions). New material classes = new manifest + rail, never hard-coded arrays in JS.

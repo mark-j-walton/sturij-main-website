@@ -54,6 +54,10 @@ function addBandFilter(sideEl, all, build){
   chips.forEach(function(c){ c.onclick=function(e){e.stopPropagation();setActive(c);var bd=c.getAttribute('data-band');build(all.filter(function(b){return boardBand(b)===bd;}));}; });
   sideEl.appendChild(bar);
 }
+/* Mark, 30 Sep 2026: an endless carousel always loops. When there are too few swatches to fill the rail and
+   one more (a filtered band, a small range), each swatch grows deeper along the scroll until they do, so no
+   swatch is ever on screen twice and the scroll stays endless and even. */
+function loopDepth(base,view,count){ return count>1 ? Math.max(base,Math.ceil(view/(count-1))) : Math.max(base,view); }
 function rail(sideEl, railEl, kind, items, paint){
   var track=railEl.querySelector('.track');
   var all=items.slice(), cur=all, y=0, dragging=false, lastY=0, vy=0, moved=0, raf=null, pool=[], glide=null;
@@ -70,7 +74,7 @@ function rail(sideEl, railEl, kind, items, paint){
   function render(){
     if(!cur.length){pool.forEach(function(d){d.remove();});pool=[];return;}
     if(!isFinite(y))y=0;
-    var sh=SH(), H=cur.length*sh, vh=railEl.clientHeight||window.innerHeight;
+    var vh=railEl.clientHeight||window.innerHeight, sh=loopDepth(SH(),vh,cur.length), H=cur.length*sh;
     var w=((y%H)+H)%H, first=Math.floor(w/sh), off=w%sh, n=Math.ceil(vh/sh)+2;
     while(pool.length<n)pool.push(mkStrip());
     while(pool.length>n)pool.pop().remove();
@@ -197,7 +201,7 @@ el('fexp').addEventListener('click',function(){el('floorbar').classList.remove('
     if(reset)x=0;
     if(!items.length){pool.forEach(function(d){d.remove();});pool=[];return;}
     if(!isFinite(x))x=0;
-    var tw=TW(), W=items.length*tw, vw=rail.clientWidth||window.innerWidth;
+    var vw=rail.clientWidth||window.innerWidth, tw=loopDepth(TW(),vw,items.length), W=items.length*tw;
     var w=((x%W)+W)%W, first=Math.floor(w/tw), off=w%tw, n=Math.ceil(vw/tw)+2;
     while(pool.length<n)pool.push(mkTile());
     while(pool.length>n)pool.pop().remove();
