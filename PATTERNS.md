@@ -4,19 +4,23 @@ This is the design law for `studio.html` / `studio.css` / `studio.js` and every 
 
 ---
 
-## 1. Palette — one accent, warm neutrals
+## 1. Palette — the brand's, one accent, warm neutrals
+
+The Studio's colour and type are the brand's: `design/sturij-public/DESIGN.md` (Mark, 30 Sep 2026 — the chrome follows the brand; light and colour lift the materials). `studio.css` keeps its own names, with the brand's values, and `test/studio-brand.test.ts` fails if one drifts.
 
 ```
---navy   #1D1D1D   chrome (header, drawers' dark tabs, dark menus)
---gold   #D4A01B   THE accent. Seams, active states, selection rings. Nothing else.
---paper  #FAF8F3   light surfaces, button text-on-dark
---paper-warm #F0EDE8, --card #FFFFFF
---ink    #1D1D1D / --ink-body #2A2724 / --ink-muted #62584F
---bronze #4A5D4E, --timber #62584F   supporting tones only
---seam   full-strength gold
+--navy   #232120   chrome (header, drawers' dark tabs, dark menus) — brand charcoal
+--gold   #A67C3C   THE accent. Seams, active states, selection rings — brand bronze-gold
+--bronze #8F6A33   the accent's deeper gold (brand gold-lo), for fills that carry white text and the favourite heart
+--paper  #FAF7F0   light surfaces, button text-on-dark — brand paper
+--paper-warm #F3EEE3, --card #FBF9F3 (brand soft white)
+--ink    #34312A / --ink-body #34312A / --ink-muted #66615A — brand ink and muted ink
+--timber #66615A   supporting tone only
+--seam   #A67C3C   full-strength gold
+--line   rgba(52,49,42,.12) — the brand hairline
 ```
 
-**Law:** gold is the only accent. No second accent, no semantic colour-coding, no gradients as decoration. Materials themselves provide all the colour; the chrome stays near-monochrome.
+**Law:** gold is the only accent. No second accent, no semantic colour-coding, no gradients as decoration. Materials themselves provide all the colour; the chrome stays near-monochrome. Where a surface needs its own UX (frost over a material), it takes a brand colour with transparency — registered as a custom token in `DESIGN.md` with its reason — never a new colour.
 
 ## 2. Seams — 1px full gold
 
@@ -24,14 +28,14 @@ Every line that separates two samples or two panels is **1px solid var(--seam)**
 
 ## 3. Frost — the one translucency recipe
 
-All floating light chrome uses the same frost: `background: rgba(250,248,243,.25)` + `backdrop-filter: blur(10px)` (with the `-webkit-` prefix). The blur is what makes it frost: without it the layer is only pale white over the sample. The one exception is **the main tile tab** (`.pgrip`, the label tab at the top of each panel), which is `rgba(250,248,243,.5)` with the same blur so the panel's name reads over any material (Mark, 30 Sep 2026). The frost is shared by: the tile tabs, the heart tab (`.pfav`), the favourites drawer and its tab, the panel filter drawer, the panel close tab and the Suggested Pairings pill. Don't invent new alpha values or blurs — matching frost is what makes the layers read as one material. Dark floating chrome (menus, the vismenu) is `rgba(29,26,23,.92)` + blur. Hover states on frost may lift the alpha; resting states never differ. The paper colour used for borders, text and hovers on the dark chrome is not frost and is not governed here.
+All floating light chrome uses the same frost (the brand's `glass.studio-frost`): `background: rgba(250,248,242,.25)` + `backdrop-filter: blur(10px)` (with the `-webkit-` prefix). The blur is what makes it frost: without it the layer is only pale white over the sample. The one exception is **the main tile tab** (`.pgrip`, the label tab at the top of each panel), which is `rgba(250,248,242,.5)` (`glass.studio-tab`) with the same blur so the panel's name reads over any material (Mark, 30 Sep 2026). The frost is shared by: the tile tabs, the heart tab (`.pfav`), the favourites drawer and its tab, the panel filter drawer, the panel close tab and the Suggested Pairings pill. Don't invent new alpha values or blurs — matching frost is what makes the layers read as one material. Dark floating chrome (menus, the vismenu) is `rgba(29,26,23,.92)` + blur. Hover states on frost may lift the alpha; resting states never differ. The paper colour used for borders, text and hovers on the dark chrome is not frost and is not governed here.
 
-## 4. Type
+## 4. Type — the brand's families
 
-- `--f-mono` (IBM Plex Mono) for ALL UI labels: uppercase, tracked (.10–.16em), 11–12px, weight 500.
-- `--f-serif` for editorial moments only (scheme name).
-- `--f-sans` for body copy.
-- Never below 11px. Never bold (600+).
+- `--f-mono` (IBM Plex Mono) for ALL UI labels: uppercase, tracked (.10–.16em), 11–12px, weight 500. (The brand sets its labels at 600; the Studio keeps 500 until Mark rules.)
+- `--f-serif` (Fraunces, the brand's titles) for editorial moments only (scheme name, welcome).
+- `--f-sans` (Inter, the brand's body) for body copy.
+- Never below 11px.
 
 ## 5. Buttons and tabs — one geometry
 
