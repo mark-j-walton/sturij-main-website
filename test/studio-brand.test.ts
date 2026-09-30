@@ -15,8 +15,8 @@ const block = (heading: string) => {
 }
 const palette = Object.values(block('## Palette') as Record<string, { hex: string }>).map((p) => p.hex.toUpperCase())
 const custom = Object.values(block('## Custom tokens') as Record<string, { value: string }>).map((t) => t.value.replace(/\s/g, ''))
-const root = Object.fromEntries(
-  [...(css.match(/:root\{([^}]*)\}/)?.[1] ?? '').matchAll(/(--[\w-]+):([^;]+)/g)].map((m) => [m[1], m[2].trim()]),
+const root: Record<string, string> = Object.fromEntries(
+  [...(css.match(/:root\{([^}]*)\}/)?.[1] ?? '').matchAll(/(--[\w-]+):([^;]+)/g)].map((m) => [m[1] ?? '', (m[2] ?? '').trim()]),
 )
 
 describe('the Studio wears the brand', () => {
@@ -47,7 +47,7 @@ describe('the Studio wears the brand', () => {
     expect(custom).toContain('rgba(250,248,242,.25)')
     expect(custom).toContain('rgba(250,248,242,.5)')
     const frosts = [...css.matchAll(/\{([^{}]*)\}/g)]
-      .map((m) => m[1])
+      .map((m) => m[1] ?? '')
       .filter((rule) => rule.includes('backdrop-filter:blur(10px)'))
       .map((rule) => rule.match(/background:(rgba\(250,248,24\d,\.\d+\))/)?.[1])
       .filter(Boolean)
