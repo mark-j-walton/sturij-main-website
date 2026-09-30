@@ -584,3 +584,16 @@ html.visframe-open,html.visframe-open body{overflow:hidden}
 .zip.alt:hover{background:rgba(29,29,29,.06)}
 .tray .foot{display:flex;gap:8px}
 .tray .foot .zip{flex:1}
+
+/* ===== Names (Mark, 30 Sep 2026): no colour or brand name shows on any instance — the post-it is the detail
+   surface. They show only when the designer switch (body.shownames) is on; tooltips follow the same switch. ===== */
+body:not(.shownames) .woodcard .cn,body:not(.shownames) .favchip .cn,body:not(.shownames) .scard .cn,
+body:not(.shownames) .hcard .nm,body:not(.shownames) .skcard .nm{display:none}
+body:not(.shownames) .favchip::before,body:not(.shownames) .favchip::after,
+body:not(.shownames) .suggest .scard[data-tip]::before,body:not(.shownames) .suggest .scard[data-tip]::after{display:none}
+
+/* ===== Favourited (Mark, 30 Sep 2026): a favourite's heart keeps its outline and fills with see-through bronze,
+   from the existing token — the heart tab and the board card alike. (A favourites chip's heart is its remove
+   button, a white heart on a bronze disc, and stays so.) ===== */
+.pfav.on svg path,.woodcard .wh.on svg path{fill:color-mix(in srgb,var(--bronze) 45%,transparent)}
+.woodcard .wh.on{background:#fff;color:var(--bronze)}
