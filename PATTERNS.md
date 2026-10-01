@@ -92,6 +92,10 @@ The furniture's style comes after its colours (scheme brief, 30 Sep 2026), and i
   view. No names show (§7).
 - **A door's options** use the Studio tools' sections, bronze ticks and Save (§8); each option shows a drawing of the
   piece. Saving keeps the type, style, colour and ticked options in the scheme (§11).
+- **Favourites** (agreed, scheme brief 30 Sep 2026): every door card carries the panels' heart tab (`.pfav`) at its
+  foot, shown on hover (always on touch, always once favourited). A favourite is the door in its colour; its heart
+  fills see-through bronze (§7) and its chip in the favourites drawer brings the colour and the door's options back.
+  A vinyl colour is favourited as a paint is, from its carousel or the Boards heart.
 - **Data** is a manifest (§10): `showcase/doors/style-step.json`, written by sturij-assets, with the renderer pinned
   beside it as `aspire-fronts.mjs` (`test/studio-style-step.test.ts`).
 

@@ -451,7 +451,7 @@ if(el('talk'))el('talk').onclick=function(){talkOnce();};
 /* ===== Favourites: heart a placed swatch → it collects in the bottom-left Favourites drawer ===== */
 var FAVES=[];
 function favKey(f){return f.key||f.s;}
-window._refreshRails=function(){['railPaint','railWallpaper','railWorktop','railCarcass','railBoard'].forEach(function(id){var r=el(id);if(r&&r._refresh)r._refresh();});};
+window._refreshRails=function(){if(window._drawDoors&&el('stylem').classList.contains('on')&&el('stylem').getAttribute('data-stage')==='doors')_drawDoors(true);['railPaint','railWallpaper','railWorktop','railCarcass','railBoard','railVinyl'].forEach(function(id){var r=el(id);if(r&&r._refresh)r._refresh();});};
 function renderFaves(){ var row=el('favrow'), dr=el('favdraw'); if(window._syncPfav)_syncPfav(); if(!row||!dr)return;
   dr.classList.toggle('on',FAVES.length>0);document.body.classList.toggle('hasfaves',FAVES.length>0&&!dr.classList.contains('min'));
   var hd=dr.querySelector('.favhd');
@@ -464,8 +464,10 @@ function renderFaves(){ var row=el('favrow'), dr=el('favdraw'); if(window._syncP
   row.innerHTML='';
   FAVES.forEach(function(f){
     var d=document.createElement('div'); d.className='favchip';
-    var visual=f.k==='paint'?'<span class="favsw" style="background:'+f.hex+'"></span>':'<img src="'+(f.img||('showcase/finishes/'+favKey(f)+'.webp'))+'" draggable="false">';
-    var brand=f.k==='paint'?'Farrow & Ball':(f.k==='worktop'?'Omega Stone':(f.k==='wallpaper'?'Farrow & Ball wallpaper':'Egger'));
+    var visual=(f.k==='paint'||f.k==='vinyl')?'<span class="favsw" style="background:'+f.hex+'"></span>'
+      :f.k==='door'?'<span class="favdoor">'+doorFavArt(f)+'</span>'
+      :'<img src="'+(f.img||('showcase/finishes/'+favKey(f)+'.webp'))+'" draggable="false">';
+    var brand=f.k==='paint'?'Farrow & Ball':((f.k==='vinyl'||f.k==='door')?'HPP':(f.k==='worktop'?'Omega Stone':(f.k==='wallpaper'?'Farrow & Ball wallpaper':'Egger')));
     d.setAttribute('data-tip', f.n+'\n'+brand+(f.hex?'\n'+f.hex.toUpperCase():''));
     d.innerHTML=visual+'<button class="fx" title="Remove from favourites — returns to the carousel" aria-label="Remove from favourites"><svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12" aria-hidden="true"><path d="M12 20.3l-7.1-7A4.6 4.6 0 0 1 11.4 6l.6.6.6-.6a4.6 4.6 0 0 1 6.5 7.2z"/></svg></button>';
     d.querySelector('.fx').onclick=function(e){e.stopPropagation();FAVES=FAVES.filter(function(q){return q!==f;});renderFaves();_refreshRails();toast(f.n+' returned to the carousel');};
@@ -488,11 +490,14 @@ function renderFaves(){ var row=el('favrow'), dr=el('favdraw'); if(window._syncP
 }
 function applyFav(f){
   if(f.k==='paint'){addPaint([f.n,f.hex]);}
+  else if(f.k==='vinyl'||f.k==='door'){ applyDoorFav(f); return; }
   else fillSide(f.k==='carcass'?'carcass':f.k,{s:favKey(f),n:f.n,img:f.img});
   toast('Applied · '+f.n);
 }
 function favFromRail(kind,it){
-  var f=kind==='paint'?{k:'paint',key:it[0],n:it[0],hex:it[1]}:{k:(kind==='carcass'?'board':kind),key:it.s,n:it.n,img:it.img};
+  var f=kind==='paint'?{k:'paint',key:it[0],n:it[0],hex:it[1]}
+    :kind==='vinyl'?{k:'vinyl',key:it[0],n:it[0],hex:it[1],code:it[2],oklch:it[3]}
+    :{k:(kind==='carcass'?'board':kind),key:it.s,n:it.n,img:it.img};
   if(FAVES.some(function(q){return favKey(q)===f.key;})){toast(f.n+' is already in favourites');return;}
   FAVES.push(f);renderFaves();_refreshRails();toast(f.n+' saved to favourites');
 }
@@ -1441,7 +1446,7 @@ function chooseFamily(code){
 /* the doors: four showing, endless, with motion and drag, as the floor carousel */
 (function(){var band=el('sdoors'),track=band.querySelector('.strack'),x=0,down=false,lx=0,vx=0,raf=null,moved=0,pool=[],glide=null;
   function SW(){return Math.max(170,Math.floor((band.clientWidth||window.innerWidth)/4));}
-  function mk(){var d=document.createElement('div');d.className='sslot';d.innerHTML='<div class="scard sdcard"><span class="sart"></span></div>';track.appendChild(d);return d;}
+  function mk(){var d=document.createElement('div');d.className='sslot';d.innerHTML='<div class="scard sdcard"><span class="sart"></span><button type="button" class="pfav" title="Save to favourites" aria-label="Save to favourites">'+(window._HEART||'')+'</button></div>';track.appendChild(d);return d;}
   function render(reset){
     var list=drawn(); if(reset)x=0;
     if(!list.length||!el('stylem').classList.contains('on')){return;}
@@ -1456,22 +1461,50 @@ function chooseFamily(code){
       if(d._idx!==idx||d._tone!==tone){d._idx=idx;d._tone=tone;d.setAttribute('data-i',idx);
         d.setAttribute('data-name',list[idx].style.name);
         d.querySelector('.sart').innerHTML=frontOf(list[idx],DOOR,tone,'d'+k+'_');}
+      d.querySelector('.pfav').classList.toggle('on',isDoorFav(list[idx]));
     }
   }
-  window._drawDoors=function(){var list=drawn(),at=styleSel&&styleSel.style?list.map(function(s){return s.style.code;}).indexOf(styleSel.style):-1;
+  window._drawDoors=function(keep){ if(keep){render();return;}
+    var list=drawn(),at=styleSel&&styleSel.style?list.map(function(s){return s.style.code;}).indexOf(styleSel.style):-1;
     pool.forEach(function(d){d._idx=null;}); x=at>0?at*SW():0; render();};
   band.addEventListener('wheel',function(e){e.preventDefault();var to=x+(e.deltaY+e.deltaX);if(glide)glide.stop();glide=glideValue(x,to,0,function(v){x=v;render();});if(!glide){x=to;render();}},{passive:false});
   band.addEventListener('pointerdown',function(e){down=true;lx=e.clientX;moved=0;vx=0;if(raf)cancelAnimationFrame(raf);if(glide){glide.stop();glide=null;}band.setPointerCapture(e.pointerId);band.classList.add('grabbing');});
   band.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-lx;lx=e.clientX;vx=dx;moved+=Math.abs(dx);x-=dx;render();});
   function mom(){glide=glideValue(x,x-vx*17,-vx*60,function(v){x=v;render();});if(glide)return;vx*=0.92;if(Math.abs(vx)<0.4)return;x-=vx;render();raf=requestAnimationFrame(mom);}
   band.addEventListener('pointerup',function(e){if(!down)return;down=false;band.classList.remove('grabbing');
-    if(moved<14){var t=document.elementFromPoint(e.clientX,e.clientY);t=t&&t.closest?t.closest('.sslot'):null;
-      if(t){var s=drawn()[parseInt(t.getAttribute('data-i'))];if(s){styleDoor=s;openStyle('opts');}}else closeStyle();return;}
+    if(moved<14){var hit=document.elementFromPoint(e.clientX,e.clientY),t=hit&&hit.closest?hit.closest('.sslot'):null;
+      if(t){var s=drawn()[parseInt(t.getAttribute('data-i'))];
+        if(s&&hit.closest('.pfav')){toggleDoorFav(s);render();return;}
+        if(s){styleDoor=s;openStyle('opts');}}else closeStyle();return;}
     if(!REDUCED)mom();});
   band.addEventListener('pointercancel',function(){down=false;band.classList.remove('grabbing');});
   window.addEventListener('resize',function(){render();});
 })();
 function drawDoors(){ if(window._drawDoors)_drawDoors(); }
+/* Favourite doors (scheme brief, Mark 30 Sep 2026): every door carries the same heart tab as a chosen panel; a
+   favourite is the door in its colour, its heart filled see-through bronze, and its chip in the favourites drawer
+   brings the colour and the door's options back. */
+function doorKey(s){return 'door:'+s.style.code+'|'+(sel.vinyl?sel.vinyl[2]:'');}
+function isDoorFav(s){var k=doorKey(s);return FAVES.some(function(q){return favKey(q)===k;});}
+function toggleDoorFav(s){
+  var k=doorKey(s);
+  if(isDoorFav(s)){FAVES=FAVES.filter(function(q){return favKey(q)!==k;});renderFaves();toast('Removed from favourites');return;}
+  var v=sel.vinyl||[];
+  FAVES.push({k:'door',key:k,n:s.style.name,style:s.style.code,colour:v[2]||null,cn:v[0]||null,hex:v[1]||null,oklch:v[3]||null});
+  renderFaves(); toast('Saved to favourites');
+}
+function doorFavArt(f){
+  var s=STEP&&STEP.styles.filter(function(x){return x.style.code===f.style;})[0];
+  return s?frontOf(s,DOOR,f.oklch||f.hex||'oklch(86% 0.012 85)','fv'+slug(f.key)+'_'):'';
+}
+/* a favourite colour or door: Moulded vinyl, the colour on the Boards tile, and for a door its options */
+function applyDoorFav(f){
+  var c=f.k==='vinyl'?[f.n,f.hex,f.code,f.oklch]:(f.colour?[f.cn,f.hex,f.colour,f.oklch]:null);
+  styleSel=styleSel&&styleSel.family==='moulded_vinyl'?styleSel:{family:'moulded_vinyl'}; setFamily('moulded_vinyl');
+  if(c){window._quiet=true;fillSide('vinyl',c);window._quiet=false;}
+  if(f.k==='door'){styleDoor=STEP&&STEP.styles.filter(function(x){return x.style.code===f.style;})[0];if(styleDoor)openStyle('opts');}
+  queueSave();
+}
 /* a door's options: the pieces HPP makes for it, at most eight, ticked and saved as in Studio tools */
 var PIECE_SIZE={WD:[2155,496],CSWD:[2155,496],TFWD:[2155,496],TFBFWD:[2155,496],FD:[2155,496],D:[715,496],EP:[715,496],DR:[215,496],HGD:[285,496],'1HDR':[215,496],'2HDR':[215,496]};
 function drawOpts(){
@@ -1657,13 +1690,14 @@ Promise.all(_ready).then(function(){
 /* ===== favourite the enlarged sample: frosted heart tab on chosen panels ===== */
 (function(){
   var HEART='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="14" height="14" aria-hidden="true"><path d="M12 20.3l-7.1-7A4.6 4.6 0 0 1 11.4 6l.6.6.6-.6a4.6 4.6 0 0 1 6.5 7.2z"/></svg>';
+  window._HEART=HEART;   /* the door cards use the same heart tab */
   function current(id){
     if(id==='sidePaint')return (wallMode==='wallpaper'&&wallPaper)?['wallpaper',wallPaper]:(paints[0]?['paint',paints[0]]:null);
     if(id==='sideCeiling')return ceilOn&&ceilCol?['paint',ceilCol]:null;
     if(id==='sideSkirting')return skirtOn&&skirtCol?['paint',skirtCol]:null;
     if(id==='sideWorktop')return sel.worktop?['worktop',sel.worktop]:null;
     if(id==='sideCarcass')return sel.carcass?['carcass',sel.carcass]:null;
-    if(id==='sideBoard')return sel.board?['board',sel.board]:null;
+    if(id==='sideBoard')return sel.board?['board',sel.board]:(sel.vinyl?['vinyl',sel.vinyl]:null);
     return null;
   }
   ['sideCeiling','sidePaint','sideSkirting','sideWorktop','sideCarcass','sideBoard'].forEach(function(id){

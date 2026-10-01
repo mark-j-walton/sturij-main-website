@@ -630,3 +630,11 @@ body:not(.shownames) .suggest .scard[data-tip]::before,body:not(.shownames) .sug
 .sopts .mrow input{width:16px;height:16px;flex:none}
 .spiece{margin-left:auto;width:84px;height:84px;display:flex;align-items:center;justify-content:center;flex:none}
 .spiece svg{max-width:84px;max-height:84px;width:auto;height:auto;display:block;box-shadow:0 4px 10px rgba(0,0,0,.14)}
+/* the door cards' heart tab: the panels' .pfav, at the foot of the card, on hover (§6), always when favourited */
+.sdcard{position:relative}
+.sdcard .pfav{display:inline-flex;opacity:0;transition:opacity .16s,background .16s,color .16s}
+.sslot:hover .pfav,.sdcard .pfav.on{opacity:1}
+@media (hover:none){.sdcard .pfav{opacity:1}}
+.favchip .favdoor{display:flex;justify-content:center;height:70px;border-radius:7px;background:var(--paper-warm)}
+.favchip .favdoor svg{height:100%;width:auto;display:block}
+body.hassel .stylelab{display:none}   /* the sample dock names the tile; the header has no room for both */
