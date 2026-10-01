@@ -22,7 +22,7 @@ function spring(el,keyframes,opts){
   try{M.animate(el,keyframes,opts||{type:'spring',stiffness:280,damping:28});return true;}catch(e){return false;}
 }
 _ready.push(fetch('showcase/paints/paints.json').then(function(r){return r.json();}).then(function(m){FB=m.map(function(p){return [p.name,p.hex];});}));
-_ready.push(fetch('showcase/finishes/boards.json').then(function(r){return r.json();}).then(function(m){BOARDS=m.map(function(b){return {s:b.file.replace(/\.webp$/,''),n:b.name};});}));
+_ready.push(fetch('showcase/finishes/boards.json').then(function(r){return r.json();}).then(function(m){BOARDS=m.map(function(b){return {s:b.file.replace(/\.webp$/,''),n:b.name,supplier:b.supplier||'Egger'};});}));
 function el(id){return document.getElementById(id)}
 function slug(s){return s.replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'')}
 function toast(t){if(window._quiet)return;var e=el('toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(function(){e.classList.remove('on');},1400);}
@@ -168,13 +168,13 @@ function fillSide(kind,it){
   if(kind==='vinyl'){
     sel.vinyl=it; sel.board=null;
     var fv=el('fillBoard'); fv.style.backgroundImage='none'; fv.style.removeProperty('--tex'); fv.style.backgroundColor=it[1]; fv.classList.remove('rotable');
-    fv.querySelector('.fn').textContent='Boards'; fv.setAttribute('data-tag',''); fv.setAttribute('data-brand','HPP'); fv.setAttribute('data-name',it[0]);
+    fv.querySelector('.fn').textContent='External'; fv.setAttribute('data-tag',''); fv.setAttribute('data-brand','HPP'); fv.setAttribute('data-name',it[0]);
     var sv=el('sideBoard'); sv._rot=0; sv.classList.add('chosen'); sv.classList.remove('idle','active'); selectedSide=sv; if(typeof renderCbar==='function')renderCbar();
     updateBar(); if(!window._quiet)openStyle('doors'); return;
   }
   if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); el('sidePaint').classList.remove('idle','active'); renderRoom(); selectedSide=el('sidePaint'); if(typeof renderCbar==='function')renderCbar(); toast('Wallpaper · '+it.n); return; }
-  sel[kind]=it; if(kind==='board'){sel.vinyl=null;el('fillBoard').style.backgroundColor='';}
-  var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
+  sel[kind]=it; if(kind==='board'){sel.vinyl=null;el('fillBoard').style.backgroundColor='';if(typeof syncInternal==='function')syncInternal();}
+  var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'External':kind==='carcass'?'Internal':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
   var texUrl="url('"+(it.img||('showcase/finishes/'+it.s+'.webp'))+"')";
   fillEl.style.backgroundImage=texUrl;
   fillEl.style.setProperty('--tex',texUrl); fillEl.classList.add('rotable');
@@ -300,14 +300,14 @@ _ready.push(fetch('showcase/wallpaper/wallpaper.json').then(function(r){return r
 })();
 /* ===== Canvas Control bar — the header's contextual second row; reflects the selected panel ===== */
 var selectedSide=null;
-var CBAR_ROLE={sideCeiling:'Ceiling',sidePaint:'Walls',sideSkirting:'Skirting',sideWorktop:'Worktop',sideCarcass:'Carcass',sideBoard:'Boards'};
+var CBAR_ROLE={sideCeiling:'Ceiling',sidePaint:'Walls',sideSkirting:'Skirting',sideWorktop:'Worktop',sideCarcass:'Internal',sideBoard:'External'};
 function renderCbar(){
   if(typeof renderHeaderCtl==='function')renderHeaderCtl();
   var bar=el('cbar'); if(!bar)return;
   if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
   var chosen=selectedSide.classList.contains('chosen');
   if(chosen){   /* name + controls live in the header dock; panel tabs carry the labels */
-    /* the Boards tile's style: in the contextual row (PATTERNS §6), where the dock has no room left */
+    /* the External tile's style: in the contextual row (PATTERNS §6), where the dock has no room left */
     bar.innerHTML=selectedSide.id==='sideBoard'?'<button class="hbtn" id="hstyle" title="Choose the style of the doors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="3" width="12" height="18" rx="1"/><rect x="8.6" y="5.6" width="6.8" height="5.4" rx=".6"/><rect x="8.6" y="13" width="6.8" height="5.4" rx=".6"/></svg><span>Style</span></button>':'';
     var hs=el('hstyle'); if(hs)hs.onclick=function(){ openStyle('types'); };
     return; }
@@ -548,7 +548,7 @@ function showSuggest(){if(!bothChosen())return;var row=el('srow');
   paints2.forEach(function(p){ ph+='<div class="scard pcard" data-paint="'+p[0]+'" data-tip="'+p[0]+'\nFarrow & Ball · '+p[1].toUpperCase()+'"><div class="si" style="background:'+p[1]+'"></div></div>'; });
   picks.forEach(function(b){ bh+='<div class="scard" data-s="'+b.s+'" data-n="'+b.n+'" data-tip="'+b.n+'\nEgger"><img src="showcase/finishes/'+b.s+'.webp" draggable="false"></div>'; });
   row.innerHTML=(ph?'<div class="sgrp"><div class="sgl">Walls · Farrow &amp; Ball</div><div class="sgr">'+ph+'</div></div>':'')
-    +(bh?'<div class="sgrp"><div class="sgl">Boards · Egger</div><div class="sgr">'+bh+'</div></div>':'');
+    +(bh?'<div class="sgrp"><div class="sgl">External · Egger</div><div class="sgr">'+bh+'</div></div>':'');
   [].forEach.call(row.querySelectorAll('.pcard'),function(c){
     c.addEventListener('click',function(){ var nm=c.getAttribute('data-paint'); for(var i=0;i<FB.length;i++)if(FB[i][0]===nm){addPaint(FB[i]);toast('Wall · '+nm);break;} });
   });
@@ -614,8 +614,8 @@ function buildZipExtras(cb){
   if(ceilOn&&ceilCol)jobs.push({label:ceilCol[0],sub:'Ceiling · Farrow & Ball · '+ceilCol[1].toUpperCase(),hex:ceilCol[1],file:'panel-ceiling.png'});
   if(skirtOn&&skirtCol)jobs.push({label:skirtCol[0],sub:'Skirting · Farrow & Ball · '+skirtCol[1].toUpperCase(),hex:skirtCol[1],file:'panel-skirting.png'});
   if(sel.worktop)jobs.push({label:sel.worktop.n,sub:'Worktop · Omega Stone',url:sel.worktop.img||('showcase/worktops/'+sel.worktop.s),file:'panel-worktop.png'});
-  if(sel.carcass)jobs.push({label:sel.carcass.n,sub:'Carcass · Egger',url:'showcase/finishes/'+sel.carcass.s+'.webp',file:'panel-carcass.png'});
-  if(sel.board)jobs.push({label:sel.board.n,sub:'Boards · Egger',url:'showcase/finishes/'+sel.board.s+'.webp',file:'panel-boards.png'});
+  if(sel.carcass)jobs.push({label:sel.carcass.n,sub:'Internal · Egger',url:'showcase/finishes/'+sel.carcass.s+'.webp',file:'panel-carcass.png'});
+  if(sel.board)jobs.push({label:sel.board.n,sub:'External · Egger',url:'showcase/finishes/'+sel.board.s+'.webp',file:'panel-boards.png'});
   if(floor&&el('floorbar').classList.contains('filled'))jobs.push({label:floor.name,sub:'Floor · '+(floor.type==='hard'?'Egger':'Crucial Trading'),url:floor.url,file:'panel-floor.png'});
   var out=[];
   function next(){
@@ -984,8 +984,8 @@ el('bzip').onclick=function(){
 
 /* ===== properties modal (the hidden cog) ===== */
 (function(){
-  var PANELS=[{k:'ceiling',label:'Ceiling'},{k:'wall',label:'Walls'},{k:'skirting',label:'Skirting'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Carcass'},{k:'boards',label:'Boards'}];
-  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'Boards',brands:['Egger']},{k:'carcass',label:'Carcass',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
+  var PANELS=[{k:'ceiling',label:'Ceiling'},{k:'wall',label:'Walls'},{k:'skirting',label:'Skirting'},{k:'worktop',label:'Worktop'},{k:'carcass',label:'Internal'},{k:'boards',label:'External'}];
+  var MATS=[{k:'walls',label:'Walls',brands:['Farrow & Ball']},{k:'ceiling',label:'Ceiling',brands:['Farrow & Ball']},{k:'skirting',label:'Skirting',brands:['Farrow & Ball']},{k:'wood',label:'External',brands:['Egger']},{k:'carcass',label:'Internal',brands:['Egger']},{k:'floor',label:'Floor',brands:['Egger','Crucial Trading']},{k:'worktop',label:'Worktop',brands:['Omega Stone']},{k:'tags',label:'Post-it tags',brands:[]}];
   var PVER=5;   /* v5: ceiling and skirting become vertical panels */
   var props={ver:PVER,panelW:{ceiling:10,wall:32,skirting:10,worktop:14,carcass:9,boards:25},mats:{},brands:{},swatchH:66,floorH:120,order:['ceiling','wall','skirting','worktop','carcass','boards']};
   /* Default: a clean canvas — only Walls + Boards on, 50/50. Doors & Carcass are further
@@ -1122,7 +1122,7 @@ el('bzip').onclick=function(){
     function visSides(){ return activeKeys().map(function(k){var e=el(SIDEID[k]);return (e&&e.style.display!=='none')?{k:k,el:e}:null;}).filter(Boolean); }
     Object.keys(SIDEID).forEach(function(k){
       var side=el(SIDEID[k]); if(!side)return;
-      var ROLE={ceiling:'Ceiling',wall:'Walls',skirting:'Skirting',worktop:'Worktop',carcass:'Carcass',boards:'Boards'};
+      var ROLE={ceiling:'Ceiling',wall:'Walls',skirting:'Skirting',worktop:'Worktop',carcass:'Internal',boards:'External'};
       var grip=document.createElement('button'); grip.className='pgrip'; grip.type='button'; grip.title='Drag to reorder the '+(ROLE[k]||'panel').toLowerCase()+' panel'; grip.setAttribute('aria-label','Drag to reorder '+(ROLE[k]||'panel')); grip.innerHTML='<span>'+(ROLE[k]||'Panel')+'</span>'; side.appendChild(grip);
       var dragging=false, curIdx=-1, gsx=0, gsy=0, gmoved=false;
       function locate(x){
@@ -1390,7 +1390,7 @@ function runCommand(t){
 
 /* ===================== Style (scheme brief, 30 Sep 2026) =====================
    The furniture's style, after its colours: the style type (Flat decor, Moulded vinyl) in one row over the blurred
-   studio; for moulded vinyl the Boards tile turns to HPP's vinyl colours, and choosing one brings the doors in an
+   studio; for moulded vinyl the External tile turns to HPP's vinyl colours, and choosing one brings the doors in an
    endless carousel that works like the floor's; a door turns to its options, ticked and saved as in Studio tools.
    Data: showcase/doors/style-step.json (written by sturij-assets tools/studio-style-step.mjs, no prices, no maker's
    codes). Drawings: aspire-fronts.mjs, sturij-assets' renderer byte for byte (test/studio-style-step.test.ts). */
@@ -1414,6 +1414,7 @@ function setFamily(code){
   el('railBoard').style.display=vinyl?'none':'';
   el('railVinyl').style.display=vinyl?'':'none';
   var lab=el('stylelab'), f=famOf(code); if(lab)lab.textContent=f?f.name:'';
+  syncInternal();
 }
 function openStyle(stage){
   if(!STEP||!FRONTS){toast('Styles are still loading');return;}
@@ -1481,6 +1482,16 @@ function chooseFamily(code){
   window.addEventListener('resize',function(){render();});
 })();
 function drawDoors(){ if(window._drawDoors)_drawDoors(); }
+/* One board supplier in a scheme (scheme brief, Mark 30 Sep 2026; style_families.internal_rule). Flat decor takes the
+   Internal tile from the External tile's board supplier (same_supplier). Moulded vinyl fronts are HPP's, not board, so
+   the Internal tile is any one board supplier's (one_board_supplier). Every Studio board is Egger today; the rule is
+   here for the next supplier. */
+function supplierOf(b){return (b&&b.supplier)||'Egger';}
+function internalBoards(){
+  var sameAs=!(styleSel&&styleSel.family==='moulded_vinyl')&&sel.board?supplierOf(sel.board):null;
+  return sameAs?BOARDS.filter(function(b){return supplierOf(b)===sameAs;}):BOARDS;
+}
+function syncInternal(){var r=el('railCarcass');if(r&&r._build)r._build(internalBoards());}
 /* Favourite doors (scheme brief, Mark 30 Sep 2026): every door carries the same heart tab as a chosen panel; a
    favourite is the door in its colour, its heart filled see-through bronze, and its chip in the favourites drawer
    brings the colour and the door's options back. */
@@ -1497,7 +1508,7 @@ function doorFavArt(f){
   var s=STEP&&STEP.styles.filter(function(x){return x.style.code===f.style;})[0];
   return s?frontOf(s,DOOR,f.oklch||f.hex||'oklch(86% 0.012 85)','fv'+slug(f.key)+'_'):'';
 }
-/* a favourite colour or door: Moulded vinyl, the colour on the Boards tile, and for a door its options */
+/* a favourite colour or door: Moulded vinyl, the colour on the External tile, and for a door its options */
 function applyDoorFav(f){
   var c=f.k==='vinyl'?[f.n,f.hex,f.code,f.oklch]:(f.colour?[f.cn,f.hex,f.colour,f.oklch]:null);
   styleSel=styleSel&&styleSel.family==='moulded_vinyl'?styleSel:{family:'moulded_vinyl'}; setFamily('moulded_vinyl');
