@@ -71,6 +71,24 @@ Visualise prompts are sectioned (CONTEXT / MATERIAL FACTS (STRICT) / INSTRUCTION
 
 Sentence-case UI, spare and trade-literate. British English. No emoji, no unicode-as-icons; line icons at stroke 1.7, 15px.
 
+## 14. Style — proposed, awaiting Mark's agreement (1 Oct 2026)
+
+The furniture's style comes after its colours (scheme brief, 30 Sep 2026), and is built from the patterns above:
+- **The trigger** is a Style control in the contextual second row while the Boards tile is selected (§6). The header
+  dock has no room left for it at common widths.
+- **The style types** (the offered families: Flat decor, Moulded vinyl) show in one row over the blurred studio, using
+  the modal's own backdrop. Each type is a door of its kind on a paper card, as the suggestion cards are. The type
+  label is a category, not an instance, so it shows. The chosen type is a label beside the logo.
+- **Moulded vinyl** turns the Boards tile's carousel to HPP's vinyl colours (a colour carousel, as the paints are), and
+  a colour fills the tile as a paint does. Choosing one brings the doors.
+- **The doors** sit on paper cards in an endless horizontal carousel that works as the floor's does (§9): four
+  showing, with drag, wheel and momentum. Each door is drawn in the chosen colour in the studio light as it comes into
+  view. No names show (§7).
+- **A door's options** use the Studio tools' sections, bronze ticks and Save (§8); each option shows a drawing of the
+  piece. Saving keeps the type, style, colour and ticked options in the scheme (§11).
+- **Data** is a manifest (§10): `showcase/doors/style-step.json`, written by sturij-assets, with the renderer pinned
+  beside it as `aspire-fronts.mjs` (`test/studio-style-step.test.ts`).
+
 ---
 
 *Deviation from this document is a design decision, not an implementation detail — it gets discussed first.*

@@ -32,6 +32,7 @@
 <header class="top">
   <div class="toprow">
   <a class="b" href="/"><img src="brand/sturij-logo-white.png" alt="Sturij"></a>
+  <span class="hdock-name stylelab" id="stylelab"></span>
   <span class="hctl" id="hctl"></span>
   <span class="tr">
     <button class="hbtn" id="stab" title="Describe your scheme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.2-4.2"/></svg><span>Search</span></button>
@@ -95,6 +96,7 @@
     <button class="pclose" title="Clear · back to carousel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="colhint">Boards</div>
     <div class="rail" id="railBoard"><div class="track"></div></div>
+    <div class="rail" id="railVinyl" style="display:none"><div class="track"></div></div>
     <div class="filled" id="fillBoard"><span class="fn"></span></div>
   </div>
 </div>
@@ -140,6 +142,11 @@
 <div class="tray" id="tray"><h4>Your scheme and swatches</h4><div class="items" id="items"></div><div class="foot"><button class="zip" id="bzip">Download zip</button><button class="zip alt" id="bboard">Send to board</button></div></div>
 <div class="toast" id="toast"></div>
 
+<div class="modal stylem" id="stylem" role="dialog" aria-modal="true" aria-label="Style">
+  <div class="stypes" id="stypes"></div>
+  <div class="sdoors" id="sdoors"><div class="strack"></div></div>
+  <div class="mcard sopts" id="sopts"></div>
+</div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Studio tools">
   <div class="mcard">
     <div class="mhead"><h3>Studio tools</h3><button id="mx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
