@@ -80,12 +80,12 @@ Sentence-case UI, spare and trade-literate. British English. No emoji, no unicod
 ## 14. Style — proposed, awaiting Mark's agreement (1 Oct 2026)
 
 The furniture's style comes after its colours (scheme brief, 30 Sep 2026), and is built from the patterns above:
-- **The trigger** is a Style control in the contextual second row while the Boards tile is selected (§6). The header
+- **The trigger** is a Style control in the contextual second row while the External tile is selected (§6). The header
   dock has no room left for it at common widths.
 - **The style types** (the offered families: Flat decor, Moulded vinyl) show in one row over the blurred studio, using
   the modal's own backdrop. Each type is a door of its kind on a paper card, as the suggestion cards are. The type
   label is a category, not an instance, so it shows. The chosen type is a label beside the logo.
-- **Moulded vinyl** turns the Boards tile's carousel to HPP's vinyl colours (a colour carousel, as the paints are), and
+- **Moulded vinyl** turns the External tile's carousel to HPP's vinyl colours (a colour carousel, as the paints are), and
   a colour fills the tile as a paint does. Choosing one brings the doors.
 - **The doors** sit on paper cards in an endless horizontal carousel that works as the floor's does (§9): four
   showing, with drag, wheel and momentum. Each door is drawn in the chosen colour in the studio light as it comes into
@@ -95,7 +95,7 @@ The furniture's style comes after its colours (scheme brief, 30 Sep 2026), and i
 - **Favourites** (agreed, scheme brief 30 Sep 2026): every door card carries the panels' heart tab (`.pfav`) at its
   foot, shown on hover (always on touch, always once favourited). A favourite is the door in its colour; its heart
   fills see-through bronze (§7) and its chip in the favourites drawer brings the colour and the door's options back.
-  A vinyl colour is favourited as a paint is, from its carousel or the Boards heart.
+  A vinyl colour is favourited as a paint is, from its carousel or the External heart.
 - **Data** is a manifest (§10): `showcase/doors/style-step.json`, written by sturij-assets, with the renderer pinned
   beside it as `aspire-fronts.mjs` (`test/studio-style-step.test.ts`).
 
