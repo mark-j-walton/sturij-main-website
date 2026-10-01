@@ -57,7 +57,7 @@ function addBandFilter(sideEl, all, build){
 function rail(sideEl, railEl, kind, items, paint){
   var track=railEl.querySelector('.track');
   var all=items.slice(), cur=all, y=0, dragging=false, lastY=0, vy=0, moved=0, raf=null, pool=[], glide=null;
-  var brand = paint ? 'Farrow & Ball' : (kind==='worktop'?'Omega Stone':'Egger');
+  var brand = kind==='vinyl' ? 'HPP' : paint ? 'Farrow & Ball' : (kind==='worktop'?'Omega Stone':'Egger');
   function SH(){return parseInt(getComputedStyle(document.documentElement).getPropertyValue('--swh'))||66;}
   function mkStrip(){var d=document.createElement('div');d.className='strip';d.setAttribute('data-tag','');d.setAttribute('data-brand',brand);d.style.position='absolute';d.style.left='0';d.style.right='0';d.innerHTML='<span class="lab"><span class="nm"></span><span class="add">Add swatch</span><span class="fav">Favourite</span></span>';track.appendChild(d);return d;}
   function fillStrip(d,it,i){
@@ -161,8 +161,15 @@ function fillSide(kind,it){
     toast((kind==='ceiling'?'Ceiling':'Skirting')+' · '+it[0]);
     return;
   }
+  if(kind==='vinyl'){
+    sel.vinyl=it; sel.board=null;
+    var fv=el('fillBoard'); fv.style.backgroundImage='none'; fv.style.removeProperty('--tex'); fv.style.backgroundColor=it[1]; fv.classList.remove('rotable');
+    fv.querySelector('.fn').textContent='Boards'; fv.setAttribute('data-tag',''); fv.setAttribute('data-brand','HPP'); fv.setAttribute('data-name',it[0]);
+    var sv=el('sideBoard'); sv._rot=0; sv.classList.add('chosen'); sv.classList.remove('idle','active'); selectedSide=sv; if(typeof renderCbar==='function')renderCbar();
+    updateBar(); if(!window._quiet)openStyle('doors'); return;
+  }
   if(kind==='wallpaper'){ wallPaper=it; wallMode='wallpaper'; el('sidePaint').classList.add('chosen'); el('sidePaint').classList.remove('idle','active'); renderRoom(); selectedSide=el('sidePaint'); if(typeof renderCbar==='function')renderCbar(); toast('Wallpaper · '+it.n); return; }
-  sel[kind]=it;
+  sel[kind]=it; if(kind==='board'){sel.vinyl=null;el('fillBoard').style.backgroundColor='';}
   var fillEl=el('fill'+cap(kind)), label=(kind==='board'?'Boards':cap(kind)), brand=(kind==='worktop'?'Omega Stone':'Egger');
   var texUrl="url('"+(it.img||('showcase/finishes/'+it.s+'.webp'))+"')";
   fillEl.style.backgroundImage=texUrl;
@@ -295,7 +302,11 @@ function renderCbar(){
   var bar=el('cbar'); if(!bar)return;
   if(!selectedSide){ bar.innerHTML='<span class="cbhint">Tap a material to select it</span>'; return; }
   var chosen=selectedSide.classList.contains('chosen');
-  if(chosen){ bar.innerHTML=''; return; }   /* name + controls live in the header dock; panel tabs carry the labels */
+  if(chosen){   /* name + controls live in the header dock; panel tabs carry the labels */
+    /* the Boards tile's style: in the contextual row (PATTERNS §6), where the dock has no room left */
+    bar.innerHTML=selectedSide.id==='sideBoard'?'<button class="hbtn" id="hstyle" title="Choose the style of the doors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="3" width="12" height="18" rx="1"/><rect x="8.6" y="5.6" width="6.8" height="5.4" rx=".6"/><rect x="8.6" y="13" width="6.8" height="5.4" rx=".6"/></svg><span>Style</span></button>':'';
+    var hs=el('hstyle'); if(hs)hs.onclick=function(){ openStyle('types'); };
+    return; }
   bar.innerHTML='<span class="cbhint">choose a material</span>';
 }
 function selectSide(s){ selectedSide=s; renderCbar(); }
@@ -350,6 +361,7 @@ function clearPanel(side){
   } else {
     var kind=id==='sideWorktop'?'worktop':(id==='sideCarcass'?'carcass':'board');
     if(sel)sel[kind]=null;
+    if(kind==='board'&&sel){sel.vinyl=null;el('fillBoard').style.backgroundColor='';}
     var fe=el('fill'+kind.charAt(0).toUpperCase()+kind.slice(1));
     if(fe){fe.style.backgroundImage=''; fe.style.removeProperty('--tex'); fe.classList.remove('rotable'); fe.style.setProperty('--rot','0deg'); side._rot=0; fe.removeAttribute('data-tag'); fe.removeAttribute('data-name'); var fn=fe.querySelector('.fn'); if(fn)fn.textContent='';}
   }
@@ -1172,6 +1184,7 @@ function snapshot(){
   return {v:1,co:ceilOn,so:skirtOn,zn:{c:zones.ceiling,s:zones.skirting,f:zones.floor,w:zones.walls},paints:paints,ceil:ceilCol,skirt:skirtCol,target:paintTarget,wallMode:wallMode,
     wp:wallPaper?{s:wallPaper.s,n:wallPaper.n,img:wallPaper.img}:null,
     selB:sel.board?{s:sel.board.s,n:sel.board.n}:null,
+    st:styleSel, vin:sel.vinyl||null,
     selC:sel.carcass?{s:sel.carcass.s,n:sel.carcass.n}:null,
     selW:sel.worktop?{s:sel.worktop.s,n:sel.worktop.n,img:sel.worktop.img}:null,
     ft:floorType,fl:floor?{name:floor.name,url:floor.url,type:floor.type,avg:floor.avg}:null,
@@ -1204,6 +1217,8 @@ function restoreScheme(){
     if(S.selW)fillSide('worktop',S.selW);
     if(S.selC)fillSide('carcass',S.selC);
     if(S.selB)fillSide('board',S.selB);
+    if(S.st&&S.st.family){styleSel=S.st;setFamily(S.st.family);}
+    if(S.vin)fillSide('vinyl',S.vin);
     if(S.ft)floorType=S.ft;
     if(S.fl){floor=S.fl;el('floorbar').classList.add('filled');var ex=el('fexp');if(ex){ex.style.backgroundImage="url('"+S.fl.url+"')";ex.querySelector('.fn').textContent=(S.fl.type==='hard'?'Egger':'Crucial Trading')+' · '+S.fl.name;}}
     renderFloorRail();
@@ -1364,6 +1379,125 @@ function runCommand(t){
   open('sdraw',true);var si=el('sq');if(si){si.value=t;var go=el('sgo');if(go)go.click();}
 }
 
+/* ===================== Style (scheme brief, 30 Sep 2026) =====================
+   The furniture's style, after its colours: the style type (Flat decor, Moulded vinyl) in one row over the blurred
+   studio; for moulded vinyl the Boards tile turns to HPP's vinyl colours, and choosing one brings the doors in an
+   endless carousel that works like the floor's; a door turns to its options, ticked and saved as in Studio tools.
+   Data: showcase/doors/style-step.json (written by sturij-assets tools/studio-style-step.mjs, no prices, no maker's
+   codes). Drawings: aspire-fronts.mjs, sturij-assets' renderer byte for byte (test/studio-style-step.test.ts). */
+var STEP=null, FRONTS=null, VINYL=[], styleSel=null, styleDoor=null;
+_ready.push(fetch('showcase/doors/style-step.json').then(function(r){return r.json();}).then(function(m){STEP=m;VINYL=m.colours.map(function(c){return [c.name,c.hex,c.code,c.oklch];});}).catch(function(){}));
+_ready.push(import('./aspire-fronts.mjs').then(function(m){FRONTS=m;}).catch(function(){}));
+function famOf(code){return STEP?STEP.families.filter(function(f){return f.code===code;})[0]:null;}
+function drawn(){return STEP?STEP.styles.filter(function(s){return s.drawn;}):[];}
+var DOOR={code:'WD',H:2155,W:496};
+var _svgCache={};
+/* a front in the chosen colour, in the studio light; cached, so the carousel draws each door once as it reaches it */
+function frontOf(style,piece,colour,id){
+  if(!FRONTS||!style||!style.geometry)return '';
+  var k=style.style.code+'|'+piece.code+'|'+(piece.panels||'')+'|'+piece.H+'x'+piece.W+'|'+colour;
+  if(!_svgCache[k]){try{_svgCache[k]=FRONTS.frontSvg(style.geometry,piece,{colour:colour,light:'studio',id:id,scale:1});}catch(e){_svgCache[k]='';}}
+  return _svgCache[k].replace(/ id="([^"]+)"/g,' id="'+id+'$1"').replace(/url\(#([^)]+)\)/g,'url(#'+id+'$1)');
+}
+function vinylTone(){return sel.vinyl?(sel.vinyl[3]||sel.vinyl[1]):'oklch(86% 0.012 85)';}
+function setFamily(code){
+  var vinyl=code==='moulded_vinyl';
+  el('railBoard').style.display=vinyl?'none':'';
+  el('railVinyl').style.display=vinyl?'':'none';
+  var lab=el('stylelab'), f=famOf(code); if(lab)lab.textContent=f?f.name:'';
+}
+function openStyle(stage){
+  if(!STEP||!FRONTS){toast('Styles are still loading');return;}
+  var m=el('stylem'); m.setAttribute('data-stage',stage); m.classList.add('on');
+  if(stage==='types')drawTypes(); else if(stage==='doors')drawDoors(); else drawOpts();
+}
+function closeStyle(){el('stylem').classList.remove('on');}
+el('stylem').addEventListener('click',function(e){if(e.target===el('stylem'))closeStyle();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&el('stylem').classList.contains('on'))closeStyle();});
+/* the style types: one clean row, each shown by a door of its kind */
+function drawTypes(){
+  var h='';
+  STEP.families.filter(function(f){return f.offered;}).forEach(function(f){
+    var art=f.code==='flat_decor'
+      ?'<span class="sflat" style="background-image:url(\'showcase/finishes/'+((sel.board&&sel.board.s)||(BOARDS[0]&&BOARDS[0].s))+'.webp\')"></span>'
+      :frontOf(STEP.styles.filter(function(s){return s.style.code==='SHAKER';})[0],DOOR,vinylTone(),'t'+f.code);
+    h+='<button class="scard stype'+(styleSel&&styleSel.family===f.code?' on':'')+'" data-f="'+f.code+'"><span class="sart">'+art+'</span><span class="tl">'+f.name+'</span></button>';
+  });
+  var row=el('stypes'); row.innerHTML=h;
+  [].forEach.call(row.querySelectorAll('.stype'),function(b){b.onclick=function(){chooseFamily(b.getAttribute('data-f'));};});
+}
+function chooseFamily(code){
+  var was=styleSel&&styleSel.family;
+  styleSel={family:code}; setFamily(code); closeStyle();
+  var sb=el('sideBoard');
+  if(was!==code&&sb.classList.contains('chosen')&&(code==='moulded_vinyl'?!sel.vinyl:!sel.board))clearPanel(sb);
+  if(code==='moulded_vinyl'&&sel.vinyl)openStyle('doors');
+  queueSave();
+}
+/* the doors: four showing, endless, with motion and drag, as the floor carousel */
+(function(){var band=el('sdoors'),track=band.querySelector('.strack'),x=0,down=false,lx=0,vx=0,raf=null,moved=0,pool=[],glide=null;
+  function SW(){return Math.max(170,Math.floor((band.clientWidth||window.innerWidth)/4));}
+  function mk(){var d=document.createElement('div');d.className='sslot';d.innerHTML='<div class="scard sdcard"><span class="sart"></span></div>';track.appendChild(d);return d;}
+  function render(reset){
+    var list=drawn(); if(reset)x=0;
+    if(!list.length||!el('stylem').classList.contains('on')){return;}
+    if(!isFinite(x))x=0;
+    var sw=SW(), W=list.length*sw, vw=band.clientWidth||window.innerWidth;
+    var w=((x%W)+W)%W, first=Math.floor(w/sw), off=w%sw, n=Math.ceil(vw/sw)+2;
+    while(pool.length<n)pool.push(mk());
+    while(pool.length>n)pool.pop().remove();
+    var tone=vinylTone();
+    for(var k=0;k<n;k++){var idx=(first+k)%list.length,d=pool[k];
+      d.style.width=sw+'px';d.style.left=(k*sw-off)+'px';
+      if(d._idx!==idx||d._tone!==tone){d._idx=idx;d._tone=tone;d.setAttribute('data-i',idx);
+        d.setAttribute('data-name',list[idx].style.name);
+        d.querySelector('.sart').innerHTML=frontOf(list[idx],DOOR,tone,'d'+k+'_');}
+    }
+  }
+  window._drawDoors=function(){var list=drawn(),at=styleSel&&styleSel.style?list.map(function(s){return s.style.code;}).indexOf(styleSel.style):-1;
+    pool.forEach(function(d){d._idx=null;}); x=at>0?at*SW():0; render();};
+  band.addEventListener('wheel',function(e){e.preventDefault();var to=x+(e.deltaY+e.deltaX);if(glide)glide.stop();glide=glideValue(x,to,0,function(v){x=v;render();});if(!glide){x=to;render();}},{passive:false});
+  band.addEventListener('pointerdown',function(e){down=true;lx=e.clientX;moved=0;vx=0;if(raf)cancelAnimationFrame(raf);if(glide){glide.stop();glide=null;}band.setPointerCapture(e.pointerId);band.classList.add('grabbing');});
+  band.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-lx;lx=e.clientX;vx=dx;moved+=Math.abs(dx);x-=dx;render();});
+  function mom(){glide=glideValue(x,x-vx*17,-vx*60,function(v){x=v;render();});if(glide)return;vx*=0.92;if(Math.abs(vx)<0.4)return;x-=vx;render();raf=requestAnimationFrame(mom);}
+  band.addEventListener('pointerup',function(e){if(!down)return;down=false;band.classList.remove('grabbing');
+    if(moved<14){var t=document.elementFromPoint(e.clientX,e.clientY);t=t&&t.closest?t.closest('.sslot'):null;
+      if(t){var s=drawn()[parseInt(t.getAttribute('data-i'))];if(s){styleDoor=s;openStyle('opts');}}else closeStyle();return;}
+    if(!REDUCED)mom();});
+  band.addEventListener('pointercancel',function(){down=false;band.classList.remove('grabbing');});
+  window.addEventListener('resize',function(){render();});
+})();
+function drawDoors(){ if(window._drawDoors)_drawDoors(); }
+/* a door's options: the pieces HPP makes for it, at most eight, ticked and saved as in Studio tools */
+var PIECE_SIZE={WD:[2155,496],CSWD:[2155,496],TFWD:[2155,496],TFBFWD:[2155,496],FD:[2155,496],D:[715,496],EP:[715,496],DR:[215,496],HGD:[285,496],'1HDR':[215,496],'2HDR':[215,496]};
+function drawOpts(){
+  var s=styleDoor; if(!s)return;
+  var tone=vinylTone(), was=styleSel&&styleSel.style===s.style.code?styleSel.options||[]:null;
+  var groups={doors:[],drawers:[]};
+  s.options.forEach(function(o){var g=groups[o.group];if(g)g.push(o);});
+  var h='<div class="mhead"><h3>Options</h3><button id="sox" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>';
+  ['doors','drawers'].forEach(function(g){ if(!groups[g].length)return;
+    h+='<div class="msec"><h4>'+cap(g)+'</h4>';
+    groups[g].forEach(function(o,i){
+      var sz=PIECE_SIZE[o.piece.code]||[715,496], lim=o.limits||{};
+      var H=Math.max(lim.min_height||0,Math.min(lim.max_height||9999,sz[0])), W=Math.max(lim.min_width||0,Math.min(lim.max_width||9999,sz[1]));
+      var piece={code:o.piece.code,H:H,W:W}; if(o.piece.panels)piece.panels=o.piece.panels;
+      var on=was?was.indexOf(o.code)>=0:o.default_on;
+      h+='<label class="mrow"><span class="ml"><input type="checkbox" data-o="'+o.code+'"'+(on?' checked':'')+'> '+o.label+'</span><span class="spiece">'+frontOf(s,piece,tone,'o'+g+i+'_')+'</span></label>';
+    });
+    h+='</div>';
+  });
+  h+='<div class="mfoot"><button class="mreset" id="soback" type="button">Back to doors</button><button id="sosave" type="button">Save</button></div>';
+  var c=el('sopts'); c.innerHTML=h;
+  el('sox').onclick=closeStyle;
+  el('soback').onclick=function(){openStyle('doors');};
+  el('sosave').onclick=function(){
+    var opts=[].map.call(c.querySelectorAll('input[data-o]:checked'),function(x){return x.getAttribute('data-o');});
+    styleSel={family:'moulded_vinyl',style:s.style.code,colour:sel.vinyl?sel.vinyl[2]:null,options:opts};
+    setFamily('moulded_vinyl'); closeStyle(); toast('Style saved'); queueSave();
+  };
+}
+
 /* ===================== boot ===================== */
 Promise.all(_ready).then(function(){
   if(FB.length){ ceilCol=ceilCol||neutralPaint(); skirtCol=skirtCol||neutralPaint();
@@ -1373,6 +1507,7 @@ Promise.all(_ready).then(function(){
   if(BOARDS.length){
     rail(el('sideCarcass'), el('railCarcass'), 'carcass', BOARDS, false);
     rail(el('sideBoard'), el('railBoard'), 'board', BOARDS, false); }
+  if(VINYL.length)rail(el('sideBoard'), el('railVinyl'), 'vinyl', VINYL, true);
   restoreScheme();
 });
 
