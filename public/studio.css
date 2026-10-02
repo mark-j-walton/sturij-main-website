@@ -582,6 +582,7 @@ header.top{position:relative}
 .visframe-bar{height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 14px;color:var(--paper)}
 .visframe-title{font:500 12px var(--f-mono);letter-spacing:.14em;text-transform:uppercase}
 .visframe-view{flex:1;width:100%;min-height:0;border:0;display:block;background:var(--paper)}
+.visframe-gap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:32px 16px;text-align:center;color:var(--navy)}
 html.visframe-open,html.visframe-open body{overflow:hidden}
 
 .zip.alt{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(29,29,29,.25)}

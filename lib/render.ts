@@ -137,11 +137,25 @@ export async function generate(r: RenderRequest, env: RenderEnv, fetchFn: typeof
   const key = env.get('GEMINI_API_KEY')
   if (!key) return { ok: false, code: 'E_NOT_CONFIGURED', message: 'The render key is not present on this deployment (GEMINI_API_KEY from the vault)' }
   const model = env.get('GEMINI_IMAGE_MODEL') || DEFAULT_MODEL
-  const body = JSON.stringify(geminiBody(composePrompt(r), r.textures, r.baseImage ?? null))
+  const out = await requestImage(key, model, JSON.stringify(geminiBody(composePrompt(r), r.textures, r.baseImage ?? null)), fetchFn, deadlineMs)
+  return out.ok ? { ok: true, image: out.image, label: VISUALISATION, model } : out
+}
+
+/** The text the model returned beside (or instead of) the image — its own note, kept for the logs. */
+export function extractNote(json: unknown): string {
+  const parts = ((((json as { candidates?: Array<{ content?: { parts?: unknown[] } }> })?.candidates ?? [])[0]?.content?.parts) ?? []) as Array<Record<string, unknown>>
+  return parts.map((p) => (typeof p.text === 'string' ? p.text.trim() : '')).filter(Boolean).join('\n\n')
+}
+
+/** The Gemini generateContent call shared by every render route: one call, one retry, the distinct errors kept. */
+export async function requestImage(key: string, model: string, body: string, fetchFn: typeof fetch = fetch, deadlineMs = 50_000): Promise<{ ok: true; image: string; note: string } | RenderError> {
   const started = Date.now()
   let last: RenderError = { ok: false, code: 'E_UPSTREAM', message: 'Generation failed' }
   for (let attempt = 0; attempt < 2; attempt++) {
-    if (attempt) await new Promise((res) => setTimeout(res, 1200))
+    if (attempt) {
+      if (deadlineMs - (Date.now() - started) < 5_000) break
+      await new Promise((res) => setTimeout(res, 1200))
+    }
     const ctrl = new AbortController()
     const t = setTimeout(() => ctrl.abort(), Math.max(1000, deadlineMs - (Date.now() - started)))
     try {
@@ -151,8 +165,8 @@ export async function generate(r: RenderRequest, env: RenderEnv, fetchFn: typeof
       if (!res.ok) { last = { ok: false, code: 'E_UPSTREAM', message: `The image service answered ${res.status}` }; if (res.status >= 400 && res.status < 500 && res.status !== 408) break; continue }
       const json = await res.json().catch(() => null)
       const image = extractImage(json)
-      if (!image) { last = { ok: false, code: 'E_NO_IMAGE', message: 'No image came back' }; continue }
-      return { ok: true, image, label: VISUALISATION, model }
+      if (!image) { const note = extractNote(json); last = { ok: false, code: 'E_NO_IMAGE', message: 'No image came back' + (note ? ' — ' + note.slice(0, 240) : '') }; continue }
+      return { ok: true, image, note: extractNote(json) }
     } catch {
       clearTimeout(t)
       last = { ok: false, code: 'E_UPSTREAM', message: 'The image service could not be reached' }

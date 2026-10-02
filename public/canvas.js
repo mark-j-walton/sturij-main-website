@@ -4,6 +4,7 @@
 var el=function(id){return document.getElementById(id);};
 var world=el('world'),plane=el('plane');
 var PROJS_KEY='sturij.canvas.projects';
+var VISUALISER_AVAILABLE=false; /* the visualiser (sturij.vercel.app) is behind Vercel Authentication since 1 Oct 2026; true when it is reachable again */
 var projs=[];try{projs=JSON.parse(localStorage.getItem(PROJS_KEY)||'[]');}catch(e){}
 if(!projs.length)projs=[{id:'p1',name:'Project 1'}];
 var curP=localStorage.getItem('sturij.canvas.curproj')||projs[0].id;
@@ -866,6 +867,7 @@ ctx.addEventListener('click',function(e){
     toast(g.length+' image'+(g.length===1?'':'s')+' set as the screensaver backdrop \u2014 select none and use Background \u203a Screensaver to reset');
   }
   else if(a==='tovis'){var pl3=g[0];
+    if(!VISUALISER_AVAILABLE){toast('The visualiser is not reachable from here at the moment \u2014 it is behind Vercel sign-in');return;}
     var payload=btoa(unescape(encodeURIComponent(JSON.stringify({verts:pl3.verts,openings:pl3.openings||[],H:2400,t:100}))));
     window.open('https://sturij.vercel.app/#/visualiser?plan='+payload,'_blank');
     toast('Opening the visualiser with this plan');}
@@ -1045,8 +1047,8 @@ el('cvClear').onclick=function(){
   pushHist();items=[];plane.innerHTML='';updateCtx();save();toast('Board cleared');
 };
 
-/* ---------- Sprint 2: AI on the board (Nano Banana via the visualiser endpoint) ---------- */
-var RENDER_ENDPOINT='https://sturij.vercel.app/api/render';
+/* ---------- Sprint 2: AI on the board (Nano Banana: the visualiser's render contract, served from this origin) ---------- */
+var RENDER_ENDPOINT='/api/studio-render';
 function rasterItem(it,px,cb){
   var cv=document.createElement('canvas');cv.width=px;cv.height=px;var x=cv.getContext('2d');
   if(it.hex){x.fillStyle=it.hex;x.fillRect(0,0,px,px);cb(cv.toDataURL('image/jpeg',0.9));}
