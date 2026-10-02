@@ -6,17 +6,20 @@
 // the measured colour where filed, the swatch image by id from the registry's store or image: null with a
 // misfit reason, the handle finishes, the snapshot's date, and the misfit list.
 //
-// THE READ. Through a read-only key held in the vault by name — STURIJ_ASSETS_READ_KEY, STURIJ_ASSETS_URL —
-// never the service-role key, never a value in this repository. Until that key exists the registry cannot
-// be read at build (every table carries RLS with no client policy), so the committed snapshot stands and the
-// build says so. The first snapshot was read by the session and kept as data/registry/*.json; `--from` that
-// file regenerates the feed byte for byte.
+// THE READ (2 Oct 2026: sturij-assets is the only asset database). At build, through the registry's public
+// read-only function registry-showcase — published, non-superseded rows only, no token and no key, so nothing
+// secret is needed anywhere (data/range.json registry.showcase names the scope). `--rest` reads the tables
+// directly instead, through the read-only key held in the vault by name — STURIJ_ASSETS_READ_KEY, with
+// STURIJ_ASSETS_URL beside it — never the service-role key, never a value in this repository. The first
+// snapshot was read by the session and kept as data/registry/*.json; `--from` that file regenerates the
+// feed byte for byte.
 //
 // THE FALLBACK (the Egger-CDN lesson): if the registry cannot be read, or answers with fewer rows than the
 // selection needs, the previous public/materials.json stands and the build reports it. The site never
 // fails on the feed.
 //
-//   node scripts/materials-feed.mjs                       # REST read by the vault names, else the fallback
+//   node scripts/materials-feed.mjs                       # the live read (registry-showcase), else the fallback
+//   node scripts/materials-feed.mjs --rest                # the direct table read by the vault names, else the fallback
 //   node scripts/materials-feed.mjs --from <rows.json>    # from a registry read kept as data (the session's)
 //   node scripts/materials-feed.mjs --check               # read the feed and print its reading, write nothing
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
@@ -30,6 +33,7 @@ export const DEFAULT_REGISTRY_URL = 'https://uxdrokyxywwezorpvfsp.supabase.co'
 export const KEY_NAME = 'STURIJ_ASSETS_READ_KEY'
 export const URL_NAME = 'STURIJ_ASSETS_URL'
 export const REGISTRY = 'sturij-assets (uxdrokyxywwezorpvfsp)'
+export const SHOWCASE_TIMEOUT_MS = 20_000
 
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -69,7 +73,10 @@ export function normalise(rows, range, meta, masters = { masters: [] }) {
     if (fam.from === 'placed') notes.push(`placed in ${tab} ${sel.placed ?? 'by the selection'}`)
     let image = null
     if (row.image && row.image.path) {
-      image = { id: row.image.id, path: '/' + String(row.image.path).replace(/^\/+/, ''), width: row.image.width ?? null, height: row.image.height ?? null, bytes: row.image.bytes ?? null, kind: row.image.kind ?? 'swatch', render_ready: !!row.image.render_ready }
+      // a path in this repository's public folder (the snapshot) is rooted; a URL in the registry's store is kept whole
+      const raw = String(row.image.path)
+      const path = /^https:\/\//.test(raw) ? raw : '/' + raw.replace(/^\/+/, '')
+      image = { id: row.image.id, path,width: row.image.width ?? null, height: row.image.height ?? null, bytes: row.image.bytes ?? null, kind: row.image.kind ?? 'swatch', render_ready: !!row.image.render_ready }
       if (typeof row.image.bytes === 'number' && row.image.bytes < 8192) misfits.push({ kind: 'flat-swatch', material: row.id, name: row.name, note: `the registry's swatch file is ${row.image.bytes} bytes — a flat synthetic colour, not the decor's texture; a photographic swatch is owed` })
     } else {
       notes.push('no swatch image in the registry')
@@ -156,6 +163,63 @@ export async function fetchRegistry(env, range) {
   return { read_at: new Date().toISOString(), decors }
 }
 
+// ---------- the live read: registry-showcase (public, published rows, no key) ----------
+
+/** "oklch(70.5% 0.072 65.8)" → { l: 0.705, c: 0.072, h: 65.8 }, the shape the snapshot keeps; null when unreadable. */
+export function parseOklch(v) {
+  if (v && typeof v === 'object' && 'l' in v) return v
+  const m = /^oklch\(\s*([\d.]+)(%?)\s+([\d.]+)\s+([\d.]+)/i.exec(String(v ?? ''))
+  if (!m) return null
+  const l = Number(m[1]) / (m[2] ? 100 : 1)
+  return { l: Math.round(l * 10000) / 10000, c: Number(m[3]), h: Number(m[4]) }
+}
+
+/**
+ * The showcase's answer assembled into the shape normalise reads, only the rows the selection names. The
+ * showcase carries the registry's colour (industry_refs hex/oklch) and the swatch's public URL in the catalog
+ * bucket; it does not carry the image's dimensions or bytes, nor the vision pass's confidence and texture, so
+ * those are null. A row the showcase did not return (unpublished, superseded) is missing, and normalise
+ * refuses the read — the snapshot stands.
+ * @param {{ total?: number, products?: any[] }} json
+ * @param {any} range
+ * @param {string} readAt
+ */
+export function fromShowcase(json, range, readAt) {
+  const sc = range.registry?.showcase ?? {}
+  const wanted = new Set(range.decors.map((d) => d.material))
+  const products = (json.products ?? []).filter((p) => wanted.has(p.id))
+  if (products.length === 0) throw Object.assign(new Error('E_FEED_EMPTY: registry-showcase answered with none of the selection\'s rows'), { code: 'E_FEED_EMPTY' })
+  const decors = products.map((p) => {
+    const sw = (p.images ?? []).find((i) => i.kind === 'swatch') ?? null
+    const surfaces = [...new Set((p.variants ?? []).map((v) => v.surface).filter(Boolean))].sort()
+    const refs = {}
+    if (surfaces.length === 1) { refs.texture_code = surfaces[0]; if (p.decor_code) refs.decor_texture_code = `${p.decor_code} ${surfaces[0]}` }
+    else if (surfaces.length > 1) refs.texture_codes = surfaces
+    return {
+      id: p.id, code: p.decor_code ?? null, name: p.name, status: p.status, supplier: sc.supplier ?? p.brand ?? null, category: p.category ?? null,
+      industry_refs: refs,
+      image: sw ? { id: null, path: sw.url, width: null, height: null, bytes: null, kind: 'swatch', render_ready: true } : null,
+      measurement: p.colour?.hex
+        ? { id: null, hex: p.colour.hex, oklch: parseOklch(p.colour.oklch), confidence: null, texture: null, texture_confidence: null, fidelity: null, measured_at: null, measured_by: p.colour.source ?? null }
+        : null,
+    }
+  })
+  return { read_at: readAt, read_by: null, counts: { showcase_scope: json.total ?? (json.products ?? []).length }, decors }
+}
+
+/** The live read: GET registry-showcase scoped by data/range.json, bounded by a timeout so a build never hangs on it. */
+export async function fetchShowcase(env, range, fetchFn = fetch) {
+  const sc = range.registry?.showcase
+  if (!sc || !sc.function) throw Object.assign(new Error('data/range.json names no registry.showcase scope'), { code: 'E_NO_SCOPE' })
+  const base = (env[URL_NAME] || DEFAULT_REGISTRY_URL).replace(/\/$/, '')
+  const q = new URLSearchParams()
+  if (sc.supplier_id) q.set('supplier_id', sc.supplier_id); else q.set('supplier', 'all')
+  if (sc.category) q.set('category', sc.category)
+  const r = await fetchFn(`${base}/functions/v1/${sc.function}?${q}`, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(SHOWCASE_TIMEOUT_MS) })
+  if (!r.ok) throw Object.assign(new Error(`E_FEED_HTTP: registry-showcase answered ${r.status}`), { code: 'E_FEED_HTTP' })
+  return fromShowcase(await r.json(), range, new Date().toISOString())
+}
+
 // ---------- the run ----------
 
 export function readJson(path) { return JSON.parse(readFileSync(path, 'utf8')) }
@@ -175,13 +239,16 @@ export async function run({ argv = [], env = process.env, cwd = process.cwd(), w
     if (fromArg) {
       rows = readJson(fromArg.startsWith('/') || /^[A-Za-z]:/.test(fromArg) ? fromArg : `${cwd}/${fromArg}`)
       meta = { at: rows.read_at, read: `session (${fromArg})`, read_by: rows.read_by ?? null }
-    } else {
+    } else if (argv.includes('--rest')) {
       rows = await (fetchImpl ?? fetchRegistry)(env, range)
       meta = { at: rows.read_at, read: `rest (${URL_NAME}, ${KEY_NAME} by name)` }
+    } else {
+      rows = await (fetchImpl ?? fetchShowcase)(env, range)
+      meta = { at: rows.read_at, read: 'registry-showcase (public, published rows, no key)' }
     }
     const feed = normalise(rows, range, meta, masters)
     if (write) writeFileSync(`${cwd}/${FEED_PATH}`, JSON.stringify(feed, null, 2) + '\n')
-    return { mode: fromArg ? 'from' : 'rest', feed, line: `materials feed: read ${feed.snapshot.read} at ${feed.snapshot.at} · ${feed.snapshot.decors} decors (${feed.snapshot.coded} coded, ${feed.snapshot.with_image} with an image, ${feed.snapshot.with_colour} with a measured colour) · ${feed.snapshot.handles} finishes, ${feed.snapshot.held} held, ${feed.snapshot.system} system renders · ${feed.snapshot.misfits} misfits → ${FEED_PATH}` }
+    return { mode: fromArg ? 'from' : argv.includes('--rest') ? 'rest' : 'showcase', feed, line: `materials feed: read ${feed.snapshot.read} at ${feed.snapshot.at} · ${feed.snapshot.decors} decors (${feed.snapshot.coded} coded, ${feed.snapshot.with_image} with an image, ${feed.snapshot.with_colour} with a measured colour) · ${feed.snapshot.handles} finishes, ${feed.snapshot.held} held, ${feed.snapshot.system} system renders · ${feed.snapshot.misfits} misfits → ${FEED_PATH}` }
   } catch (e) {
     const reason = (e && e.code ? e.code + ': ' : '') + String((e && e.message) || e)
     if (!previous) throw Object.assign(new Error(`materials feed: the registry could not be read (${reason}) and no previous ${FEED_PATH} exists — the site cannot build without a feed`), { code: 'E_NO_FEED' })

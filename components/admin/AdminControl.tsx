@@ -2,8 +2,9 @@
 // §12 + the addendum: the admin login on the footer. A small sign-in (Supabase Auth on sturij-web, Mark's
 // existing account, an email link or code) that turns on EDITING MODE for a signed-in admin only: every
 // content photo gets the dashed outline and the chip (native size · displayed size · the limit) and a
-// click opens a picker; every content text is a slot — click to edit in place, save. Images go to the
-// site-images bucket and a site_image_slots row; copy to site_content_slots; every save is audited by the
+// click opens a picker; every content text is a slot — click to edit in place, save. Images go to
+// sturij-assets, the one asset store, through /api/slots/image (the server holds the asset-ingest token by
+// name; lib/slot-store.ts is the slot convention); copy to sturij-web's site_content_slots, audited by that
 // database (a publish content act at the login class); nothing lives in the visitor's browser.
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CONFIGURED, normaliseAuthReturn, publicSupabase, sessionHint } from '@/lib/supabase/browser'
@@ -107,17 +108,21 @@ export function AdminControl() {
   }, [])
 
   const uploadFor = useCallback(async (slotId: string, file: File) => {
-    const sb = await publicSupabase()
-    if (!sb) return
     const v = await validateImageFile(file)
     if (!v.ok) { say(`Refused: ${v.reason}`, true); return }
     say(`Uploading ${file.name}…`)
-    const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
-    const path = `slots/${slotId}/${Date.now()}.${ext}`
-    const up = await sb.storage.from('site-images').upload(path, file, { contentType: file.type, cacheControl: '31536000', upsert: false })
-    if (up.error) { say(`Upload refused: ${up.error.message}`, true); return }
-    const ins = await sb.from('site_image_slots').insert({ slot_id: slotId, asset_path: path, width: v.width, height: v.height, bytes: file.size, mime: file.type, alt: null })
-    if (ins.error) { say(`Saved the file, but the slot row was refused: ${ins.error.message}`, true); return }
+    // to sturij-assets through this site's server, which holds the ingest token; the browser never sees it
+    const form = new FormData()
+    form.set('slot', slotId)
+    form.set('file', file)
+    form.set('width', String(v.width))
+    form.set('height', String(v.height))
+    const r = await fetch('/api/slots/image', { method: 'POST', body: form }).then((x) => x.json()).catch(() => null) as { ok?: boolean; stage?: string; error?: string } | null
+    if (!r?.ok) {
+      const reason = r?.error ?? 'no answer'
+      say(r?.stage === 'row' ? `Saved the file, but the slot row was refused: ${reason}` : `Upload refused: ${reason}`, true)
+      return
+    }
     say(`${slotId} replaced (${v.width}×${v.height}, ${Math.round(file.size / 1024)} KB)`)
     publish()
     setTimeout(() => location.reload(), 1800)

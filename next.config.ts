@@ -15,12 +15,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ['image/avif', 'image/webp'],
-    // The bucket the admin editing mode uploads into (sturij-web's site-images); renditions are
-    // derived on request from the master there, never served as the master.
+    // sturij-assets, the one asset store: the admin's slot images (public-media/site/slots) and the materials
+    // feed's swatches (catalog). Renditions are derived on request from the master there, never served as it.
     remotePatterns: [
-      { protocol: 'https', hostname: '*.supabase.co', pathname: '/storage/v1/object/public/site-images/**' },
-      // the materials registry's own storage (sturij-assets), for the registry door when it lands (materials-feed
-      // Part B); today the registry names files in this repository's showcase folder as its store.
       { protocol: 'https', hostname: 'uxdrokyxywwezorpvfsp.supabase.co', pathname: '/storage/v1/object/public/**' },
     ],
   },

@@ -7,8 +7,15 @@
       "material_images",
       "material_measurements"
     ],
-    "store": "the registry's material_images.storage_path is a path in this repository's public folder — the showcase directory the record names as the image store (745e6fe7)",
-    "read_key": "STURIJ_ASSETS_READ_KEY — a read-only key held in the vault by name; STURIJ_ASSETS_URL beside it. Never the service-role key; never a value in this repository."
+    "store": "the registry serves every swatch from its own catalog bucket (public storage on uxdrokyxywwezorpvfsp); the committed snapshot still names the copies in this repository's showcase folder (745e6fe7)",
+    "showcase": {
+      "note": "THE LIVE READ (build time): the registry's public read-only function registry-showcase — published, non-superseded rows only, no token, no key, nothing held in the browser or in this repository. The selection's decors are all one supplier's decor boards, so the read is scoped to that supplier and category and the feed picks the selection's ids from it.",
+      "function": "registry-showcase",
+      "supplier_id": "0c327345-0731-4a09-9e0a-a8b8a60cc4db",
+      "supplier": "Egger",
+      "category": "decor-boards"
+    },
+    "read_key": "STURIJ_ASSETS_READ_KEY — a read-only key held in the vault by name, used only by 'node scripts/materials-feed.mjs --rest' (the direct table read); STURIJ_ASSETS_URL beside it overrides the project URL for either read. Never the service-role key; never a value in this repository."
   },
   "families": {
     "note": "Egger's decor code grammar: the first letter of the code says the family. A rule on the supplier's own data, declared once here — not a decor named in code.",

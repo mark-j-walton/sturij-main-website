@@ -19,7 +19,7 @@ export interface RenderRequest {
   textures: [string, string, string]
   /** Channels whose texture is a neutral placeholder — a held finish with no master yet, rendered from its name. */
   placeholders?: Array<'doors' | 'carcass' | 'handle'>
-  /** The remix: the block's own image — a path under /showcase or a public object in the site-images bucket. */
+  /** The remix: the block's own image — a path under /showcase or a slot's image on sturij-assets (public-media/site/slots). */
   base?: string | null
   /** The base image as base64 JPEG, loaded by the route from the path above; never sent by the client. */
   baseImage?: string | null
@@ -30,9 +30,9 @@ export type RenderOk = { ok: true; image: string; label: typeof VISUALISATION; m
 
 const name = (v: unknown, max = 80) => (typeof v === 'string' && v.trim() ? v.trim().slice(0, max) : null)
 const b64 = /^[A-Za-z0-9+/]+={0,2}$/
-/** A base the server may load: the site's own showcase folder, or a public object in the site-images bucket. */
+/** A base the server may load: the site's own showcase folder, or a slot's image on sturij-assets, the one asset store (lib/slot-store.ts). */
 export const BASE_LOCAL = /^\/showcase\/[a-z0-9][a-z0-9\-\/]*\.(jpe?g|png|webp)$/i
-export const BASE_BUCKET = /^https:\/\/[a-z0-9-]+\.supabase\.co\/storage\/v1\/object\/public\/site-images\/[A-Za-z0-9._\/-]+$/
+export const BASE_BUCKET = /^https:\/\/uxdrokyxywwezorpvfsp\.supabase\.co\/storage\/v1\/object\/public\/public-media\/site\/slots\/[A-Za-z0-9._\/-]+$/
 export function validateBase(v: unknown): string | null | 'invalid' {
   if (v === undefined || v === null || v === '') return null
   if (typeof v !== 'string' || v.includes('..')) return 'invalid'

@@ -1,5 +1,5 @@
 // The editing mode's refusals: a wrong type or an oversized file is refused with the reason, before any byte
-// leaves the browser. The database enforces the same limits again (check constraints on site_image_slots).
+// leaves the browser. The server checks the same limits again, and the file's own bytes, before it goes to sturij-assets (lib/slot-upload.ts).
 export const IMAGE_LIMIT_BYTES = 800 * 1024
 export const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif'] as const
 export const IMAGE_MIN_WIDTH = 800
