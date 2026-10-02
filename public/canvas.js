@@ -1,6 +1,7 @@
 /* Sturij Canvas — endless composable whiteboard. State: sturij.canvas.board */
 (function(){
 'use strict';
+var VISUALISER_ORIGIN=window.STURIJ_VISUALISER_ORIGIN; /* visualiser-origin.js */
 var el=function(id){return document.getElementById(id);};
 var world=el('world'),plane=el('plane');
 var PROJS_KEY='sturij.canvas.projects';
@@ -867,7 +868,7 @@ ctx.addEventListener('click',function(e){
   }
   else if(a==='tovis'){var pl3=g[0];
     var payload=btoa(unescape(encodeURIComponent(JSON.stringify({verts:pl3.verts,openings:pl3.openings||[],H:2400,t:100}))));
-    window.open('https://sturij.vercel.app/#/visualiser?plan='+payload,'_blank');
+    window.open(VISUALISER_ORIGIN+'/#/visualiser?plan='+payload,'_blank');
     toast('Opening the visualiser with this plan');}
   else if(a==='restyle'){var im2=g.filter(function(q){return q.type==='img';})[0],sw2=g.filter(function(q){return q.type==='swatch';});if(im2&&sw2.length)restyleMenu(b,im2,sw2);}
   else if(a==='export')exportItems(g);
@@ -1046,7 +1047,9 @@ el('cvClear').onclick=function(){
 };
 
 /* ---------- Sprint 2: AI on the board (Nano Banana via the visualiser endpoint) ---------- */
-var RENDER_ENDPOINT='https://sturij.vercel.app/api/render';
+/* The visualiser's origin is written once, in visualiser-origin.js; the call carries its password cookie
+   (credentials:'include') — see studio.js. */
+var RENDER_ENDPOINT=VISUALISER_ORIGIN+'/api/render';
 function rasterItem(it,px,cb){
   var cv=document.createElement('canvas');cv.width=px;cv.height=px;var x=cv.getContext('2d');
   if(it.hex){x.fillStyle=it.hex;x.fillRect(0,0,px,px);cb(cv.toDataURL('image/jpeg',0.9));}
@@ -1059,7 +1062,7 @@ function rasterItem(it,px,cb){
 }
 function aiCall(base,prompt,swatches,onDone){
   SturijProgress.open('Rendering',['Packing your materials\u2026','Sending to the studio\u2026','Composing the room\u2026','Painting light and shadow\u2026','Final grade\u2026']);
-  fetch(RENDER_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
+  fetch(RENDER_ENDPOINT,{method:'POST',credentials:'include',headers:{'content-type':'application/json'},
     body:JSON.stringify({base:base,prompt:prompt,requestId:'board-'+Date.now(),swatches:swatches||[],scenario:'pairing-studio'})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(res){

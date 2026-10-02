@@ -43,4 +43,4 @@ Storage bucket `chat-uploads/` (customer photo/file uploads → also mirrored in
 
 ## Front-end contract
 
-`window.STURIJ_CHAT_API = 'https://sturij.vercel.app/api'` switches every fetch from the local fallback to the real routes. Auth header: Supabase JWT. All prototype data lives under localStorage keys `sj-chat-*` and migrates by POSTing each stored session to `/api/chat/import` (optional route).
+`window.STURIJ_CHAT_API = 'https://visualiser.sturij.com/api'` (the visualiser's sturij.com address; the origin itself is written once in `public/visualiser-origin.js`) switches every fetch from the local fallback to the real routes. Auth header: Supabase JWT. All prototype data lives under localStorage keys `sj-chat-*` and migrates by POSTing each stored session to `/api/chat/import` (optional route).

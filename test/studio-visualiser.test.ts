@@ -11,7 +11,8 @@ const html = readFileSync('public/studio.html', 'utf8')
 
 describe("the Studio's Visualise opens the visualiser itself", () => {
   it('frames the visualiser\'s embed page at a fixed https address', () => {
-    expect(js).toContain("var VISUALISER_EMBED='https://sturij.vercel.app/#/embed/visualiser';")
+    expect(js).toContain('var VISUALISER_ORIGIN=window.STURIJ_VISUALISER_ORIGIN;')
+    expect(js).toContain("var VISUALISER_EMBED=VISUALISER_ORIGIN+'/#/embed/visualiser';")
   })
 
   it('sets the frame\'s address only from that constant — nothing from the page\'s URL reaches it', () => {

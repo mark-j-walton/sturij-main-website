@@ -71,6 +71,7 @@ button{all:unset;cursor:pointer}
   <div class="slist" id="slist"></div>
 </aside>
 <main class="main" id="main"></main>
+<script src="visualiser-origin.js"></script>
 <script src="chat-core.js"></script>
 <script>
 var C=window.SturijChat,cur=null,recog=null,speakOn=false;
@@ -175,7 +176,7 @@ function renderImage(promptText){
   /* image mode: forward the composed paragraph to the visualiser render endpoint */
   var t=el('thread');
   t.insertAdjacentHTML('beforeend','<div class="think" id="imgth">Rendering</div>');
-  fetch('https://sturij.vercel.app/api/render',{method:'POST',headers:{'content-type':'application/json'},
+  fetch(window.STURIJ_VISUALISER_ORIGIN+'/api/render',{method:'POST',credentials:'include',headers:{'content-type':'application/json'},
     body:JSON.stringify({prompt:promptText,requestId:'chat-'+Date.now(),scenario:'pairing-studio'})})
   .then(function(r){return r.json();}).then(function(j){
     var img=j&&j.outputs&&j.outputs[0]&&j.outputs[0].image;

@@ -1749,8 +1749,12 @@ Promise.all(_ready).then(function(){
 
 /* ===================== Visualise: hand the scheme to the visualiser's Nano Banana endpoint =====================
    Contract: sturij-visualiser/api/render.js — POST {base, prompt, requestId, swatches[<=14], scenario}.
-   The studio's origin must be whitelisted in RENDER_ALLOWED_ORIGINS on the sturij Vercel project. */
-var RENDER_ENDPOINT='https://sturij.vercel.app/api/render';
+   The studio's origin must be whitelisted in RENDER_ALLOWED_ORIGINS on the sturij Vercel project.
+   The visualiser's origin is written once, in visualiser-origin.js. It sits behind Vercel Password Protection,
+   so the call carries the visualiser's password cookie (credentials:'include'; studio.sturij.com and
+   visualiser.sturij.com are the same site), and /api/render must answer with Access-Control-Allow-Credentials. */
+var VISUALISER_ORIGIN=window.STURIJ_VISUALISER_ORIGIN;
+var RENDER_ENDPOINT=VISUALISER_ORIGIN+'/api/render';
 function swatchRef(label,hexOrUrl,isHex,cb){
   var cv=document.createElement('canvas');cv.width=640;cv.height=640;var x=cv.getContext('2d');
   if(isHex){x.fillStyle=hexOrUrl;x.fillRect(0,0,640,640);cb({label:label,image:cv.toDataURL('image/jpeg',0.9)});}
@@ -1778,7 +1782,7 @@ function buildRenderRefs(cb){
    The visualiser's embed page (sturij #76, #/embed/visualiser) draws it without its own site menus.
    The address is fixed here and nothing from the page's URL reaches it. The scheme is not carried yet.
    Closing hides the frame and keeps it, so reopening returns to where you were. */
-var VISUALISER_EMBED='https://sturij.vercel.app/#/embed/visualiser';
+var VISUALISER_EMBED=VISUALISER_ORIGIN+'/#/embed/visualiser';
 var visFrame=null;
 function openVisualiser(){
   if(!visFrame){
@@ -1838,7 +1842,7 @@ function runVisualise(){
         +'Natural daylight. True material sheen: matt emulsion paint, oiled timber, honed stone.\n\n'
         +'NEGATIVE CONSTRAINTS\n'
         +'No swatch board or grid in the scene. No text or labels. Only the listed materials. Do not simplify a textured decor into a flat colour.';
-      fetch(RENDER_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},
+      fetch(RENDER_ENDPOINT,{method:'POST',credentials:'include',headers:{'content-type':'application/json'},
         body:JSON.stringify({base:base,prompt:prompt,requestId:'studio-'+Date.now(),swatches:refs,scenario:'pairing-studio'})})
       .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
       .then(function(res){
