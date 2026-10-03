@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { FEED, GALLERIES, HANDLE_GALLERY_INDEX, isPainted, registryMisfits, tileByKey } from '@/lib/galleries'
 // the build script is plain ESM, imported for its pure functions
-import { familyOf, normalise, run } from '../scripts/materials-feed.mjs'
+import { familyOf, fetchShowcase, fromShowcase, normalise, parseOklch, run } from '../scripts/materials-feed.mjs'
 // the finish renders: the rig, the prompt, the floor, the register row
 import { masterRow, meetsFloor, promptFor, PROVIDERS } from '../scripts/render-finishes.mjs'
 
@@ -92,23 +92,90 @@ describe('the feed script — the guards and the fallback', () => {
     const noColours = { ...range, decors: range.decors.filter((s: { code: string | null; family?: string }) => s.code !== 'U604' && s.family !== 'colour') }
     expect(() => normalise(rows, noColours, meta)).toThrow(/E_FEED_EMPTY_TAB/)
   })
-  it('without the vault name the previous snapshot stands and the build reports it; nothing is written', async () => {
-    const r = await run({ env: {}, write: false })
+  it('--rest without the vault name: the previous snapshot stands and the build reports it; nothing is written', async () => {
+    const r = await run({ argv: ['--rest'], env: {}, write: false })
     expect(r.mode).toBe('fallback')
     expect(r.reason).toContain('STURIJ_ASSETS_READ_KEY')
     expect(r.line).toContain('stands')
     expect(r.feed.snapshot.at).toBe(feed.snapshot.at)
   })
   it('a registry that answers nothing (a key with no read policy) is a fallback, never an empty feed', async () => {
-    const r = await run({ env: { STURIJ_ASSETS_READ_KEY: 'x' }, write: false, fetchImpl: async () => { throw Object.assign(new Error('the registry answered with no rows'), { code: 'E_FEED_EMPTY' }) } })
+    const r = await run({ argv: ['--rest'], env: { STURIJ_ASSETS_READ_KEY: 'x' }, write: false, fetchImpl: async () => { throw Object.assign(new Error('the registry answered with no rows'), { code: 'E_FEED_EMPTY' }) } })
     expect(r.mode).toBe('fallback')
     expect(r.reason).toContain('E_FEED_EMPTY')
   })
-  it('a good read replaces the snapshot with the registry\'s date', async () => {
-    const r = await run({ env: { STURIJ_ASSETS_READ_KEY: 'x' }, write: false, fetchImpl: async () => ({ ...rows, read_at: '2030-01-01T00:00:00.000Z' }) })
+  it('a good --rest read replaces the snapshot with the registry date', async () => {
+    const r = await run({ argv: ['--rest'], env: { STURIJ_ASSETS_READ_KEY: 'x' }, write: false, fetchImpl: async () => ({ ...rows, read_at: '2030-01-01T00:00:00.000Z' }) })
     expect(r.mode).toBe('rest')
     expect(r.feed.snapshot.at).toBe('2030-01-01T00:00:00.000Z')
     expect(r.feed.decors.length).toBe(9)
+  })
+})
+
+// The live read (2 Oct 2026): sturij-assets' public registry-showcase function — published rows, no key at all.
+// A showcase answer built from the snapshot's own rows, in the function's shape (decor_code, colour, images[].url).
+const CATALOG = 'https://uxdrokyxywwezorpvfsp.supabase.co/storage/v1/object/public/catalog/'
+type SnapRow = { id: string; code: string | null; name: string; status: string; industry_refs?: { texture_code?: string }; image?: { path: string } | null; measurement?: { hex: string } | null }
+const showcaseOf = (decors: SnapRow[]) => ({
+  count: decors.length + 1, total: decors.length + 1, offset: 0,
+  products: [
+    ...decors.map((d) => ({
+      id: d.id, name: d.name, decor_code: d.code ?? 'H9999', status: d.status, brand: null, category: 'decor-boards',
+      colour: d.measurement ? { number: d.code, hex: d.measurement.hex, oklch: 'oklch(70.5% 0.072 65.8)', source: 'measured by Sturij' } : null,
+      images: d.image ? [{ url: CATALOG + d.image.path, kind: 'swatch', variant: true }] : [],
+      variants: d.industry_refs?.texture_code ? [{ sku: 'x', surface: d.industry_refs.texture_code }, { sku: 'y', surface: d.industry_refs.texture_code }] : [],
+    })),
+    // a decor the selection does not name is ignored
+    { id: '00000000-0000-0000-0000-000000000000', name: 'Not selected', decor_code: 'H0000', status: 'published', images: [], variants: [], colour: null },
+  ],
+})
+
+describe('the feed script — the live read through registry-showcase', () => {
+  it('reads the showcase by the scope range.json declares, with no key and no authorisation header', async () => {
+    const calls: Array<{ url: string; init: RequestInit }> = []
+    const fetchFn = async (url: string, init: RequestInit) => { calls.push({ url, init }); return new Response(JSON.stringify(showcaseOf(rows.decors)), { status: 200 }) }
+    const got = await fetchShowcase({}, range, fetchFn as unknown as typeof fetch)
+    expect(calls).toHaveLength(1)
+    const u = new URL(calls[0]!.url)
+    expect(u.origin).toBe('https://uxdrokyxywwezorpvfsp.supabase.co')
+    expect(u.pathname).toBe('/functions/v1/registry-showcase')
+    expect(u.searchParams.get('supplier_id')).toBe(range.registry.showcase.supplier_id)
+    expect(u.searchParams.get('category')).toBe('decor-boards')
+    const headers = new Headers(calls[0]!.init.headers)
+    expect(headers.has('authorization')).toBe(false)
+    expect(headers.has('apikey')).toBe(false)
+    expect(got.decors).toHaveLength(9)
+  })
+  it('turns the showcase rows into the feed: the catalog URL kept whole, the texture code from the variants, the oklch parsed', async () => {
+    const r = await run({ env: {}, write: false, fetchImpl: async (_env, rng) => fromShowcase(showcaseOf(rows.decors), rng, '2030-02-02T00:00:00.000Z') })
+    expect(r.mode).toBe('showcase')
+    expect(r.feed.snapshot.read).toContain('registry-showcase')
+    expect(r.feed.snapshot.at).toBe('2030-02-02T00:00:00.000Z')
+    expect(r.feed.decors).toHaveLength(9)
+    const oak = r.feed.decors.find((d: { code: string }) => d.code === 'H1316')
+    expect(oak.image.path).toBe(CATALOG + 'showcase/finishes/bookmatch-oak.webp')
+    expect(oak.finish).toBe('ST17')
+    expect(oak.supplier).toBe('Egger')
+    expect(oak.colour.oklch).toEqual({ l: 0.705, c: 0.072, h: 65.8 })
+    expect(JSON.stringify(r.feed)).not.toContain('Not selected')
+  })
+  it('a showcase that is down, answers an error, or lacks a selected row leaves the snapshot standing', async () => {
+    const down = await run({ env: {}, write: false, fetchImpl: async () => { throw new TypeError('fetch failed') } })
+    expect(down.mode).toBe('fallback')
+    expect(down.feed.snapshot.at).toBe(feed.snapshot.at)
+    const err = await run({ env: {}, write: false, fetchImpl: (env, rng) => fetchShowcase(env, rng, (async () => new Response('no', { status: 500 })) as unknown as typeof fetch) })
+    expect(err.mode).toBe('fallback')
+    expect(err.reason).toContain('E_FEED_HTTP')
+    const thin = await run({ env: {}, write: false, fetchImpl: async (_env, rng) => fromShowcase(showcaseOf(rows.decors.slice(1)), rng, '2030-02-02T00:00:00.000Z') })
+    expect(thin.mode).toBe('fallback')
+    expect(thin.reason).toContain('E_FEED_MISSING')
+    expect(() => fromShowcase({ products: [] }, range, 'x')).toThrow(/E_FEED_EMPTY/)
+  })
+  it('parses the registry oklch string and passes an object through', () => {
+    expect(parseOklch('oklch(70.5% 0.072 65.8)')).toEqual({ l: 0.705, c: 0.072, h: 65.8 })
+    expect(parseOklch('oklch(0.5 0.1 120)')).toEqual({ l: 0.5, c: 0.1, h: 120 })
+    expect(parseOklch({ l: 0.1, c: 0.2, h: 3 })).toEqual({ l: 0.1, c: 0.2, h: 3 })
+    expect(parseOklch(null)).toBeNull()
   })
 })
 

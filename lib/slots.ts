@@ -1,5 +1,7 @@
 // The page's content slots: copy and images, seeded from the repository and overridden by the latest
-// version in sturij-web's slot tables when the deployment carries the project's public names. A page holds
+// version on record — the copy in sturij-web's site_content_slots when the deployment carries that project's
+// public names; the images on sturij-assets, the one asset store (lib/slot-store.ts, 2 Oct 2026), when the
+// deployment carries STURIJ_ASSETS_ANON_KEY. A page holds
 // no content; it reads its slots (page-platform S1/S5). Reads are cached and revalidated (ISR) — an admin
 // save calls /api/revalidate so visitors see the new version on the next request.
 //
@@ -13,6 +15,7 @@ import { asset } from './assets'
 import { allBlogSlots } from './blog'
 import { sanitizeCopy } from './copy'
 import { allSectionSlots } from './sections'
+import { assetsReadConfig, currentSlots, slotPublicUrl, SLOT_READ_QUERY, type SlotRow } from './slot-store'
 
 export interface ImageRef {
   src: string
@@ -21,7 +24,7 @@ export interface ImageRef {
   alt: string
   /** The manifest asset the slot resolves to, when it is not overridden. */
   asset?: string
-  /** True when the value comes from site_image_slots rather than the seed. */
+  /** True when the value comes from the slot's image on sturij-assets rather than the seed. */
   override?: boolean
   version?: number
   /** The slot's declared crop (IMAGE_SLOT_CROPS), when it has one. */
@@ -83,17 +86,13 @@ export const COPY_SLOT_IDS: string[] = Object.keys(SEED_SLOTS).filter((k) => !k.
 export const CLAIM_SLOT_IDS: string[] = Object.keys(SEED_SLOTS).filter((k) => k.startsWith('claim.'))
 
 export const SLOT_REVALIDATE_SECONDS = 60
-export const SITE_IMAGES_BUCKET = 'site-images'
 
+/** sturij-web's public names: the sign-in and the copy slots (site_content_slots). Not the images — those are on sturij-assets. */
 export function supabasePublicConfig(): { url: string; key: string } | null {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
   if (!url || !key) return null
   return { url, key }
-}
-
-export function bucketPublicUrl(url: string, path: string): string {
-  return `${url.replace(/\/$/, '')}/storage/v1/object/public/${SITE_IMAGES_BUCKET}/${path.replace(/^\//, '')}`
 }
 
 function seedContent(): SiteContent {
@@ -108,7 +107,6 @@ function seedContent(): SiteContent {
 }
 
 interface ContentRow { slot_id: string; text: string; version: number }
-interface ImageRow { slot_id: string; asset_path: string; width: number; height: number; alt: string | null; version: number }
 
 async function rest<T>(cfg: { url: string; key: string }, path: string): Promise<T[] | null> {
   try {
@@ -123,14 +121,26 @@ async function rest<T>(cfg: { url: string; key: string }, path: string): Promise
   }
 }
 
-/** Seeds, then the latest version per slot from the tables when the names are present. Cached per request. */
+/** The seeded images with each slot's current image on sturij-assets laid over them (a slot the page does not declare is ignored). Pure. */
+export function overlayImages(images: Record<string, ImageRef>, rows: SlotRow[], assetsBase: string): Record<string, ImageRef> {
+  const out = { ...images }
+  for (const [slotId, img] of currentSlots(rows)) {
+    const seeded = out[slotId]
+    if (!seeded) continue
+    out[slotId] = { src: slotPublicUrl(assetsBase, img.path), width: img.width, height: img.height, alt: img.alt ?? seeded.alt, override: true, version: img.version, ...(seeded.crop ? { crop: seeded.crop } : {}) }
+  }
+  return out
+}
+
+/** Seeds, then the latest version per slot from the stores whose names are present. Cached per request. */
 export const loadContent = cache(async (): Promise<SiteContent> => {
   const content = seedContent()
   const cfg = supabasePublicConfig()
-  if (!cfg) return content
+  const assets = assetsReadConfig()
+  if (!cfg && !assets) return content
   const [copyRows, imageRows] = await Promise.all([
-    rest<ContentRow>(cfg, 'site_content_slots_current?select=slot_id,text,version'),
-    rest<ImageRow>(cfg, 'site_image_slots_current?select=slot_id,asset_path,width,height,alt,version'),
+    cfg ? rest<ContentRow>(cfg, 'site_content_slots_current?select=slot_id,text,version') : Promise.resolve(null),
+    assets ? rest<SlotRow>(assets, SLOT_READ_QUERY) : Promise.resolve(null),
   ])
   if (!copyRows && !imageRows) return content
   for (const row of copyRows ?? []) {
@@ -138,11 +148,7 @@ export const loadContent = cache(async (): Promise<SiteContent> => {
     content.copy[row.slot_id] = sanitizeCopy(row.text)
     content.copyVersions[row.slot_id] = row.version
   }
-  for (const row of imageRows ?? []) {
-    const seeded = content.images[row.slot_id]
-    if (!seeded) continue
-    content.images[row.slot_id] = { src: bucketPublicUrl(cfg.url, row.asset_path), width: row.width, height: row.height, alt: row.alt ?? seeded.alt, override: true, version: row.version, ...(seeded.crop ? { crop: seeded.crop } : {}) }
-  }
+  if (assets && imageRows) content.images = overlayImages(content.images, imageRows, assets.url)
   content.source = 'seed+db'
   return content
 })

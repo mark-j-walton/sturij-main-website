@@ -76,7 +76,9 @@ describe('the render — server-side, labelled, limited', () => {
     expect(body.contents[0]!.parts[1]).toEqual({ inline_data: { mime_type: 'image/jpeg', data: 'AAAA' } })
     expect(validateRenderRequest({ ...req, base: '/showcase/../../etc/passwd' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
     expect(validateRenderRequest({ ...req, base: 'https://evil.example/x.jpg' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
-    expect(validateRenderRequest({ ...req, base: 'https://bcpmgpktmuaicjessseg.supabase.co/storage/v1/object/public/site-images/slots/hero.image/1.jpg' })).toMatchObject({ ok: true })
+    expect(validateRenderRequest({ ...req, base: 'https://uxdrokyxywwezorpvfsp.supabase.co/storage/v1/object/public/public-media/site/slots/hero.image/1.jpg' })).toMatchObject({ ok: true })
+    // sturij-web's site-images bucket is retired (2 Oct 2026): a base there is no longer one of the site's own images
+    expect(validateRenderRequest({ ...req, base: 'https://bcpmgpktmuaicjessseg.supabase.co/storage/v1/object/public/site-images/slots/hero.image/1.jpg' })).toMatchObject({ ok: false, code: 'E_BAD_REQUEST' })
     expect(validateRenderRequest({ ...req, base: null })).toMatchObject({ ok: true })
   })
   it('composes the prompt as the handoff does, with the registry code beside a decor and no-text rule', () => {

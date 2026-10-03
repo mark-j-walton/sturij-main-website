@@ -15,8 +15,8 @@ and the Canvas pages are served unchanged from `public/` at their existing URLs 
 | Motion recipes with reduced-motion mappings | `motion/recipes.json` | the page applies the mapping; nothing writes animation code |
 | Assets by id | `assets/sources.json` → `assets/manifest.json` (`scripts/measure-assets.mjs`) | a page holds no asset; `next/image` derives renditions, never the master |
 | Copy slots (seed) | `content/copy.seed.json` | live values: `site_content_slots` on sturij-web, highest version per slot |
-| Image slots | `lib/slots.ts` `IMAGE_SLOTS` | live values: `site_image_slots` + the `site-images` bucket |
-| The materials feed (one registry) | `public/materials.json` ← `scripts/materials-feed.mjs` from sturij-assets, selected by id in `data/range.json`; `data/rooms.json` for room finishes | read at build through `STURIJ_ASSETS_READ_KEY` by name, else the committed snapshot stands; no decor named in code; held finishes are labelled tiles |
+| Image slots | `lib/slots.ts` `IMAGE_SLOTS` | live values: sturij-assets `media` rows in `public-media/site/slots/` (`lib/slot-store.ts`), written through `asset-ingest` by `/api/slots/image` |
+| The materials feed (one registry) | `public/materials.json` ← `scripts/materials-feed.mjs` from sturij-assets, selected by id in `data/range.json`; `data/rooms.json` for room finishes | read at build from sturij-assets' public `registry-showcase` (published rows, no key), else the committed snapshot stands; no decor named in code; held finishes are labelled tiles |
 | The enquiry door | `app/api/enquiry` → sturij-web `enquiry` function | the customer table; a failed post shows the phone and the mailbox |
 | The render door | `app/api/render` | server-side, `GEMINI_API_KEY` from the vault by name; every image labelled VISUALISATION |
 | The admin login + editing mode | `components/admin/AdminControl.tsx`, `supabase/migrations/20260910150000_site_slots.sql` | Supabase Auth on sturij-web; `site_admin` allowlist; append-only versions; audit by trigger |
@@ -31,8 +31,9 @@ npm run dev
 
 Names the deployment reads (values from the vault, never here — see `.env.example`): `NEXT_PUBLIC_SUPABASE_URL`,
 `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `GEMINI_API_KEY`, `GEMINI_IMAGE_MODEL`, `ENQUIRY_FUNCTION_URL`,
-`RENDER_LIMIT_PER_VISITOR_HOUR`, `RENDER_LIMIT_PER_DAY`. Without the first two the page renders from the seeds and
-the admin sign-in says so; without the Gemini key the Visualise flow answers `E_NOT_CONFIGURED`.
+`RENDER_LIMIT_PER_VISITOR_HOUR`, `RENDER_LIMIT_PER_DAY`, `STURIJ_ASSETS_ANON_KEY`, `ASSET_INGEST_TOKEN` (server only; optional
+`STURIJ_ASSETS_URL`). Without the first two the page renders from the seeds and the admin sign-in says so; without
+`STURIJ_ASSETS_ANON_KEY` the image slots render their seeds; without `ASSET_INGEST_TOKEN` an image save is refused; without the Gemini key the Visualise flow answers `E_NOT_CONFIGURED`.
 
 ## Verify
 

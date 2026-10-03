@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import sharp from 'sharp'
 import { generate, RateLimiter, validateRenderRequest } from '@/lib/render'
 
-/** The remix base: one of the site's own images, read by the server from public/ or the site-images bucket, resized to 1024 and sent as JPEG. The client never sends image bytes for the base. */
+/** The remix base: one of the site's own images, read by the server from public/ or a slot's image on sturij-assets, resized to 1024 and sent as JPEG. The client never sends image bytes for the base. */
 async function loadBase(base: string | null | undefined): Promise<string | null> {
   if (!base) return null
   const bytes = base.startsWith('/')
