@@ -1747,10 +1747,11 @@ Promise.all(_ready).then(function(){
   });
 })();
 
-/* ===================== Visualise: hand the scheme to the visualiser's Nano Banana endpoint =====================
+/* ===================== Visualise: render the scheme with Nano Banana =====================
    Contract: sturij-visualiser/api/render.js — POST {base, prompt, requestId, swatches[<=14], scenario}.
-   The studio's origin must be whitelisted in RENDER_ALLOWED_ORIGINS on the sturij Vercel project. */
-var RENDER_ENDPOINT='https://sturij.vercel.app/api/render';
+   Served from this site's own origin (app/api/studio-render): since 1 Oct 2026 the visualiser project
+   (sturij.vercel.app) is behind Vercel Authentication and answers every cross-site call with a 401. */
+var RENDER_ENDPOINT='/api/studio-render';
 function swatchRef(label,hexOrUrl,isHex,cb){
   var cv=document.createElement('canvas');cv.width=640;cv.height=640;var x=cv.getContext('2d');
   if(isHex){x.fillStyle=hexOrUrl;x.fillRect(0,0,640,640);cb({label:label,image:cv.toDataURL('image/jpeg',0.9)});}
@@ -1777,8 +1778,12 @@ function buildRenderRefs(cb){
    over the Studio, with a Close back to the scheme; the room-type renders stay in the menu below it.
    The visualiser's embed page (sturij #76, #/embed/visualiser) draws it without its own site menus.
    The address is fixed here and nothing from the page's URL reaches it. The scheme is not carried yet.
-   Closing hides the frame and keeps it, so reopening returns to where you were. */
+   Closing hides the frame and keeps it, so reopening returns to where you were.
+   Since 1 Oct 2026 the visualiser (sturij.vercel.app) is behind Vercel Authentication and cannot be framed
+   here; until it is served from this origin, the dialog says so plainly instead of showing a broken frame.
+   Set VISUALISER_AVAILABLE back to true when the visualiser is reachable again. */
 var VISUALISER_EMBED='https://sturij.vercel.app/#/embed/visualiser';
+var VISUALISER_AVAILABLE=false;
 var visFrame=null;
 function openVisualiser(){
   if(!visFrame){
@@ -1790,7 +1795,10 @@ function openVisualiser(){
     close.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Close</span>';
     close.onclick=closeVisualiser;
     bar.appendChild(title);bar.appendChild(close);
-    var view=document.createElement('iframe');view.className='visframe-view';view.title='Sturij visualiser';view.setAttribute('allow','fullscreen');view.src=VISUALISER_EMBED;
+    var view;
+    if(VISUALISER_AVAILABLE){view=document.createElement('iframe');view.className='visframe-view';view.title='Sturij visualiser';view.setAttribute('allow','fullscreen');view.src=VISUALISER_EMBED;}
+    else{view=document.createElement('div');view.className='visframe-view visframe-gap';view.setAttribute('role','status');
+      view.innerHTML='<p><strong>The visualiser cannot open inside the Studio at the moment.</strong></p><p>It is behind Vercel sign-in, so it cannot be shown here. The room renders in the Visualise menu still work.</p>';}
     visFrame.appendChild(bar);visFrame.appendChild(view);document.body.appendChild(visFrame);
   }
   visFrame.classList.add('on');document.documentElement.classList.add('visframe-open');
@@ -1848,7 +1856,7 @@ function runVisualise(){
         items.push({name:visRoom+' render',file:visRoom.toLowerCase().replace(/\s+/g,'-')+'-render-'+Date.now()+'.jpg',sub:'photo',swatchCss:'background:#EFE9DD',png:img});
         renderTray();SturijProgress.done(visRoom+' render added to your scheme');
       })
-      .catch(function(e){b.classList.remove('rec');SturijProgress.fail('Render failed \u2014 is this origin whitelisted on the visualiser?');});
+      .catch(function(e){b.classList.remove('rec');SturijProgress.fail('Render failed \u2014 check the connection');});
     });
   });
 };

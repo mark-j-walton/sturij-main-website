@@ -172,16 +172,17 @@ function renderPending(v){
   t.scrollTop=t.scrollHeight;
 }
 function renderImage(promptText){
-  /* image mode: forward the composed paragraph to the visualiser render endpoint */
+  /* image mode: forward the composed paragraph to the render endpoint, served from this origin */
   var t=el('thread');
   t.insertAdjacentHTML('beforeend','<div class="think" id="imgth">Rendering</div>');
-  fetch('https://sturij.vercel.app/api/render',{method:'POST',headers:{'content-type':'application/json'},
+  fetch('/api/studio-render',{method:'POST',headers:{'content-type':'application/json'},
     body:JSON.stringify({prompt:promptText,requestId:'chat-'+Date.now(),scenario:'pairing-studio'})})
   .then(function(r){return r.json();}).then(function(j){
     var img=j&&j.outputs&&j.outputs[0]&&j.outputs[0].image;
     var th=el('imgth');if(th)th.remove();
     if(img){cur.msgs.push({role:'assistant',body:'Here is the render.',img:img,t:Date.now()});C.put(cur);renderThread();}
-  }).catch(function(){var th=el('imgth');if(th)th.remove();});
+    else{cur.msgs.push({role:'assistant',body:'The render did not come back'+(j&&j.error?' \u2014 '+j.error:j&&j.failures&&j.failures[0]?' \u2014 '+j.failures[0].error:'')+'.',t:Date.now()});C.put(cur);renderThread();}
+  }).catch(function(){var th=el('imgth');if(th)th.remove();cur.msgs.push({role:'assistant',body:'The render did not come back \u2014 check the connection.',t:Date.now()});C.put(cur);renderThread();});
 }
 el('newc').onclick=function(){cur=C.create('agent','help');renderMain();renderRail();};
 renderStatus();renderRail();renderMain();
